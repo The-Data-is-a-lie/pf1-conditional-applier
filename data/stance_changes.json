@@ -1,0 +1,1059 @@
+{
+  "Razor Wings of the Black Seraph": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "ac",
+        "type": "profane",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Stance of the Defending Shell": {
+    "changes": [
+      {
+        "formula": "1 + max(0, floor(@pow.initLevel / 4))",
+        "target": "sac",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Mithral Tortoise Stance": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "ac",
+        "type": "dodge",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "cmd",
+        "type": "dodge",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Turtle Generals Stance": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "sac",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Malignant Punisher Stance": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "ac",
+        "type": "dodge",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Flowing Water Stance": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "ac",
+        "type": "dodge",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "4",
+        "target": "init",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Mithral Lightning Stance": {
+    "changes": [
+      {
+        "formula": "10",
+        "target": "landSpeed",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Stance of the Thunderbrand": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "ac",
+        "type": "dodge",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Running Hunters Stance": {
+    "changes": [
+      {
+        "formula": "10",
+        "target": "landSpeed",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Sands of Time Stance": {
+    "changes": [
+      {
+        "formula": "2 + ifelse(gte(@pow.initLevel, 12), 2, 0)",
+        "target": "init",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2 + ifelse(gte(@pow.initLevel, 12), 2, 0)",
+        "target": "ref",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Riven Hourglass Stance": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "ac",
+        "type": "dodge",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "4",
+        "target": "init",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Celestrial Orrery Stance": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "init",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Scarlet Einhander": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "ac",
+        "type": "shield",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Unfettered Movement": {
+    "changes": [
+      {
+        "formula": "10",
+        "target": "landSpeed",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Scarlet Duelist Attitude": {
+    "changes": [
+      {
+        "formula": "5",
+        "target": "ac",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "5",
+        "target": "cmd",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "5",
+        "target": "init",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Silver Crane Waltz": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "ac",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "ref",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Diamond Wings of the Imperial Crane": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "allSavingThrows",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Battle Dragons Stance": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "init",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Bean nighe Attitude": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "allSavingThrows",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Black Seraphs Glare": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[4]] profane on Intimidate checks to demoralize foes you damaged this turn (made as a free action)",
+        "target": "skill.int"
+      }
+    ]
+  },
+  "Savage Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "while wielding a melee weapon two-handed: -[[2]] attack",
+        "target": "attack"
+      }
+    ]
+  },
+  "Black Seraph Battle Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Walk in the Dark": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Vampiric Aura": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Iron Hand Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[2 + ifelse(gte(@pow.initLevel, 18), 3, ifelse(gte(@pow.initLevel, 12), 2, ifelse(gte(@pow.initLevel, 6), 1, 0)))]] shield bonus to AC while you have at least one free hand",
+        "target": "ac"
+      }
+    ]
+  },
+  "Pugilist Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[1d6]] damage with unarmed or discipline weapon strikes",
+        "target": "wdamage"
+      }
+    ]
+  },
+  "Broken Blade Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@pow.initLevel]] competence on Acrobatics checks to avoid attacks of opportunity",
+        "target": "skill.acr"
+      }
+    ]
+  },
+  "Steel Grapplers Attitude": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@INITMOD]] to CMB for grapple, bull rush, and overrun attempts",
+        "target": "cmb"
+      },
+      {
+        "text": "+[[@INITMOD]] to CMD to resist grapple, bull rush, and overrun attempts",
+        "target": "cmd"
+      }
+    ]
+  },
+  "Pit Fighters Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[2]] to CMD to resist dirty trick and feint attempts",
+        "target": "cmd"
+      }
+    ]
+  },
+  "Unbreakable Stride Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Hungry Jaws": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Painbringer": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Catfish Hold": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Kraken's Coils": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Insatiable Warpath": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Gorgonops' Jaws": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Aura of Misfortune": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Touch of the Witch": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "The Dragon Knows": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Oathbreakers Aura": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Luckdrinker Aura": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Elemental Nimbus": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Embrace the Elements": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Elemental Flux Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[2d6]] energy damage of your active element on attacks",
+        "target": "wdamage"
+      }
+    ]
+  },
+  "Enter the Vortex": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Nexus of Elemental Retribution": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Master of the Elements": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Valiant Keepers Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Vigilant Keepers Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Inescapable Grasp": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Infinite Warrior": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Lesson I: Balance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Lesson II: Control": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Lesson III: Supression": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Lesson IV: The Ladder": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Lesson V: Expression": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Lesson VI: Supremacy": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Pride Leaders Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[4]] morale on saves vs fear effects and demoralization effects",
+        "target": "allSavingThrows"
+      }
+    ]
+  },
+  "Golden Lion Charger": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "while charging: +[[2]] attack (on top of the charge's own +[[2]])",
+        "target": "attack"
+      }
+    ]
+  },
+  "Triumphant Lions Leadership": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Snapping Turtle Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Iron Tortoise Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Turtle Knights Stance": {
+    "changes": [
+      {
+        "formula": "@pow.initLevel",
+        "target": "cmd",
+        "type": "circumstance",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "4",
+        "target": "sac",
+        "type": "shield",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Cruel Hyenas Facade": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Riot of Despair": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of Sown Mistrust": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Leaden Hyena Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Quick-Fingered Draw": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Twin Thunder Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Diving Thunderbolt Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@pow.initLevel * 2]] on Acrobatics checks made to jump",
+        "target": "skill.acr"
+      }
+    ]
+  },
+  "Deadly Thunder Lancers Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@INITMOD]] to attack rolls",
+        "target": "attack"
+      },
+      {
+        "text": "+[[@INITMOD]] to damage rolls",
+        "target": "wdamage"
+      },
+      {
+        "text": "+[[@INITMOD]] on Acrobatics checks to jump or tumble",
+        "target": "skill.acr"
+      }
+    ]
+  },
+  "Stance of Aggression": {
+    "changes": [
+      {
+        "formula": "-2",
+        "target": "ac",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Primal Warrior Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Iron Hide Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "The Caged Sun": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Spoils of War": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Armaments of the Empire": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Sunlight Shield": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Battle Against the Sun": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Sun's Zenith": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Chronal Fission": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Sand-Bearers Swiftness": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "ac",
+        "type": "dodge",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "ref",
+        "type": "dodge",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "30",
+        "target": "allSpeeds",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "God of the Hourglass Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Crouching Lion": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Rat Pack": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Pussyfoot Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[2]] attack while flanking an ally whose space you share",
+        "target": "attack"
+      }
+    ]
+  },
+  "Swarming Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Clever Cat Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@INITMOD]] to AC against attacks and effects from tricked enemies",
+        "target": "ac"
+      },
+      {
+        "text": "+[[@INITMOD]] on saving throws against attacks and effects from tricked enemies",
+        "target": "allSavingThrows"
+      }
+    ]
+  },
+  "Stance of the Elder Rat": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Asteroid Belt": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Celestial Hurricane Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of Infinite Prophecies": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Embodiment of the first Meteor": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[1d8]] force damage on ranged attacks",
+        "target": "rattack"
+      }
+    ]
+  },
+  "Circular Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Scarlet Majesty Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Doppelganger Dance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Infinity Mirror Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Silvered Mirror Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Cursed Mirror Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Unholy Mirror Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Eyes of the Crane": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Silver Crane": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Crane Knight": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Silver Crane Endurance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Battle Mantra": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Unbroken Stride": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Internal Dominion of the Sleeping Goddess": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Unavoidable Gaze of the Sleeping Goddess": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@INITMOD]] on initiative checks",
+        "target": "init"
+      }
+    ]
+  },
+  "Unimpeachable Authority of the Sleeping Goddess": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Phantom Sun Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of Piercing Rays": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "True Shot Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Solar Hailstorm Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@INITMOD]] damage on the [[2]] extra ranged attacks granted during a full attack",
+        "target": "wdamage"
+      }
+    ]
+  },
+  "Eye of the Storm SoB": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Lightning Parry Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "-[[2]] per size category the attacker is larger than you, and an additional -[[2]] when parrying for an adjacent ally, on the Acrobatics check to parry",
+        "target": "skill.acr"
+      }
+    ]
+  },
+  "Ozone Shimmer": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Form of Thunder": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[1d6]] electricity and +[[1d6]] sonic damage on melee attacks",
+        "target": "wdamage"
+      }
+    ]
+  },
+  "Stance of Storms": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Poisoners Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Steel Coils": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "nac",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Hooded Killers Stance": {
+    "changes": [
+      {
+        "formula": "floor(@pow.initLevel / 2)",
+        "target": "skill.int",
+        "type": "competence",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "floor(@pow.initLevel / 2)",
+        "target": "skill.ste",
+        "type": "competence",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Spitting Cobra Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "thrown weapons: +[[2d6]] damage",
+        "target": "wdamage"
+      }
+    ]
+  },
+  "Hooded Cobra Attitude": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Pistol Shrimp": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Sea Turtle": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Surging Shark": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Hermit Crab": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Torrent in the Water": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Frenzied Shark": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Galebreakers Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Tempest Gale Stance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@INITMOD]] damage with ranged weapons",
+        "target": "rattack"
+      },
+      {
+        "text": "+[[max(1, floor(@pow.initLevel / 4))]] on ranged combat maneuver checks",
+        "target": "cmb"
+      }
+    ]
+  },
+  "Dancing Winds Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Winds of Vengeance Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Eye of the Storm": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "+[[@INITMOD]] damage with ranged weapons",
+        "target": "rattack"
+      }
+    ]
+  },
+  "Outer Sphere Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Bend with the Wind": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "for each attack that misses you, optionally +[[2]] dodge to AC until your next turn",
+        "target": "ac"
+      }
+    ]
+  },
+  "Brutal Dragons Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Dragon Warriors Talons": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "while wielding two weapons: melee/unarmed hits inflict [[2d4]] bleed per round",
+        "target": "wdamage"
+      }
+    ]
+  },
+  "Starving Vampire Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Avenging Revenant's Advance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Mourning Ghost Attitude": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Charging Dullahan's Advance": {
+    "changes": [],
+    "contextNotes": [
+      {
+        "text": "vs creatures you are flanking: +[[@pow.initLevel]] negative energy damage",
+        "target": "wdamage"
+      }
+    ]
+  },
+  "Laughing Demilich Attitude": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Spirit Sensing Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Formless Dance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Stance of the Ether Gate": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Anchoring Spirit": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Aura of Shared Misery": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Golden Commander Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Steelscrapper's Attitude": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Mangled Gear Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Failsafe Reserves": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Keep the Flame Alive": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Reaching Blade Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Ready the Draw": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Shifting Waters Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Mithral Current Stance": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Iron Pikemans Attitude": {
+    "changes": [],
+    "contextNotes": []
+  },
+  "Phalanx Lancer": {
+    "changes": [],
+    "contextNotes": []
+  }
+}

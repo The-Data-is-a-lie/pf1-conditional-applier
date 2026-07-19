@@ -1,0 +1,1928 @@
+{
+  "Alchemy": {
+    "Aboleth Mucus": {
+      "modifiers": [],
+      "rider": "poison alternate effect; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target (instead of becoming fatigued) takes a [[-2]] penalty on Will saves and cannot breathe air but can breathe underwater for [[1]] minute; renewed contact and another failed save extends the effect by [[1]] minute (cumulative); a creature that cannot breathe air and remains out of water begins to suffocate unless it holds its breath"
+    },
+    "Aging Toxin": {
+      "modifiers": [],
+      "rider": "poison alternate effect; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target's age category increases by [[1]] instead of becoming fatigued, taking that category's physical penalties ([[-1]] to all physical scores at middle age, [[-2]] at old, [[-3]] at venerable); each consecutive failed save increases the age category by [[1]] more (cumulative); it does not alter mental scores and cannot kill by old age; permanent (removable only by the Break Enchantment Life talent or similar)"
+    },
+    "Aligned Liquid": {
+      "modifiers": [
+        {
+          "formula": "2d4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "thrown flask, ranged touch attack, range increment [[10]] ft (pour onto an adjacent incorporeal target); the aligned liquid only damages creatures matching its alignment (good: undead and evil outsiders; evil: living creatures and good outsiders; chaotic: constructs and lawful outsiders; lawful: elementals and chaotic outsiders); +[[1d4]] per two ranks in Craft (alchemy) on a direct hit; such creatures within [[5]] ft of the point of impact take [[1]] splash damage; increasing the Craft DC by [[10]] widens each damage ring by [[5]] ft"
+    },
+    "Chemical Coating": {
+      "modifiers": [],
+      "rider": "a formulae turned into a weapon coating (+[[5]] Craft DC): its effect is added to any attack you make that hits the target, expended on that hit."
+    },
+    "Cherry Bomb": {
+      "modifiers": [
+        {
+          "formula": "1d4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "splash weapon, ranged touch attack, range increment [[10]] ft; +[[1d4]] per [[3]] ranks in Craft (alchemy) on a direct hit; targets [[5]] ft from the point of contact take [[1]] bludgeoning splash per damage die (max half the direct-hit damage); each bomb may instead deal an energy type you can craft; increasing the Craft DC by [[10]] raises the splash Reflex save DC by [[1]]"
+    },
+    "Disabling Poison": {
+      "modifiers": [],
+      "rider": "poison rider; whenever the target fails a non-harmless save against your special poison it gains the battered condition for [[1]] round, +[[1]] round per [[5]] ranks in Craft (alchemy)"
+    },
+    "Diseased Venom": {
+      "modifiers": [],
+      "rider": "poison that inflicts disease; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target immediately contracts a chosen disease (bubonic plague, cackle fever, filth fever, leprosy, mind fire, red ache, shakes, or slimy doom) with no onset, using your Alchemy save DC; treated as a disease rather than a poison"
+    },
+    "Disorientating Venom": {
+      "modifiers": [],
+      "rider": "poison alternate effect; while affected, at the start of each of its turns the target must succeed a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be unable to spend or regain martial focus for [[1]] round"
+    },
+    "Drowsy Venom": {
+      "modifiers": [],
+      "rider": "poison alternate effect; a target that fails [[2]] consecutive Fortitude saves [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] is exhausted (instead of fatigued); failing [[3]] consecutive saves it falls unconscious and asleep (slapping or wounding wakes it; normal noise does not; waking it is a standard action)"
+    },
+    "Dynamite Throwing Form": {
+      "modifiers": [],
+      "rider": "stance; when your ranged touch attack with an alchemical item also beats the target's normal (non-touch) AC, it deals extra damage equal to your unarmed strike's damage dice plus your Strength modifier [[@abilities.str.mod]], of your unarmed strike's damage type"
+    },
+    "Frightening Hallucinogen": {
+      "modifiers": [],
+      "rider": "poison alternate effect (fear); on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target is shaken instead of fatigued; [[2]] consecutive failed saves make it frightened; [[3]] consecutive failed saves make it panicked"
+    },
+    "Grease": {
+      "modifiers": [],
+      "rider": "thrown as a splash weapon, ranged touch attack, range increment [[10]] ft; a creature directly hit takes a [[-2]] penalty to Acrobatics, to CMD vs disarm and trip, and to Reflex saves vs fire or catching fire; creatures in the splash take half these penalties (rounded down); an affected creature that falls prone must succeed an Acrobatics check (DC [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) to stand or immediately fall prone again; lasts [[2]] rounds (a standard action removes the grease)"
+    },
+    "Habit Forming": {
+      "modifiers": [],
+      "rider": "poison rider; whenever the target fails a save against your Alchemy poison it must also make a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or develop an addiction - minor ([[-2]] Con), rising to moderate ([[-4]] Str and Con) then severe ([[-6]] Str, Dex, and Con) on further failed saves; penalties begin [[24]] hours after becoming addicted and are suppressed for [[24]] hours each time it fails a save against the poison"
+    },
+    "Haemophilic Venom": {
+      "modifiers": [],
+      "rider": "poison alternate effect; while affected, the target takes [[1]] extra bleed damage whenever it would take bleed damage, +[[1]] per [[4]] ranks in Craft (alchemy), and takes an extra [[1d4]] bleed whenever it suffers a critical hit; it also counts as taking bleed damage for the Blood sphere's blood control"
+    },
+    "Hemorrhaging Poison": {
+      "modifiers": [],
+      "rider": "poison rider; the flat damage dealt by Painful Venin ([[1/2]] your Craft (alchemy) ranks, minimum [[1]]) becomes bleed damage; a creature immune to or not subject to bleed instead takes it as normal Painful Venin damage"
+    },
+    "Improved Acid Flask": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "acid"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "splash weapon, ranged touch attack, range increment [[10]] ft; +[[1d6]] per two ranks in Craft (alchemy) on a direct hit; targets [[5]] ft away take half that damage and targets [[10]] ft away take [[1]] acid splash per die (max half the direct-hit damage); a target that takes at least [[2]] acid damage takes half the total again the following round"
+    },
+    "Improved Alchemist Fire": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "splash weapon, ranged touch attack, range increment [[10]] ft; +[[1d6]] per two ranks in Craft (alchemy) on a direct hit; targets [[5]] ft away take half and targets [[10]] ft away take [[1]] fire splash per die (max half the direct-hit damage); all targets inside the outer splash ring catch fire, taking [[1d6]] fire each subsequent round until they use a full-round action and succeed a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] to extinguish it (+[[2]] for rolling on the ground); water or magic auto-extinguishes"
+    },
+    "Improved Blanch Bomb": {
+      "modifiers": [],
+      "rider": "thrown, ranged touch attack, range increment [[10]] ft; the target square and adjacent squares make a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] (targets [[10]] ft away also save but gain +[[5]]) or have one type of damage reduction reduced by [[2]] + [[1]] per [[5]] ranks in Craft (alchemy) for [[1]] minute or until washed off; the DR type affected depends on the Craft DC (DR/magic, DR/cold iron or DR/silver, DR/adamantine, DR/alignment); ignores immunity to Fortitude-based effects; increasing the Craft DC by [[10]] widens the area by [[5]] ft and raises the save DC by [[2]]"
+    },
+    "Improved Bottled Lightning": {
+      "modifiers": [
+        {
+          "formula": "1d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "electricity"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "ranged touch attack, range [[20]] ft; +[[1d8]] per two ranks in Craft (alchemy); every creature in the line between you and the target (including the target) takes [[1]] sonic + [[1]] per rank in Craft (alchemy); increasing the Craft DC by [[10]] adds [[10]] ft range and [[1d6]] sonic to the line"
+    },
+    "Improved Flash Powder": {
+      "modifiers": [],
+      "rider": "thrown, ranged touch attack, range increment [[20]] ft; creatures in a [[10]]-ft-radius burst are blinded for [[1]] round unless they succeed a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]; increasing the Craft DC by [[10]] adds [[10]] ft radius and [[1]] round of blindness"
+    },
+    "Improved Fuse Grenade": {
+      "modifiers": [
+        {
+          "formula": "2d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "nonCrit"
+        },
+        {
+          "formula": "2d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "thrown into an unoccupied square within [[60]] ft; [[1d3]] rounds later it explodes in a [[20]]-ft-radius burst, Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] halves; +[[1d6]] bludgeoning and +[[1d6]] fire per [[3]] ranks in Craft (alchemy); increasing the Craft DC by [[10]] adds [[10]] ft radius and [[1]] to the Reflex DC"
+    },
+    "Improved Itching Powder": {
+      "modifiers": [],
+      "rider": "thrown, ranged touch attack, range increment [[10]] ft; the target square and adjacent squares make a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] (targets [[10]] ft away also save but gain +[[5]]) or take a [[-2]] penalty on attack rolls, saves, skill checks, and ability checks until they wash the powder off; poison effect; increasing the Craft DC by [[10]] widens the area by [[5]] ft and raises the save DC by [[2]]"
+    },
+    "Improved Liquid Ice": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "cold"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "splash weapon, ranged touch attack, range increment [[10]] ft; +[[1d6]] per [[3]] ranks in Craft (alchemy) on a direct hit; targets [[5]] ft away take half and targets [[10]] ft away take [[1]] cold splash per die (max half the direct-hit damage); a directly hit creature makes a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or is staggered and has its speed halved for [[1]] round (can also be poured out to freeze liquid instead)"
+    },
+    "Improved Liquid Nice": {
+      "modifiers": [],
+      "rider": "thrown splash weapon, ranged touch attack, range increment [[10]] ft; creatures in the impact square or adjacent make a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or have their attitude toward you improved by [[1]] step (max friendly) for [[1]] minute per rank in Craft (alchemy); mind-affecting compulsion; increasing the Craft DC by [[20]] instead sets attitude to friendly on a failed save"
+    },
+    "Improved Sneezing Powder": {
+      "modifiers": [],
+      "rider": "thrown, ranged touch attack, range increment [[10]] ft; the target square and adjacent squares make a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] (targets [[10]] ft away also save but gain +[[5]]) or are staggered for [[1]] round, then must save each round for [[1d4+1]] rounds or remain staggered (a successful save ends it); poison effect; increasing the Craft DC by [[10]] widens the area by [[5]] ft and raises the save DC by [[2]]"
+    },
+    "Improved Tanglefoot Bag": {
+      "modifiers": [],
+      "rider": "thrown, ranged touch attack, range increment [[10]] ft; a struck target is entangled ([[-2]] on attack rolls, [[-4]] Dex) and must make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be glued in place (a flying creature must instead save or be unable to fly and fall); even on a success it moves at half speed; break free with a Strength check or by dealing [[20]] slashing damage to the goo; an entangled caster needs a concentration check (DC [[15]] + spell level); the goo becomes brittle after [[3d4]] rounds; increasing the Craft DC by [[10]] makes creatures within [[5]] ft also save or be affected"
+    },
+    "Improved Thunderstone": {
+      "modifiers": [],
+      "rider": "thrown, ranged attack, range increment [[10]] ft; creatures in a [[10]]-ft-radius spread make a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be deafened for [[1]] hour ([[-4]] initiative and [[20]]% chance to miscast verbal spells); increasing the Craft DC by [[10]] adds [[1]] hour of deafness, [[1d6]] sonic to all creatures in the radius (half on a successful save), and [[10]] ft radius"
+    },
+    "Necrotic Poison": {
+      "modifiers": [],
+      "rider": "poison rider (death effect); on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target gains [[1]] temporary negative level for [[24]] hours (a save then or it becomes permanent), and must save again at the start of its next turn or gain another negative level (repeating each round it fails); a creature slain by this poison rises as a zombie [[1]] minute later"
+    },
+    "Nerve Venom": {
+      "modifiers": [],
+      "rider": "poison alternate effect; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target is sickened instead of fatigued; [[2]] consecutive failed saves make it nauseated"
+    },
+    "Painful Venin": {
+      "modifiers": [],
+      "rider": "poison rider; in addition to fatigue the target takes [[1/2]] your ranks in Craft (alchemy) (minimum [[1]]) damage, resolved before the poison's other effects (with the Apocrypha option this damage applies to all your Alchemy poisons and stacks with a poison's normal damage)"
+    },
+    "Petrifying Poison": {
+      "modifiers": [],
+      "rider": "poison alternate effect; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target is staggered instead of fatigued; [[2]] consecutive failed saves leave it immobilized (cannot move from its space); [[3]] consecutive failed saves petrify it (turned to stone, unconscious)"
+    },
+    "Slowing Poison": {
+      "modifiers": [],
+      "rider": "poison alternate effect; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] all the target's speeds are halved instead of fatigue; [[2]] consecutive failed saves reduce its speeds to one quarter; [[3]] consecutive failed saves reduce them to [[5]] ft (never below [[5]] ft)"
+    },
+    "Sorcerers Scourge": {
+      "modifiers": [],
+      "rider": "poison alternate effect; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target takes a [[-1]] caster level penalty instead of fatigue; [[2]] consecutive failed saves increase the penalty by [[1]]; [[3]] or more consecutive failed saves increase it by [[2]] each; a caster whose caster level penalty exceeds its base caster level cannot cast spells"
+    },
+    "Three Wise Monkeys": {
+      "modifiers": [],
+      "rider": "poison alternate effect; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target is deafened instead of fatigued; [[2]] consecutive failed saves also blind it; [[3]] consecutive failed saves also silence it (unable to speak or provide verbal components)"
+    },
+    "Virulent Basilisk’s Cloak": {
+      "modifiers": [],
+      "rider": "stance; expend one Alchemy poison to enter (expend martial focus to also craft that poison as part of activating and to extend the duration); while in the stance, any creature that begins its turn within your natural reach or hits you with a melee attack must save against the expended poison [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]; whenever you successfully attack a creature already affected by your Alchemy poison it takes a [[-2]] penalty on its next save against your Alchemy poisons within the next [[1]] minute (does not stack with itself)"
+    },
+    "Witchbane": {
+      "modifiers": [],
+      "rider": "poison alternate effect; on a failed Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the target suffers [[10]]% spell failure instead of fatigue; [[2]] consecutive failed saves raise it to [[20]]%; [[3]] consecutive failed saves raise it to [[50]]% (adds to any other spell failure source; applies to all spells, spell-like, supernatural, and spherecasting abilities)"
+    },
+    "Degenerating Poison": {
+      "modifiers": [],
+      "rider": "your applied/thrown poison inflicts a -[[2]] penalty to one of the target ability scores (not Con) instead of fatigue on a failed Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]; multiple applications stack."
+    },
+    "Mind Venom": {
+      "modifiers": [],
+      "rider": "your applied/thrown poison makes the target confused (mind-affecting) instead of fatigued on a failed Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]."
+    },
+    "Talentless Poison": {
+      "modifiers": [],
+      "rider": "your applied/thrown poison inflicts a -[[4]] penalty on all skill checks instead of fatigue on a failed Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] (rises with your Craft (alchemy) ranks; duration 1 hour)."
+    },
+    "Graceless Tincture": {
+      "modifiers": [],
+      "rider": "your applied/thrown poison inflicts a -[[5]] penalty on Sense Motive and reduces the DC to influence the target attitude by [[5]] instead of fatigue, on a failed Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]."
+    },
+    "Vulnerability Venom": {
+      "modifiers": [],
+      "rider": "your applied/thrown poison reduces one of the target energy resistances by your Craft (alchemy) ranks instead of fatigue, on a failed Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]."
+    }
+  },
+  "Athletics": {
+    "Bewildering Blow": {
+      "modifiers": [],
+      "rider": "requires martial focus; when you succeed at an Acrobatics check to avoid provoking an attack of opportunity while moving through an enemy's threatened area or its space, that enemy must make a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be battered for [[1]] round; if you moved more than half your base speed, the battered condition lasts [[1]] additional round for every [[5]] ranks in your package's associated skill"
+    },
+    "Blustering Hustle": {
+      "modifiers": [],
+      "rider": "when you succeed at an Acrobatics check to avoid provoking an attack of opportunity while moving through an opponent's space, that opponent is denied its Dexterity bonus to AC against the first melee attack you make against it before the start of your next turn"
+    },
+    "Diving Strike": {
+      "modifiers": [],
+      "rider": "charge by rapidly descending from above (fly-fall or an Acrobatics leap); on a hit, add falling damage of [[1d6]] per [[10]] ft descended (maximum [[1d6]] per rank you have in Acrobatics or Fly), not multiplied on a critical hit; you then land in an adjacent square and take falling damage as if you had fallen [[10]] fewer ft (the first [[1d6]] of that is nonlethal); on a miss you land prone in a random adjacent square and take full falling damage; abilities that reduce falling damage reduce this bonus damage likewise"
+    },
+    "Dizzying Tumble": {
+      "modifiers": [],
+      "rider": "when you exit a square adjacent to a hostile creature after moving no more than your base speed, that creature must make a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be sickened for [[1]] round; if you moved no more than half your base speed it is instead nauseated for [[1]] round on a failed save (cannot be used with a 5-foot step); a given creature cannot be nauseated by this more than once per hour"
+    },
+    "Dolphin Strike": {
+      "modifiers": [],
+      "rider": "when a high jump (an Acrobatics check as part of a move action; with the (swim) package underwater use Swim instead) lets you threaten a creature at a higher elevation, you may make an attack action against it as a standard action; on a hit add [[1d6]] per [[10]] ft of maximum vertical height allowed by the check (maximum [[1d6]] per rank in Acrobatics); a creature damaged this way cannot make attacks of opportunity against you for leaving threatened squares until the end of your turn"
+    },
+    "Elevation Mastery": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "while you have higher ground in melee (this increases your higher-ground attack bonus); increases by a further [[1]] if you have [[10]]+ ranks in a skill granted by an Athletics package you possess; creatures attacking you in melee from lower ground take a penalty to their attack rolls equal to your total higher-ground attack bonus"
+    },
+    "Knockdown Tumble": {
+      "modifiers": [],
+      "rider": "expend martial focus; when you succeed at an Acrobatics check to avoid provoking an attack of opportunity while moving through an opponent's threatened area or its space, that opponent must make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be knocked prone"
+    },
+    "Overhead Flip": {
+      "modifiers": [],
+      "rider": "as part of an attack action, make an Acrobatics check to jump against an adjacent creature's CMD; on a success, jump without provoking to any square adjacent to that creature that would flank with your starting position and treat the creature as flanked by you for the attack action; on a failure you provoke an attack of opportunity from it and do not move"
+    },
+    "Scale Foe": {
+      "modifiers": [],
+      "rider": "while you have climbed onto a creature at least one size larger than you (a move action; Climb check vs its CMD, +[[3]] per size category it is larger), it is flat-footed against your attacks and takes a [[-2]] penalty to attack rolls and combat maneuver checks against you per size category it is larger than you"
+    },
+    "Sinking Blow": {
+      "modifiers": [],
+      "rider": "while flying or swimming and you have martial focus; on a successful attack action against a creature using the same movement mode, it must make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or lose [[30]] ft of altitude toward the ground; if you have [[10]]+ ranks in that movement mode's skill, a creature that fails also has its speed with that mode reduced by half for [[@spheres.pam]] rounds (minimum [[1]])"
+    },
+    "Slippery Weasel’s Tumble": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "when you succeed at an Acrobatics check to move through an opponent's threatened area or space without provoking (using a package movement mode); this bonus applies against that opponent until the start of your next turn and increases by [[1]] for every [[7]] ranks in an Athletics package skill; you may also shift [[5]] ft into another space within that opponent's reach without provoking (an extra [[5]] ft per [[10]] ranks), up to [[@spheres.pam]] times per round"
+    },
+    "Terror Below": {
+      "modifiers": [],
+      "rider": "as an attack action from beneath the surface of a liquid, move up to [[1/4]] your base land speed (or [[1/2]] your swim speed) and make a melee attack against a creature above the surface; on a hit it must make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be pulled into the water in a square of your choice adjacent to you (even from solid ground); with [[10]]+ ranks in Swim it cannot have held its breath first and must immediately begin checks to avoid drowning"
+    },
+    "Wall Stunt": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "requires the Mobile Striker talent and kicking off a wall for the rest of your movement; applies to an attack you make while airborne, and increases by [[1]] for every [[5]] ranks in Acrobatics you possess"
+    },
+    "Windwake": {
+      "modifiers": [],
+      "rider": "when you move at least [[30]] ft, a gust affects every square you were adjacent to during the movement, triggering at movement's end; a creature at least [[2]] sizes smaller than you must make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or have its speed halved for [[1]] round; a creature at least [[3]] sizes smaller automatically has its speed halved for [[1]] round and must make the save or be pushed [[5]] ft and knocked prone (this movement provokes no attacks of opportunity); for every [[5]] ranks in your movement mode's skill, creatures are pushed [[5]] ft farther and you treat them as [[1]] size smaller for this talent"
+    }
+  },
+  "Barrage": {
+    "Blowback Barrage": {
+      "modifiers": [],
+      "rider": "when you strike the same target at least twice with your barrage, that creature must make a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be pushed straight back [[5]] ft per shot beyond the first; if this movement would force it into a solid object it falls prone instead"
+    },
+    "Cone Of Death": {
+      "modifiers": [],
+      "rider": "expend martial focus; special full-round action; forgo all (blitz) talents; make one attack roll and apply it to every creature within a close-range ([[25]] ft + [[5]] ft per [[2]] base attack bonus) cone, dealing damage to each creature you hit (may affect swarms normally immune to weapon damage); counts as [[10]] ranged/thrown attacks and consumes that much ammunition; if this talent is taken twice the cone becomes medium range ([[100]] ft + [[10]] ft per base attack bonus), if three times long range ([[400]] ft + [[40]] ft per base attack bonus)"
+    },
+    "Distracting Shot": {
+      "modifiers": [],
+      "rider": "forgo your extra barrage attack to instead make a ranged feint (Bluff) check against the target before any other attacks; on success it loses its Dexterity bonus to AC against your next attack, and you force it to take a [[5]]-foot step (not provoking) in any direction that is not intrinsically dangerous"
+    },
+    "Double Tap": {
+      "modifiers": [],
+      "rider": "expend one additional piece of ammunition; when this (blitz) attack hits a target already damaged earlier in this barrage, it deals [[1 + floor(@attributes.bab.total / 7)]] precision damage for each earlier attack that damaged that target this barrage"
+    },
+    "Pinning Punishment": {
+      "modifiers": [],
+      "rider": "when you strike the same target twice with this barrage (arrows, bolts, or similar ammunition only, and the target must be adjacent to a floor, wall, or other solid object), it must make a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or have all of its movement speeds reduced to [[0]] (pinned); it can free itself by spending a standard action to remove or break the arrows, or rip free as part of a move action by passing a Strength or Escape Artist check (DC [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]), taking [[1d6]] bleed if it rips free"
+    },
+    "Shove And Shoot": {
+      "modifiers": [],
+      "rider": "special attack action; forgo your first ranged attack of the barrage to make a Bull Rush combat maneuver as a free action (not provoking) against a creature within your natural reach; your barrage attack penalty also applies to this CMB"
+    },
+    "Suppressing Fire": {
+      "modifiers": [],
+      "rider": "make [[2]] extra attacks that must all target the same creature and that automatically miss; unless the target chooses to instead be attacked normally (rolling those attacks, taking no penalty), its speed is halved and it takes a -[[3]] penalty to Perception checks and to all attack rolls until the end of its next turn, worsening by -[[1]] for each additional suppressing-fire (blitz) attack targeting it"
+    },
+    "Hammering Shots": {
+      "modifiers": [],
+      "rider": "when you strike a target twice with the same barrage, its initiative is reduced by -[[5]] for [[@spheres.pam]] rounds, changing its place in the initiative order."
+    }
+  },
+  "Barroom": {
+    "Alchemical Dragon": {
+      "modifiers": [],
+      "rider": "special standard action; imbibe a held liquid alchemical weapon (must be spit within [[@spheres.pam]] rounds or it is wasted), then spit it in a [[10]]-ft cone (the cone increases by [[5]] ft for every [[5]] points of base attack bonus); each creature in the cone takes the alchemical item's normal direct-hit damage, Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] for half"
+    },
+    "Devastating Burst": {
+      "modifiers": [],
+      "rider": "special attack action; expend martial focus and break your weapon; this attack is treated as a critical threat (roll to confirm as normal), and a critical confirmed this way uses a x[[2]] multiplier even if the weapon's would be higher; you cannot use a (smash) talent again for [[1]] minute"
+    },
+    "Dumbfounding Crack": {
+      "modifiers": [],
+      "rider": "break your weapon and expend martial focus when you attack; on a hit the target must succeed at a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be confused for [[1 + floor(@attributes.bab.total / 3)]] rounds"
+    },
+    "Jagged Edge": {
+      "modifiers": [],
+      "rider": "break a melee or thrown weapon when you attack; on a hit the target takes [[1d4]] bleed damage"
+    },
+    "Shatter": {
+      "modifiers": [
+        {
+          "formula": "1d4 + (floor(@attributes.bab.total / 4))d4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "break your weapon when you attack to deal the extra damage on that hit; if you threaten a critical hit you gain a +[[4]] bonus on the confirmation roll, and on a confirmed critical the weapon is destroyed"
+    },
+    "Sudden Crash": {
+      "modifiers": [],
+      "rider": "break your weapon as part of the attack; on a hit the target gains the battered condition until the end of your turn; if the attack was made as an attack action, the target must also succeed at a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or have all its movement speeds halved (minimum [[5]] ft) for [[1 + floor(@attributes.bab.total / 5)]] rounds"
+    },
+    "Up, Down And…": {
+      "modifiers": [],
+      "rider": "while you have the drunk status; after you strike a foe while prone and then attack it again while standing within [[1]] round (or vice versa), expend martial focus to resolve that second attack against the target's flat-footed AC; at +[[10]] base attack bonus you instead gain a +[[2]] bonus on attack rolls made while prone"
+    },
+    "You Want Some?": {
+      "modifiers": [],
+      "rider": "with an alcoholic beverage (or other non-directly-harmful liquid) in one hand and the target within your natural reach; on a successful attack action you force the target to drink, allowing it a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] to avoid, and on a failed save it becomes sickened for [[1]] round plus any effects of the drink (such as gaining the drunk condition)"
+    }
+  },
+  "Beastmastery": {
+    "Beast Tamer": {
+      "modifiers": [],
+      "rider": "expend martial focus (standard action); a tameable creature within close range ([[25]] ft + [[5]] ft per [[2]] Handle Animal ranks) must make a Will save ([[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) or have its attitude improved to helpful and serve you as a tame creature for [[1]] minute per Handle Animal rank; non-animal-type creatures gain +[[2]] on the save; a creature that saves is immune to your Beast Tamer for [[24]] hours; ordering an obviously suicidal action ends the tame"
+    },
+    "Bronco Buster": {
+      "modifiers": [],
+      "rider": "standard action; attempt to mount an animal-type creature within reach of suitable size via a Ride check vs its CMD; on success it becomes your mount; each round it may make a Will save ([[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) to break free, then once per round attempt to throw you (combat maneuver vs DC [[10]] + your Ride modifier); on a failed save it acts as a willing mount that turn; with Broad Skills you may target any creature your trainer ability applies to, and non-animal creatures gain +[[2]] on the save"
+    },
+    "Coordinated Attack": {
+      "modifiers": [],
+      "rider": "attack action only; one animal ally also attacks your target with a single natural weapon as a joint swift action; if both you and the ally deal damage, the ally may move [[5]] ft as a free action (does not provoke)"
+    },
+    "Knock Down": {
+      "modifiers": [],
+      "rider": "while mounted, on a successful bull rush, drag, or reposition (yours or your mount's) make a free trip attempt using that maneuver's check (you never fall prone from it); a mounted target instead falls off its mount into an adjacent space directly away from you; expend martial focus to deal [[1d6]] falling damage plus an additional [[1d6]] per [[3]] Ride ranks when a target is knocked prone this way"
+    },
+    "Monster Breaker": {
+      "modifiers": [],
+      "rider": "use Bronco Buster on any creature suitable to serve as your mount; a creature with Intelligence greater than 2 may make its Will save ([[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) as a free action at the start of its turn, and on a failed save you may only direct it to move (not attack or use other abilities)"
+    },
+    "Pack Attack": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "while flanking an enemy together with one or more animal allies within close range ([[25]] ft + [[5]] ft per [[2]] Handle Animal ranks); the flanking attack bonus increases by a further +[[1]] for each additional animal ally that threatens that enemy (maximum +[[1]] per [[4]] Handle Animal ranks)"
+    },
+    "Run Down": {
+      "modifiers": [],
+      "rider": "attack action only; your mount may attempt an overrun combat maneuver against your target as a joint swift action (does not provoke), moving up to half its speed on a success"
+    },
+    "Vaulting Flank": {
+      "modifiers": [],
+      "rider": "attack action only; your mount also attacks your target with a single natural weapon as a joint swift action; if both you and your mount deal damage, you may vault into a dismount and flanking position against the target (Ride check DC [[15]] + [[5]] per size category the target is larger than your mount, or fall prone adjacent to your mount); your mount keeps attacking that target until it falls or you remount and give a new command"
+    }
+  },
+  "Berserker": {
+    "Advancing Carnage": {
+      "modifiers": [
+        {
+          "formula": "-2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "melee attack action only; the attack penalty applies to all your attack rolls this round; on a hit you may make an additional melee attack as a free action against a creature adjacent to the struck target and within your reach, chaining to a new adjacent creature on each subsequent hit (never the same creature twice); additional attacks cannot exceed [[floor(@attributes.bab.total / 2)]] (minimum [[1]]); taken a second time, you may take a [[5]] ft step as a free action after an attack to bring new foes into reach"
+    },
+    "Alter Terrain": {
+      "modifiers": [],
+      "rider": "requires the Shatter Earth talent; when your Shatter Earth reduces the ground to [[0]] hp you may create a [[5]] ft deep hole in the affected squares (and may also raise all adjacent squares by [[5]] ft); each creature standing in a square that becomes a hole must make a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or fall prone"
+    },
+    "Bone-breaker": {
+      "modifiers": [],
+      "rider": "on a brutal strike hit, the battered target takes a -[[1 + floor(@attributes.bab.total / 4)]] penalty on all attack and damage rolls for as long as it remains battered (multiple uses of this talent do not stack)"
+    },
+    "Brutal Strike": {
+      "modifiers": [
+        {
+          "formula": "2 * @attributes.bab.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "special attack action; the added damage applies only when you expend martial focus; on a hit the target gains the battered condition until the end of your next turn; each brutal strike may be modified by a single (exertion) talent"
+    },
+    "Flesh Carver": {
+      "modifiers": [],
+      "rider": "on a brutal strike hit, reduce the battered target's damage reduction by [[floor(@attributes.bab.total / 2)]] (minimum [[1]]) for as long as it remains battered (does not stack; halved, minimum [[1]], against DR that cannot be overcome or is overcome only by epic weapons)"
+    },
+    "Genie’s Wrath": {
+      "modifiers": [],
+      "rider": "(exertion) usable only when Elemental Might changes your brutal strike's added damage to energy; pick the option matching the chosen energy type. Electricity (Djinn's Crackling Blow): the damaged creature must make a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or drop all held items (as though stunned); if it was already battered it also provokes an attack of opportunity from you and your allies. Fire (Efreeti's Arcing Flame): after damaging the target, any number of other creatures within your reach also take the brutal strike's added damage (Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] half); if the target was already battered it must make a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be blinded for [[1]] round. Cold (Marid's Whirlpool Strike): the damaged creature treats other creatures as having partial concealment ([[20]]% miss chance) while battered; if it was already battered you may reposition it (Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] negates) into any unoccupied square within your reach as a free reposition that may place it in a dangerous space. Acid (Shaitan's Eroding Assault): the damaged creature treats enemies' threatened areas as difficult terrain while battered, and this brutal strike ignores hardness equal to your base attack bonus; if the target was already battered it also ignores damage reduction equal to your base attack bonus"
+    },
+    "Heavy Swing": {
+      "modifiers": [],
+      "rider": "on a brutal strike hit, the target must make a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be staggered for [[1 + floor(@attributes.bab.total / 4)]] rounds; if the target is battered it is instead staggered [[1]] round on a success, or dazed [[1]] round then staggered as normal on a failure; on a failed save the attack's damage counts as ongoing damage for concentration checks for the duration; a creature immune to dazed is staggered instead for the round it would have been dazed"
+    },
+    "Juggernaut": {
+      "modifiers": [
+        {
+          "formula": "1 + floor(@attributes.bab.total / 10)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "at the end of a charge only; the same bonus also applies to bull rush combat maneuvers made at the end of the charge; you take no AC penalty when charging, ignore difficult terrain when you charge, run, or withdraw, and may charge through squares occupied by allies"
+    },
+    "Shatter Earth": {
+      "modifiers": [],
+      "rider": "full-round action (expend martial focus to make it a standard action); the attack automatically hits the corner of a square within reach and deals damage normally; if the damage exceeds the floor's hardness you create a [[5]] ft radius, [[10]] ft cone, or [[15]] ft line of difficult terrain (radius +[[5]] ft per [[10]] BAB, cone +[[5]] ft per [[5]] BAB, line +[[10]] ft per [[5]] BAB); each creature in the affected area becomes battered for [[1]] round, and any creature already battered must make a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be knocked prone"
+    },
+    "Shrapnel": {
+      "modifiers": [],
+      "rider": "when a brutal strike destroys an unattended object, fragments fill a cone ([[10]] ft for a Small or smaller object, +[[5]] ft per size category above Small) dealing [[1d6 + (floor((@attributes.bab.total - 1) / 2))d6]] bludgeoning, piercing, and slashing damage of the object's material (increased by [[1d6]] per [[5]] points of the object's hardness, to a maximum of +[[10d6]]); a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] halves the damage and negates the battered condition, and a battered creature rolls the save twice and takes the worse result"
+    },
+    "Bell-ringer": {
+      "modifiers": [],
+      "rider": "while the target is battered by your brutal strike, it takes -[[1 + floor(@attributes.bab.total / 4)]] on concentration checks and Will saves."
+    },
+    "Heart Crusher": {
+      "modifiers": [],
+      "rider": "while the target is battered by your brutal strike, it takes -[[1 + floor(@attributes.bab.total / 4)]] on all Fortitude saves."
+    },
+    "Leg-smasher": {
+      "modifiers": [],
+      "rider": "while the target is battered by your brutal strike, it takes -[[1 + floor(@attributes.bab.total / 4)]] on AC and Reflex saves."
+    },
+    "Beat Down": {
+      "modifiers": [],
+      "rider": "the battered condition you inflict with a brutal strike lasts [[max(1, @spheres.pam)]] additional rounds."
+    }
+  },
+  "Boxing": {
+    "Corkscrew Set Up": {
+      "modifiers": [],
+      "rider": "as part of readying a counter punch, make an attack roll against one creature within your reach; on a hit it deals no damage, but until the start of your next turn the target can move only such that it ends adjacent to you (or, as a swift action on its turn, attempt a combat maneuver check vs your CMD to ignore this); at base attack bonus +[[10]] the attack instead deals [[@spheres.pam + @attributes.bab.total]] damage"
+    },
+    "Counter Punch": {
+      "modifiers": [
+        {
+          "formula": "2 + (floor(@attributes.bab.total / 4)) * 2",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "competence",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "readied counter punch (treated as an attack action; resolves before the triggering attack); you may apply one (counter)-tagged talent to it"
+    },
+    "Cross Counter": {
+      "modifiers": [],
+      "rider": "expend martial focus as an immediate action when a creature within your reach makes an attack of opportunity against you, to make an attack against it (normal damage); on a hit, that creature must roll its triggering attack twice and take the worse result"
+    },
+    "Cutting Comeback": {
+      "modifiers": [],
+      "rider": "ready a demoralize (Intimidate), a Warleader shout that affects enemies, or a Fencing feint as a counter punch; on success one afflicted target within [[30]] ft takes [[4 + (floor(@attributes.bab.total / 4)) * 4]] nonlethal damage (twice your counter punch bonus damage); language-based mind-altering effect"
+    },
+    "Dug In Blow": {
+      "modifiers": [],
+      "rider": "on a successful counter punch you gain DR [[2 + floor(@attributes.bab.total / 3)]]/- until the start of your next turn (lost if you move more than [[5]] ft during your turn)"
+    },
+    "Forceful Smash": {
+      "modifiers": [],
+      "rider": "on a successful counter punch, attempt a bull rush against the target as a free action that does not provoke; you may move with the target (this movement provokes) and must end adjacent to it; at base attack bonus +[[10]] the target falls prone at the end of this movement"
+    },
+    "Intense Conditioning": {
+      "modifiers": [],
+      "rider": "expend martial focus as a free action on a successful counter punch; the target makes a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or, for [[1]] minute, must succeed a Will save each time it attempts the action that triggered your counter punch or lose that action (mind-affecting)"
+    },
+    "Jolt Counter": {
+      "modifiers": [],
+      "rider": "expend martial focus as a free action (even off your turn) when you attack with your counter punch to treat the target as flat-footed until the end of that turn; on a hit it gains the battered condition until the end of your next turn"
+    },
+    "Knuckle Crusher": {
+      "modifiers": [],
+      "rider": "on a successful counter punch, the target's natural attacks and unarmed strikes take a -[[2]] penalty to damage rolls for [[1 + floor(@attributes.bab.total / 4)]] round(s); at base attack bonus +[[10]] this penalty is -[[5]] and the target also takes a -[[1]] penalty on attack rolls with natural attacks"
+    },
+    "Ko Focus": {
+      "modifiers": [],
+      "rider": "when you deal damage with your counter punch to a creature of CR at least half your character level (minimum 1/2), spend an immediate action to regain your martial focus"
+    },
+    "Launching Uppercut": {
+      "modifiers": [],
+      "rider": "expend martial focus on a successful counter punch to attempt a bull rush against the target as a free action (even off your turn, does not provoke); on success push it [[5]] ft further than normal, and you may force the movement vertically instead of horizontally; a creature forced upward descends at the end of its turn and on landing must make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or fall prone and take falling damage (on a success, half falling damage and no prone); for every [[4]] points of base attack bonus you may launch a creature [[10]] ft further"
+    },
+    "Liver Shot": {
+      "modifiers": [],
+      "rider": "on a successful counter punch, the target makes a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or is sickened and has all movement speeds reduced by half for [[1 + floor(@attributes.bab.total / 5)]] round(s)"
+    },
+    "Loopy Blow": {
+      "modifiers": [],
+      "rider": "on a successful counter punch, the target makes a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or is confused (as the confusion spell) for [[1]] round; at base attack bonus +[[10]] it lasts [[2]] rounds; a battered target rolls twice on the confusion table and takes the higher result"
+    },
+    "Overhead Smash": {
+      "modifiers": [],
+      "rider": "as long as you have martial focus, spend an immediate action before the attack roll of your counter punch to roll both the attack roll and the damage roll twice and use whichever set of results you prefer"
+    },
+    "Punishing Cross": {
+      "modifiers": [],
+      "rider": "expend martial focus as an immediate action when you take damage from a melee attack; you take half the damage, and the attacker must succeed a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or take half the damage you would have taken"
+    },
+    "Reflecting Palm": {
+      "modifiers": [],
+      "rider": "enhances Punishing Cross: if the attacker fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]], it takes all the damage you would have taken and you take none"
+    },
+    "Rope A Dope": {
+      "modifiers": [],
+      "rider": "once per round, spend an immediate action when a creature makes a melee attack against you; at the end of its turn it makes a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] (taking a -[[2]] penalty for each attack it made that round) or is fatigued for [[1 + floor(@attributes.bab.total / 4)]] round(s); at base attack bonus +[[10]] it is exhausted instead"
+    },
+    "Sucker Punch": {
+      "modifiers": [],
+      "rider": "once per round, expend martial focus to treat an attack of opportunity made with a counter-punch-capable weapon as a counter punch; you then become staggered for [[1]] round"
+    },
+    "Violent Pressure": {
+      "modifiers": [],
+      "rider": "when you ready a counter punch, spend a swift action to target one creature within [[30]] ft; it makes a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or is shaken for [[1 + floor(@attributes.bab.total / 5)]] round(s); only once per creature per day"
+    },
+    "Winding Blow": {
+      "modifiers": [],
+      "rider": "on a successful counter punch, the target makes a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or cannot make attacks of opportunity for [[1]] round and has the air forced from its lungs (it can hold its breath only [[1]] round) for [[max(1, floor(@attributes.bab.total / 2))]] rounds"
+    },
+    "Dizzying Maul": {
+      "modifiers": [],
+      "rider": "on a successful counter punch, if the target tries to move more than half its speed on its next turn it must make an Acrobatics check (DC [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) or fall prone."
+    }
+  },
+  "Brute": {
+    "Armored Momentum": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only while charging in heavy armor (this raises the attack bonus gained from charging); you may also expend martial focus as part of the charge to ignore the additional damage from a weapon with the brace special feature readied against your charge"
+    },
+    "Break Defenses": {
+      "modifiers": [],
+      "rider": "on a successful bull rush, drag, overrun, or reposition maneuver, the target provokes an attack of opportunity from each of your allies (but not from you)"
+    },
+    "Brutal Boar’s Charge": {
+      "modifiers": [],
+      "rider": "as part of a charge in which you make a combat maneuver, shove one target in the charge's path as a free action before rolling your maneuver check; the shove gains the charge's attack bonus and deals +[[1]] damage for every [[10]] ft you travelled before it (this extra damage cannot exceed twice your base attack bonus and is not multiplied on a charge); only one target may be shoved this way"
+    },
+    "Dazed And Confused": {
+      "modifiers": [],
+      "rider": "on a successful maneuver (manhandle); Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be staggered for [[1]] round ([[2]] rounds at base attack bonus +[[10]])"
+    },
+    "Destabilizing Charge": {
+      "modifiers": [],
+      "rider": "on the first successful attack of a charge, the target loses its Dexterity bonus to AC against the next attack roll made against it before the end of your next turn"
+    },
+    "Dizzy Spin": {
+      "modifiers": [],
+      "rider": "on a successful maneuver (manhandle); Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or treat all other creatures as having partial concealment for [[1]] round ([[2]] rounds at base attack bonus +[[10]])"
+    },
+    "Dominoes": {
+      "modifiers": [],
+      "rider": "when you bull rush, drag, or reposition a creature into another creature, make a trip attempt against that second creature as a free action that does not provoke an attack of opportunity (even if it is not within your reach); if you fail this trip by [[5]] or more, that creature cannot make a trip attempt against you in return"
+    },
+    "Drop": {
+      "modifiers": [],
+      "rider": "on a successful maneuver (manhandle); make a trip combat maneuver against the target as a free action that does not provoke an attack of opportunity; if you have the Hammer talent, a successful trip lets you use the ground to deal damage as if it were a wall"
+    },
+    "Earthquake Stomp": {
+      "modifiers": [],
+      "rider": "full-round action (expend martial focus to perform it as a standard action); make one trip attempt as a free action that does not provoke (you may use your bull rush CMB) and compare it against all valid targets within [[5]] ft (the radius increases by an additional [[5]] ft per [[10]] base attack bonus); enemies not knocked prone cannot attempt to trip you in return"
+    },
+    "Follow-through": {
+      "modifiers": [],
+      "rider": "on a hit with an attack action, make a bull rush or reposition maneuver against the target as a free action that does not provoke an attack of opportunity (you may use your weapon, adding its enhancement bonus and attack-boosting effects such as Weapon Focus to the maneuver)"
+    },
+    "Forceful Jaunt": {
+      "modifiers": [],
+      "rider": "on a successful bull rush, drag, overrun, or reposition, the target's movement from that maneuver passes harmlessly through creatures and objects in its path as if ethereal (supernatural; still affected by force and abjuration effects); at base attack bonus +[[10]] you may also force it into walls and solid objects, whereupon it is shunted to the nearest open space and takes [[1d6]] damage for every [[5]] ft travelled (maximum [[1d6]] per point of base attack bonus)"
+    },
+    "Greater Shove": {
+      "modifiers": [
+        {
+          "formula": "floor(@attributes.bab.total / 2)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "applies to a successful shove; you may also augment the shove with feats and talents such as Power Attack even though it is a touch attack"
+    },
+    "Hammer": {
+      "modifiers": [],
+      "rider": "while you have martial focus (no longer required if you take this talent twice), when you bull rush, drag, or reposition a creature into a wall, creature, or object no more than one size smaller than it, the target stops in the adjacent space and both it and the obstacle take bludgeoning damage by the moved creature's size: Fine [[1d2]], Diminutive [[1d3]], Tiny [[1d4]], Small [[1d6]], Medium [[1d8]], Large [[1d10]], Huge [[2d6]], Gargantuan [[2d8]], Colossal [[3d6]]; this damage is dealt again for every [[5]]-ft square it would have travelled beyond the obstacle (if taken twice, treat creatures as two sizes larger, to a maximum of Colossal)"
+    },
+    "Humiliate": {
+      "modifiers": [],
+      "rider": "on a successful maneuver (manhandle); Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be entangled for [[1]] round ([[2]] rounds at base attack bonus +[[10]])"
+    },
+    "Launching Rush": {
+      "modifiers": [],
+      "rider": "on an awesome blow, bull rush, drag, or reposition that uses at least a standard action; expend martial focus to push the target back an additional [[5]] ft for every [[2]] by which your check exceeds its CMD (instead of every [[5]]); any resulting fall damage cannot exceed [[1d6]] per point of base attack bonus, and collision damage from talents such as Hammer is not increased by this extra movement"
+    },
+    "Ornery Ox": {
+      "modifiers": [],
+      "rider": "stance; when you shove as a move action, spend an attack of opportunity to make an overrun maneuver against [[1]] creature in your path as a free action; for every [[5]] base attack bonus you may overrun an additional target at a cumulative -[[2]] penalty per extra check; you cannot overrun a target more than once in the same shove"
+    },
+    "Perpetual Motion": {
+      "modifiers": [],
+      "rider": "on a successful maneuver (manhandle); make a bull rush, drag, or reposition combat maneuver against the target as a free action that does not provoke an attack of opportunity"
+    },
+    "Pertinacious Conditioning": {
+      "modifiers": [],
+      "rider": "on a successful maneuver (manhandle); Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be unable to willingly move from its square for [[1]] round per [[5]] points of base attack bonus (supernatural mind-affecting fear; the creature may attempt a new save each round as a move action); if your maneuver exceeds its CMD by [[5]] or more, you may make an Intimidate check to demoralize it as an immediate action"
+    },
+    "Robbery": {
+      "modifiers": [],
+      "rider": "on a successful maneuver (manhandle); make a steal or disarm combat maneuver against the creature as a free action that does not provoke an attack of opportunity"
+    },
+    "Shove": {
+      "modifiers": [],
+      "rider": "on a successful shove (a melee touch attack made as a move action after moving up to half your speed, dealing bludgeoning damage equal to your Strength modifier), the target gains the battered condition until the end of your next turn; when you successfully bull rush, drag, reposition, or overrun a target that blocked you, you may apply one (manhandle) talent you know to it (not on maneuvers made as a free action)"
+    },
+    "Slapper": {
+      "modifiers": [],
+      "rider": "you may use a natural weapon, unarmed strike, or one-handed weapon to perform your shove, adding its attack bonus to the shove and its enhancement bonus (plus damage from special abilities such as flaming or holy) to the shove's damage; on a successful bull rush, drag, reposition, or overrun, the target gains the battered condition until the end of your next turn"
+    },
+    "Smash (brute)": {
+      "modifiers": [],
+      "rider": "on a successful bull rush, drag, overrun, or reposition maneuver (not one made as a free action), the target takes damage equal to your unarmed strike or a light weapon you wield; you may make these maneuvers with that weapon (adding its enhancement and attack-boosting effects to your CMB) and augment them with Power Attack and similar feats"
+    },
+    "Throw": {
+      "modifiers": [],
+      "rider": "on a successful bull rush, drag, or reposition; expend martial focus to throw the creature an additional [[5]] ft in any direction ([[10]] ft at base attack bonus +[[10]]); Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or fall prone"
+    },
+    "Thunderous Clap": {
+      "modifiers": [
+        {
+          "formula": "(floor(@attributes.bab.total / 2))d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "sonic"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "expend martial focus; full-round action; a thunderous shockwave fills a close-range burst ([[25]] ft + [[5]] ft per [[2]] base attack bonus) or a cone ([[100]] ft + [[10]] ft per base attack bonus); Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] halves the damage and negates the deafen; on a failed save targets are deafened for [[1d4+1]] rounds; you may also make a ranged bull rush against each target in the area as a free action that does not provoke (you do not move with them and there is no size limit); all nonmagical fires in the area are extinguished"
+    },
+    "Transonic Smash": {
+      "modifiers": [
+        {
+          "formula": "(floor(@attributes.bab.total / 5))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "sonic"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "on a successful maneuver (manhandle); Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] halves the sonic damage and negates the deafen; on a failed save the target is deafened for [[1]] minute; you may expend martial focus to instead deal [[1d6]] sonic per [[2]] points of base attack bonus"
+    }
+  },
+  "Dual Wielding": {
+    "Concentrated Breakdown": {
+      "modifiers": [],
+      "rider": "after you deal damage to a creature with two or more weapons in a single round, reduce either its natural armor bonus OR its damage reduction (your choice) by [[2]] (minimum 0) for [[1]] minute or until it recovers hit points from any source; if you would apply this to the same creature again before it ends, either reduce the value you did not pick or increase the reduction by [[1]] and reset the duration; at BAB +[[10]], reapplying to the same value increases the penalty by [[2]] instead"
+    },
+    "Crushing Combo": {
+      "modifiers": [],
+      "rider": "attack action while wielding two weapons; expend your martial focus as a swift action; until the end of your turn all your attacks deal extra damage equal to your off-hand weapon's damage die (not multiplied on a critical hit and not increased by Vital Strike)"
+    },
+    "Cyclone Cut": {
+      "modifiers": [],
+      "rider": "standard action; expend your martial focus; each creature within [[10]] ft (radius increases by [[5]] ft per [[5]] BAB) takes damage equal to your weapon damage for both your primary and one off-hand attack; a successful Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] halves the damage"
+    },
+    "Defensive Whirl": {
+      "modifiers": [],
+      "rider": "on an attack action in which you strike a single creature with BOTH your main-hand and off-hand weapons; that creature takes a -[[1]] penalty (an additional -[[1]] per [[5]] BAB) on all attack rolls against you for [[1]] round"
+    },
+    "Dizzying Combination": {
+      "modifiers": [],
+      "rider": "on an attack action in which you strike a single creature with BOTH your main-hand and off-hand weapons before the start of your next turn; the target must succeed on a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or take a -[[2]] penalty on Reflex saves and have all its movement speeds reduced by [[10]] ft (minimum 0) for [[1]] minute; at BAB +[[10]] the penalty and reduction are doubled; any action that removes the battered condition also ends this"
+    },
+    "High-low Combination": {
+      "modifiers": [],
+      "rider": "on a successful main-hand hit during a dual attack, you may forgo your off-hand attack to make a trip combat maneuver against that target without provoking an attack of opportunity (if you used a ranged weapon, the target must be within [[30]] ft)"
+    },
+    "Mixed Assault": {
+      "modifiers": [
+        {
+          "formula": "2 + floor(@attributes.bab.total / 5) * 2",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "requires wielding a melee weapon in one hand and a ranged weapon in the other; applies only after you strike two different creatures more than [[5]] ft apart in the same round you make an attack action; the bonus lasts against each such creature until the end of your next turn"
+    },
+    "Perfect Set-up": {
+      "modifiers": [
+        {
+          "formula": "2 + floor(@attributes.bab.total / 4) * 2",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "on your off-hand attack made after a successful main-hand touch attack (which deals only the weapon's damage die) taken as part of the same attack action; this off-hand attack targets the creature's flat-footed AC (it is not actually flat-footed) and ignores cover and concealment, and must be made before the end of your next round"
+    },
+    "Strategic Set-up": {
+      "modifiers": [],
+      "rider": "on a successful main-hand hit during a dual attack, if you attempt a combat maneuver against that same creature in place of your off-hand attack, treat yourself as [[1]] size category larger (an additional size per [[5]] BAB) for your CMB and your ability to affect the target"
+    },
+    "Tandem Offensive": {
+      "modifiers": [],
+      "rider": "on a successful main-hand hit with an attack action, your off-hand weapon gains your main-hand weapon's enhancement bonus (to attack and damage rolls) until the start of your next turn, replacing its own; at BAB +[[10]] the off-hand weapon also counts as the same material as your main-hand for overcoming damage reduction"
+    }
+  },
+  "Duelist": {
+    "Blackblood Strike": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage, the target's body is cursed; any creature that makes a Heal check on, applies healing to, or grants temporary hit points to it (including itself) is sickened for [[1]] round (Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] negates), or nauseated for [[1]] round instead if already sickened; supernatural curse. At base attack bonus +[[10]], applying this to a creature with fast healing or regeneration suppresses those abilities while the total Duelist-sphere bleed it suffers (dice counted as their minimum) exceeds its fast healing or regeneration"
+    },
+    "Bleed Air": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage to a creature already taking bleed damage, unless it succeeds at a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] it begins suffocating [[1d4]] rounds later: round [[1]] it falls unconscious ([[0]] HP), round [[2]] it drops to [[-1]] HP and is dying, round [[3]] it suffocates and dies; it may attempt a new Fortitude save each round to stave off the next stage but keeps saving each round until it dies or the effect ends. Receiving at least [[5]] HP of healing, or a full-round Heal check (DC equal to your combat-sphere DC), ends it; creatures that need not breathe are immune; using this against a creature already suffocating advances it [[1]] round closer to death"
+    },
+    "Blood Fountain": {
+      "modifiers": [],
+      "rider": "creatures suffering your bleed damage spill blood into the squares they occupy at the start of their turns, making that terrain slippery; moving into a slippery square at more than half speed requires a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] — failure makes the creature flat-footed until the end of its turn and stops that movement, and failure by [[5]] or more knocks it prone and flat-footed until the start of its next turn; the blood dries to normal terrain after [[10]] minutes"
+    },
+    "Blooded Strike": {
+      "modifiers": [],
+      "rider": "attack action or attack of opportunity only; on a successful attack or disarm the target takes [[1 + floor(@attributes.bab.total / 3)]] bleed damage (stacks with your other Duelist-sphere bleed); you never provoke attacks of opportunity for combat maneuvers against a creature currently taking bleed damage"
+    },
+    "Bloodied Shark’s Frenzy": {
+      "modifiers": [
+        {
+          "formula": "1 + floor(@attributes.bab.total / 6)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "morale",
+          "damageType": [],
+          "critical": "normal"
+        },
+        {
+          "formula": "1 + floor(@attributes.bab.total / 6)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "morale",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "expend martial focus as a free action when you detect a bleeding or badly wounded ([[50]]% or fewer HP) creature with this talent's scent to enter a blood frenzy for [[@spheres.pam]] rounds (minimum [[1]]); this morale bonus applies only against bleeding or badly wounded creatures, and you take an equal penalty on attack and damage rolls against all other creatures"
+    },
+    "Bloody Hell": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage, expend two martial focus; the target must succeed at a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be transported to a strongly evil-aligned plane (e.g. Hell, Abaddon); on a successful save the cosmic energy backlashes and you take [[6d6]] fire damage and are fatigued; supernatural, usable against a given creature only once per [[24]] hours"
+    },
+    "Clouding Cut": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage, expend martial focus to gash the target near a sensory organ, giving it a [[10]]% miss chance on all its attacks; each time it takes its bleed damage at the start of its turn the miss chance rises by [[10]]%, and at [[40]]% it is instead blinded and stops increasing; ending the bleed ends this. You may reuse it on an already-affected creature without expending martial focus to raise its miss chance by [[10]]% (unless already blinded)"
+    },
+    "Curtain Call": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (floor(@attributes.bab.total / 3))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning",
+            "slashing",
+            "piercing"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend a move action and expend martial focus (not required if you have Defiant Focus) to elaborately sheathe a held weapon without provoking; each enemy within [[30]] ft currently suffering your blooded-strike bleed hemorrhages and takes this damage (plus an extra [[2d6]] per stack of Perforating Wounds applied to it), after which all Duelist-sphere bleed on it immediately ends"
+    },
+    "Cut Free": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage with an attack action, one creature grappled, pinned, impaled, or swallowed whole by the target (this may include you) may immediately attempt to escape (a combat maneuver or Escape Artist check) with a bonus equal to the bleed damage the target is taking; a creature no longer impaled still takes its bleed as normal"
+    },
+    "Debilitating Injuries": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage, the target takes a penalty on all weapon attack rolls equal to the bonus bleed damage your blooded strike grants, for as long as the bleed is in effect; any healing or effect that ends the bleed also ends this penalty"
+    },
+    "Dervish Launch": {
+      "modifiers": [],
+      "rider": "when you succeed at a disarm to make a creature drop a weapon, use an immediate action (or an attack of opportunity if the disarmed creature is currently taking bleed damage) to make a ranged attack with that weapon against any creature in range; a weapon with no ranged use is thrown with a [[10]]-ft range increment"
+    },
+    "Finger Cutter": {
+      "modifiers": [],
+      "rider": "on a successful disarm attempt the target takes [[1 + floor(@attributes.bab.total / 3)]] bleed damage (stacks with your other Duelist-sphere bleed); you no longer provoke attacks of opportunity for attempting the disarm maneuver"
+    },
+    "Jugular Cut": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage, if that bleed is not ended within [[3]] rounds the target must succeed at a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or die, repeating the save each round thereafter until the bleed is healed"
+    },
+    "Leg Cutter": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage, the target must succeed at a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or fall prone"
+    },
+    "Long Cuts": {
+      "modifiers": [],
+      "rider": "bleed damage you cause requires at least [[5]] HP of healing at one time or a DC [[20]] Heal check to end; at base attack bonus +[[5]] and every [[5]] points thereafter the healing required and the Heal DC each increase by [[5]]"
+    },
+    "Open Vein": {
+      "modifiers": [],
+      "rider": "special attack action; expend martial focus; on hit the target takes [[1d4 + (floor(@attributes.bab.total / 3))d4]] bleed damage (stacks with other Duelist sphere bleed)"
+    },
+    "Perforating Wounds": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage with an attack action to a creature already suffering your blooded-strike bleed, it takes an extra [[1 + floor(@attributes.bab.total / 3)]] bleed damage (stacks with your Duelist-sphere bleed); this bleed stacks with itself once for every [[6]] points of base attack bonus you possess and is tracked separately from your blooded strike"
+    },
+    "Sever": {
+      "modifiers": [],
+      "rider": "when your natural die roll for a disarm attempt falls within your weapon's natural critical threat range (keen/Improved Critical do not count), expend martial focus as an immediate action; the target must succeed at a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or have one hand it wields the weapon with severed (with lasting penalties until magically restored) and take [[1d6 + (floor(@attributes.bab.total / 4))d6]] bleed damage (stacks with your blooded strike)"
+    },
+    "Slickened Grip": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage, the target takes a penalty to CMD equal to the bleed damage your blooded strike dealt, doubled against its disarm and sunder CMD"
+    },
+    "Swift Slice": {
+      "modifiers": [],
+      "rider": "on a successful disarm, make one melee attack against that target as a swift action at full base attack bonus (if it is taking bleed from your attacks, you may instead make it as an immediate action)."
+    },
+    "Twirling Disarm": {
+      "modifiers": [],
+      "rider": "on a successful disarm attempt, the disarmed weapon rebounds against its wielder, dealing damage to that creature equal to the weapon's base damage dice"
+    },
+    "…and Stay Down!": {
+      "modifiers": [],
+      "rider": "when a creature lands prone in a square you threaten (this and a successful trip are the same trigger, at most one attack of opportunity per circumstance), make an attack of opportunity that deals [[1]] extra bleed damage (stacks with your Duelist-sphere bleed); on a hit the target must succeed at an Acrobatics check to stand up, at a penalty equal to your blooded-strike bleed it suffers; targets immune to bleed need not check"
+    }
+  },
+  "Equipment": {
+    "Caber Toss": {
+      "modifiers": [],
+      "rider": "special thrown attack targeting a 5-ft square (AC [[5]]) within range; on a hit every creature in the resulting line (a [[5]]-ft line for a Medium caber, [[10]] ft Large, [[20]] ft Huge) must make a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or take the caber's bludgeoning damage ([[1d6]] Medium, [[1d8]] Large, [[1d10]] Huge); the struck line becomes difficult terrain while the caber remains"
+    },
+    "Critical Genius": {
+      "modifiers": [],
+      "rider": "on a confirmed critical hit with the chosen weapon using the attack action, deal an extra [[@attributes.bab.total]] damage, applied after other modifiers and not multiplied by the crit"
+    },
+    "Dagger Dancer": {
+      "modifiers": [],
+      "rider": "with daggers: draw or sheathe one as a free action and gain +[[ifelse(gte(@attributes.bab.total, 10), 6, 3)]] on rolls to confirm critical hits."
+    },
+    "Duelist’s Grip": {
+      "modifiers": [
+        {
+          "formula": "floor(@abilities.str.mod / 2)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only while wielding a single one-handed melee weapon (not a natural attack) in one hand and making no attacks with any other hand or natural weapon"
+    },
+    "Finesse Fighting": {
+      "modifiers": [
+        {
+          "formula": "max(1, floor(@attributes.bab.total / 2))",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only if you have taken Finesse Fighting a second time, and only when using your Dexterity bonus on the attack roll and your Strength bonus on damage with a light or finesse weapon"
+    },
+    "Goblin Heritage": {
+      "modifiers": [
+        {
+          "formula": "1d4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "only when wielding a lit torch as a weapon (treated as a club)"
+    },
+    "Mechanical Savant": {
+      "modifiers": [
+        {
+          "formula": "max(1, floor(@attributes.bab.total / 2))",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "on a successful ranged attack with a crossbow or firearm (attack action, attack of opportunity, or an extra attack from a class feature or talent)"
+    },
+    "Ninjutsu Training": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "on your first attack against a creature that is unaware of your presence"
+    },
+    "Pikeman Training": {
+      "modifiers": [
+        {
+          "formula": "2 + 2 * min(1, floor(@attributes.bab.total / 10))",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only on a readied attack with a brace weapon against a target moving into your threatened area"
+    },
+    "Swashbuckler Training": {
+      "modifiers": [],
+      "rider": "on damaging a creature while using your Dexterity on the attack roll and Strength on damage, that creature takes -[[1]] CMB to disarm or sunder your weapon and -[[1]] CMD against your disarm and sunder attempts until the start of your next turn (-[[2]] at base attack bonus +[[10]])"
+    },
+    "Sword Shooter": {
+      "modifiers": [
+        {
+          "formula": "1d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "when firing a lance, longsword, or spear as ammunition from a longbow, shortbow, or crossbow; the extra die is not multiplied on a crit; take a -[[2]] penalty on the attack roll (doubled on a full attack)"
+    },
+    "Versatile Fighter": {
+      "modifiers": [],
+      "rider": "Offensive Style: on damaging a creature with an attack action modified by Power Attack or Deadly Aim, that creature becomes battered for [[1]] round"
+    }
+  },
+  "Fencing": {
+    "Ankle Strike": {
+      "modifiers": [],
+      "rider": "on hit you may attempt a trip combat maneuver against the target as a free action that does not provoke an attack of opportunity"
+    },
+    "Arm Strike": {
+      "modifiers": [],
+      "rider": "on hit the target takes a -[[2]] penalty to all attack rolls, ability checks, and skill checks made with the struck arm for [[1d4 + floor(@attributes.bab.total / 5)]] rounds"
+    },
+    "Belt Cutter": {
+      "modifiers": [],
+      "rider": "on hit you may attempt a steal combat maneuver against the target as a free action that does not provoke an attack of opportunity"
+    },
+    "Chest Strike": {
+      "modifiers": [],
+      "rider": "on hit the target must make a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be sickened for [[1d4 + floor(@attributes.bab.total / 5)]] rounds"
+    },
+    "Fatal Thrust": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (floor(@attributes.bab.total / 5))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "attack action or attack of opportunity only; vs a target within [[30]] ft that you are flanking, that is flat-footed, or that has lost its Dex bonus to AC; precision damage (not multiplied on a crit); a fencer may apply one (exploit) talent to this attack"
+    },
+    "Hand Slash": {
+      "modifiers": [],
+      "rider": "on hit you may attempt a disarm combat maneuver against the target as a free action that does not provoke an attack of opportunity"
+    },
+    "Leg Slash": {
+      "modifiers": [],
+      "rider": "on hit the target's movement speeds are halved for [[1d4 + floor(@attributes.bab.total / 5)]] rounds"
+    },
+    "Master Of Deception": {
+      "modifiers": [],
+      "rider": "on a successful feint the target must make a Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be confused for [[1]] round (supernatural)"
+    },
+    "Pace Setter": {
+      "modifiers": [],
+      "rider": "when you deal your Fencing precision damage you may force the target to move [[5]] ft in any direction (not ending in dangerous terrain); this movement does not provoke attacks of opportunity"
+    },
+    "Reaving Strike": {
+      "modifiers": [],
+      "rider": "requires martial focus; when you strike a target that has a chance to negate critical hits or precision damage (e.g. fortification), reduce that chance by [[5]]% per point of base attack bonus; expend martial focus to treat creatures immune to critical hits and precision damage as having a [[150]]% negation chance, reduced as above (treat [[100]]%-or-greater fortification as immunity)"
+    },
+    "Sequestering Facade": {
+      "modifiers": [],
+      "rider": "on a successful feint using Master Of Deception you may sequester one feinted creature for [[1]] round instead of confusing it; while sequestered it perceives only you and cannot interact with (or be interacted with by) any creature except you; alternatively enter a stance to keep it sequestered while you remain in the stance, the target making a Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] at the end of each of its turns to end the effect (supernatural, mind-affecting)"
+    },
+    "Shadow Strike": {
+      "modifiers": [],
+      "rider": "your attack deals full damage to ethereal and incorporeal creatures; against corporeal creatures it deals nonlethal damage and the target must make a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be fatigued for [[1d4 + floor(@attributes.bab.total / 5)]] rounds (supernatural)"
+    },
+    "Skewer": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (max(0, floor((@attributes.bab.total - 1) / 2)))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "when you deal your Fencing precision damage, expend martial focus; this replaces your Fatal Thrust precision dice; you may apply two different (exploit) talents to this attack; precision damage (not multiplied on a crit)"
+    },
+    "Soul Strike": {
+      "modifiers": [],
+      "rider": "on hit the target takes a -[[2]] penalty to all saving throws for [[1d4 + floor(@attributes.bab.total / 5)]] rounds (supernatural)"
+    },
+    "To The Hilt": {
+      "modifiers": [],
+      "rider": "on hit reduce the target's damage reduction by [[floor(@attributes.bab.total / 2)]] (minimum [[1]]) for [[1 + floor(@attributes.bab.total / 5)]] rounds"
+    },
+    "Distracting Blades": {
+      "modifiers": [],
+      "rider": "on hit the target cannot make attacks of opportunity for [[1 + floor(@attributes.bab.total / 5)]] round(s)."
+    },
+    "Face Strike": {
+      "modifiers": [],
+      "rider": "on hit the target treats all creatures as having partial concealment ([[20]]% miss chance) and takes -[[2]] on Perception for [[1 + floor(@attributes.bab.total / 5)]] round(s)."
+    },
+    "Wide Open": {
+      "modifiers": [
+        {
+          "formula": "2 + floor(@attributes.bab.total / 5)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "the target's AC is reduced by [[2 + floor(@attributes.bab.total / 5)]] until the end of your next turn — this attack bonus reflects that lowered AC (the reduction applies to all attackers)."
+    }
+  },
+  "Gladiator": {
+    "Burn The Chaff": {
+      "modifiers": [],
+      "rider": "vs a creature suffering a fear effect whose CR is less than half your base attack bonus; your melee attack (including attacks of opportunity) is an automatic critical hit, then the target must succeed on a Fortitude save (DC [[10]] + damage dealt) or die"
+    },
+    "Cow Enemy": {
+      "modifiers": [],
+      "rider": "when you deal damage or succeed on a combat maneuver check against a creature using an attack or standard action; you may attempt an Intimidate check to demoralize that creature as a swift action"
+    },
+    "Duel Of Wills": {
+      "modifiers": [],
+      "rider": "expend martial focus; target a creature within medium range; Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or it takes -[[1]] to AC and Will saves for several rounds."
+    },
+    "Dullahan’s Call": {
+      "modifiers": [],
+      "rider": "expend martial focus (swift); designate a fear-suffering creature that can see and hear you; Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or it is staggered for [[1]] round + [[1]] per [[4]] ranks in Intimidate."
+    },
+    "Fear Eater": {
+      "modifiers": [],
+      "rider": "expend martial focus; when you damage a demoralized creature with an attack action you may gain temporary hit points equal to your Intimidate ranks (doubled if you have [[10]]+ ranks) as a free action, lasting [[1]] minute"
+    },
+    "Flamboyant Movement": {
+      "modifiers": [],
+      "rider": "the next enemy you attack before the end of your next turn must succeed on a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be denied its Dexterity bonus to AC against your attack; each time the same creature saves against this it gains a cumulative +[[1]] bonus on the save for [[24]] hours"
+    },
+    "Nightmare Fuel": {
+      "modifiers": [],
+      "rider": "when you demoralize the target or it fails a Will save against your fear effect, expend focus (free) to force a Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or its fear condition becomes permanent until removed."
+    },
+    "Punish The Meek": {
+      "modifiers": [],
+      "rider": "when you use an attack action to deal damage to a creature you have demoralized; extend the duration of that demoralization by [[1]] round"
+    }
+  },
+  "Guardian": {
+    "Challenge": {
+      "modifiers": [],
+      "rider": "issue a challenge (move action, or swift by expending martial focus) to a creature that can perceive it; it takes -[[2]] on attack rolls that do not include you."
+    },
+    "Defiant Boar": {
+      "modifiers": [],
+      "rider": "while in this stance; whenever you damage a creature with an attack action, remove hit point damage from your delayed damage pool equal to the damage dealt, to a maximum of [[@attributes.bab.total]]"
+    },
+    "Final Retribution": {
+      "modifiers": [],
+      "rider": "when you use Punishment while postponing death with Indomitable; the target must succeed at a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or die immediately (a death effect); regardless of the save's outcome you die immediately, even if immune to death effects"
+    },
+    "Punishment": {
+      "modifiers": [],
+      "rider": "on dealing damage to a creature with an attack while your delayed damage pool holds damage; spend an immediate action and expend martial focus to deal extra damage to that creature equal to the damage stored in your delayed damage pool, also inflicting any effect you are postponing with Cold Iron Call or Durable; a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] halves this damage and negates the inflicted effects"
+    },
+    "Stand Still": {
+      "modifiers": [],
+      "rider": "while a patrol is in place; when a foe provokes an attack of opportunity by moving through your threatened area, make a reposition combat maneuver against it (with any weapon you wield) in place of that attack of opportunity; on a success the creature cannot move for the rest of its turn, though it may otherwise act"
+    },
+    "Sweeping Defense": {
+      "modifiers": [
+        {
+          "formula": "ifelse(gte(@attributes.bab.total, 10), -4, -2)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "attack action only; in exchange for a penalty to your own attack rolls until the start of your next turn (applied by this modifier), also strike [[1]] adjacent target within your reach ([[3]] targets at base attack bonus +[[10]]); compare your attack roll to each additional target's AC, and each target you meet or exceed takes half damage but none of the attack's non-damage effects; every creature damaged by Sweeping Defense takes a [[-2]] penalty on all attack rolls until the start of your next turn"
+    }
+  },
+  "Lancer": {
+    "Bloody Rip": {
+      "modifiers": [],
+      "rider": "attack action against a creature impaled by the weapon you are wielding only; you may remove that weapon as a swift action, dealing the normal impale-removal bleed; the creature keeps all impaled penalties (except being unable to move) until the end of its next turn"
+    },
+    "Cruel Vibration": {
+      "modifiers": [],
+      "rider": "attack action dealing damage with the weapon currently impaling the target only; your weapon damage dice deal their maximum result (extra dice from crits, special abilities such as flaming, and Vital Strike are unaffected); at +[[10]] base attack bonus, Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or the creature cannot take a move action for [[1]] round"
+    },
+    "Distracting Tear": {
+      "modifiers": [],
+      "rider": "when you deal damage while removing the impaling weapon from a creature, that creature provokes an attack of opportunity from [[1]] ally of your choice other than yourself (+[[1]] more ally per [[4]] points of base attack bonus)"
+    },
+    "Double Impale": {
+      "modifiers": [],
+      "rider": "on a successful impale with a two-handed weapon; expend martial focus; make an additional attack roll at the same penalty against a creature adjacent to the impaled target; on a hit that creature takes damage and is also impaled; while both stay impaled they act on the same (lower) initiative count and can move only if both agree (slower shared movement); the first creature cannot remove the weapon while it still impales the second, though either may attempt a combat maneuver check at +[[2]] circumstance bonus to free itself"
+    },
+    "Impale": {
+      "modifiers": [
+        {
+          "formula": "-2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "melee attack action dealing lethal damage only; on a hit the target is impaled and battered, is forced into a square within your reach, and cannot move; to cast a spell or use a spell-like ability while impaled it must make a concentration check (DC [[10]] + your CMB + spell level) or lose it; it can break free with a combat maneuver check as a standard action vs your CMD; when it loses the impaled condition it takes bleed damage equal to the impaling weapon's damage dice; (impale)-tag talents work only against a creature you have impaled and whose weapon you control"
+    },
+    "Lancealot": {
+      "modifiers": [],
+      "rider": "when an impaled creature loses the impaled condition and takes the impale bleed, treat the impaling weapon's damage dice as [[1]] size category larger (2 size categories at +[[10]] base attack bonus)"
+    },
+    "Opportune Impalement": {
+      "modifiers": [],
+      "rider": "attack of opportunity only; expend martial focus; on a hit you may impale the target (see Impale) with no penalty on the attack roll"
+    },
+    "Pierce Vitals": {
+      "modifiers": [],
+      "rider": "when an impaled creature loses the impaled condition and would take the impale bleed, you may forgo that bleed to instead deal [[1d2]] Constitution damage; or expend martial focus to instead deal [[1]] point of Constitution bleed"
+    },
+    "Pincushion Punishment": {
+      "modifiers": [],
+      "rider": "you may make an impale attempt against a creature that is already impaled; for each weapon currently impaling it, it takes a -[[1]] penalty to attack rolls and to AC; while no other creature holds any of those weapons, you may as an attack action make one combat maneuver check vs its CMD to remove all of them at once, dealing each removed weapon's base damage die"
+    },
+    "Ragdoll Swing": {
+      "modifiers": [],
+      "rider": "as long as you have martial focus, you may wield a creature you are impaling with a wielded weapon as an improvised weapon of its size (no penalty on attack rolls, up to a size you could normally wield); each hit you make while using it as a weapon also deals [[floor(@attributes.bab.total / 2)]] damage to that impaled creature"
+    },
+    "Soul Link": {
+      "modifiers": [],
+      "rider": "while you control the impaling weapon: whenever you take damage, the impaled creature must succeed at a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or suffer [[1/4]] of that damage (typeless, cannot be reduced); at +[[10]] base attack bonus it instead suffers [[1/2]] the damage on a failed save and [[1/4]] on a success; also, if the impaled creature would regain hit points from a non-extraordinary source it must succeed at a Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or heal only [[1/2]] as much, and you gain temporary hit points equal to [[1/2]] the healing it loses (lasting [[1]] minute)"
+    },
+    "Staggering Tear": {
+      "modifiers": [],
+      "rider": "when you remove the impaling weapon from a creature, it must succeed at a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be staggered for [[1]] round"
+    },
+    "Whirlwind Knockdown": {
+      "modifiers": [],
+      "rider": "as an attack action, make one trip combat maneuver check and compare it to the CMD of every creature you threaten, tripping each whose CMD you beat; you take a -[[1]] penalty to the check for each creature targeted; at +[[10]] base attack bonus, each creature knocked prone also takes damage equal to [[@attributes.bab.total]]"
+    },
+    "Terrifying Pierce": {
+      "modifiers": [],
+      "rider": "on a successful impale, make an immediate Intimidate check to demoralize the target; at +[[10]] base attack bonus a creature demoralized this way is frightened instead of shaken for the duration."
+    }
+  },
+  "Open Hand": {
+    "Air Cannon": {
+      "modifiers": [],
+      "rider": "standard action; expend martial focus; create a close-range cone ([[25]] ft + [[5]] ft per [[2]] base attack bonus) of howling air that deals bludgeoning damage equal to twice your base unarmed strike damage die to all creatures within; Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] halves"
+    },
+    "Axe Kick": {
+      "modifiers": [
+        {
+          "formula": "floor(@abilities.str.mod / 2)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "applies to unarmed strikes made as an attack action, attack of opportunity, or extra attack from a class feature/talent (not off-hand or specified half-Strength attacks) and only when you add your Strength modifier to damage; vs a prone target add your full Strength modifier to the damage instead of half"
+    },
+    "Capoeira Spin": {
+      "modifiers": [],
+      "rider": "immediate action to stand up from prone (no AoO) as part of an attack-action unarmed strike, dealing +[[2]] damage (+[[5]] at +[[10]] base attack bonus); while prone your unarmed strike attack penalty is reduced by [[2]] (and removed entirely at +[[10]] base attack bonus)"
+    },
+    "Counterbalance": {
+      "modifiers": [],
+      "rider": "when a creature within your threatened area misses you with a melee attack, expend martial focus to make an immediate-action trip attempt against it (no AoO); if that creature's attack roll was penalized (e.g., by Power Attack), its CMD to resist this trip is reduced by the same amount"
+    },
+    "Devil’s Strikes": {
+      "modifiers": [
+        {
+          "formula": "@attributes.bab.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "spend a move action to activate; applies to your next unarmed strike before the start of your next turn, which is also treated as magic vs incorporeal creatures (or deals full damage vs incorporeal if already magic); a creature killed by this strike can only be resurrected if the caster succeeds at a caster level check ([[10]] + your base attack bonus); supernatural"
+    },
+    "Fading Slide": {
+      "modifiers": [
+        {
+          "formula": "@spheres.pam + @attributes.bab.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "requires martial focus; when a creature makes a melee attack or combat maneuver against you, spend an immediate action to make this touch attack against it; you then fall prone regardless of whether it hits (unusable if you cannot become prone or are already prone); at +[[10]] base attack bonus it deals your unarmed strike damage instead"
+    },
+    "God Hand": {
+      "modifiers": [],
+      "rider": "on any unarmed strike hit, the target's fast healing and regeneration cease functioning for [[1]] round; on an attack-action unarmed strike hit that would reduce a creature to [[0]] or fewer hit points, it is instantly killed and reduced to fine dust (an object reduced to [[0]] hp is disintegrated, or a [[10]] ft cube if the object is particularly large); supernatural"
+    },
+    "Joint Lock": {
+      "modifiers": [],
+      "rider": "on an unarmed strike hit vs a grappled creature, it gains the entangled condition for [[1]] round ([[2]] rounds at +[[10]] base attack bonus)"
+    },
+    "Judo Throw": {
+      "modifiers": [],
+      "rider": "trip attempt as a standard action (no AoO); on a successful trip you may place the target in any adjacent square (any square within your natural reach at +[[10]] base attack bonus), never into an occupied space; expend martial focus (free action) to deal your unarmed strike damage, plus +[[1d10]] bludgeoning for every [[5]] points your trip result exceeds the target's CMD"
+    },
+    "Lotus Touch": {
+      "modifiers": [
+        {
+          "formula": "@abilities.str.mod",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "standard-action melee touch attack (uses the attribute you attacked with for damage); the next successful attack-action, attack-of-opportunity, or extra attack an ally makes against that creature before the start of your next turn has its base critical threat range doubled (does not stack with Improved Critical and reduces that crit's multiplier to x[[2]]); applies to [[1]] additional eligible attack per [[5]] base attack bonus"
+    },
+    "Rippling Blow": {
+      "modifiers": [],
+      "rider": "attack action; accept a -[[2]] penalty to your attack rolls until the end of your turn to force a creature hit by the attack to immediately provoke an unarmed strike attack of opportunity from you"
+    },
+    "Sliding Heelkick": {
+      "modifiers": [],
+      "rider": "on a successful unarmed strike at the end of a charge, attempt a trip against the target as a free action (no AoO); you then immediately fall prone (unusable if you cannot become prone or are already prone)"
+    },
+    "Snap Kick": {
+      "modifiers": [],
+      "rider": "when you succeed on a trip combat maneuver, the target provokes an unarmed strike attack of opportunity from you (only [[1]] such AoO per trip); if that attack of opportunity hits, the target must make a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be staggered until the end of its next turn"
+    },
+    "Soul Punch": {
+      "modifiers": [],
+      "rider": "expend martial focus (free action as part of an attack action); until the end of your turn, each unarmed strike that deals damage forces a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or the target gains [[1]] permanent negative level (max negative levels dealt to one creature = [[1/2]] your practitioner modifier); at +[[20]] base attack bonus the target must fail [[2]] Fortitude saves to resist the negative level"
+    },
+    "Soul Sunder": {
+      "modifiers": [],
+      "rider": "expend martial focus; on an attack-action unarmed strike hit, the target must make a Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or become ethereal for [[1]] round per point of base attack bonus (a new Will save as a full-round action each round ends it early); you cannot reaffect the same creature for [[24]] hours; supernatural"
+    },
+    "Suppressive Rush": {
+      "modifiers": [],
+      "rider": "special attack action; expend martial focus; make [[2]] unarmed strikes against the target's touch AC dealing [[1/2]] damage each (each strike after the first is a free action; multiple hits count as a single successful attack for on-hit effects), plus [[1]] additional strike per [[4]] base attack bonus; the target may instead automatically block (all strikes miss) but then takes a -[[2]] penalty (increasing by -[[2]] per [[4]] base attack bonus) to all attack and damage rolls until it takes a Total Defense action or goes [[1]] round without being subject to a hostile action"
+    },
+    "Sweeping Kick": {
+      "modifiers": [],
+      "rider": "on a successful attack-action unarmed strike, make a trip attempt at -[[2]] against that creature as an immediate action (no AoO)"
+    },
+    "Swinging Swap": {
+      "modifiers": [],
+      "rider": "on a successful attack-action unarmed strike, swap positions with the target; if you do this to the same creature on [[2]] consecutive rounds it must make a Will Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be confused for [[1]] round; at +[[10]] base attack bonus the confusion lasts your practitioner modifier in rounds, with a new save at the start of each of its turns at -[[2]] (worsening by -[[2]] each time you reuse this on it while it is confused)"
+    },
+    "Tear Flesh": {
+      "modifiers": [],
+      "rider": "you may deal bludgeoning, piercing, or slashing damage with your unarmed strikes (chosen per attack); on an attack-action unarmed strike hit, spend a swift action to inflict [[1]] bleed and reduce the target's natural armor by [[1]] (minimum [[0]]) for as long as the bleed persists; both values increase by [[1]] per [[6]] base attack bonus"
+    },
+    "Thunderous Punishment": {
+      "modifiers": [],
+      "rider": "on a successful unarmed strike attack of opportunity, the target must make a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be battered and staggered for [[1]] round (no more than once per creature per round); at +[[10]] base attack bonus you may expend martial focus (immediate action) to instead batter and daze it for [[1]] round on a failed save"
+    },
+    "Up High, Down Low, Too Slow": {
+      "modifiers": [],
+      "rider": "if you trip a creature and also deal unarmed strike damage to it in the same round, it gains the battered condition until the end of your next turn and its speed is reduced by [[10]] ft (minimum [[5]] ft) while battered; the reduction increases to [[15]] ft at +[[10]] base attack bonus"
+    },
+    "Vibrating Impacts": {
+      "modifiers": [],
+      "rider": "on a successful attack-action or attack-of-opportunity unarmed strike vs a battered creature, the damage dealt counts as continuous damage for the purpose of forcing concentration checks until the start of your next turn"
+    },
+    "Waving Hand": {
+      "modifiers": [],
+      "rider": "spend a swift action to give a creature damaged by your unarmed strike the battered condition until the end of your next turn; while you have martial focus your unarmed strikes also gain the distracting and performance weapon special properties"
+    },
+    "Withering Defense": {
+      "modifiers": [],
+      "rider": "when a creature within your threatened area misses you with a melee attack, expend an attack of opportunity (a free action usable even off your turn) to force it to make a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be fatigued for [[1]] round, +[[1]] round per [[4]] base attack bonus; at +[[10]] base attack bonus a fatigued creature that fails instead becomes exhausted; cannot be combined with (deflect) talents or other missed-attack retaliation abilities"
+    },
+    "Grasping Hand": {
+      "modifiers": [],
+      "rider": "on a successful unarmed strike vs a prone creature (attack action), make an immediate grapple check against it at -[[2]] (does not provoke)."
+    },
+    "Aquatic Stalker": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "(swimming target) trip it; on a success it is off-balanced — it loses its Dex bonus to AC and attackers gain +[[2]] against it (reflected by this attack bonus)."
+    }
+  },
+  "Scoundrel": {
+    "Broke And Broken": {
+      "modifiers": [],
+      "rider": "requires martial focus; on a successful dirty trick combat maneuver, you may attempt a steal combat maneuver against the same target as a free action"
+    },
+    "Clever Fox’s Heist": {
+      "modifiers": [],
+      "rider": "you may perform a dirty trick or steal combat maneuver as an attack of opportunity (to apply (trick) talents to it, expend martial focus or spend an additional attack of opportunity); when such a maneuver made as an attack of opportunity succeeds, as an immediate action you may move up to half your base speed without provoking from the target (subtract this from your movement on your next turn)"
+    },
+    "Combat Hustle": {
+      "modifiers": [],
+      "rider": "requires martial focus; when you attempt a dirty trick or steal combat maneuver against an enemy threatened by at least [[1]] ally, gain a +[[2]] circumstance bonus on the maneuver check for each ally threatening that enemy, and the maneuver does not provoke attacks of opportunity"
+    },
+    "Cut And Run": {
+      "modifiers": [],
+      "rider": "requires martial focus; on a successful dirty trick or steal combat maneuver, you may move up to half your base speed as a free action without provoking an attack of opportunity from the target"
+    },
+    "Devastating Tricks": {
+      "modifiers": [],
+      "rider": "expend martial focus; when you use Savage Tricks to inflict a greater condition, you may instead inflict a more intense condition — battered becomes stunned, dazzled becomes dazed, entangled becomes pinned, fatigued becomes exhausted, shaken becomes panicked, sickened becomes nauseated"
+    },
+    "Double Dip": {
+      "modifiers": [],
+      "rider": "expend martial focus as a free action; on a successful dirty trick combat maneuver, apply [[2]] different conditions instead of one (up to [[3]] with at least [[10]] ranks in Sleight of Hand); both may be removed with the same action, and only conditions a dirty trick could normally apply"
+    },
+    "Flustering Antics": {
+      "modifiers": [],
+      "rider": "on a successful steal or dirty trick combat maneuver, the target must succeed at a Will save ([[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) or lose its martial focus; on a failed save you may regain your martial focus as an immediate action"
+    },
+    "Focusing Thievery": {
+      "modifiers": [],
+      "rider": "on a successful steal or dirty trick combat maneuver against an opponent within your reach, make a Sleight of Hand check vs its CMD; on success the opponent is entangled until the start of your next turn, and you may spend an immediate action to move to any other space adjacent to it and regain your martial focus"
+    },
+    "Forgettable Theft": {
+      "modifiers": [],
+      "rider": "on a successful steal that takes an object from an opponent, the opponent must succeed at a Will save ([[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) or forget it owned the stolen object for [[1]] minute ([[1]] hour with at least [[10]] ranks in Sleight of Hand); being presented evidence of ownership grants an immediate additional save, and at [[10]]+ ranks it makes another save at the end of the duration or forgets ownership entirely"
+    },
+    "Humiliating Trick": {
+      "modifiers": [],
+      "rider": "on a successful dirty trick combat maneuver, the target takes a -[[5]] penalty on Diplomacy checks and a -[[2]] penalty on damage rolls for [[1]] minute (the damage penalty ends with the same action that removes the dirty trick), and any Diplomacy check it fails is treated as failing by [[10]] or more; with at least [[10]] ranks in Sleight of Hand these penalties are doubled and the duration becomes [[10]] minutes"
+    },
+    "Lingering Slight": {
+      "modifiers": [],
+      "rider": "expend martial focus; on a successful dirty trick combat maneuver against a creature not currently affected by a dirty trick condition, the condition it inflicts lasts [[1]] additional round after it would normally be removed"
+    },
+    "Playing Dirty": {
+      "modifiers": [],
+      "rider": "requires martial focus; creatures affected by your dirty trick combat maneuver must spend a standard action (rather than the usual action) to remove its effects"
+    },
+    "Ranged Trickery": {
+      "modifiers": [],
+      "rider": "requires martial focus; you may perform a dirty trick combat maneuver against a creature within [[15]] ft (+[[5]] ft per [[4]] ranks in Sleight of Hand); take a -[[2]] penalty on the maneuver check for every [[10]] ft between you and the target"
+    },
+    "Savage Tricks": {
+      "modifiers": [],
+      "rider": "on a successful dirty trick combat maneuver you may also inflict the battered or fatigued condition; with [[5]]+ ranks in Sleight of Hand, expend martial focus as a free action to instead inflict a greater condition for the normal duration — battered becomes flat-footed, dazzled becomes all creatures having concealment ([[20]]% miss chance), entangled becomes the penalties of being grappled (but not actually grappled), fatigued becomes fatigued with an additional -[[4]] penalty to Strength and Dexterity, shaken becomes frightened, sickened becomes staggered"
+    },
+    "Steal Charm": {
+      "modifiers": [],
+      "rider": "expend martial focus during a steal combat maneuver to steal the target's Charisma instead of an item; on success the creature takes a -[[4]] penalty (increasing by -[[2]] per [[4]] ranks in Sleight of Hand) on all Charisma-based skill checks for [[10]] minutes ([[1]] hour with [[10]]+ ranks) and is unaware of the penalty; supernatural"
+    },
+    "Steal Heart": {
+      "modifiers": [],
+      "rider": "expend martial focus to perform a steal combat maneuver as a full-round action; instead of an item, force the target to succeed at a Will save ([[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) or have its attitude toward you improved to friendly for a number of minutes equal to your Sleight of Hand ranks; the target gains a +[[5]] bonus on the save if it is in combat, already hostile, or aware of the ability; spell-like mind-altering (charm); you may keep only your practitioner modifier of creatures charmed at once, and an affected creature is immune for [[24]] hours"
+    },
+    "Tunnel Vision": {
+      "modifiers": [],
+      "rider": "on a successful steal combat maneuver, the target must succeed at a Reflex save ([[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]]) or treat all creatures as having concealment until the end of its next turn (total concealment with at least [[10]] ranks in Sleight of Hand)"
+    },
+    "Twist The Knife": {
+      "modifiers": [],
+      "rider": "on a confirmed critical hit; expend martial focus to attempt a dirty trick combat maneuver against that creature as an immediate action, gaining a circumstance bonus on the maneuver check equal to the critical multiplier of the weapon that scored the hit"
+    },
+    "Vagabond Nick": {
+      "modifiers": [],
+      "rider": "while in this stance, on a successful dirty trick or steal combat maneuver you deal damage equal to half your Sleight of Hand ranks + your practitioner modifier ([[@spheres.pam]]); with [[10]]+ ranks in Sleight of Hand you may then move up to half your speed (this movement does not provoke from creatures damaged by this talent)"
+    },
+    "Marked Target": {
+      "modifiers": [],
+      "rider": "melee touch attack as a swift action; on a hit the target is battered and takes -[[1]] on Perception for [[1]] round (increases with your Sleight of Hand ranks)."
+    },
+    "Filthy Distraction": {
+      "modifiers": [],
+      "rider": "after a successful dirty trick vs an unaware creature, the target also takes -[[5]] on Perception and cannot act in surprise rounds for [[1]] minute (on top of the dirty trick effect)."
+    }
+  },
+  "Scout": {
+    "Calibrating Wiggle": {
+      "modifiers": [],
+      "rider": "if you used this talent to move away from a scouted target and then charge it before the end of your next turn; your first successful attack deals precision damage equal to half your Perception ranks (min [[1]]); not multiplied on a crit"
+    },
+    "Deadly Strike": {
+      "modifiers": [],
+      "rider": "vs a target unaware of your presence due to your Stealth; your first attack deals precision damage equal to half your Stealth ranks (min [[1]]), or your full Stealth ranks if you have scouted that target's weaknesses; not multiplied on a crit"
+    },
+    "Dust To Dust": {
+      "modifiers": [],
+      "rider": "attack action vs a creature unaware of your presence that you have scouted; ignore its immunity to critical hits and precision damage (including fortification and % negation chances) and maximize all precision damage on a critical hit; if the attack would reduce it to [[0]] or fewer HP it is instantly slain and crumbles to silent dust (Fortitude [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] negates the instant kill and dust); a target that survives is immune to this ability for [[24]] hours (supernatural)"
+    },
+    "Target Weakness": {
+      "modifiers": [],
+      "rider": "after scouting the target's weaknesses, as a move action (or a free action if you expend martial focus); your next attack before the end of your next turn treats half its total damage (rounded down) as an energy type the target is vulnerable to (this conversion is separate from bonus energy such as flaming/frost) — or, alternatively, treats your weapon as one material/alignment type from the target's damage reduction for [[1]] round"
+    },
+    "Wind Reader": {
+      "modifiers": [],
+      "rider": "swift action (requires martial focus); halve the penalties from wind, rain, or other weather to your next ranged attack made before the end of your turn"
+    }
+  },
+  "Shield": {
+    "Battering Defense": {
+      "modifiers": [],
+      "rider": "vs a creature that (before the end of your next turn) missed an attack against a creature benefiting from your active defense; on dealing damage to or succeeding on a combat maneuver against it, that creature becomes battered for [[1]] round"
+    },
+    "Snapping Tortoise": {
+      "modifiers": [],
+      "rider": "while in the Snapping Tortoise stance; vs a creature that missed an attack against a creature benefiting from your active defense; on your next successful attack action against it (before the end of your next turn), that creature must succeed at a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or fall prone"
+    }
+  },
+  "Sniper": {
+    "Deadly Shot": {
+      "modifiers": [
+        {
+          "formula": "1d10 + (floor(@attributes.bab.total / 4))d10",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "special attack action; expend martial focus; choose before rolling; these extra dice are not multiplied on a critical hit; use d6 instead of d10 if the attack targets touch AC or is made with a scatter weapon; you may add one (snipe) talent you know to this attack"
+    },
+    "Fragmenting Shot": {
+      "modifiers": [],
+      "rider": "if this deadly shot reduces the target to [[0]] or fewer hit points it is instantly killed; each creature within [[10]] ft takes bludgeoning and piercing damage equal to your weapon's base damage die + your base attack bonus ([[@attributes.bab.total]]), Reflex [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] half"
+    },
+    "Head Shot": {
+      "modifiers": [],
+      "rider": "if this deadly shot deals damage equal to at least [[50]]% of the target's current hit points, the target must succeed at a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or die (death effect); constructs, elementals, swarms, and oozes are immune"
+    },
+    "Hindering Projectiles": {
+      "modifiers": [],
+      "rider": "on a hit the weapon or ammunition lodges in the wound: the target takes a [[-2]] penalty to attack rolls, AC, and CMD (an additional [[-2]] per projectile lodged, stacking); the target may remove one projectile as a move action or several as a full-round action"
+    },
+    "I Miss You My Darling": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "insight",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only against a creature you have designated as your prey; when you miss with a deadly shot you may expend martial focus (free action) to designate that target as your prey for [[24]] hours (only one prey at a time, once per [[24]] hours per creature); you automatically confirm the first critical threat you make against your prey, which ends the effect"
+    },
+    "Push Shot": {
+      "modifiers": [],
+      "rider": "on a successful deadly shot you may make a free ranged bull rush against the target, using this attack roll as your combat maneuver check; no movement is required and it provokes no attack of opportunity (except as usual for a ranged attack)"
+    },
+    "Shattering Shot": {
+      "modifiers": [],
+      "rider": "you may make this deadly shot as a ranged sunder attempt, using your Dexterity modifier in place of Strength for the combat maneuver bonus; provokes no attack of opportunity (except as usual for a ranged attack)"
+    },
+    "Targeted Assault": {
+      "modifiers": [],
+      "rider": "attack action only; on a hit the target's damage reduction, energy resistance, or hardness is reduced by [[floor(@attributes.bab.total / 2)]] (minimum [[1]]) against this attack"
+    },
+    "Thread The Needle": {
+      "modifiers": [],
+      "rider": "on a successful deadly shot the target is dazzled for [[1d4]] rounds; if it is already dazzled it is instead blinded for [[1]] minute (removed by a DC [[20]] Heal check or [[1]] point of healing); at base attack bonus +[[10]] you may blind a target even if it is not dazzled"
+    },
+    "Trip Shot": {
+      "modifiers": [],
+      "rider": "on a successful deadly shot you may make a free ranged trip against the target, using this attack roll as your combat maneuver check; provokes no attack of opportunity (except as usual for a ranged attack)"
+    },
+    "Unblockable": {
+      "modifiers": [],
+      "rider": "attack action only; if a spell or ability (such as wind wall or Deflect Arrows) would prevent or deflect this attack, that effect's user must succeed at a caster level check (spell or supernatural ability) or a combat maneuver check against your attack roll, or the attack is not impeded"
+    },
+    "Weapon Shot": {
+      "modifiers": [],
+      "rider": "on a successful deadly shot you may make a free ranged disarm against the target, using this attack roll as your combat maneuver check; provokes no attack of opportunity (except as usual for a ranged attack)"
+    },
+    "Tangling Shot": {
+      "modifiers": [],
+      "rider": "on a successful deadly shot the target gains the entangled condition (it may spend a standard action to end it)."
+    },
+    "Piercing Shot": {
+      "modifiers": [],
+      "rider": "your deadly shot pierces the target and also strikes one creature in a line directly behind it at -[[4]] (you must be able to trace the line through both)."
+    }
+  },
+  "Trap": {
+    "A Better Mouse Trap": {
+      "modifiers": [],
+      "rider": "when this trap is triggered, a hostile rat swarm (Bestiary) appears in the triggering square and attacks the creature that triggered it (or another nearby creature if it cannot reach that target); the swarm remains for [[1]] minute per rank of Craft (traps) you possess before disappearing; for every [[10]] ranks in Craft (traps) an additional swarm appears in the nearest adjacent square; you may expend martial focus when placing this trap (with Bee Keeper) to instead release any animal or vermin swarm of CR up to [[1/2]] your ranks in Craft (traps)"
+    },
+    "Bamboozling Trap": {
+      "modifiers": [],
+      "rider": "snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] is treated as if successfully feinted (denied its Dex bonus to AC against your next attack), and this counts as you feinting for Fencing sphere talents; non-humanoids with Intelligence [[1]] or [[2]] gain +[[4]] on the save and mindless creatures are immune (with Unlikely Feint that bonus drops to +[[2]] and mindless creatures instead become vulnerable but gain +[[4]] on the save)"
+    },
+    "Barbed Dart": {
+      "modifiers": [],
+      "rider": "on hit the dart deals [[1]] bleed damage per damage die it rolled; this bleed cannot be healed until the dart is removed (a full-round action); the target may instead pull the dart out as a swift action, but doing so deals [[1d6]] bleed damage"
+    },
+    "Bear Trap": {
+      "modifiers": [],
+      "rider": "snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] cannot move from its square until it succeeds a Strength or Escape Artist check against the trap's DC or destroys the trap; it also takes [[1]] bleed damage per [[8]] ranks in Craft (traps) you possess (minimum [[1]]); this counts as an attack action by you for Duelist sphere bleed talents"
+    },
+    "Blunt Dart": {
+      "modifiers": [],
+      "rider": "the dart deals nonlethal bludgeoning damage and its damage die increases by one step"
+    },
+    "Brutal Traps": {
+      "modifiers": [],
+      "rider": "snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] is bull rushed as if the trap beat its CMD by [[1]] + [[1]] per [[2]] ranks in Craft (traps); this counts as you performing the bull rush (a standard action) for Brute sphere abilities (the trap is treated as dealing [[1d4]] damage with a +[[0]] Strength bonus for talents such as Smash); the target gains +[[1]] on its save per size category larger than Medium"
+    },
+    "Darts": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "piercing"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "ranged attack against each creature in a line until one is hit; you may use your ranks in Craft (traps) + your Intelligence modifier in place of BAB + Dexterity on the roll; the line reaches Close range ([[25]] ft + [[5]] ft per [[2]] ranks in Craft (traps)); the dart gains an additional [[1d6]] piercing at Craft (traps) [[3]] ranks and every [[2]] ranks thereafter, and threatens a critical on a [[20]] for x[[3]]; you may forgo the dart's damage to deliver an alchemical item, thrown splash weapon, dust, or contact/inhaled poison, resolving the attack against touch AC"
+    },
+    "Deadly Dart": {
+      "modifiers": [],
+      "rider": "the dart deals both piercing and slashing damage, its damage die becomes d8, and its critical threat range improves to [[19]]-[[20]]/x[[3]]"
+    },
+    "Disarming Traps": {
+      "modifiers": [],
+      "rider": "snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] is disarmed as if the trap beat its CMD, and this counts as you performing the disarm for Duelist sphere abilities; the target gains +[[1]] on its save per size category larger than Medium"
+    },
+    "False Trigger": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only when the trap is set as a delayed trap; this bonus also applies to the trap's save DC (for snares) and both it and the attack bonus increase by +[[1]] per [[10]] ranks in Craft (traps); the first time the trap would trigger it instead does not trigger and makes an obvious noise (such as a click)"
+    },
+    "Flash Trap": {
+      "modifiers": [],
+      "rider": "as a dart, the struck target must make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or take a [[20]]% miss chance on all attack rolls for [[1]] round and be dazzled for a number of rounds equal to your ranks in Craft (traps) (at [[10]] ranks it inflicts blinded instead of the miss chance); as a snare, every creature within [[5]] ft of a chosen corner of the triggering square must make the same Reflex save or be blinded for [[1]] round and dazzled for a number of rounds equal to your Craft (traps) ranks; the snare's area grows by [[5]] ft per [[5]] ranks in Craft (traps) and, at [[10]]+ ranks, the blinded duration increases by [[1]] round"
+    },
+    "Fool’s Retreat": {
+      "modifiers": [],
+      "rider": "while in this stance, whenever you take the withdraw action, each hostile creature that threatens your starting square with a melee weapon must succeed a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or give chase, attempting to move to a square adjacent to you by the end of its turn"
+    },
+    "Guillotine": {
+      "modifiers": [],
+      "rider": "snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] suffers a called shot to a limb chosen when the snare is set (excluding locations that normally carry a 'challenging' penalty); that creature must then succeed a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or take the critical called shot penalties for that limb in place of the normal ones (requires the Ultimate Combat called shot optional rules)"
+    },
+    "Net": {
+      "modifiers": [],
+      "rider": "as a dart, the struck creature must make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or become entangled (you may forgo the dart's damage to resolve the attack against touch AC); as a snare, the target is entangled and cannot move from the triggering square; the entangle lasts until the creature succeeds a Strength or Escape Artist check against the trap's DC or destroys the trap"
+    },
+    "Noose": {
+      "modifiers": [],
+      "rider": "snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] cannot move from its square and cannot breathe until it succeeds a Strength or Escape Artist check against the trap's DC or destroys the trap; for every [[4]] ranks in Craft (traps) it is treated as though an additional round passed each round for the purpose of holding its breath; any spell it attempts with verbal components has a [[50]]% spell failure chance"
+    },
+    "Opportunist": {
+      "modifiers": [],
+      "rider": "a creature struck by your dart trap, or that fails its save against your snare trap, provokes an attack of opportunity from you; you may make this attack with a ranged weapon provided the target is within your first range increment"
+    },
+    "Penetrating Trap": {
+      "modifiers": [],
+      "rider": "your damage-dealing traps overcome damage reduction based on your ranks in Craft (traps): magic at [[4]] ranks, cold iron and silver at [[8]], adamantine at [[12]], and all alignments at [[16]]"
+    },
+    "Plummeting Traps": {
+      "modifiers": [],
+      "rider": "expend martial focus as part of placing this snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] falls prone and takes [[1d6]] bludgeoning damage per rank in Craft (traps) you possess; a successful save halves the damage and negates the prone"
+    },
+    "Razor Wire": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "slashing"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "razor wire tripwire snare; the slashing damage is dealt to the triggering creature and gains an additional [[1d6]] at Craft (traps) [[3]] ranks and every [[2]] ranks thereafter; alchemical items cannot be attached to this snare, which otherwise functions as a tripwire snare"
+    },
+    "Scratching Post": {
+      "modifiers": [],
+      "rider": "when triggered, this trap erects a scratching post (an object) in the nearest unoccupied square, where it remains for [[1]] minute per rank in Craft (traps) and makes its square difficult terrain; the triggering creature must immediately make a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be affected; while it stands, any enemy within Close range ([[25]] ft + [[5]] ft per [[2]] ranks in Craft) that can see the post and makes an attack roll not targeting it must succeed a Will save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or take a -[[2]] penalty (worsening by -[[1]] per [[5]] ranks in Craft) on all attack rolls until the start of its next turn; a creature that saves is immune until the start of its next turn"
+    },
+    "Skunk Smoke": {
+      "modifiers": [],
+      "rider": "when triggered, a [[5]]-ft radius from a chosen corner of the triggering square fills with noxious smoke that blocks sight (including darkvision) beyond [[5]] ft, granting concealment ([[20]]% miss) within [[5]] ft and total concealment ([[50]]% miss) farther out; any creature in the smoke must make a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be sickened until [[1d4]] rounds after leaving it (nauseated instead at [[10]]+ ranks in Craft), saving again on any turn it remains; the smoke lasts an extra [[1]] minute per [[4]] ranks in Craft (traps) and is dispersed by a moderate wind in [[4]] rounds or a strong wind in [[1]] round"
+    },
+    "Temporal Snare": {
+      "modifiers": [],
+      "rider": "a creature that fails its save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] is forced into suspended animation for a number of rounds equal to [[1/2]] your ranks in Craft (traps): time ceases to flow for it, it does not age, its body functions virtually cease, and no force or effect can harm it; this is a spell-like ability (caster level equal to your Craft (traps) ranks) and can be dispelled normally"
+    },
+    "Terrain Trap": {
+      "modifiers": [],
+      "rider": "snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] triggers a [[10]]-ft + [[5]] ft per [[5]] ranks in Craft (traps) radius of difficult terrain centered on a chosen corner (you may also create this effect without a trap, as an immediately triggered snare); you may fill the area with caltrops or spikes so that any creature entering or ending its turn there takes [[1d6]] + [[1d6]] per [[6]] ranks in Craft (traps) damage (Reflex half), recurring at the end of your turns; you and allies you warn gain +[[5]] on Reflex saves to avoid it; the difficult terrain lasts [[1]] minute"
+    },
+    "Tethered Dart": {
+      "modifiers": [],
+      "rider": "on hit the struck creature must succeed a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be tethered to the chosen corner and dragged toward it (a drag combat maneuver using your practitioner modifier and Craft (traps) ranks in place of Strength and BAB); each round it remains tethered it is subject to the drag again; the tether has [[10]] hp + [[2]] per rank in Craft (traps), AC [[5]], hardness equal to [[1/2]] your Craft (traps) ranks, and a Break DC equal to your Trap sphere DC; the target cannot move farther from the trap without first breaking the tether or succeeding a drag or reposition maneuver against your Trap sphere DC + [[5]] (dragging the trap along)"
+    },
+    "Thaumic Sink": {
+      "modifiers": [],
+      "rider": "as a dart, the struck creature is affected as if inside an antimagic field (per the spell) for [[1]] round per rank in Craft (traps), or until the dart is removed (a full-round action; removing it as a standard action instead deals the dart's minimum damage); as a snare, a [[10]]-ft radius around the triggering square is filled with an antimagic field for [[1]] round per rank in Craft (traps); this is a spell-like ability using your Craft (traps) ranks as caster level"
+    },
+    "Tricky Traps": {
+      "modifiers": [],
+      "rider": "snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] is subject to a dirty trick maneuver as if the trap beat its CMD, and this counts as you performing the dirty trick for Scoundrel sphere abilities; the target gains +[[1]] on its save per size category larger than Medium"
+    },
+    "Tripwire": {
+      "modifiers": [],
+      "rider": "tripwire snare; a creature that fails its Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] falls prone (once prone it no longer risks triggering the trap in that square); running or charging creatures take -[[2]] on the save; the trap is not destroyed when triggered — instead its duration is reduced by [[5]] rounds per creature that fails its save"
+    }
+  },
+  "Warleader": {
+    "Deadly Herdsman": {
+      "modifiers": [],
+      "rider": "while this tactic is active; when you deal damage to a creature with an attack action, you may attempt a bull rush or reposition combat maneuver against that creature as a free action that does not provoke attacks of opportunity; at [[10]] or more ranks in Diplomacy, the forced movement provokes an attack of opportunity from your other threatening allies"
+    },
+    "Marauding Monkey": {
+      "modifiers": [],
+      "rider": "while in this stance; when you damage a creature with an attack action or attack of opportunity, you may extend one of your active warleader abilities (once per shout or tactic per round) — an active shout by [[1]] round, or an active tactic so that the next time you maintain it you may do so as a free action and recenter it"
+    },
+    "Resonating Chorus": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "sonic"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "shout; for the duration your metal weapon attacks deal the listed extra sonic damage; expend martial focus instead to have it affect all of your weapon types (not only metal); the damage die increases with your Diplomacy ranks"
+    },
+    "Triumph": {
+      "modifiers": [],
+      "rider": "when you succeed on an attack action you may use a Warleader shout as a swift action; expend martial focus to instead make that shout as a free action"
+    }
+  },
+  "Wrestling": {
+    "Armbar": {
+      "modifiers": [],
+      "rider": "expend your martial focus as an immediate action when you maintain a grapple against a creature you have already pinned; the creature must succeed at a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or have one limb (arm, leg, tentacle, or wing) damaged, ending the grapple; the damaged limb inflicts the Limb Ripper penalties except with no bleed and all numerical penalties halved, lasting [[1]] round + [[1]] round per [[4]] base attack bonus (undead are not immune)"
+    },
+    "Chink In The Armor": {
+      "modifiers": [],
+      "rider": "make a melee attack that deals damage as normal but ignores any armor and shield bonuses to the target's Armor Class"
+    },
+    "Clinch Strike": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (floor(@attributes.bab.total / 4))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "the additional damage is nonlethal"
+    },
+    "Death Valley Driver": {
+      "modifiers": [],
+      "rider": "as a slam (requires base attack bonus +[[10]]); the target suffers [[1]] negative level and must succeed at a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or fall prone, and this slam immediately ends your grapple; the negative levels last a number of hours equal to your base attack bonus; you may expend your martial focus so a creature that fails its Reflex save suffers [[1]] additional negative level per [[10]] base attack bonus; in addition, the first time each round a creature suffering negative levels attacks you it provokes an attack of opportunity from you (which may be used to grapple it)"
+    },
+    "Earth-shattering Slam": {
+      "modifiers": [],
+      "rider": "expend your martial focus when you maintain a grapple as a standard action and deal your unarmed strike damage; you also deal that damage to the ground as the Berserker sphere's Shatter Earth, and if you deal more damage than the ground's hardness the target is stuck fast and entangled (freeing itself and moving from that spot requires beating your CMD with a grapple, Escape Artist, or Strength check); your grapple then ends and the target cannot be grappled again while it remains entangled"
+    },
+    "Ghostbinding Grasp": {
+      "modifiers": [],
+      "rider": "requires martial focus to attempt grapples against incorporeal creatures; on a successful grapple of an incorporeal creature you may expend your martial focus as a free action to bind it, making it corporeal and subject to physical effects while grappled and for [[1]] round per [[5]] base attack bonus after the grapple ends"
+    },
+    "Hard Whip": {
+      "modifiers": [],
+      "rider": "end the grapple to force the grappled creature up to [[10]] ft in a direction of your choice except upward, +[[5]] ft per [[4]] base attack bonus; this movement provokes no attack of opportunity, except that if it would enter an ally's square that ally may make an attack of opportunity (gaining +[[2]] circumstance damage per [[5]] ft the creature was forced to travel) and the creature stops before that square; if the movement collides with a solid object the creature takes [[1d6 + @abilities.str.mod]] damage, +[[1d6]] per [[5]]-ft square it would have traveled beyond the object; alternatively target a willing ally, who may make a melee attack at any point during the movement (+[[2]] circumstance damage per [[5]] ft traveled first) and end the movement at will"
+    },
+    "Limb Ripper": {
+      "modifiers": [],
+      "rider": "expend your martial focus as an immediate action when you maintain a grapple against a creature you have already pinned (requires base attack bonus +[[10]]); the creature must succeed at a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or have a limb (arm, leg, tentacle, or wing) removed, ending the grapple; losing a wing removes that wing attack and grounds flight, losing a tentacle removes its attacks and related abilities, and losing an arm or leg imposes the standard lost-limb penalties; a two-legged creature that loses an arm or leg also takes [[1d6 + (floor(@attributes.bab.total / 4))d6]] bleed damage; undead are not immune"
+    },
+    "Painful Flex": {
+      "modifiers": [
+        {
+          "formula": "2 + (floor(@attributes.bab.total / 5) * 2)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only when you deal damage with a successful grapple check; the target also takes a -[[2]] penalty (worsening by [[1]] per [[5]] base attack bonus) on the next grapple check it makes against you within [[1]] minute"
+    },
+    "Piledriver": {
+      "modifiers": [],
+      "rider": "when you maintain a grapple against a creature you have already pinned; this unarmed strike automatically threatens a critical hit (roll to confirm as normal) and, if the critical confirms, the creature must succeed at a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be staggered for [[1]] round (dazed for [[1]] round instead at base attack bonus +[[10]]); this ends your grapple"
+    },
+    "Power Bomb": {
+      "modifiers": [
+        {
+          "formula": "1d8 + @spheres.pam",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "the creature must succeed at a Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or be fatigued for [[1]] round, ending the grapple; a creature that fails is also knocked prone, and at base attack bonus +[[10]] it is knocked prone even on a successful save"
+    },
+    "Shoulder Throw": {
+      "modifiers": [],
+      "rider": "on a successful trip against a grappled creature, throw it to land prone in an unoccupied square within [[10]] ft (+[[5]] ft per [[5]] base attack bonus), ending the grapple; a creature thrown more than [[10]] ft takes [[1d6]] bludgeoning damage per additional [[5]] ft thrown, plus any falling damage"
+    },
+    "Tackle": {
+      "modifiers": [],
+      "rider": "attempt a grapple in place of the attack granted at the end of a charge; on a successful grapple the creature must succeed at a Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] or fall prone"
+    },
+    "Tombstone Burial": {
+      "modifiers": [],
+      "rider": "when you successfully use Earth-Shattering Slam you may bury the target underground, driving it [[5]] ft through the ground per [[5]] base attack bonus (if driven completely through it falls and takes falling damage as normal); while entangled from Earth-Shattering Slam the buried target cannot breathe and must hold its breath or begin suffocating"
+    },
+    "Vital Crusher": {
+      "modifiers": [],
+      "rider": "when using Limb Ripper (requires base attack bonus +[[15]]) you may instead attempt to destroy the target's vitals; on a failed Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] the creature is reduced to -[[1]] hit points and is dying, takes a -[[4]] penalty to all saving throws, and is exhausted for [[24]] hours; a second use while it suffers these penalties kills it if it fails the save (a death effect); a creature with CR less than half your base attack bonus instead dies on its first failed save"
+    },
+    "Compound Entrapment": {
+      "modifiers": [],
+      "rider": "when you would get a free grapple attempt against a creature you already grapple (e.g. via grab on a hit), you may instead increase that creature grapple penalties by [[2]] for [[1]] round."
+    }
+  }
+}

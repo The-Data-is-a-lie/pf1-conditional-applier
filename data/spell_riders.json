@@ -1,0 +1,6776 @@
+{
+  "Acid Arrow": {
+    "attack": "ranged",
+    "save": null,
+    "riders": [
+      "Ongoing [[2d4]] acid damage each round for [[1]] round + [[1]] round per three caster levels (max [[6]] extra rounds)."
+    ]
+  },
+  "Acid Fog": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "No save — [[2d6]] acid damage each round, [[20]]-ft.-radius fog, movement through it [[5]] ft."
+    ]
+  },
+  "Aggressive Thundercloud": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[3d6]] electricity damage"
+    ]
+  },
+  "Air Geyser": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial (see text) — [[2d6]] bludgeoning damage"
+    ]
+  },
+  "Arrow of Law": {
+    "attack": "ranged",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Chaotic outsider dazed for [[1]] round; Will save negates the daze."
+    ]
+  },
+  "Aversion": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target nauseated"
+    ]
+  },
+  "Babble": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target nauseated"
+    ]
+  },
+  "Baleful Polymorph": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates, Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — transformed into a Small or smaller animal of the caster's choice; failed Will save also loses its mind (becomes the animal)"
+    ]
+  },
+  "Ball Lightning": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[3d6]] electricity damage; -[[4]] penalty to this saving throw"
+    ]
+  },
+  "Bane": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — enemies within [[50]] ft. take -[[1]] on attack rolls and -[[1]] on saving throws against fear"
+    ]
+  },
+  "Barbed Chains": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — [[1d6]] slashing damage; target shaken for [[1d4]] rounds"
+    ]
+  },
+  "Bestow Curse": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — choose one, permanent until removed: -[[6]] to an ability score; OR -[[4]] on attack rolls, saves, ability checks and skill checks; OR [[50]]% chance to lose each action"
+    ]
+  },
+  "Black Tentacles": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "No save — CMB [[ min(25, @spells.primary.cl.total) + 5 ]] grapple attempt vs every creature in the area each round; grappled targets take [[1d6+4]] bludgeoning damage per round; [[20]]-ft.-radius spread, difficult terrain"
+    ]
+  },
+  "Blade Barrier": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half or Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[ (min(15, @spells.primary.cl.total))d6 ]] slashing damage to creatures passing through (or caught in) the wall of blades"
+    ]
+  },
+  "Blast Barrier": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half (see below)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half (see below) — [[ (min(6, (floor(@spells.primary.cl.total/3))*2))d6 ]] slashing damage"
+    ]
+  },
+  "Bleed": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — ongoing [[1]] damage each round"
+    ]
+  },
+  "Blinding Ray": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Target blinded for [[1]] round (Fort negates).",
+      "Light-vulnerable target instead blinded for [[1d4]] rounds.",
+      "Blinded target sheds light as a sunrod for the duration."
+    ]
+  },
+  "Blindness/Deafness": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target is permanently blinded or deafened (caster's choice)"
+    ]
+  },
+  "Bloodbath": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] damage"
+    ]
+  },
+  "Boiling Blood": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (see text) — ongoing [[1]] fire damage each round"
+    ]
+  },
+  "Bone Flense": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[ (@spells.primary.cl.total)d6 ]] piercing damage"
+    ]
+  },
+  "Boneshaker": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial or negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial or negates (see text) — [[ ((floor(@spells.primary.cl.total/2))*3)d6 ]] damage"
+    ]
+  },
+  "Burning Disarm": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates (object, see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates (object, see text) — [[ (min(5, @spells.primary.cl.total))d4 ]] fire damage"
+    ]
+  },
+  "Burning Hands": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(5, @spells.primary.cl.total))d4 ]] fire damage, [[15]]-ft. cone"
+    ]
+  },
+  "Burning Sands": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d4]] fire damage"
+    ]
+  },
+  "Burst of Radiance": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — [[ (min(5, @spells.primary.cl.total))d4 ]] damage; target blinded for [[1d4]] rounds; target dazzled for [[1d4]] rounds"
+    ]
+  },
+  "Campfire Wall": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] fire damage"
+    ]
+  },
+  "Cause Fear": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — one creature of [[5]] or fewer HD is frightened for [[1d4]] rounds (save: shaken [[1]] round)"
+    ]
+  },
+  "Ceremony": {
+    "attack": "melee",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Unholy Gala boon: good foe sickened for [[1]] round on a melee touch hit.",
+      "Rite of Insanity boon: foe confused for [[1d4]] rounds on a melee touch hit (Will negates)."
+    ]
+  },
+  "Chain Lightning": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(20, @spells.primary.cl.total))d6 ]] electricity damage to the primary target and to each of up to [[ min(20, @spells.primary.cl.total) ]] secondary targets within [[30]] ft. (secondary save DC -[[2]])"
+    ]
+  },
+  "Charm Monster": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (+[[5]] if currently threatened) — creature regards the caster as a trusted friend for [[1]] day per caster level"
+    ]
+  },
+  "Charm Person": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (+[[5]] if currently threatened) — humanoid regards the caster as a trusted friend for [[1]] hour per caster level"
+    ]
+  },
+  "Charnel House": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target sickened for [[1d6]] rounds"
+    ]
+  },
+  "Chill Touch": {
+    "attack": "melee",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial or Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "[[1]] Strength damage to living target unless Fort save succeeds.",
+      "Undead instead flee as if panicked for [[1d4]] rounds + [[1]] round per caster level unless Will save succeeds."
+    ]
+  },
+  "Circle of Death": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — slays [[ (min(20, @spells.primary.cl.total))d4 ]] HD of living creatures of [[8]] or fewer HD each (closest first), [[40]]-ft.-radius burst"
+    ]
+  },
+  "Cloak of Dreams": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target asleep for [[1]] minutes; target helpless; -[[4]] penalty to their saves"
+    ]
+  },
+  "Cloudkill": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[3]] HD or less die (no save); [[4]]-[[6]] HD die (save: [[1d4]] Con damage instead); [[7]]+ HD take [[1d4]] Con damage (save halves); [[20]]-ft.-radius fog moves away at [[10]] ft./round"
+    ]
+  },
+  "Color Spray": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[2]] HD or less: unconscious, blinded and stunned [[2d4]] rounds, then blinded and stunned [[1d4]] rounds; [[3]]-[[4]] HD: blinded and stunned [[1d4]] rounds, then stunned [[1]] round; [[5]]+ HD: stunned [[1]] round; [[15]]-ft. cone"
+    ]
+  },
+  "Command": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target obeys a one-word command (approach / drop / fall [prone] / flee / halt) for [[1]] round"
+    ]
+  },
+  "Compelling Rant": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — [[1d4]] Wisdom drain; [[1d6]] Wisdom damage"
+    ]
+  },
+  "Cone of Cold": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(15, @spells.primary.cl.total))d6 ]] cold damage, [[60]]-ft. cone"
+    ]
+  },
+  "Confusion": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — confused for [[ @spells.primary.cl.total ]] rounds (roll [[1d100]] each round: [[1]]-[[25]] act normally / [[26]]-[[50]] babble / [[51]]-[[75]] deal [[1d8]]+Str to self / [[76]]-[[100]] attack nearest creature), [[15]]-ft.-radius burst"
+    ]
+  },
+  "Contagion": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — infected with a disease of the caster's choice (blinding sickness, bubonic plague, cackle fever, filth fever, leprosy, mindfire, red ache, shakes or slimy doom) with no onset period"
+    ]
+  },
+  "Cosmic Ray": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Target sickened for [[1]] round per caster level on a failed Fort save.",
+      "While sickened, target emits toxic energy; creatures within [[5]] ft. must save or be sickened for [[1]] round per [[2]] caster levels."
+    ]
+  },
+  "Crushing Despair": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty on attack rolls, saving throws, ability checks, skill checks and weapon damage for [[1]] minute per caster level, [[30]]-ft. cone"
+    ]
+  },
+  "Curse of Disgust": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target sickened"
+    ]
+  },
+  "Dark-Light": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target dazzled for [[1]] rounds per caster level"
+    ]
+  },
+  "Daze": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — humanoid of [[4]] or fewer HD is dazed (no actions) for [[1]] round"
+    ]
+  },
+  "Daze Monster": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — creature of [[6]] or fewer HD is dazed (no actions) for [[1]] round"
+    ]
+  },
+  "Death Clutch": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — target staggered for [[1]] minutes; [[1d4]] Constitution drain"
+    ]
+  },
+  "Deep Slumber": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[10]] HD of creatures fall asleep (helpless) for [[1]] minute per caster level, [[10]]-ft.-radius burst (lowest HD first)"
+    ]
+  },
+  "Delayed Blast Fireball": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(20, @spells.primary.cl.total))d6 ]] fire damage, [[20]]-ft.-radius spread, delayable up to [[5]] rounds"
+    ]
+  },
+  "Delusional Pride": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to attacks and skill checks"
+    ]
+  },
+  "Depilate": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to all diplomacy"
+    ]
+  },
+  "Destruction": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target is slain and its remains destroyed (save: [[10d6]] damage instead)"
+    ]
+  },
+  "Discharge": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target staggered"
+    ]
+  },
+  "Disfiguring Touch": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to attack rolls or saving throws"
+    ]
+  },
+  "Disintegrate": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Ranged touch, then Fortitude Save partial — [[ (min(40, 2*@spells.primary.cl.total))d6 ]] damage (save: [[5d6]] instead); a target reduced to [[0]] HP is entirely disintegrated"
+    ]
+  },
+  "Dominate Monster": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — creature obeys the caster's telepathic commands for [[1]] day per caster level (new save at +[[2]] vs acts against its nature)"
+    ]
+  },
+  "Dominate Person": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — humanoid obeys the caster's telepathic commands for [[1]] day per caster level (new save at +[[2]] vs acts against its nature)"
+    ]
+  },
+  "Doom": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target shaken (-[[2]] attack, saves, checks) for [[1]] minute per caster level"
+    ]
+  },
+  "Dread Bolt": {
+    "attack": "ranged",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Good outsider sickened for [[1]] round; Will save negates the sicken."
+    ]
+  },
+  "Dreadscape": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target frightened; [[1d6]] Wisdom damage"
+    ]
+  },
+  "Ear-Piercing Scream": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(5, floor(@spells.primary.cl.total/2)))d6 ]] sonic damage; target dazed for [[1]] rounds"
+    ]
+  },
+  "Ectoplasmic Snare": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial; see text — target entangled"
+    ]
+  },
+  "Elemental Touch": {
+    "attack": "melee",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "see text",
+      "harmless": false
+    },
+    "riders": [
+      "Acid: ongoing [[1]] acid damage each round for [[1]] round per three caster levels; Fort save or sickened for that duration.",
+      "Cold: Fort save or fatigued.",
+      "Electricity: Fort save or staggered for [[1]] round.",
+      "Fire: target may catch on fire."
+    ]
+  },
+  "Endothermic Touch": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target staggered"
+    ]
+  },
+  "Energy Drain": {
+    "attack": "ranged",
+    "save": null,
+    "riders": [
+      "No save — [[2d4]] temporary negative levels; [[24]] hours later a Fortitude save is required for each or it becomes permanent"
+    ]
+  },
+  "Enervation": {
+    "attack": "ranged",
+    "save": null,
+    "riders": [
+      "No save — [[1d4]] temporary negative levels (-[[1]] each on attacks, saves, skill checks, ability checks, effective level) for [[1]] hour per caster level"
+    ]
+  },
+  "Entangle": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — entangled by plants (new save each round; breaking free: Strength or Escape Artist check DC [[20]]); [[40]]-ft.-radius spread, difficult terrain"
+    ]
+  },
+  "Eyebite": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — one target per round: [[4]] HD or less comatose [[10]] minutes per caster level; [[5]]-[[9]] HD also panicked [[1d4]] rounds; all targets sickened [[10]] minutes per caster level"
+    ]
+  },
+  "Fear": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — panicked for [[ @spells.primary.cl.total ]] rounds (save: shaken [[1]] round), [[30]]-ft. cone"
+    ]
+  },
+  "Fear the Sun": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target blinded"
+    ]
+  },
+  "Feast on Fear": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target panicked for [[1d4]] rounds; target shaken for [[10]] minutes per caster level"
+    ]
+  },
+  "Feeblemind": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (arcane casters save at -[[4]]) — Intelligence and Charisma scores drop to [[1]] until healed"
+    ]
+  },
+  "Film of Filth": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target nauseated for [[1d4]] rounds; target sickened"
+    ]
+  },
+  "Finger of Death": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target is slain (save: [[ 3d6 + min(25, @spells.primary.cl.total) ]] damage instead)"
+    ]
+  },
+  "Fire Storm": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(20, @spells.primary.cl.total))d6 ]] fire damage, two [[10]]-ft. cubes per caster level"
+    ]
+  },
+  "Fireball": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(10, @spells.primary.cl.total))d6 ]] fire damage, [[20]]-ft.-radius spread"
+    ]
+  },
+  "Flame Strike": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(15, @spells.primary.cl.total))d6 ]] damage (half fire, half divine), [[10]]-ft.-radius, [[40]]-ft.-high cylinder"
+    ]
+  },
+  "Flaming Sphere": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[3d6]] fire damage"
+    ]
+  },
+  "Flaming Sphere, Greater": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates (see text) — [[6d6]] fire damage"
+    ]
+  },
+  "Flare": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target dazzled for [[1]] minutes"
+    ]
+  },
+  "Flesh to Stone": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target is permanently petrified"
+    ]
+  },
+  "Fleshworm Infestation": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — target staggered for [[1]] rounds; target sickened for [[1]] rounds; [[2]] Dexterity damage"
+    ]
+  },
+  "Flurry of Snowballs": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[4d6]] cold damage"
+    ]
+  },
+  "Freezing Sphere": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(15, @spells.primary.cl.total))d6 ]] cold damage, [[40]]-ft.-radius burst (frozen liquid: creatures swimming take damage with no save)"
+    ]
+  },
+  "Frigid Touch": {
+    "attack": "melee",
+    "save": null,
+    "riders": [
+      "Target staggered for [[1]] round, or [[1]] minute on a critical hit."
+    ]
+  },
+  "Frost Fall": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[2d6]] cold damage; target staggered for [[1]] rounds"
+    ]
+  },
+  "Frost Mammoth": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] cold damage"
+    ]
+  },
+  "Frostbite": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target fatigued"
+    ]
+  },
+  "Garden of Peril": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target sickened for [[1d4]] rounds"
+    ]
+  },
+  "Garrulous Grin": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to bluff and diplomacy checks to convince another of the truth"
+    ]
+  },
+  "Geas, Lesser": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to each of its ability scores"
+    ]
+  },
+  "Geas/Quest": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[3]] penalty to each of its ability scores"
+    ]
+  },
+  "Glitterdust": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (blinding only)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates blindness — blinded for [[ @spells.primary.cl.total ]] rounds (new save each round); outlines invisible creatures; -[[40]] penalty on Stealth checks; [[10]]-ft.-radius spread"
+    ]
+  },
+  "Gloomblind Bolts": {
+    "attack": "ranged",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Target blinded for [[1]] round on a failed Reflex save."
+    ]
+  },
+  "Glue Seal": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target entangled"
+    ]
+  },
+  "Grease": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — falls prone; moving through the [[10]]-ft. square requires an Acrobatics check (DC [[10]]) at half speed or fall"
+    ]
+  },
+  "Gullibility": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[10]] penalty to sense motive checks for the spell's duration"
+    ]
+  },
+  "Gust of Wind": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[2d6]] damage; -[[4]] penalty to fly skill checks; -[[4]] penalty to ranged attacks and perception checks in the area of a gust of wind"
+    ]
+  },
+  "Gusting Sphere": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (object) or Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (object) or Reflex negates; see text — -[[4]] penalty to ranged weapon attacks that pass through it"
+    ]
+  },
+  "Harm": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[ min(150, 10*@spells.primary.cl.total) ]] negative energy damage (cannot reduce below [[1]] HP); heals undead"
+    ]
+  },
+  "Haunting Mists": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — target shaken; [[1d2]] Wisdom damage"
+    ]
+  },
+  "Haunting Reminder": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to saving throws against spells you cast with the fear descriptor"
+    ]
+  },
+  "Heckle": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to attack rolls"
+    ]
+  },
+  "Hideous Laughter": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (+[[4]] if not the caster's creature type) — collapses in laughter: falls prone, can take no actions, for [[ @spells.primary.cl.total ]] rounds"
+    ]
+  },
+  "Hold Monster": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target paralyzed for [[ @spells.primary.cl.total ]] rounds (new save each round as a full-round action to end)"
+    ]
+  },
+  "Hold Person": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — humanoid target paralyzed for [[ @spells.primary.cl.total ]] rounds (new save each round as a full-round action to end)"
+    ]
+  },
+  "Horrid Wilting": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half — [[ (min(20, @spells.primary.cl.total))d6 ]] damage ([[ (min(20, @spells.primary.cl.total))d8 ]] to plant creatures and water elementals), targets within a [[60]]-ft.-radius"
+    ]
+  },
+  "Hostile Levitation": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to cmd against bull rush; -[[1]] penalty to attack rolls"
+    ]
+  },
+  "Ice Slick": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial (see text) — [[1d6]] cold damage"
+    ]
+  },
+  "Ice Storm": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "No save — [[3d6]] bludgeoning + [[2d6]] cold damage, -[[4]] penalty on Perception checks, [[20]]-ft.-radius, [[40]]-ft.-high cylinder of hail"
+    ]
+  },
+  "Implant Urge": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — -[[2]] penalty to saving throws against mind-affecting effects that compel it to act"
+    ]
+  },
+  "Incendiary Cloud": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[6d6]] fire damage each round in the cloud, [[20]]-ft.-radius smoke"
+    ]
+  },
+  "Inflict Light Wounds": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[1d8]] damage"
+    ]
+  },
+  "Inflict Moderate Wounds": {
+    "attack": "melee",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Living target sickened for [[1]] round per caster level (max [[10]] rounds) on a failed save."
+    ]
+  },
+  "Inflict Pain": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — -[[4]] penalty on attack rolls, skill checks and ability checks for [[1]] round per caster level (save: [[1]] round)"
+    ]
+  },
+  "Inflict Serious Wounds": {
+    "attack": "melee",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Living target sickened for [[1]] round per caster level (max [[15]] rounds) on a failed save."
+    ]
+  },
+  "Insanity": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — permanently confused (roll [[1d100]] each round: [[1]]-[[25]] act normally / [[26]]-[[50]] babble / [[51]]-[[75]] deal [[1d8]]+Str to self / [[76]]-[[100]] attack nearest creature)"
+    ]
+  },
+  "Interrogation": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d4]] damage; -[[4]] penalty to bluff checks to convince you when it is lying"
+    ]
+  },
+  "Iron Spine": {
+    "attack": "ranged",
+    "save": null,
+    "riders": [
+      "Whenever the target moves it takes [[1d6]] piercing damage and is sickened for [[1]] round.",
+      "A target with DR/cold iron is nauseated instead of sickened."
+    ]
+  },
+  "Iron Stake": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Target with DR/cold iron sickened for [[1]] round.",
+      "On a failed Fort save, for [[1]] round per caster level the target must make a concentration check to cast or lose the spell."
+    ]
+  },
+  "Irresistible Dance": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — compelled to dance [[1d4]]+[[1]] rounds (save: [[1]] round): -[[4]] to AC, -[[10]] on Reflex saves, provokes no-defense"
+    ]
+  },
+  "Itching Curse": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[1]] penalty to attack rolls"
+    ]
+  },
+  "Light Prison": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[1d6]] damage; target blinded for [[1]] rounds"
+    ]
+  },
+  "Lightning Bolt": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(10, @spells.primary.cl.total))d6 ]] electricity damage, [[120]]-ft. line"
+    ]
+  },
+  "Liquefy": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (object) — [[3d6]] damage"
+    ]
+  },
+  "Mad Hallucination": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to will saving throws"
+    ]
+  },
+  "Mad Monkeys": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target deafened for [[1]] minutes"
+    ]
+  },
+  "Mad Sultan's Melody": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[1d4]] Wisdom damage"
+    ]
+  },
+  "Magnetic Field": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates (object; see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates (object; see text) — -[[2]] penalty to their reflex saves"
+    ]
+  },
+  "Mark of the Reptile God": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Cursed: [[2]] penalty to AC against your attacks and on saves vs. your spells.",
+      "Each day, Fort save or take [[1d4]] Charisma damage ([[1]] of which is Charisma drain).",
+      "Reduced to [[0]] Charisma, target is polymorphed into a harmless cave lizard."
+    ]
+  },
+  "Masochistic Shadow": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates, then Reflex partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates, then Reflex partial; see text — [[1d4]] Strength damage; -[[2]] penalty to reflex saves against this spell"
+    ]
+  },
+  "Massacre": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — slays living creatures of up to [[20]] HD in a [[60]]-ft. line (save or fewer HD than half CL: [[10d6]] damage instead)"
+    ]
+  },
+  "Meteor Swarm": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "None or Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Four meteors — each: [[6d6]] fire damage in a [[40]]-ft.-radius spread (Reflex half); a directly struck target takes [[2d6]] bludgeoning per meteor (ranged touch, no save vs that sphere's fire damage)"
+    ]
+  },
+  "Mind Fog": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[10]] competence penalty on Wisdom checks and Will saves while in the fog and [[2d6]] rounds after leaving, [[20]]-ft. fog bank"
+    ]
+  },
+  "Mirror Mantis": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to saves against fear effects for as long as it can see the altered"
+    ]
+  },
+  "Mischievous Shadow": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[8]] penalty to a single attack roll"
+    ]
+  },
+  "Moonstruck": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — dazed [[1]] round, then confused and enraged (bite attack, rage-like bonuses) for [[ @spells.primary.cl.total ]] rounds, then dazed [[1]] more round"
+    ]
+  },
+  "Mortal Terror": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — target shaken for [[1]] rounds; target helpless"
+    ]
+  },
+  "Mudball": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates; see text — target blinded"
+    ]
+  },
+  "Mydriatic Spontaneity": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target blinded"
+    ]
+  },
+  "Nauseating Trail": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "none and Fortitude negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (see text) — target nauseated"
+    ]
+  },
+  "Necrostasis": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target dazed for [[1]] rounds; target staggered"
+    ]
+  },
+  "Negative Reaction": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[10]] penalty to any bluff"
+    ]
+  },
+  "Night of Blades": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(10, @spells.primary.cl.total))d4 ]] damage"
+    ]
+  },
+  "Oneiric Horror": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target fatigued for [[1]] minutes"
+    ]
+  },
+  "Oneiric Horror, Greater": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates, Fortitude negates, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates, Fortitude negates, see text — [[1]] Strength damage"
+    ]
+  },
+  "Open Book": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to saving throws against divinations"
+    ]
+  },
+  "Outbreak": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target fatigued for [[1]] rounds"
+    ]
+  },
+  "Overwhelming Presence": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates, see text — target staggered for [[1d4]] rounds; target staggered for [[1]] rounds; [[1d6]] Wisdom drain"
+    ]
+  },
+  "Pain Strike": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target sickened"
+    ]
+  },
+  "Painful Revelation": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target staggered for [[1d4]] rounds"
+    ]
+  },
+  "Paranoia": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to attack rolls"
+    ]
+  },
+  "Passing Fancy": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[10]] penalty to sense motive checks to notice that anything is amiss"
+    ]
+  },
+  "Pellet Blast": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] piercing damage"
+    ]
+  },
+  "Pernicious Poison": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[4]] penalty to saves against poison"
+    ]
+  },
+  "Pesh Vigor": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target fatigued"
+    ]
+  },
+  "Pessimism": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to attack rolls"
+    ]
+  },
+  "Phantasmal Asphyxiation": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief, then Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief, then Fortitude partial (see text) — target shaken for [[1]] minutes; target staggered"
+    ]
+  },
+  "Phantasmal Killer": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief, then Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief, then Fortitude partial — target dies of fear on a failed Fortitude save; on a success it takes [[3d6]] damage"
+    ]
+  },
+  "Phasic Challenge": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see below)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see below) — target unconscious"
+    ]
+  },
+  "Poison": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — poisoned: [[1d3]] Constitution damage per round for [[6]] rounds; [[1]] successful save cures"
+    ]
+  },
+  "Polar Ray": {
+    "attack": "ranged",
+    "save": null,
+    "riders": [
+      "[[1d4]] Dexterity drain."
+    ]
+  },
+  "Power Word Blind": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "No save — blinded permanently ([[50]] hp or less), [[1d4+1]] minutes ([[51]]-[[100]] hp), or [[1d4+1]] rounds ([[101]]-[[200]] hp)"
+    ]
+  },
+  "Power Word Kill": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "No save — a creature with [[100]] or fewer current hit points dies"
+    ]
+  },
+  "Power Word Stun": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "No save — stunned [[4d4]] rounds ([[50]] hp or less), [[2d4]] rounds ([[51]]-[[100]] hp), or [[1d4]] rounds ([[101]]-[[150]] hp)"
+    ]
+  },
+  "Pox of Rumors": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates, then Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates, then Will partial (see text) — -[[4]] penalty to these secondary saves"
+    ]
+  },
+  "Psychic Leech": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target fatigued"
+    ]
+  },
+  "Purge Spirit": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — [[ (min(10, @spells.primary.cl.total))d6 ]] damage; target staggered for [[1]] rounds"
+    ]
+  },
+  "Pyrotechnics": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates or Fortitude negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates or Fortitude negates; see text — target blinded"
+    ]
+  },
+  "Qualm": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[10]] penalty to its ability checks"
+    ]
+  },
+  "Ray of Enfeeblement": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half — [[ 1d6 + min(5, floor(@spells.primary.cl.total/2)) ]] Strength penalty (cannot drop below [[1]]) for [[1]] round per caster level"
+    ]
+  },
+  "Ray of Exhaustion": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — exhausted for [[1]] minute per caster level (save: fatigued instead)"
+    ]
+  },
+  "Ray of Sickening": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial; see text — target sickened"
+    ]
+  },
+  "Repel Vermin": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none or Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — [[2d6]] damage"
+    ]
+  },
+  "Rigor Mortis": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — -[[4]] penalty to dexterity and its movement speed decreases by [[10]] feet"
+    ]
+  },
+  "Sawtooth Terrain": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[3d8]] piercing damage"
+    ]
+  },
+  "Scare": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — creatures of [[5]] or fewer HD frightened for [[1d4]] rounds (save: shaken [[1]] round), one target per [[3]] caster levels"
+    ]
+  },
+  "Shadow Trap": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target entangled"
+    ]
+  },
+  "Shatter": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object); Will negates (object) or Fortitude half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object); Will negates (object) or Fortitude half; see text — [[ (min(10, @spells.primary.cl.total))d6 ]] sonic damage"
+    ]
+  },
+  "Shout": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial or Reflex negates (object); see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[5d6]] sonic damage and deafened [[2d6]] rounds (save: halves damage, negates deafness), [[30]]-ft. cone"
+    ]
+  },
+  "Shout, Greater": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial or Reflex negates (object); see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[10d6]] sonic damage, stunned [[1]] round, deafened [[4d6]] rounds (save halves damage, negates stun), [[60]]-ft. cone"
+    ]
+  },
+  "Skin Tag": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "none (object), Fortitude negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save (object), negates; see text — target sickened for [[1d4]] rounds"
+    ]
+  },
+  "Slave to Sin": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see below)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see below) — target sickened"
+    ]
+  },
+  "Slay Living": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target is slain (save: [[12d6]] damage instead)"
+    ]
+  },
+  "Sleep": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[4]] HD of creatures fall asleep (helpless) for [[1]] minute per caster level, [[10]]-ft.-radius burst (lowest HD first)"
+    ]
+  },
+  "Slough": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d4]] Constitution damage; -[[4]] penalty to saving throws against disease"
+    ]
+  },
+  "Slow": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[ min(20, @spells.primary.cl.total) ]] creatures: single move OR standard action per turn, -[[1]] on attack rolls, AC and Reflex saves, half speed, for [[ @spells.primary.cl.total ]] rounds"
+    ]
+  },
+  "Snowball": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Target staggered for [[1]] round on a failed Fort save."
+    ]
+  },
+  "Solid Fog": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[2]] penalty to all melee attack and melee damage rolls"
+    ]
+  },
+  "Sonic Scream": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half (see text) — [[4d4]] sonic damage"
+    ]
+  },
+  "Sound Burst": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[1d8]] sonic damage and stunned [[1]] round (save negates stun only), [[10]]-ft.-radius spread"
+    ]
+  },
+  "Spear of Purity": {
+    "attack": "ranged",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Evil outsider blinded for [[1]] round; Will save negates the blindness."
+    ]
+  },
+  "Spellcurse": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[1d6]] damage"
+    ]
+  },
+  "Stage Fright": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to ability checks"
+    ]
+  },
+  "Steal Breath": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates; see text — [[2d6]] damage"
+    ]
+  },
+  "Steal Years": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target fatigued for [[1d4]] hours"
+    ]
+  },
+  "Stinking Cloud": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — nauseated while in the cloud and for [[1d4]]+[[1]] rounds after leaving it, [[20]]-ft.-radius fog"
+    ]
+  },
+  "Stone Call": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] damage"
+    ]
+  },
+  "Stone Discus": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[4d6]] damage"
+    ]
+  },
+  "Stormbolts": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[ (min(20, @spells.primary.cl.total))d8 ]] electricity damage; target stunned for [[1]] rounds"
+    ]
+  },
+  "Stricken Heart": {
+    "attack": "melee",
+    "save": null,
+    "riders": [
+      "Target staggered for [[1]] round, or [[1]] minute on a critical hit.",
+      "Creatures immune to precision damage are immune to the staggered effect."
+    ]
+  },
+  "Suggestion": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target follows a suggested reasonable course of action for [[1]] hour per caster level or until completed"
+    ]
+  },
+  "Sun's Disdain": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target blinded for [[1]] rounds; target dazzled"
+    ]
+  },
+  "Sunbeam": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates and Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — [[4d6]] damage and permanently blinded (save: no blindness, half damage); undead take [[ (min(20, @spells.primary.cl.total))d6 ]] damage, [[60]]-ft. beam, one beam per [[3]] caster levels"
+    ]
+  },
+  "Sunburst": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — [[6d6]] damage and permanently blinded (save: half damage, no blindness); undead take [[ (min(25, @spells.primary.cl.total))d6 ]] damage, [[80]]-ft.-radius burst"
+    ]
+  },
+  "Swarm of Fangs": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] damage"
+    ]
+  },
+  "Symbol of Pain": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — wracking pain: -[[4]] on attack rolls, skill checks and ability checks; lasts [[1]] hour after leaving the symbol's [[60]]-ft. radius"
+    ]
+  },
+  "Terrible Remorse": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — [[1d8]] damage; target staggered for [[1]] rounds; -[[2]] penalty to armor class"
+    ]
+  },
+  "They Know": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target shaken"
+    ]
+  },
+  "Touch of Blindness": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target blinded for [[1]] rounds"
+    ]
+  },
+  "Touch of Gracelessness": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target prone"
+    ]
+  },
+  "Touch of Idiocy": {
+    "attack": "melee",
+    "save": null,
+    "riders": [
+      "No save — [[1d6]] penalty to Intelligence, Wisdom and Charisma (cannot drop below [[1]]) for [[10]] minutes per caster level"
+    ]
+  },
+  "Touch of Slime": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d3]] Constitution damage"
+    ]
+  },
+  "Touch of Slumber": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target asleep for [[2d6]] hours; target helpless"
+    ]
+  },
+  "Trial of Fire and Acid": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half (see text) — [[1d6]] acid damage; ongoing [[1d6]] acid damage each round"
+    ]
+  },
+  "Unadulterated Loathing": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target nauseated"
+    ]
+  },
+  "Unprepared Combatant": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to initiative checks and reflex saves"
+    ]
+  },
+  "Unsettling Presence": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to handle animal"
+    ]
+  },
+  "Vampiric Hunger": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target exhausted; [[1d4]] Constitution damage"
+    ]
+  },
+  "Virulent Miasma": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (see text) — -[[4]] penalty to saving throws against disease effects as long as they remain within"
+    ]
+  },
+  "Vision of Hell": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target shaken; -[[2]] penalty to saves versus fear effects"
+    ]
+  },
+  "Wail of the Banshee": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — slays up to [[ min(25, @spells.primary.cl.total) ]] living creatures within a [[40]]-ft.-radius spread (closest first)"
+    ]
+  },
+  "Wall of Bone": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] damage"
+    ]
+  },
+  "Wall of Fire": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d4]] fire damage"
+    ]
+  },
+  "Wandering Star Motes": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — target dazed for [[1]] rounds"
+    ]
+  },
+  "Warp Metal": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) — -[[4]] penalty to attack rolls"
+    ]
+  },
+  "Waters of Lamashtu": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target sickened for [[1d4]] rounds; [[1d6]] Intelligence damage; [[1d6]] Dexterity damage; -[[4]] penalty to their save to resist its effects)"
+    ]
+  },
+  "Waves of Blood": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates, Fortitude negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates, Fortitude negates (see text) — target sickened for [[1d6]] rounds"
+    ]
+  },
+  "Waves of Ecstasy": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — target stunned for [[1]] rounds; target staggered"
+    ]
+  },
+  "Waves of Exhaustion": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "No save — living creatures are exhausted (-[[6]] Str/Dex, half speed), [[60]]-ft. cone"
+    ]
+  },
+  "Waves of Fatigue": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "No save — living creatures are fatigued (-[[2]] Str/Dex, no run or charge), [[30]]-ft. cone"
+    ]
+  },
+  "Web": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — grappled by webs (escape: combat maneuver or Escape Artist check); [[20]]-ft.-radius spread, difficult terrain; burning webs deal [[2d4]] fire damage"
+    ]
+  },
+  "Weird": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief, then Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief, then Fortitude partial — targets that fail both saves die; on a successful Fortitude save: [[3d6]] damage, [[1d4]] Strength drain, stunned [[1]] round"
+    ]
+  },
+  "Whip of Ants": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[3d6]] damage"
+    ]
+  },
+  "Whip of Centipedes": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] damage"
+    ]
+  },
+  "Wither Limb": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[2d6]] damage"
+    ]
+  },
+  "Absurdity": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[10]] penalty to sense motive checks to avoid surprise or to notice that a creature; -[[2]] penalty to initiative checks"
+    ]
+  },
+  "Acid Pit": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates; see text — [[2d6]] acid damage; ongoing [[2d6]] acid damage each round"
+    ]
+  },
+  "Acidic Spray": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial (see text) — [[ (min(15, @spells.primary.cl.total))d6 ]] acid damage"
+    ]
+  },
+  "Advanced Scurvy": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — -[[1]] penalty to strength-and dexterity-based checks)"
+    ]
+  },
+  "Aggressive Thundercloud, Greater": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates and Fortitude negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates and Fortitude negates (see text) — [[6d6]] electricity damage; target stunned for [[1]] rounds"
+    ]
+  },
+  "Air Walk": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] damage"
+    ]
+  },
+  "Alluring Spores": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — -[[1]] penalty to saving throws against your enchantment spells or effects"
+    ]
+  },
+  "Apathy": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[5]] penalty to all skill checks and ability checks to investigate"
+    ]
+  },
+  "Appearance of Life, Greater": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief or Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief or Will negates (see text) — -[[5]] penalty to their will saving throws to disbelieve the illusion"
+    ]
+  },
+  "Arbitrament": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none or Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — [[3d6]] damage; target sickened for [[1d4]] rounds; target staggered for [[2d4]] rounds; target nauseated for [[1d10]] minutes"
+    ]
+  },
+  "Arboreal Hammer": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] damage"
+    ]
+  },
+  "Archon's Aura": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to attack rolls and saving throws and to armor class for the duration"
+    ]
+  },
+  "Archon's Trumpet": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target paralyzed for [[1d4]] rounds"
+    ]
+  },
+  "Ardor's Onslaught": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial; see text — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] damage; target nauseated for [[1d6]] rounds"
+    ]
+  },
+  "Aura of Distraction": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[5]] penalty to concentration checks"
+    ]
+  },
+  "Awaken the Devoured": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — target confused for [[1]] rounds per caster level"
+    ]
+  },
+  "Banishing Blade": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none and Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — target staggered for [[1]] rounds"
+    ]
+  },
+  "Banshee Blast": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half and Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half and Will negates (see text) — [[ (min(15, @spells.primary.cl.total))d4 ]] damage; target panicked for [[1]] rounds per caster level"
+    ]
+  },
+  "Battering Blast": {
+    "attack": "ranged",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial (see text)",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Bestow Curse, Greater": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[12]] penalty to an ability score; -[[6]] penalty to two ability scores (to a minimum ability score of [[1]]); -[[8]] penalty to attack rolls"
+    ]
+  },
+  "Betraying Sting": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — [[ (floor(@spells.primary.cl.total/2))d8 ]] damage"
+    ]
+  },
+  "Bilocation": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target paralyzed"
+    ]
+  },
+  "Binding Earth": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] damage"
+    ]
+  },
+  "Black Mark": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target shaken"
+    ]
+  },
+  "Blasphemy": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — [[3d6]] damage; target helpless for [[1d10]] minutes; target paralyzed"
+    ]
+  },
+  "Blaze of Glory": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — [[ (floor(@spells.primary.cl.total/2))d6 ]] damage"
+    ]
+  },
+  "Blazing Rainbow": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target dazzled for [[1]] minutes"
+    ]
+  },
+  "Bleed for your Master": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target shaken for [[1]] minutes",
+      "target frightened"
+    ]
+  },
+  "Blight": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half; see text — [[ (min(15, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Blightburn Weapon": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) — [[2d6]] fire damage; ongoing [[2d6]] fire damage each round"
+    ]
+  },
+  "Bloatbomb": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates or Reflex half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates or Reflex half (see text) — [[3d6]] acid damage"
+    ]
+  },
+  "Blood Boil": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (see text) — [[ (min(15, @spells.primary.cl.total))d6 ]] damage; target fatigued; target exhausted; [[1d6]] Constitution damage"
+    ]
+  },
+  "Blood Crow Strike": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] damage"
+    ]
+  },
+  "Blood Mist": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (see text) — [[1d4]] Wisdom damage"
+    ]
+  },
+  "Blood Money": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] damage",
+      "[[1]] Strength damage"
+    ]
+  },
+  "Blood Sentinel": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2]] Intelligence drain"
+    ]
+  },
+  "Blood Ties": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — -[[2]] penalty to its save if the two targets are parent and child or siblings"
+    ]
+  },
+  "Boneshatter": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(15, @spells.primary.cl.total))d6 ]] damage; target exhausted for [[1]] minutes per caster level; target fatigued"
+    ]
+  },
+  "Borrow Corruption": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d3]] Wisdom drain"
+    ]
+  },
+  "Brand": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] damage"
+    ]
+  },
+  "Brand of Conformity": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] damage"
+    ]
+  },
+  "Brand of Hobbling": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] damage"
+    ]
+  },
+  "Brand of Tracking": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] damage"
+    ]
+  },
+  "Brand, Greater": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] damage"
+    ]
+  },
+  "Bungle": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[20]] penalty to its next attack roll or check; -[[20]] penalty to its next attack roll or check that requires a d20 roll"
+    ]
+  },
+  "Burn Corruption": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(7, floor(@spells.primary.cl.total/2)))d8 ]] fire damage"
+    ]
+  },
+  "Burning Arc": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(10, @spells.primary.cl.total))d6 ]] fire damage"
+    ]
+  },
+  "Burning Entanglement": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates or partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates or partial (see text) — [[4d6]] fire damage"
+    ]
+  },
+  "Burst Bonds": {
+    "attack": "melee",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half (object)",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Burst of Force": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half (see text) — [[ (min(15, @spells.primary.cl.total))d6 ]] force damage"
+    ]
+  },
+  "Burst of Nettles": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[3d6]] damage"
+    ]
+  },
+  "Burst with Light": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] damage",
+      "target blinded for [[1]] rounds"
+    ]
+  },
+  "Cackling Skull": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target shaken for [[1d4]] rounds"
+    ]
+  },
+  "Calcific Touch": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[1d4]] Dexterity damage"
+    ]
+  },
+  "Call Lightning": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[3d6]] electricity damage"
+    ]
+  },
+  "Call Lightning Storm": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[5d6]] damage"
+    ]
+  },
+  "Cast Out": {
+    "attack": "melee",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Castigate": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target shaken for [[1]] rounds; -[[2]] penalty to its saving throw"
+    ]
+  },
+  "Catatonia": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target helpless"
+    ]
+  },
+  "Caustic Eruption": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half (see text) — [[ (min(20, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Caustic Safeguard": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half (see text) — [[ (min(10, floor(@spells.primary.cl.total/2)))d6 ]] acid damage"
+    ]
+  },
+  "Chains of Light": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — target paralyzed"
+    ]
+  },
+  "Challenge Evil": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target sickened"
+    ]
+  },
+  "Chaos Hammer": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial; see text — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] damage"
+    ]
+  },
+  "Chord of Shards": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[2d6]] piercing damage"
+    ]
+  },
+  "Clashing Rocks": {
+    "attack": "ranged",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial, see text",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Cleansing Fire": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] fire damage"
+    ]
+  },
+  "Clenched Fist": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target stunned for [[1]] rounds"
+    ]
+  },
+  "Cloak of Chaos": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target confused for [[1]] rounds"
+    ]
+  },
+  "Cloak of Secrets": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[5]] penalty to the check"
+    ]
+  },
+  "Clone": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2]] Constitution drain"
+    ]
+  },
+  "Cold Ice Strike": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(15, @spells.primary.cl.total))d6 ]] cold damage"
+    ]
+  },
+  "Condensed Ether": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[2]] penalty to armor class and on reflex saves"
+    ]
+  },
+  "Confess": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial; see text — [[ (min(5, floor(@spells.primary.cl.total/2)))d6 ]] damage; target sickened for [[2d4]] rounds"
+    ]
+  },
+  "Confusion, Lesser": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target confused for [[1]] rounds; target confused for [[1]] rounds"
+    ]
+  },
+  "Conjuration Foil": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — [[1d6]] damage"
+    ]
+  },
+  "Conjure Deadfall": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates (see text) — [[ (min(15, @spells.primary.cl.total))d6 ]] bludgeoning damage"
+    ]
+  },
+  "Consecrate": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[1]] penalty to attack rolls"
+    ]
+  },
+  "Constricting Coils": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — ongoing [[6]] bludgeoning damage each round"
+    ]
+  },
+  "Corpse Hammer": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(6, floor(@spells.primary.cl.total/3)))d6 ]] damage"
+    ]
+  },
+  "Corpse Lanterns": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[5]] penalty to stealth checks"
+    ]
+  },
+  "Corrosive Consumption": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(15, @spells.primary.cl.total))d4 ]] acid damage"
+    ]
+  },
+  "Counterbalancing Aura": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target sickened for [[1d6]] rounds",
+      "target nauseated for [[1d6]] rounds"
+    ]
+  },
+  "Coward's Lament": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — -[[1]] penalty to its armor class"
+    ]
+  },
+  "Crafter's Curse": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[5]] penalty to all craft skill checks while the spell lasts"
+    ]
+  },
+  "Crafter's Nightmare": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[1d6]] damage; -[[5]] penalty to the check"
+    ]
+  },
+  "Creeping Doom": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial; see text — [[4d6]] damage"
+    ]
+  },
+  "Crusader's Edge": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target sickened for [[1]] rounds"
+    ]
+  },
+  "Curse of Burning Sleep": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — [[ (min(8, floor(@spells.primary.cl.total/2)))d6 ]] fire damage; ongoing [[2d6]] fire damage each round"
+    ]
+  },
+  "Curse of Unexpected Death": {
+    "attack": "melee",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Damnation": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[1d8]] damage"
+    ]
+  },
+  "Damnation Stride": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half, see text — [[4d6]] fire damage"
+    ]
+  },
+  "Dazzling Blade": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — target blinded for [[1]] rounds; target dazzled for [[1]] rounds"
+    ]
+  },
+  "Deadly Finale": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[2d8]] damage"
+    ]
+  },
+  "Death Knell Aura, Greater": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[1d8]] damage"
+    ]
+  },
+  "Death Pact": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — [[ (@spells.primary.cl.total)d8 ]] damage"
+    ]
+  },
+  "Deathwine": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d8]] damage"
+    ]
+  },
+  "Debilitating Pain": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — target dazed for [[1]] rounds"
+    ]
+  },
+  "Decapitate": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[4d6]] damage"
+    ]
+  },
+  "Decollate": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target blind"
+    ]
+  },
+  "Decompose Corpse": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (object) — -[[2]] penalty to all rolls and to its armor class and cmd for [[1]] minute"
+    ]
+  },
+  "Deja Vu": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target confused"
+    ]
+  },
+  "Destabilize Powder": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) — target prone"
+    ]
+  },
+  "Destroy Robot": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Detect Anxieties": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — target stunned for [[1]] rounds"
+    ]
+  },
+  "Detect Demon": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target stunned for [[1]] rounds"
+    ]
+  },
+  "Detect Desires": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — target stunned for [[1]] rounds"
+    ]
+  },
+  "Detect Evil": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target stunned for [[1]] rounds"
+    ]
+  },
+  "Detect Thoughts": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — target stunned for [[1]] rounds"
+    ]
+  },
+  "Detect Undead": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target stunned for [[1]] rounds"
+    ]
+  },
+  "Detonate": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(10, @spells.primary.cl.total))d8 ]] damage"
+    ]
+  },
+  "Dictum": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none or Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — [[3d6]] damage; target deafened for [[1d4]] rounds; target staggered for [[2d4]] rounds; target helpless for [[1d10]] minutes; target paralyzed"
+    ]
+  },
+  "Dimension Door": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none and Will negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) — [[1d6]] damage"
+    ]
+  },
+  "Dirge of the Victorious Knights": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(20, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Disable Construct": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target helpless for [[1]] rounds per caster level"
+    ]
+  },
+  "Discordant Blast": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[3d6]] sonic damage"
+    ]
+  },
+  "Dissolution": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (object) — [[1d0]] damage"
+    ]
+  },
+  "Dream Dalliance": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief, then Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief, then Will partial (see text) — target asleep; -[[2]] penalty to all saving throws against spells and effects that may put it back"
+    ]
+  },
+  "Dream Scan": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target asleep"
+    ]
+  },
+  "Dream Travel": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[1d10]] damage; target shaken"
+    ]
+  },
+  "Dust of Twilight": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (fatigue only)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (fatigue only) — target fatigued"
+    ]
+  },
+  "Early Judgment": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target confused for [[1d4]] rounds; target shaken for [[1d4]] rounds"
+    ]
+  },
+  "Earthquake": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[8d6]] damage"
+    ]
+  },
+  "Ego Whip I": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target staggered for [[1]] rounds; -[[2]] penalty to int; -[[2]] penalty to that ability score"
+    ]
+  },
+  "Ego Whip II": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target staggered for [[1d4]] rounds; target staggered for [[1d4]] rounds; -[[4]] penalty to the chosen ability score and is staggered for [[1d4]] rounds on a failed"
+    ]
+  },
+  "Ego Whip III": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target staggered for [[1d6]] rounds; target staggered for [[1d6]] rounds; -[[6]] penalty to the chosen ability score and is staggered for [[1d6]] rounds on a failed"
+    ]
+  },
+  "Ego Whip IV": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target staggered for [[1d8]] rounds; target staggered for [[1d8]] rounds; -[[8]] penalty to the chosen ability score and is staggered for [[1d8]] rounds on a failed"
+    ]
+  },
+  "Ego Whip V": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target staggered for [[1d10]] rounds; target staggered for [[1d10]] rounds; -[[10]] penalty to the chosen ability score and is staggered for [[1d10]] rounds"
+    ]
+  },
+  "Enlarge Person": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — -[[1]] penalty to attack rolls and ac due to its increased size"
+    ]
+  },
+  "Enticing Adulation": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target fatigued; -[[2]] penalty to its armor class"
+    ]
+  },
+  "Entrap Spirit": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to its saving throw"
+    ]
+  },
+  "Etheric Shards": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial or Reflex negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial or Reflex negates (see text) — -[[4]] penalty to its saving throw"
+    ]
+  },
+  "Excruciating Deformation": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[1]] Dexterity damage; [[1]] Constitution damage"
+    ]
+  },
+  "Explode Head": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(20, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Explosion of Rot": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half; see text — [[ (min(15, @spells.primary.cl.total))d6 ]] damage; target staggered for [[1d4]] rounds; target staggered for [[1d4]] rounds"
+    ]
+  },
+  "Explosive Runes": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[6d6]] damage"
+    ]
+  },
+  "Faerie Fire": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[20]] penalty to all stealth checks"
+    ]
+  },
+  "Fearsome Duplicate": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief (if interacted with)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief (if interacted with) — -[[4]] penalty to perception checks while you control your duplicate"
+    ]
+  },
+  "Feast of Ashes": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target nauseated for [[1]] rounds"
+    ]
+  },
+  "Ferment": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (object) — -[[2]] penalty to attack rolls"
+    ]
+  },
+  "Final Sacrifice": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates, then Reflex half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates, then Reflex half (see text) — [[1d4]] damage"
+    ]
+  },
+  "Fire Breath": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half; see text — [[4d6]] fire damage"
+    ]
+  },
+  "Fire of Entanglement": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — target entangled"
+    ]
+  },
+  "Fire of Judgment": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — [[1d6]] damage"
+    ]
+  },
+  "Fire of Vengeance": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[3d8]] damage"
+    ]
+  },
+  "Fire Seeds": {
+    "attack": "ranged",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "none or Reflex half; see text",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Fire Snake": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(15, @spells.primary.cl.total))d6 ]] fire damage"
+    ]
+  },
+  "Fire Trap": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half; see text — [[1d4]] fire damage"
+    ]
+  },
+  "Firefall": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates and Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates and Reflex negates; see text — [[2d6]] fire damage; target blinded"
+    ]
+  },
+  "Firestream": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[2d6]] fire damage"
+    ]
+  },
+  "Flash Fire": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object); see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object); see text — target blinded for [[1d4]] rounds; -[[4]] penalty to this saving throw"
+    ]
+  },
+  "Fleshcurdle": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — -[[2]] penalty to attack and damage rolls"
+    ]
+  },
+  "Fleshwarping Swarm": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[4]] penalty to dexterity and on saving throws against transmutation effects for [[1]]"
+    ]
+  },
+  "Fool's Forbiddance": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — target confused; target staggered"
+    ]
+  },
+  "Forbiddance": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[6d6]] damage"
+    ]
+  },
+  "Force Punch": {
+    "attack": "melee",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Foster Hatred": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to their saving throws"
+    ]
+  },
+  "Fumblestep": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[1]] penalty to reflex saving throws and acrobatics checks"
+    ]
+  },
+  "Fungal Infestation": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d3]] Charisma damage"
+    ]
+  },
+  "Geb's Hammer": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(6, floor(@spells.primary.cl.total/3)))d6 ]] damage"
+    ]
+  },
+  "Geyser": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial (see below)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial (see below) — [[3d6]] fire damage; ongoing [[1d6]] fire damage each round"
+    ]
+  },
+  "Ghost Wolf": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target shaken for [[1d4]] rounds"
+    ]
+  },
+  "Glyph of Warding": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] damage"
+    ]
+  },
+  "Glyph of Warding, Greater": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[10d8]] damage"
+    ]
+  },
+  "Gravel Vortex": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[5d6]] bludgeoning damage",
+      "-[[4]] penalty to perception skill checks"
+    ]
+  },
+  "Gravity Sphere": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] damage"
+    ]
+  },
+  "Grim Stalker": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object); see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object); see text — target shaken for [[1]] rounds"
+    ]
+  },
+  "Hairline Fractures": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (object) — -[[2]] penalty to ac for the spell's duration"
+    ]
+  },
+  "Harrowing": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[1]] penalty to that associated check"
+    ]
+  },
+  "Haunting Choir": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to attack rolls"
+    ]
+  },
+  "Heatstroke": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial, see text — -[[4]] penalty to their saves"
+    ]
+  },
+  "Hex Vulnerability": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to your caster level check to overcome the target's spell resistance"
+    ]
+  },
+  "Hibernate": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target paralyzed"
+    ]
+  },
+  "Hide Bruises": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none and Will disbelief (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief (see text) — -[[10]] penalty to that check"
+    ]
+  },
+  "Holy Aura": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target blinded"
+    ]
+  },
+  "Holy Ice": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates or none (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates or none (see text) — [[1d6]] damage"
+    ]
+  },
+  "Holy Smite": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial; see text — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] damage; target blinded for [[1]] rounds"
+    ]
+  },
+  "Holy Word": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — [[3d6]] damage; target deafened for [[1d4]] rounds; target blinded for [[2d4]] rounds; target helpless for [[1d10]] minutes; target paralyzed"
+    ]
+  },
+  "Hostile Juxtaposition": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target unconscious"
+    ]
+  },
+  "Hungry Darkness": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[3d6]] force damage",
+      "[[2]] Constitution damage",
+      "ongoing [[3d6]] force damage each round"
+    ]
+  },
+  "Hungry Earth": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target prone"
+    ]
+  },
+  "Hungry Pit": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates; Reflex half; see text — [[4d6]] damage; ongoing [[4d6]] bludgeoning damage each round"
+    ]
+  },
+  "Ice Crystal Teleport": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target paralyzed"
+    ]
+  },
+  "Ice Spears": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half and see below",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half and see below — [[2d6]] piercing damage"
+    ]
+  },
+  "Icy Prison": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — target helpless; ongoing [[1]] cold damage each round"
+    ]
+  },
+  "Id Insinuation I": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target confused"
+    ]
+  },
+  "Imbue with Addiction": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — -[[4]] penalty to its saving throw"
+    ]
+  },
+  "Imprisonment": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — -[[4]] penalty to its save"
+    ]
+  },
+  "Incendiary Runes": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — [[1d6]] fire damage"
+    ]
+  },
+  "Inflict Critical Wounds": {
+    "attack": "melee",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Inflict Critical Wounds, Mass": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[4d8]] damage"
+    ]
+  },
+  "Inflict Light Wounds, Mass": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[1d8]] damage"
+    ]
+  },
+  "Inflict Moderate Wounds, Mass": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[2d8]] damage"
+    ]
+  },
+  "Inflict Serious Wounds, Mass": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[3d8]] damage"
+    ]
+  },
+  "Infuse Robot": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target staggered for [[1d4]] rounds"
+    ]
+  },
+  "Intensify Psyche": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to saving throws against spells and effects with the emotion or pain"
+    ]
+  },
+  "Jitterbugs": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to all dexterity checks and dexterity-based skill checks"
+    ]
+  },
+  "Ki Shout": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(20, @spells.primary.cl.total))d6 ]] sonic damage; target stunned for [[1]] rounds"
+    ]
+  },
+  "Kiss of the First World": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target staggered"
+    ]
+  },
+  "Lament of Summer's Last Breath": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — target shaken for [[1]] rounds"
+    ]
+  },
+  "Leashed Shackles": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — target entangled"
+    ]
+  },
+  "Light of Iomedae": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — -[[20]] penalty to all stealth checks; -[[2]] penalty to all saving throws made against positive energy effects"
+    ]
+  },
+  "Lightning Arc": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half — [[ (min(15, @spells.primary.cl.total))d6 ]] electricity damage"
+    ]
+  },
+  "Lily Pad Stride": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[5]] penalty to its check it can move at its normal speed",
+      "-[[5]] penalty to their acrobatics checks when traveling across that particular"
+    ]
+  },
+  "Limited Wish": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[7]] penalty to its next saving throw"
+    ]
+  },
+  "Lipstitch": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] damage"
+    ]
+  },
+  "Lissalan Snake Sigil": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — target nauseated; target exhausted; -[[4]] penalty to perception checks relating to vision"
+    ]
+  },
+  "Litany of Entanglement": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target entangled"
+    ]
+  },
+  "Litany of Madness": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target confused"
+    ]
+  },
+  "Litany of Righteousness": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target dazzled for [[1d4]] rounds"
+    ]
+  },
+  "Litany of Thunder": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target confused for [[1]] rounds; target confused for [[1]] rounds; target deafened"
+    ]
+  },
+  "Litany of Weakness": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target fatigued for [[1]] rounds"
+    ]
+  },
+  "Loathsome Veil": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target nauseated for [[1d4]] rounds; target sickened for [[2d4]] rounds; target nauseated for [[1d4]] rounds; target sickened for [[1d4]] rounds"
+    ]
+  },
+  "Lock Gaze": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target blinded for [[1]] rounds; target unconscious"
+    ]
+  },
+  "Lost Passage": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — -[[4]] penalty to dexterity"
+    ]
+  },
+  "Lullaby": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[5]] penalty to perception checks and a -[[2]] penalty on will saves against sleep"
+    ]
+  },
+  "Lunar Veil": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates, see text — -[[5]] penalty to constitution checks to do so"
+    ]
+  },
+  "Maddening Oubliette": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — target confused"
+    ]
+  },
+  "Mage's Disjunction": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) — -[[5]] penalty to avoid being permanently destroyed"
+    ]
+  },
+  "Mage's Faithful Hound": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "ongoing [[3]] piercing damage each round"
+    ]
+  },
+  "Magnifying Chime": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half (see text) — [[1d6]] sonic damage"
+    ]
+  },
+  "Malicious Spite": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[2]] Wisdom damage"
+    ]
+  },
+  "Marionette Possession": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — target helpless"
+    ]
+  },
+  "Maw of Chaos": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (@spells.primary.cl.total)d6 ]] damage",
+      "target entangled"
+    ]
+  },
+  "Maze of Madness and Suffering": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial, see below",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial, see below — [[4d6]] fire damage; target frightened for [[2d4]] rounds; target paralyzed; [[2d4]] Wisdom damage"
+    ]
+  },
+  "Miasmatic Form": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d2]] Constitution damage"
+    ]
+  },
+  "Mind Thrust I": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[ (min(5, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Mind Thrust II": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[ (min(5, @spells.primary.cl.total))d8 ]] damage"
+    ]
+  },
+  "Mind Thrust III": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[ (min(10, @spells.primary.cl.total))d8 ]] damage"
+    ]
+  },
+  "Mind Thrust IV": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[ (min(15, @spells.primary.cl.total))d8 ]] damage; target fatigued for [[1]] rounds; target fatigued for [[1]] rounds"
+    ]
+  },
+  "Mind Thrust V": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — target fatigued for [[1]] rounds; target exhausted for [[1]] rounds; target fatigued for [[1]] rounds"
+    ]
+  },
+  "Mind Thrust VI": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will half",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save half — [[ (min(20, @spells.primary.cl.total))d8 ]] damage; target stunned for [[1]] rounds; target stunned for [[1]] rounds; target exhausted"
+    ]
+  },
+  "Mirror Hideaway": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target nauseated for [[1d6]] rounds"
+    ]
+  },
+  "Morning Sun": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates and Reflex half, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates and Reflex half, see text — [[10d6]] fire damage; target staggered"
+    ]
+  },
+  "Nature's Exile": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to all attack rolls; -[[10]] penalty to survival skill checks as the weather and environment themselves seem"
+    ]
+  },
+  "Nauseating Dart": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[1d2]] damage; target nauseated for [[1]] rounds"
+    ]
+  },
+  "Night Terrors": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target fatigued; [[1d4]] Wisdom damage"
+    ]
+  },
+  "Nightmare": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — [[1d10]] damage; target stunned for [[10]] minutes per caster level"
+    ]
+  },
+  "Node of Blasting": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial; see text — [[6d6]] damage; target staggered for [[1]] minutes"
+    ]
+  },
+  "Oath of Justice": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[4]] penalty to influence dwarves"
+    ]
+  },
+  "Obsidian Flow": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial, see text — [[ (min(10, floor(@spells.primary.cl.total/2)))d6 ]] fire damage"
+    ]
+  },
+  "Old Salt's Curse": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target staggered"
+    ]
+  },
+  "Open and Shut": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief — -[[5]] penalty to perception checks regarding the door itself or creatures"
+    ]
+  },
+  "Order's Wrath": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial; see text — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] damage; target dazed for [[1]] rounds"
+    ]
+  },
+  "Overwhelming Grief": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — -[[2]] penalty to armor class"
+    ]
+  },
+  "Pale Flame": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] fire damage"
+    ]
+  },
+  "Parchment Swarm": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half; see text — [[ (min(15, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Phantasmal Affliction": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief, then Fortitude or Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief, then Fortitude or Will negates (see text) — [[1d3]] damage; target fatigued; [[1d4]] Constitution damage; -[[4]] penalty to attack rolls"
+    ]
+  },
+  "Phantasmal Putrefaction": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief, then Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief, then Fortitude partial (see text) — [[1d4]] Wisdom damage"
+    ]
+  },
+  "Phantasmal Revenge": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will disbelief then Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save disbelief then Fortitude partial; see text — [[5d6]] damage"
+    ]
+  },
+  "Phobia": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target panicked; target shaken"
+    ]
+  },
+  "Piercing Shriek": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target staggered"
+    ]
+  },
+  "Pillar of Life": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(10, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Polar Midnight": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[5d6]] cold damage; [[1d6]] Dexterity damage; ongoing [[5d6]] cold damage each round"
+    ]
+  },
+  "Pox Pustules": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target sickened; -[[4]] penalty to dexterity (this penalty cannot lower dexterity below [[0]])"
+    ]
+  },
+  "Primal Regression": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[1d4]] Intelligence drain; [[1d4]] Charisma damage; -[[4]] penalty to will saves"
+    ]
+  },
+  "Prismatic Spray": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target blinded for [[2d4]] rounds"
+    ]
+  },
+  "Prismatic Wall": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target blinded"
+    ]
+  },
+  "Psychic Crush I": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial and Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial and Fortitude partial; see text — [[3d6]] damage; target sickened for [[1]] rounds; target sickened for [[1]] rounds"
+    ]
+  },
+  "Psychic Crush II": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial and Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial and Fortitude partial; see text — [[5d6]] damage"
+    ]
+  },
+  "Psychic Crush III": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial and Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial and Fortitude partial; see text — [[7d6]] damage"
+    ]
+  },
+  "Psychic Crush IV": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial and Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial and Fortitude partial; see text — [[9d6]] damage"
+    ]
+  },
+  "Psychic Crush V": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial and Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial and Fortitude partial; see text — [[11d6]] damage; -[[2]] penalty to the will save to resist this spell"
+    ]
+  },
+  "Pup Shape": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (and Will special, see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (and Will special, see text) — -[[4]] penalty to strength"
+    ]
+  },
+  "Puzzle Box": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates or none",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates or none — -[[5]] penalty to all ability and skill checks attempted with such items"
+    ]
+  },
+  "Pyrotechnic Eruption": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half (see text) — [[ (min(15, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Quench": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none or Will negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) — [[ (min(10, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Raise Dead": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2]] Constitution drain"
+    ]
+  },
+  "Rebuke": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] damage; target staggered for [[1]] rounds"
+    ]
+  },
+  "Recharge": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (object) — [[1d6]] electricity damage"
+    ]
+  },
+  "Reincarnate": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2]] Constitution drain"
+    ]
+  },
+  "Rejuvenate Eidolon": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[3d10]] damage"
+    ]
+  },
+  "Rejuvenate Eidolon, Greater": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[5d10]] damage"
+    ]
+  },
+  "Rejuvenate Eidolon, Lesser": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d10]] damage"
+    ]
+  },
+  "Remove Radioactivity": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates (object) — [[1d4]] Constitution drain; [[1d4]] Strength drain"
+    ]
+  },
+  "Rend Body I": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(10, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Rend Body II": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(10, @spells.primary.cl.total))d8 ]] damage"
+    ]
+  },
+  "Rend Body III": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(15, @spells.primary.cl.total))d8 ]] damage; target sickened"
+    ]
+  },
+  "Rend Body IV": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(20, @spells.primary.cl.total))d8 ]] damage"
+    ]
+  },
+  "Resonating Word": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[5d6]] sonic damage; target staggered for [[1]] rounds; target stunned for [[1]] rounds"
+    ]
+  },
+  "Resounding Clang": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — -[[1]] penalty to attack rolls; -[[1]] penalty to associated skill checks"
+    ]
+  },
+  "Resurrection": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2]] Constitution drain"
+    ]
+  },
+  "Retribution": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — -[[4]] penalty to attack rolls; -[[2]] penalty to its saving throw"
+    ]
+  },
+  "Retributive Reparations": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object) and Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) and Will negates; see text — target fatigued; target exhausted"
+    ]
+  },
+  "Rotting Alliance": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[1d6]] Constitution damage; [[1d6]] Charisma damage; [[1d6]] Constitution damage; [[1d6]] Charisma damage"
+    ]
+  },
+  "Runic Overload": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(20, @spells.primary.cl.total))d6 ]] sonic damage"
+    ]
+  },
+  "Sacred Space": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[1]] penalty to attack rolls"
+    ]
+  },
+  "Sand Table": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[10]] penalty to their perception checks because of the size of the models"
+    ]
+  },
+  "Sands of Time": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[3d6]] damage"
+    ]
+  },
+  "Scintillating Pattern": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target unconscious for [[1d4]] rounds",
+      "target stunned for [[1d4]] rounds",
+      "target confused for [[1d4]] rounds"
+    ]
+  },
+  "Scorching Ash Form": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d6]] fire damage"
+    ]
+  },
+  "Scourge of the Horsemen": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half — [[ (min(20, @spells.primary.cl.total))d6 ]] acid damage"
+    ]
+  },
+  "Scouring Winds": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[3d6]] damage",
+      "ongoing [[3d6]] piercing damage each round"
+    ]
+  },
+  "Screaming Flames": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half and Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half and Will negates (see text) — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] fire damage; [[1d3]] Wisdom damage"
+    ]
+  },
+  "Sebaceous Twin": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target sickened",
+      "[[1]] Constitution damage",
+      "-[[2]] penalty to acrobatics and climb checks"
+    ]
+  },
+  "Seeds of Influence": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to its will save to negate the spell for each step by which; -[[2]] penalty to saving throws against divination spells you cast"
+    ]
+  },
+  "Serren's Armor Lock": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial; see text — target staggered; target entangled"
+    ]
+  },
+  "Severed Fate": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target shaken"
+    ]
+  },
+  "Shadow of Doubt": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — target staggered for [[1]] rounds; -[[4]] penalty to saving throws against this effect"
+    ]
+  },
+  "Shamefully Overdressed": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target sickened for [[1d3]] rounds"
+    ]
+  },
+  "Shard of Chaos": {
+    "attack": "ranged",
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Shared Suffering": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(5, floor(@spells.primary.cl.total/2)))d6 ]] damage"
+    ]
+  },
+  "Sheet Lightning": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target dazzled for [[1]] rounds; -[[2]] penalty to its saving throw against this spell"
+    ]
+  },
+  "Shifting Sand": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates; see text — target entangled"
+    ]
+  },
+  "Shifting Shadows": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target blind"
+    ]
+  },
+  "Shining Cord": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see below)",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Siege Scatter": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial (see text) — [[ (min(5, floor(@spells.primary.cl.total/2)))d6 ]] slashing damage"
+    ]
+  },
+  "Sirocco": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial, see text — [[4d6]] damage; target fatigued; -[[4]] penalty to all saving throws against this spell and take double normal damage"
+    ]
+  },
+  "Sleepwalk": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — target helpless; target unconscious"
+    ]
+  },
+  "Sleepwalking Suggestion": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates or none (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates or none (see text) — target unconscious"
+    ]
+  },
+  "Smug Narcissism": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to all skill checks"
+    ]
+  },
+  "Snapdragon Fireworks": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[1d4]] fire damage; target dazzled for [[1]] rounds"
+    ]
+  },
+  "Snare": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] damage"
+    ]
+  },
+  "Snow Shape": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[2]] penalty to attacks due to the slippery"
+    ]
+  },
+  "Song of Kyonin": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d8]] damage"
+    ]
+  },
+  "Sonic Thrust": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object) or none (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) or none (see text) — [[1d6]] damage"
+    ]
+  },
+  "Sotto Voce": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target shaken for [[1]] rounds"
+    ]
+  },
+  "Soulreaver": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half — [[ (min(20, @spells.primary.cl.total))d6 ]] damage"
+    ]
+  },
+  "Spell Scourge": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target confused for [[1d4]] rounds"
+    ]
+  },
+  "Spike Growth": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — [[1d4]] damage"
+    ]
+  },
+  "Spike Stones": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — [[1d8]] damage"
+    ]
+  },
+  "Spiked Pit": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates — [[2d6]] piercing damage; ongoing [[1d6]] piercing damage each round"
+    ]
+  },
+  "Spontaneous Immolation": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude half and Reflex (see description)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save half and Reflex (see description) — [[3d6]] fire damage"
+    ]
+  },
+  "Spore Burst": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target sickened for [[1d6]] rounds"
+    ]
+  },
+  "Spotlight": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — -[[20]] penalty to all stealth checks for the spell's duration and cannot benefit from"
+    ]
+  },
+  "Staggering Fall": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] damage",
+      "target staggered"
+    ]
+  },
+  "Stay the Hand": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — -[[5]] penalty to its attack and damage rolls; -[[2]] penalty to attack and damage rolls against the creature it originally targeted"
+    ]
+  },
+  "Storm of Vengeance": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] acid damage"
+    ]
+  },
+  "Storm Step": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex halves",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save halves — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] electricity damage"
+    ]
+  },
+  "Strangling Hair": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] damage"
+    ]
+  },
+  "Stumble Gap": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial — [[1d6]] damage; -[[1]] penalty to all rolls and checks for [[1]] round"
+    ]
+  },
+  "Stunning Finale": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial; see text — target stunned for [[1]] rounds; target staggered for [[1]] rounds"
+    ]
+  },
+  "Suffocation": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — target staggered for [[1]] rounds"
+    ]
+  },
+  "Symbol of Fear": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target panicked for [[1]] rounds per caster level"
+    ]
+  },
+  "Symbol of Stunning": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target stunned for [[1d6]] rounds"
+    ]
+  },
+  "Symbol of Vulnerability": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[4]] penalty to spell resistance and a -[[4]] penalty on saving throws"
+    ]
+  },
+  "Symbol of Weakness": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — [[3d6]] Strength damage"
+    ]
+  },
+  "Sympathetic Vibration": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[2d10]] damage",
+      "ongoing [[2d10]] damage each round"
+    ]
+  },
+  "Synapse Overload": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(15, @spells.primary.cl.total))d6 ]] damage; target staggered for [[1]] minutes"
+    ]
+  },
+  "Synaptic Pulse, Greater": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — target sickened for [[1]] rounds"
+    ]
+  },
+  "Synesthesia": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[4]] penalty to ac and on skill checks and reflex saves"
+    ]
+  },
+  "Tar Ball": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d4]] fire damage",
+      "ongoing [[1d4]] fire damage each round",
+      "-[[2]] penalty to dexterity for that duration"
+    ]
+  },
+  "Tar Pool": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial, see text — [[ (min(10, floor(@spells.primary.cl.total/2)))d6 ]] fire damage; -[[4]] penalty to its reflex save against the tar and on strength and escape artist; -[[4]] penalty to acrobatics and fly checks made to fly with wings or similar"
+    ]
+  },
+  "Telekinesis": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object) or none; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) or none; see text — [[1d6]] damage"
+    ]
+  },
+  "Telekinetic Storm": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial (see text) — [[ (min(20, @spells.primary.cl.total))d6 ]] damage; target stunned for [[1]] rounds"
+    ]
+  },
+  "Thirsting Entanglement": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save partial; see text — [[1d2]] Constitution damage"
+    ]
+  },
+  "Thorn Javelin": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target sickened for [[1]] rounds"
+    ]
+  },
+  "Thought Worm I": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — -[[2]] penalty to will saves against all mind-affecting spells and effects"
+    ]
+  },
+  "Thought Worm III": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — -[[2]] penalty to will saves against your mind-affecting spells and effects"
+    ]
+  },
+  "Thought Worm IV": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial (see text) — -[[3]] penalty to will saves against your mind-affecting spells and effects"
+    ]
+  },
+  "Thunder Fire": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object), see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object), see text — target deafened for [[1]] minutes; -[[4]] penalty to this saving throw"
+    ]
+  },
+  "Thundering Drums": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial — [[ (min(5, @spells.primary.cl.total))d8 ]] sonic damage"
+    ]
+  },
+  "Touch of Combustion": {
+    "attack": "melee",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Transfer Tattoo": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude negates",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save negates — target staggered for [[1]] rounds"
+    ]
+  },
+  "Transmute Metal to Wood": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "-[[2]] penalty to attack and damage rolls"
+    ]
+  },
+  "Transmute Rock to Mud": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[8d6]] bludgeoning damage",
+      "-[[2]] penalty to attack rolls and ac"
+    ]
+  },
+  "Trial by Fire": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(5, floor(@spells.primary.cl.total/2)))d6 ]] damage"
+    ]
+  },
+  "Tsunami": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[8d6]] bludgeoning damage"
+    ]
+  },
+  "Umbral Strike": {
+    "attack": "ranged",
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial",
+      "harmless": false
+    },
+    "riders": []
+  },
+  "Undeath Ward": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none or Will negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (see text) — [[3d6]] damage"
+    ]
+  },
+  "Unholy Aura": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] Strength damage"
+    ]
+  },
+  "Unholy Blight": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial — [[ (min(5, floor(@spells.primary.cl.total/2)))d8 ]] damage; target sickened for [[1d4]] rounds"
+    ]
+  },
+  "Unleash Pandemonium": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will partial; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save partial; see text — target deafened; target shaken"
+    ]
+  },
+  "Unlock Flesh": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(5, @spells.primary.cl.total))d6 ]] damage",
+      "target staggered"
+    ]
+  },
+  "Unravel Destiny": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates — [[2d6]] damage; -[[2]] penalty to all ability checks"
+    ]
+  },
+  "Vinetrap": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates (see text)",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates (see text) — [[2d4]] damage; target blinded; target staggered; ongoing [[2d4]] damage each round"
+    ]
+  },
+  "Violent Accident": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex half; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save half; see text — [[5d8]] damage"
+    ]
+  },
+  "Volcanic Storm": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[5d6]] damage",
+      "-[[4]] penalty to perception skill checks and the entire area is treated as difficult"
+    ]
+  },
+  "Vortex": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates, see text — [[3d6]] bludgeoning damage; ongoing [[1d8]] damage each round"
+    ]
+  },
+  "Wall of Ice": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates; see text — [[1d6]] cold damage"
+    ]
+  },
+  "Wall of Iron": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[10d6]] damage"
+    ]
+  },
+  "Wall of Light": {
+    "attack": null,
+    "save": {
+      "type": "fortitude",
+      "dc": "",
+      "description": "Fortitude partial, see text",
+      "harmless": false
+    },
+    "riders": [
+      "Fortitude Save partial, see text — target blinded; -[[4]] penalty to the save for that round"
+    ]
+  },
+  "Wall of Nausea": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "target nauseated for [[1]] rounds"
+    ]
+  },
+  "Wall of Silver": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[ (min(3, @spells.primary.cl.total))d6 ]] damage",
+      "target blinded for [[1]] rounds",
+      "target staggered for [[1]] rounds"
+    ]
+  },
+  "Warp Wood": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) — -[[4]] penalty to attack rolls"
+    ]
+  },
+  "Weaken Powder": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "Will negates (object)",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates (object) — -[[2]] penalty to damage rolls; -[[2]] penalty to damage rolls"
+    ]
+  },
+  "Whirlwind": {
+    "attack": null,
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "description": "Reflex negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Reflex Save negates; see text — [[3d6]] damage; ongoing [[1d8]] damage each round"
+    ]
+  },
+  "Winter Grasp": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[1d6]] cold damage",
+      "-[[2]] penalty to saving throws against all spells with the cold descriptor for [[1]]"
+    ]
+  },
+  "Word of Chaos": {
+    "attack": null,
+    "save": {
+      "type": "will",
+      "dc": "",
+      "description": "none or Will negates; see text",
+      "harmless": false
+    },
+    "riders": [
+      "Will Save negates; see text — [[3d6]] damage; target deafened for [[1d4]] rounds; target stunned for [[1]] rounds; target confused for [[1d10]] minutes"
+    ]
+  },
+  "World Wave": {
+    "attack": null,
+    "save": null,
+    "riders": [
+      "[[6d6]] bludgeoning damage"
+    ]
+  }
+}

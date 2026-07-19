@@ -1,0 +1,1710 @@
+{
+  "Alteration": {
+    "Aberrant Body": {
+      "modifiers": [
+        {
+          "formula": "(floor(@spheres.cl.total / 2))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "acid"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "Acid Spit: standard-action ranged touch attack at close range; acid; the struck target also takes +[[1]] acid per damage die each round for [[(floor(@spheres.cl.total / 2))]] rounds (minimum [[1]]) until it spends a move action to remove the acid"
+    },
+    "Aquan Transformation": {
+      "modifiers": [
+        {
+          "formula": "1d8 + (ceil(@spheres.cl.total / 2))d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "electricity"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "Shock: melee touch attack that does not provoke; electricity; if a creature grapples you, you may instead use it as an immediate action, dealing the damage automatically with a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half; in water it becomes a [[10]] ft radius burst (Fortitude for half) and creatures out to [[30]] ft take half (Fortitude for half); usable again after [[1d4]] rounds"
+    },
+    "Bestial Reflexes": {
+      "modifiers": [
+        {
+          "formula": "4",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "Lunge: full-round action; make a single attack with one chosen natural weapon at double its normal reach"
+    },
+    "Bestial Spirit": {
+      "modifiers": [],
+      "rider": "Rend (requires claws): when you hit the same target with [[2]] or more claw attacks in one round, once per round it takes extra damage equal to one claw die plus [[1.5]]x your Strength modifier"
+    },
+    "Bully": {
+      "modifiers": [],
+      "rider": "Push/Pull: on a successful natural attack against a creature of your size or smaller, attempt a bull rush, drag, or reposition combat maneuver as a free action that does not provoke. Powerful Charge: on a charge the chosen natural attack deals damage as one size larger and adds [[1.5]]x your Strength modifier instead of [[1]]x"
+    },
+    "Elemental Transformation": {
+      "modifiers": [
+        {
+          "formula": "@spheres.cl.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "Elemental Empowerment: only your FIRST successful natural attack, unarmed strike, or manufactured-weapon attack each round deals this bonus energy damage (choose acid, cold, electricity, or fire when the trait is granted)"
+    },
+    "Morphic Weapon": {
+      "modifiers": [
+        {
+          "formula": "min(5, floor(@spheres.cl.total / 4))",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "enhancement",
+          "damageType": [],
+          "critical": "normal"
+        },
+        {
+          "formula": "min(5, floor(@spheres.cl.total / 4))",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "enhancement",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "Shape Weapon: a limb becomes a manufactured weapon you are proficient with that cannot be disarmed and gains this enhancement bonus (minimum [[0]], maximum [[5]])"
+    },
+    "Muensterous Traits": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        },
+        {
+          "formula": "1",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "Dangerously Cheesy: this bonus applies only against a creature currently sickened by this trait; a creature that damages you with a melee attack must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be sickened for a number of rounds equal to your casting ability modifier ([[@spheres.cam]])"
+    },
+    "Ooze Transformation": {
+      "modifiers": [
+        {
+          "formula": "1d4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "acid"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "applies to a slam or unarmed strike (Ooze Transformation form / Acidic Body); with the jelly or pudding package or the Acidic Nature trait, a hit also corrodes the target's clothing and non-metal (or metal) armor and any wooden weapon that strikes you (Reflex DC [[10]] + half your Hit Dice + your Constitution modifier negates)"
+    },
+    "Orb Transformation": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (floor(@spheres.cl.total / 3))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "Beam: standard-action ranged touch attack, maximum range [[30]] ft (+[[30]] ft per [[10]] caster levels); damage is untyped and overcomes any DR (hardness still applies). Alternatively spend [[1]] spell point to charge it as a full-round action, then fire a [[100]] ft line for [[(floor(@spheres.cl.total / 2))d6]] (minimum [[1d6]]) plus fire damage equal to twice your caster level (Reflex half, DC [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]])"
+    },
+    "Outsider Body": {
+      "modifiers": [],
+      "rider": "Daemon Body (requires evil subtype): on a hit with the chosen natural attack, the target must succeed at a Fortitude save (DC [[10]] + half your Hit Dice + your Constitution modifier) or contract fleshweep (injury; onset immediate; frequency [[1]]/day; effect [[1]] Con and [[1d3]] Dex damage; cure [[2]] consecutive saves)"
+    },
+    "Prickly": {
+      "modifiers": [],
+      "rider": "Razor Claws: on a hit with the chosen piercing or slashing natural attack, the target takes [[1 + floor(@spheres.cl.total / 5)]] bleed damage (stacks with itself but not with other sources of bleed)"
+    },
+    "Serpentine Transformation": {
+      "modifiers": [],
+      "rider": "Poisonous package: on a successful bite the target is automatically poisoned (Fortitude DC [[10]] + half your Hit Dice + your Constitution modifier; frequency [[1]]/round for [[6]] rounds; effect [[1d2]] Con damage; cure [[1]] save). Constrictor package: the bite gains grab and constrict for [[1d6]] (Medium; [[1d4]] Small) plus your Strength modifier on each successful grapple check"
+    },
+    "Subterranean Transformation": {
+      "modifiers": [],
+      "rider": "Armor Shredder: on a hit with the chosen natural attack, attempt a free sunder combat maneuver against one worn or held object using this attack roll as the CMB (does not provoke; Reflex DC [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); if you spent [[1]] additional spell point, the attack also ignores hardness equal to your caster level when damaging objects"
+    },
+    "Tentacles": {
+      "modifiers": [],
+      "rider": "Grab: on a hit with the chosen natural attack, start a grapple as a free action without provoking. Constrict: on each successful grapple check, automatically deal [[1d6]] (Medium; [[1d4]] Small) plus your Strength modifier"
+    },
+    "Vermin Transformation": {
+      "modifiers": [],
+      "rider": "Poison: on a hit with the poisoned natural attack, the target is poisoned (Fortitude DC [[10]] + half your Hit Dice + your Constitution modifier; frequency [[1]]/round for [[6]] rounds; effect [[1d2]] Con damage; cure [[1]] save)"
+    },
+    "Transforming Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with making a shapeshift (standard action, does not provoke unless it is a ranged attack); if the attack hits, the target is also subject to your shapeshift. A scatter weapon applies it to a single target chosen at the time of attack."
+    }
+  },
+  "Bear": {
+    "Bear Strength": {
+      "modifiers": [
+        {
+          "formula": "max(1, floor(@spheres.cl.total / 2))",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        },
+        {
+          "formula": "max(1, floor(@spheres.cl.total / 2))",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "spend [[1]] spell point (free action) when making a melee attack roll; if made as an unarmed strike, the attack does not provoke an attack of opportunity"
+    },
+    "Bearbaque": {
+      "modifiers": [
+        {
+          "formula": "(max(1, floor(@spheres.cl.total / 2)))d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "close-range cone (minimum [[1d6]] fire); Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half; usable once per [[1d4]] rounds, or spend [[1]] additional spell point to use again before [[1d4]] rounds have passed"
+    },
+    "Slumbear": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; one target creature falls into a deep slumber for [[1]] minute (a sleep effect; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates when used on an unwilling creature). A willing target instead recovers [[1]] hp per level on waking."
+    },
+    "Ursine Blow": {
+      "modifiers": [],
+      "rider": "on a successful bear strength melee hit vs a corporeal target; spend [[1]] additional spell point; compare your attack roll to the target's CMD, and if higher it is knocked flying [[10]] ft in a direction of your choice and falls prone (it cannot move closer to you than its starting square); if an obstacle stops the movement, the target and the obstacle each take [[1d6]] damage before it falls prone in an adjacent space"
+    }
+  },
+  "Blood": {
+    "Exsanguinating Strike": {
+      "modifiers": [],
+      "rider": "special standard-action attack (cannot be reduced below a standard action; does not provoke attacks of opportunity except when made as a ranged attack); make a single weapon attack while using a blood art or blood control; on a hit you may apply the chosen blood art to the struck creature, or initiate blood control on it (including a (quicken) or (still) effect) if it is not already controlled, or apply a new (quicken)/(still) if it already is; the target attempts the applied effect's normal Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to negate"
+    },
+    "Inject": {
+      "modifiers": [],
+      "rider": "increase the casting time of the blood art or blood control by one step and take [[1]] point of Constitution damage to yourself; make a melee or ranged touch attack against a creature within blood control range; on a hit the target is marked with your blood for [[1]] round per caster level (treated as below half its maximum hit points for the save penalty of your blood control, and your Blood sphere effects against it ignore its spell resistance); the target can wipe the blood off with a standard action or two move actions to end the mark; with Mass Blood Magic, take [[1]] Constitution damage and make one attack roll per additional target"
+    },
+    "Piercing Blood": {
+      "modifiers": [
+        {
+          "formula": "(max(1, floor(@spheres.cl.total / 2)))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "piercing"
+          ],
+          "critical": "nonCrit"
+        },
+        {
+          "formula": "max(1, floor(@spheres.cl.total / 2))",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "as a blood art, launch a blood projectile as a ranged touch attack (the circumstance attack bonus equals the blood loss); on a hit the target suffers blood loss ([[max(1, floor(@spheres.cl.total / 2))]] untyped damage that cannot be prevented and bypasses temporary hit points) and must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be staggered for [[1]] round; spend [[1]] extra spell point to instead stagger for a number of rounds equal to your casting ability modifier; with Mass Blood Magic, spend [[1]] extra spell point to pierce up to [[floor(@spheres.cl.total / 2)]] additional targets (minimum [[1]]), each within [[10]] ft + [[5]] ft per [[5]] caster levels of the previous"
+    }
+  },
+  "Conjuration": {
+    "Draconic Creature": {
+      "modifiers": [],
+      "rider": "companion gains a breath weapon usable once per [[1d4]] rounds: a [[30]]-ft cone or [[60]]-ft line (chosen when gained) dealing [[1d8]] acid, cold, electricity, or fire damage (chosen when gained) per [[2]] Hit Dice (minimum [[1d8]]); Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.con.mod ]] halves"
+    },
+    "Elemental Creature": {
+      "modifiers": [],
+      "rider": "each of the companion's natural attacks deals an extra [[1d3]] acid, cold, electricity, or fire damage (chosen when gained); this die increases one step per [[5]] Hit Dice"
+    },
+    "Explosive Companion": {
+      "modifiers": [],
+      "rider": "when the companion is reduced to [[0]] hit points or fewer it explodes, dealing [[1d6]] acid, cold, electricity, or fire damage (chosen when gained) per Hit Die to all creatures within [[5]] ft + [[5]] ft per [[5]] Hit Dice; Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] halves"
+    },
+    "Infectious Creature": {
+      "modifiers": [],
+      "rider": "when a creature takes damage from the companion's manufactured or natural weapon attack it must make a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.con.mod ]] or immediately contract the chosen disease (no onset period); whether it saves or fails it is immune to this ability from the companion for [[24]] hours"
+    },
+    "Ooze Companion": {
+      "modifiers": [],
+      "rider": "(taken twice) as a standard action the companion moves up to its speed and engulfs any creature smaller than itself in its path; a target that forgoes its attack of opportunity may make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.str.mod ]] to avoid (on a success it is pushed aside), otherwise it is engulfed: pinned, in danger of suffocating, and taking [[1d4]] slam damage each round (escape as a pin)"
+    },
+    "Ravenous Creature": {
+      "modifiers": [],
+      "rider": "companion gains swallow whole: a successful grapple check at the start of its turn (standard action) swallows a grappled creature up to one size smaller (dealing bite damage if it has a bite); each round swallowed the target is pinned, may suffocate, and takes [[1d6]] bludgeoning + [[1d6]] acid per [[3]] Hit Dice; it can cut free with a light slashing or piercing weapon after dealing [[1/10]] the companion's total hit points"
+    },
+    "Roguish Creature": {
+      "modifiers": [],
+      "rider": "the companion deals an extra [[1d6]] precision (sneak attack) damage against foes that are flat-footed or denied their Dexterity bonus, increasing to [[2d6]] at [[7]] Hit Dice and [[3d6]] at [[14]] Hit Dice"
+    },
+    "Sanguine Creature": {
+      "modifiers": [],
+      "rider": "(Bleed option) one chosen natural attack inflicts [[1d2]] bleed on a hit (die increases one step per [[4]] Hit Dice: [[1d3]], [[1d4]], [[1d6]], [[1d8]]), stopped by a [[DC 15]] Heal check or any magical healing; alternatively (Blood Drain) [[1]] Constitution damage at end of turn while grappling (scaling to [[1d2]] at [[5]] Hit Dice), or (Thirst) gain temporary hit points equal to the grappled creature's Hit Dice on a blood drain"
+    },
+    "Shocking Creature": {
+      "modifiers": [
+        {
+          "formula": "1d8 + (floor(@attributes.bab.total / 2))d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "electricity"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "standard-action melee touch attack (provokes no attack of opportunity) delivering the electricity damage; if a creature grapples the companion it may instead deal it as an immediate action with no attack roll but a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.con.mod ]] for half; while in water it becomes a [[10]]-ft-radius burst (Fortitude save for half; creatures from [[10]] to [[30]] ft take half, then Fortitude save for half again); cannot be used again for [[1d4]] rounds"
+    },
+    "Stinking Companion": {
+      "modifiers": [],
+      "rider": "(Nauseating Spray) standard action, [[15]]-ft cone: each creature makes a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.con.mod ]] or is sickened for [[1d6]] rounds (poison); or (Stench) any creature other than you adjacent to the companion must make the same Fortitude save or be sickened until [[1d6]] rounds after it is no longer adjacent (a success grants immunity for [[24]] hours; poison)"
+    }
+  },
+  "Creation": {
+    "Acidic Creation": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "acid"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[1]] additional spell point to work acidic liquid; an object coated in acid and dropped on or used to attack a target adds the shown acid damage; to spray or drop acid to cover a target instead (acid equal to the target's size, or double to also coat the ground beneath) the target gets a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to avoid, and on a failure takes [[1d6 + (floor(@spheres.cl.total / 2))d6]] acid per round; it may attempt a new Reflex save as a move action, or clear the acid with a full-round action that provokes (no save); the acid deals only minimum damage after [[1]] round per caster level ([[10]] minutes per caster level with Lengthened Creation)"
+    },
+    "Buried": {
+      "modifiers": [],
+      "rider": "a target buried in created material takes [[1d6]] nonlethal damage per minute (which becomes lethal once its nonlethal damage equals its hp); a buried creature cannot free itself, but may attempt a Strength or Escape Artist check (DC [[5]] + the Reflex save DC it failed) to escape; others can clear material equal to [[5]] times their heavy load per minute, or per [[30]] seconds with a pick, crowbar, or shovel"
+    },
+    "Catches, Nets, And Cages": {
+      "modifiers": [],
+      "rider": "drop a covering on a target: a net (same size as the target, of pliable material) works as the exotic net weapon and entangles; a catch (a covering larger than the target) also entangles but is escaped simply by moving out from under it, breaking it, or a Strength check; a cage wraps the target to impede it without falling damage, and if the enclosing walls are not at least [[10]] ft from the target on all sides it gets a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to immediately move to the nearest open space outside; a caged target may always attack the cage or make Strength checks against it (DC [[10]] + the cage's hardness + [[1]] per inch of thickness), taking damage only if the inside is spiked or coated in harmful material"
+    },
+    "Corp Criadhach": {
+      "modifiers": [
+        {
+          "formula": "(@spheres.cl.total)d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "untyped"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[1]] spell point when you Duplicate a creature to link the duplicate to its original; with the 'There Can Be Only One' link, if the duplicate and the original come into physical contact (such as a touch attack made by or using the duplicate) the duplicate is instantly destroyed and the original takes the shown untyped damage, Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half; alternatively the 'Redoubled Pain' link makes the original take equal damage whenever the duplicate is hurt (Fortitude negates) and lets your sphere effects channel through the duplicate to reach the original at any range (Fortitude negates), for [[1]] + [[1]] per [[10]] caster levels uses before the duplicate crumbles"
+    },
+    "Dissolution": {
+      "modifiers": [
+        {
+          "formula": "(2 * @spheres.cl.total)d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "untyped"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[1]] spell point to use with Destroy; against an unattended non-magical object it deals no damage and simply disintegrates up to a [[10]]-ft cube; against an attended non-magical object, a magical object, or a creature (paying Potent Alteration's extra [[1]] spell point) you may spend [[1]] more spell point so it must make a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] — on a failure it takes the shown damage, bypassing all hardness, resistances, and damage reduction, reduced on a success to Potent Alteration's normal [[1d6]] + caster level; a target reduced to [[0]] or fewer hp is entirely disintegrated"
+    },
+    "Divided Creation": {
+      "modifiers": [],
+      "rider": "create and drop multiple objects as a single attack — each object must target a different square (up to [[4]] Tiny-or-smaller objects may share one square, rolling one attack each), and a creature can be targeted by no more objects than fit the square(s) it occupies; alternatively drop many small objects as a cave-in on a target, dealing a single falling object's damage for the chosen material and forcing a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or the target is buried as though under a soft material"
+    },
+    "Falling Objects": {
+      "modifiers": [],
+      "rider": "dropping a created object on a target is a ranged attack (range increment [[20]] ft measured from the object's starting point, using Intelligence for the attack roll); vs a target larger than the object, roll against normal AC; vs a same-size-or-larger target, roll against touch AC as an indirect-fire siege weapon, which also deals half its falling damage as splash to creatures within [[5]] ft (+[[5]] ft per size category above Large), and on a miss veers [[1]] square per range increment (roll [[1d8]] for direction); a dropped soft object larger than the target instead forces a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or the target is knocked prone and buried; stone-or-harder objects deal double falling damage, soft objects half, capped at [[20d6]]"
+    },
+    "Fleshcraft": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to alter a living creature's flesh (Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); with the Forge talent you may sculpt its body — remove or restore an arm, leg, or tail (added limbs are too weak to hold or attack with), remove or restore a sense (sight, hearing, touch, taste, or smell), or attack its body to deal [[2d6]] Constitution damage; with Fabricate you may permanently change its appearance (a Disguise check to mimic a specific creature)"
+    },
+    "Internal Creation": {
+      "modifiers": [
+        {
+          "formula": "4d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "untyped"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "create (or alter) an object inside a target you can detect within range; the target, or an attended object's owner, gets a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to negate; on a failure the target and the object each take twice the object's normal falling damage from normal height (the shown value assumes a Large object — adjust for other object sizes); an object not at least two sizes smaller than its vessel is instead immediately ejected into an adjacent square"
+    },
+    "Plasma Production": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "create fire or electricity as an object; a flaming created object deals the shown fire damage to anyone who touches it, has it dropped on them, or is struck by it as a weapon, and it can set terrain alight as hazardous fire terrain; alternatively spend [[1]] spell point to create electricity directly on a creature or object ([[1]] charge = a Medium object), dealing [[1d6]] electricity per charge (Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates) and repeating at the start of each of your turns with the charge dropping by [[1]] each round; through a conductive medium (flesh, metal, shared water) it also hits touching targets, losing [[1d6]] per [[10]] ft it must travel, and a grounded target dissipates the remaining charge as a move action"
+    },
+    "Plasma Projection": {
+      "modifiers": [
+        {
+          "formula": "(1 + floor((@spheres.cl.total - 5) / 5))d10",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[1]] spell point to form a plasma energy sword above a held hilt or from a wielded melee weapon (you are proficient with it), lasting [[1]] round per caster level, and spend [[1]] more spell point as a free action to renew it when it lapses; it can be switched on or off as a swift action; spend [[1]] spell point as a swift action to intensify the blade for [[1]] round — adding the shown damage and extending it to threaten and attack at [[10]] ft reach (and adjacent targets at no penalty)"
+    },
+    "Potent Alteration": {
+      "modifiers": [
+        {
+          "formula": "1d6 + @spheres.cl.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "untyped"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "your Destroy (and Repair) now uses the shown amount and bypasses all hardness; spend [[1]] spell point to affect a magical object, an attended object, an animate object, or a construct — vs an attended object this requires a touch attack and its wielder may make a Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to negate; vs an animate object or construct it is a touch attack with no save; an unwilling target or wielder may also make a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to halve the Destroy damage (or negate an alter/Repair effect)"
+    },
+    "Restrictive Casing": {
+      "modifiers": [],
+      "rider": "spend [[1]] additional spell point to form a full-body confinement cage on a creature (treat a [[1]]-inch cage sharing its space as an object the target's size); the target may still breathe and make Strength checks to escape but cannot attack the cage or take any action requiring physical movement, and it takes damage each round from any spikes or harmful material lining the inside; you may also create a non-harmful object directly on a creature — an unwilling target gets a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to make it miss and fall harmlessly to the ground; used this way, create is subject to spell resistance"
+    },
+    "Spikes And Hazardous Ground": {
+      "modifiers": [
+        {
+          "formula": "max(1, @spheres.cl.total)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "piercing"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "a creature pushed onto the spikes (e.g. by a bull rush) or that steps onto them provokes a touch attack using your caster level as the attack bonus; on a hit it takes the shown piercing damage and, if struck in the feet, has its land speed halved for [[24]] hours (or until a DC [[15]] Heal check or [[1]] point of magical healing, fast healing, or regeneration); a charging or running creature must stop on entering spiked squares, and any creature may move through them at half speed without harm; when spikes or other hazardous terrain are placed directly beneath a target, it gets a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to suffer no effect from that square until the end of its next turn"
+    }
+  },
+  "Dark": {
+    "Dark Slaughter": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (floor(@spheres.cl.total / 10))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[1]] spell point to grant a target precision strikes for [[1]] hour per caster level; applies only while within an area of your darkness, and only when attacking a creature you are flanking, that is denied its Dex bonus to AC, or that cannot perceive you; precision damage (not multiplied on a crit; stacks with a rogue's sneak attack)"
+    },
+    "Imbue Shadow": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; imbue the target shadow so it wraps across their eyes, blinding the target for as long as the shadow ability persists (a (shadow) effect)."
+    }
+  },
+  "Death": {
+    "Bleeding Wounds": {
+      "modifiers": [],
+      "rider": "ghost strike; no save; on hit the target takes [[@spheres.cl.total]] bleed damage on the round it is hit and each round thereafter until the bleed is stopped (Heal skill or magical healing); or spend [[1]] spell point to deal [[@spheres.cl.total * 2]] bleed instead"
+    },
+    "Bonerattle": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (floor(@spheres.cl.total / 3))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "untyped"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "ghost strike; Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] partial (half damage and no forced movement); on a failed save the target is also moved [[5 + 5 * (floor(@spheres.cl.total / 10))]] ft into an unoccupied space of your choice it could reach with its natural movement (does not provoke), and gains +[[4]] on the save if it would be moved somewhere directly harmful. Spend [[1]] additional spell point to afflict the target for [[max(1, floor(@spheres.cl.total / 2))]] rounds, repeating this effect at the start of its turn (a new save each round reduces but does not end it). Bypasses racial immunity to Fort saves/death effects for creatures with a skeleton, exoskeleton, or similar body structure; creatures without discernible anatomy are immune."
+    },
+    "Corpse Bomb": {
+      "modifiers": [],
+      "rider": "target a corpse (raisable as a skeleton or zombie) or a corporeal mindless undead you control with any of your ghost strikes; it explodes in a [[20]]-ft radius, affecting every creature in range as if struck by the chosen ghost strike. If that ghost strike allows no save, affected creatures may attempt a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to negate. The corpse/undead is destroyed and cannot be reanimated or Corpse Bombed again."
+    },
+    "Curse (death)": {
+      "modifiers": [],
+      "rider": "spend [[2]] spell points; ghost strike; on hit the target must make a Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or gain a permanent curse (removable only by Break Enchantment, remove curse, wish, your death, or your free-action choice). Choose one: a -[[4]] penalty to one ability score plus an extra -[[2]] per [[5]] caster levels (min [[1]]); a -[[3]] penalty on all attack rolls, saves, ability checks and skill checks plus an extra -[[1]] per [[5]] caster levels; or a [[25]]% chance each turn to take no action, increasing by [[5]]% per [[2]] caster levels (max [[75]]%). Other curses of equal power (Clumsy, Fumble, Greater Pain, Phobia, Old Age, Repel Healing, etc.) may be chosen with GM permission. Curses do not stack with themselves."
+    },
+    "Drain": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; ghost strike; no save; on hit the target gains [[1]] temporary negative level (rising in die size to [[1d2]] at CL [[5]], [[1d3]] at [[10]], [[1d4]] at [[15]], [[1d6]] at [[20]]) lasting [[1]] hour per caster level, and these stack. If a negative level would reduce the target to 0 Hit Dice it instead takes [[4]] Constitution drain for the duration; if any negative level lasts longer than [[1]] day the target must make a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] per level or it becomes permanent. Used on an undead it instead grants [[5]] temporary hp per negative level for [[1]] hour."
+    },
+    "Enervation": {
+      "modifiers": [],
+      "rider": "spend [[1]] additional spell point when using the Drain ghost strike to add one more die of temporary negative levels ([[2d4]], [[2d6]], [[2d8]], up to a maximum of [[2d12]]) and extend their duration to [[24]] hours (if that would be longer)."
+    },
+    "Exhausting Strike": {
+      "modifiers": [],
+      "rider": "ghost strike; on hit the target is fatigued for [[1]] round per caster level (Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); or spend [[1]] spell point to instead make it exhausted for [[1]] minute per caster level (same save; on a successful save it is fatigued for [[1]] round instead). These conditions end as soon as the duration expires."
+    },
+    "Greater Curse": {
+      "modifiers": [],
+      "rider": "augments your Curse ghost strike: the DC to remove the curse increases by +[[5]], and you may instead apply a greater curse such as Curse of Ages (ages [[1]] year per day), Daybane ([[1d6]] nonlethal per minute in bright light), Dayblind (blind except in dim light or darkness), Venerable (venerable-age penalties), Vulnerability to one energy type, Unluck (reroll [[1]] roll per hour and take the worse), Lycanthropy, Insanity, Famine, or Ravenous."
+    },
+    "Haunting Apparition": {
+      "modifiers": [],
+      "rider": "place a chosen ghost strike as a haunt on up to one [[5]]-ft square per [[2]] caster levels (minimum one square); the first creature to enter is subject to that ghost strike (if it allows no save, that creature may attempt a Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to negate), then the haunt vanishes. It otherwise lasts [[10]] minutes per caster level, its Perception DC and hp equal its save DC, and you may have [[1]] active at a time."
+    },
+    "Hunger": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; ghost strike; on hit the target must make a Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be fatigued and take [[(@spheres.cl.total)d8]] nonlethal starvation damage. This fatigue and damage cannot be healed by any means, even magic, until the target eats food (a standard action); multiple applications do not stack, only the highest nonlethal damage applies."
+    },
+    "Inflict Disease": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; ghost strike; on hit the target must make a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or immediately contract a disease of your choice (blinding sickness, bubonic plague, cackle fever, filth fever, leprosy, mindfire, red ache, shakes, or slimy doom) with no onset period, thereafter using that disease's own frequency and save DC."
+    },
+    "Instill Death": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to instill a ghost strike into a thrown liquid (a splash weapon); on a direct hit the target is subject to the chosen ghost strike, and every creature in the [[5]]-ft splash radius must save against any of its save-allowing effects (a creature caught only by the splash treats all of the effect's dice as their minimum). The instilled liquid stays potent until you next rest to regain spell points."
+    },
+    "Killing Curse": {
+      "modifiers": [],
+      "rider": "when a target fails its saving throws against your ghost strikes [[3]] times within a [[1]]-minute period, it immediately dies (Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); a ghost strike that allows no save cannot be used with this talent."
+    },
+    "Lich Strike": {
+      "modifiers": [],
+      "rider": "ghost strike; on hit the target is staggered for [[1]] round plus [[1]] round per [[4]] caster levels (Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); or spend [[2]] additional spell points to instead paralyze it for [[1]] round per caster level (same save; on a successful save it is staggered for [[1]] round instead). A paralyzed target may attempt a new Fortitude save each round to end the effect early, and appears dead (Perception DC [[15]] + caster level, or Heal DC [[15]] + half caster level, reveals it still lives)."
+    },
+    "Manipulate Undeath": {
+      "modifiers": [
+        {
+          "formula": "(max(1, floor(@spheres.cl.total / 2)))d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "untyped"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "ghost strike that affects only undead; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] halves; or spend [[1]] spell point to instead heal the undead by this amount."
+    },
+    "Mass Death Magic": {
+      "modifiers": [],
+      "rider": "spend [[1]] additional spell point to shape your ghost strike into a close-range cone, making a separate attack roll against every target in the area. (The other half of this talent lets you reanimate multiple creatures at once with a single reanimate.)"
+    },
+    "Necrotic Feeding": {
+      "modifiers": [],
+      "rider": "ghost strike; on hit a living creature below 0 hp but stabilized resumes dying (no save); or spend [[1]] spell point so that a target below 0 hp is killed instantly (Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates). On a failed save you gain temporary hp equal to twice the target's Hit Dice and a +[[2]] enhancement bonus to Strength and Dexterity (increasing by +[[2]] per [[8]] Hit Dice the target has), lasting [[10]] minutes per Hit Die of the slain creature; bonuses from multiple creatures do not stack."
+    },
+    "Sickening": {
+      "modifiers": [],
+      "rider": "ghost strike; on hit the target is sickened for [[1]] round per caster level (Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); or spend [[1]] spell point to instead make it nauseated (on a successful save it is sickened for [[1]] round instead)."
+    },
+    "Spectral Distortion": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; ghost strike; on hit an incorporeal creature must make a Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be treated as corporeal for [[@spheres.cl.total]] rounds (minimum [[1]]); it may attempt a new save at the end of each of its turns to end the effect."
+    },
+    "Taint Soul": {
+      "modifiers": [],
+      "rider": "when a target fails its save against your ghost strike, all healing on it is halved for [[1]] round per [[2]] caster levels; or spend [[1]] additional spell point so it cannot heal hp by any means (including fast healing and regeneration) for that duration. You may also touch a willing creature to have it healed by negative energy and harmed by positive energy for [[1]] minute (Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates if unwilling)."
+    },
+    "Tomb Of Flesh": {
+      "modifiers": [],
+      "rider": "make a melee touch attack to absorb a living creature up to your size into your body, like swallow whole (Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates). An absorbed creature gains the grappled condition (you do not) and takes [[1d6 + (floor(@spheres.cl.total / 3))d6]] negative energy damage each round (undead unaffected). It can cut free with a light slashing or piercing weapon (damage needed to escape equals [[1/10]] your total hp) or escape as a grapple against your CMD or MSD, whichever is higher; your interior AC is [[10 + floor(@spheres.cl.total / 2)]]."
+    },
+    "Vampiric Strike": {
+      "modifiers": [
+        {
+          "formula": "(max(1, floor(@spheres.cl.total / 2)))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "negative"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[1]] spell point; ghost strike; Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] halves; you gain temporary hp equal to the damage dealt, lasting [[1]] minute per caster level (no more than the target's current hp + its Constitution score; when striking multiple targets at once, no more than [[3]] temp hp per caster level, minimum [[6]])."
+    },
+    "Weakening": {
+      "modifiers": [],
+      "rider": "ghost strike; on hit the target takes a [[1d4]] penalty to Strength or Dexterity (your choice) for [[1]] round per level (Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); or spend [[1]] spell point to increase the penalty by [[max(1, floor(@spheres.cl.total / 2))]] and make a successful save halve the penalty instead of negating it. This cannot reduce the score below [[1]]."
+    },
+    "Ghost Strike": {
+      "modifiers": [],
+      "rider": "the Death sphere base attack: a negative energy death effect delivered as a melee OR ranged touch attack within medium range (SR applies; no effect on undead, constructs, or creatures immune to death effects unless a talent says otherwise). It carries whichever of your ghost-strike talents you apply on the hit; the bare ghost strike deals no hp damage on its own."
+    },
+    "Cryptic Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with a ghost strike (standard action, does not provoke unless it is a ranged attack); if the attack hits, the target is ALSO subject to your chosen ghost strike. A scatter weapon applies the ghost strike to a single target chosen at the time of attack."
+    },
+    "Command Undead": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; ghost strike against an undead creature; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates or, for [[1]] minute per caster level, an unintelligent undead falls under your control and an intelligent undead becomes friendly (giving it orders it dislikes needs an opposed Charisma check, no retries; never suicidal/obviously-harmful orders)."
+    },
+    "Fowl Infestation": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; ghost strike; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates or the target is permanently cursed so that whenever it draws a weapon or pulls an item from a container it has a [[50]]% chance to draw a live hostile bird instead. Removable as a curse."
+    },
+    "Poltergeist": {
+      "modifiers": [],
+      "rider": "ghost strike; on hit, for [[1]] round per caster level you may force the target to take a -[[3 + floor(@spheres.cl.total / 6)]] penalty on one d20 roll (choosing to do so ends the effect); or spend [[1]] spell point to instead impose the penalty on up to one d20 roll each round for the whole duration without ending it."
+    }
+  },
+  "Destruction": {
+    "Acid Blast": {
+      "modifiers": [],
+      "rider": "blast deals acid damage; a creature struck by the blast (or that failed the blast's Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]], if one was allowed) takes [[1]] acid damage per damage die the following round"
+    },
+    "Adhesive Blast": {
+      "modifiers": [],
+      "rider": "blast deals acid damage; a creature struck by the blast (or that failed the blast's Reflex save, if one was allowed) must succeed at a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be entangled and unable to move for [[1]] round"
+    },
+    "Admixture": {
+      "modifiers": [],
+      "rider": "apply [[2]] (blast type) talents to a single blast; increase its casting time by [[1]] step or spend [[1]] additional spell point (no cost if both blast types are from the same blast type group); the blast deals half its damage as each type and applies both types' effects, using the larger damage die and lower caster level"
+    },
+    "Air Blast": {
+      "modifiers": [],
+      "rider": "blast deals nonlethal bludgeoning damage; make a bull rush as a free action at range (CMB = your caster level + casting ability modifier) against each creature struck (or that failed the blast's Reflex save, if one was allowed), pushing it from the point of origin; a target pushed into the ground is knocked prone, and one knocked into a solid object takes [[1d6]] bludgeoning +[[1d6]] per [[5]] ft it would have continued past the barrier"
+    },
+    "Alkali Blast": {
+      "modifiers": [],
+      "rider": "blast deals acid damage, using d4 damage dice instead of d6; make a trip attempt as a free action at range (CMB = your caster level + casting ability modifier) against each creature struck (or that failed the blast's Reflex save, if one was allowed)"
+    },
+    "Alternyating Current": {
+      "modifiers": [],
+      "rider": "blast deals electricity damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) must take a [[5]]-foot step in any direction and then cannot take a [[5]]-foot step on its next turn; if it cannot move it does not step but still cannot [[5]]-foot step next turn"
+    },
+    "Battering Blast": {
+      "modifiers": [],
+      "rider": "blast becomes smooth stones dealing bludgeoning damage, using d4 damage dice instead of d6; make a bull rush as a free action at range (CMB = your caster level + casting ability modifier) against each creature struck (or that failed the blast's Reflex save, if one was allowed), pushing it from the point of origin (knocked prone if pushed into the ground; if knocked into a solid object it takes [[1d6]] bludgeoning +[[1d6]] per [[5]] ft past the barrier); ignores spell resistance/turning/antimagic and is non-magical for DR, incorporeal, and anti-magic-save purposes"
+    },
+    "Blast Array": {
+      "modifiers": [],
+      "rider": "with Admixture or Greater Admixture plus Blast Salvo, spend [[1]] additional spell point so each surge of the salvo uses a different blast type or Admixture effect; a target is affected by non-damage and non-Destruction effects only from the first [[3]] surges to strike it; using Greater Admixture with single-type surges, spend [[2]] spell points to fire [[1]] additional surge plus [[1]] per [[2]] caster levels"
+    },
+    "Blast Salvo": {
+      "modifiers": [],
+      "rider": "blast shape: deliver [[2]] surges (each a melee or ranged touch attack, ranged counting as a ray), distributing the blast's damage dice among them (each surge must deal at least [[1]] die); spend [[1]] additional spell point to deliver [[1]] more surge plus [[1]] per [[6]] caster levels; a target damaged by multiple surges is damaged and affected only once"
+    },
+    "Blast Trap": {
+      "modifiers": [],
+      "rider": "blast shape: place the blast on an adjacent unoccupied [[5]]-foot square; a creature entering the square triggers it and may make a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half; the trap (Perception and Disable Device DC equal to the blast's save DC) lasts [[10]] minutes per caster level; you may have [[1]] active trap, +[[1]] per [[10]] caster levels"
+    },
+    "Blinding Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals untyped damage (d8 dice instead of d6 against undead or creatures vulnerable to sunlight); a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be blinded for [[1]] round"
+    },
+    "Blistering Blast": {
+      "modifiers": [],
+      "rider": "blast deals fire damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) takes a -[[2]] penalty on Fortitude saves for [[1d4]] rounds"
+    },
+    "Calamity": {
+      "modifiers": [],
+      "rider": "spend [[2]] spell points to shape the blast into a vast area (with Explosive Orb: a close-range radius burst centered in range; with Sculpt Blast: a long-range line, medium-range cone, or close-radius burst centered on yourself); all targets may make a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half"
+    },
+    "Cascade Failure": {
+      "modifiers": [],
+      "rider": "a creature damaged by your blast takes a -[[1]] penalty on all saving throws against your destructive blasts until the end of your next turn; this penalty stacks each time the creature is damaged by your blast"
+    },
+    "Chain Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to arc the blast between up to [[1]] + half your caster level targets (minimum [[2]]); make a ranged touch attack against each in order; no target may be more than [[10]] ft +[[5]] ft per [[5]] caster levels from the previous one, and none may be targeted twice; the chain stops the first time a target takes no damage"
+    },
+    "Clinging Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] additional spell point so all of the blast's damage counts as continuous for concentration checks until the start of your next turn (Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates)"
+    },
+    "Crafted Blast": {
+      "modifiers": [],
+      "rider": "on a blast unaltered by a (blast type) talent, change its damage to bludgeoning, piercing, or slashing, and treat all rolled [[1]]s and [[2]]s as [[3]]s"
+    },
+    "Crystal Blast": {
+      "modifiers": [],
+      "rider": "blast deals piercing damage, using d4 dice instead of d6; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be entangled and unable to move; the affected squares become crystal difficult terrain; escaping the entangle is a move action (Strength or Escape Artist vs the save DC), or deal [[3]] damage per caster level to the crystal to destroy it; crystal vanishes after [[1]] minute"
+    },
+    "Crystal Cocoon": {
+      "modifiers": [],
+      "rider": "with Crystal Blast or Living Crystal Blast, spend [[1]] extra spell point; a target that fails its Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] is helpless, encased in crystal that blocks line of sight and effect and can act only mentally or attempt Strength/Escape Artist checks to escape; destroying the crystal frees it"
+    },
+    "Damage Control": {
+      "modifiers": [],
+      "rider": "the blast deals nonlethal damage (still its normal type for resistance); when used with a (blast type) that already deals nonlethal damage, the blast deals +[[1]] damage per die; alternatively deal no damage at all, producing only the blast's secondary effects or minor controlled effects"
+    },
+    "Demolition": {
+      "modifiers": [],
+      "rider": "tuned against objects: the blast deals +[[1]] damage per die and full damage to objects, ignoring reductions for energy, ranged, or ineffective weapon type (hardness still applies); anything that is not an inanimate object takes only half damage"
+    },
+    "Destructive Blast": {
+      "modifiers": [
+        {
+          "formula": "(ceil(@spheres.cl.total / 2))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "standard action; melee or ranged touch attack within close range (ranged counts as a ray); spend [[1]] spell point to increase the blast's damage to [[1]] die per caster level (minimum [[2]]d6)"
+    },
+    "Disintegrate": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals untyped damage; a creature reduced to [[0]] or fewer hit points is disintegrated to dust (its equipment unaffected); deals full damage to objects, ignoring hardness, energy resistance, and immunity, and can destroy up to a [[10]]-foot cube of nonliving matter (even objects of force); an attended object may make a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to negate the disintegration but still takes damage"
+    },
+    "Drowning Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals bludgeoning water damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) is considered wet and must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be nauseated for [[1]] round"
+    },
+    "Electric Blast": {
+      "modifiers": [],
+      "rider": "blast deals electricity damage instead of bludgeoning; a target wearing metal armor or primarily made of metal takes -[[3]] AC and -[[3]] on saves against this blast; can ignite combustibles and melt low-melting metals"
+    },
+    "Energetic Response": {
+      "modifiers": [],
+      "rider": "blast shape: make attacks of opportunity with your destructive blast as if it were a melee weapon (you are considered armed with it); this use cannot increase the blast's casting time nor spend a spell point to boost its damage"
+    },
+    "Energy Aura": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point as a move action to surround yourself with a damaging aura for a number of rounds equal to your casting ability modifier; a creature ending its turn within [[5]] ft +[[5]] ft per [[10]] caster levels takes your blast's minimum damage (Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); only one aura at a time"
+    },
+    "Energy Bomb": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to instill the blast in a small container of liquid, thrown as a splash weapon; a direct hit deals the blast's damage, and the [[5]]-foot splash deals the blast's minimum damage; anyone taking either the direct or splash damage must save against the blast type's effects; cannot combine with Gather Energy; the liquid stays potent until you rest to regain spell points"
+    },
+    "Energy Cloud": {
+      "modifiers": [],
+      "rider": "spend [[3]] spell points to make the blast a cloud with a [[10]]-foot +[[5]] ft per [[5]] caster levels radius and equal height, obscuring vision like fog; it is stationary or moves [[20]] ft +[[5]] ft per [[2]] caster levels as a move action and lasts [[1]] minute per caster level; a creature that begins its turn inside takes the blast's damage (Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half); you are immune to your own cloud"
+    },
+    "Energy Leap": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to move in a straight line up to the blast's range (provokes normally); overrun creatures in the way as a free action (using caster level + casting modifier for the check), and any creature that tries to impede you suffers the blast (Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] half) whether or not it stops you; you may crash through objects or barriers, dealing the blast's damage to them; if stopped, your movement ends and you are staggered for [[1]] round"
+    },
+    "Energy Satellite": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to form [[1]] orbiting satellite lasting [[1]] minute per caster level or until discharged (max [[1]] at a time, +[[1]] per [[10]] caster levels; cannot combine with Gather Energy or a damage-boost spell point); as an immediate action, discharge a satellite at a creature within [[5]] ft +[[5]] ft per [[2]] caster levels to deal the blast's damage (Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] half)"
+    },
+    "Energy Sphere": {
+      "modifiers": [],
+      "rider": "shape the blast into a mobile [[5]]-foot sphere (duration concentration, or spend [[1]] spell point for [[1]] round per caster level); it has fly [[20]] ft +[[5]] ft per [[2]] caster levels (perfect); direct it as a move action to strike one creature per round (Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates), and a creature moving through its space must save or take the blast; it must stay within the blast's range"
+    },
+    "Energy Strike": {
+      "modifiers": [],
+      "rider": "as a standard action, make one weapon attack together with the blast (casting cannot drop below a standard action); if the weapon attack hits, the target is also struck by the destructive blast"
+    },
+    "Energy Tether": {
+      "modifiers": [],
+      "rider": "make a ranged touch attack to tether a target in range; on a hit it takes the blast's damage (Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] half) and again each round you maintain the tether (concentration, or spend [[1]] spell point as a free action for [[1]] round per caster level); the tether has [[10]] HP +[[2]] per caster level, AC [[5]], hardness equal to half your caster level, and a Break DC equal to the blast's DC; neither of you may move farther apart without breaking it or a drag/reposition maneuver; only one tether at a time"
+    },
+    "Energy Wall": {
+      "modifiers": [],
+      "rider": "shape the blast into a [[5]]-foot cubic wall (duration concentration), or spend [[1]] spell point for a wall up to [[20]] ft high and [[20]] ft wide per caster level, or a hemisphere of radius up to [[5]] ft per [[2]] caster levels, lasting [[1]] round per caster level; a creature passing through the wall takes the blast's damage and effects, and a creature caught in the wall's space at creation may make a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to avoid damage"
+    },
+    "Erratic Blast": {
+      "modifiers": [],
+      "rider": "randomly determine the blast's type: select [[6]], [[8]], [[10]], [[12]], or [[20]] blast types (no more than one per blast type group) and assign each a die face; after choosing targets but before rolling, roll the matching die to set this blast's damage die, damage type, and effects; Erratic Blast costs spell points equal to the highest-cost selected blast type; the maximum die result may instead be an admixture of [[2]] selected types (or [[3]] with Greater Admixture)"
+    },
+    "Explosive Orb": {
+      "modifiers": [],
+      "rider": "shape the blast into a burst centered anywhere in range filling a single [[5]]-foot square (Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates), or spend [[1]] spell point to make it a radius up to [[10]] ft +[[5]] ft per [[5]] caster levels (Reflex save for half)"
+    },
+    "Extended Range": {
+      "modifiers": [],
+      "rider": "increase the blast's range by [[1]] range level (close to medium, medium to long); may be taken multiple times, with the effects stacking"
+    },
+    "Extreme Range": {
+      "modifiers": [],
+      "rider": "the blast has a range of [[1000]] ft +[[100]] ft per caster level; beyond long range it can target only squares or large objects (not individual creatures) and takes effect [[1]] round after use"
+    },
+    "Fire Blast": {
+      "modifiers": [],
+      "rider": "blast deals fire damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or catch fire, taking [[1d6]] fire the following round and [[1d6]] each round after until extinguished (a Reflex save each round, +[[4]] if it drops and rolls or smothers the flames as a full-round action, ends it)"
+    },
+    "Focused Blast": {
+      "modifiers": [],
+      "rider": "on a blast unaltered by a (blast shape) talent, the blast deals +[[1]] damage per die"
+    },
+    "Force Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals force damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or fall prone"
+    },
+    "Frost Blast": {
+      "modifiers": [],
+      "rider": "blast deals cold damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be staggered for [[1]] round"
+    },
+    "Gale Blast": {
+      "modifiers": [],
+      "rider": "blast deals nonlethal bludgeoning damage; make a trip maneuver as a free action at range (CMB = your caster level + casting ability modifier) against a creature struck (or that failed the blast's Reflex save, if one was allowed); you cannot be tripped in return on a failed check"
+    },
+    "Gather Energy": {
+      "modifiers": [],
+      "rider": "increase the blast's casting time by [[1]] step to reduce its spell point cost by [[1]] (minimum [[0]])"
+    },
+    "Gloom Blast": {
+      "modifiers": [],
+      "rider": "blast deals negative energy damage; a living creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be sickened for [[1]] round; undead take no damage but are blinded for [[1]] round on a failed Fortitude save (bypasses undead immunities)"
+    },
+    "Gore Blast": {
+      "modifiers": [],
+      "rider": "blast deals bludgeoning damage that ignores spell resistance/turning/antimagic and is non-magical for DR, incorporeal, and anti-magic-save purposes; a creature struck (or that failed the blast's Reflex save, if one was allowed) takes -[[1]] on Fortitude saves for [[1d4]] rounds (-[[3]] versus diseases or poisons)"
+    },
+    "Grandmaster": {
+      "modifiers": [],
+      "rider": "with Knight's Blast, change direction up to [[90]] degrees a number of times equal to your caster level, as long as the total distance traveled is no more than close range plus half"
+    },
+    "Greater Admixture": {
+      "modifiers": [],
+      "rider": "with Admixture, spend [[1]] additional spell point to add a third (blast type); the damage is split among the three types and each type's effects apply, using the largest damage die and the lowest caster level"
+    },
+    "Guided Strike": {
+      "modifiers": [
+        {
+          "formula": "20",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "spend [[1]] spell point"
+    },
+    "Hurricane Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals nonlethal bludgeoning damage from swirling wind; the target takes a penalty on ranged attacks and Fly checks equal to half your caster level for [[1d4]] rounds"
+    },
+    "Incandescent Blast": {
+      "modifiers": [],
+      "rider": "blast deals untyped damage, using d4 dice instead of d6 (d8 against undead or creatures vulnerable to sunlight); a creature struck (or that failed the blast's Reflex save, if one was allowed) takes -[[2]] on Perception checks and Will saves for [[1d4]] rounds"
+    },
+    "Invigorating Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals positive energy damage to non-living creatures, using d4 dice instead of d6; a living creature instead gains that many temporary hit points (up to its maximum) for [[1]] hour and must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be dazed for [[1]] round"
+    },
+    "Knight’s Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; the blast is a close-range line from you that, at its end, turns [[90]] degrees and travels half its total distance again (Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half); with Energy Leap, spend [[1]] additional spell point to add a [[90]]-degree turn of half the distance to your leap"
+    },
+    "Living Crystal Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals piercing damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be entangled and unable to move; affected squares grow living crystal, and a creature entering one must save or be entangled; escaping is a move action (Strength or Escape Artist vs the save DC), or deal [[3]] damage per caster level to free the creature; crystal vanishes after [[1]] minute"
+    },
+    "Mana Siphon": {
+      "modifiers": [],
+      "rider": "blast deals nonlethal force damage, using d4 dice instead of d6; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or lose [[1]] spell point (the loss increases by one die size per [[5]] caster levels); you gain that many temporary spell points for [[1]] round per caster level, not exceeding the target's loss (non-stacking)"
+    },
+    "Mutable Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] additional spell point to shape the blast into any contiguous area of [[5]]-foot cubes, up to [[5]] cubes +[[1]] per [[2]] caster levels (at least one cube in a square adjacent to you); all targets in the area may make a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half"
+    },
+    "Nether Blast": {
+      "modifiers": [],
+      "rider": "blast deals negative energy damage; a living creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Will save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be shaken for [[1]] round; undead take no damage but must save or be frightened for [[1]] round (bypasses undead immunities)"
+    },
+    "Numbing Blast": {
+      "modifiers": [],
+      "rider": "blast deals cold damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) takes -[[2]] on Reflex saves for [[1d4]] rounds"
+    },
+    "Paradigm Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; if you are lawful the blast deals axiomatic damage, if chaotic it deals anarchic damage (you must be one or the other); it deals full damage to incorporeal targets and bypasses all damage reduction"
+    },
+    "Penetrating Blast": {
+      "modifiers": [],
+      "rider": "the blast ignores energy resistance equal to your caster level; spend [[1]] spell point to ignore twice your caster level instead; treat immunity to the blast's damage type as resistance [[40]]"
+    },
+    "Radiant Blast": {
+      "modifiers": [],
+      "rider": "blast deals untyped damage, using d4 dice instead of d6 (d8 against undead or creatures vulnerable to sunlight); a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or treat all creatures as having concealment ([[20]]%) for [[1]] round (bypasses undead immunities)"
+    },
+    "Radiation Blast": {
+      "modifiers": [],
+      "rider": "spend [[2]] additional spell points; the blast deals half fire and half untyped damage; a creature damaged must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or suffer low radiation (Constitution drain, then Strength damage), and an already-irradiated creature's radiation level increases one step on a failure; the affected squares stay irradiated for [[1]] minute per caster level, and a creature passing through must succeed at a Fortitude save (DC [[14]]) or be affected by low radiation"
+    },
+    "Razor Blast": {
+      "modifiers": [],
+      "rider": "blast deals slashing damage, using d4 dice instead of d6; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or have its speed halved for [[24]] hours or until it receives at least [[1]] point of magical healing, fast healing, or regeneration; affected squares are covered in crystal caltrops (a creature moving through must save or take [[1]] damage and be slowed the same way); destroy the crystal in a square by dealing [[1]] damage per caster level; crystal vanishes after [[1]] minute"
+    },
+    "Retributive Blast": {
+      "modifiers": [],
+      "rider": "when a creature misses you with a melee or melee touch attack, spend [[1]] spell point as an immediate action to hit it with the blast (Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); cannot combine with Gather Energy or a damage-boost spell point"
+    },
+    "Reverberating Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals sonic damage; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or take a penalty on concentration checks and all mental skill checks equal to half your caster level for [[1d4]] rounds"
+    },
+    "Sculpt Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to make the blast an area: a [[10]]-foot radius +[[5]] ft per [[5]] caster levels burst, a close-range cone, or a medium-range line emanating from you (excluding you); no attack roll, but creatures in the area may make a Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half"
+    },
+    "Searing Blast": {
+      "modifiers": [],
+      "rider": "blast deals fire damage, using d8 damage dice instead of d6"
+    },
+    "Selective Blast": {
+      "modifiers": [],
+      "rider": "exclude [[1]] creature +[[1]] per [[10]] caster levels from the area of your instantaneous-duration blasts; spend [[1]] spell point to exclude an additional number equal to your casting ability modifier (minimum +[[1]])"
+    },
+    "Shattering Blast": {
+      "modifiers": [],
+      "rider": "blast becomes a sonic lance dealing sonic damage, using d4 dice instead of d6; deals full damage to objects and ignores hardness up to half your caster level"
+    },
+    "Shock Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals electricity damage, using d4 dice instead of d6; a creature struck (or that failed the blast's Reflex save, if one was allowed) must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be dazed for [[1]] round"
+    },
+    "Shrapnel Blast": {
+      "modifiers": [],
+      "rider": "blast becomes jagged blades dealing slashing damage, using d4 dice instead of d6; a creature struck (or that failed the blast's Reflex save, if one was allowed) takes [[ floor((ceil(@spheres.cl.total / 2)) / 2) ]] bleed damage (minimum [[1]]); ignores spell resistance/turning/antimagic and is non-magical for DR, incorporeal, and anti-magic-save purposes"
+    },
+    "Smiting Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; if you are good the blast deals sacred damage, if evil it deals profane damage (you must be one or the other); it deals full damage to incorporeal targets and bypasses all damage reduction"
+    },
+    "Spirit Blast": {
+      "modifiers": [],
+      "rider": "the blast affects ethereal and incorporeal targets normally, extending into the Ethereal Plane and dealing full damage with no [[50]]% miss chance against incorporeal creatures"
+    },
+    "Split Blast": {
+      "modifiers": [],
+      "rider": "with Admixture plus Blast Salvo, some surges use one of the admixed blast types while others use the second; a non-Destruction admixture surge may instead deal bludgeoning damage as a basic blast or deal no damage as a [[1]]-die surge; spend [[2]] spell points to fire [[1]] additional surge plus [[1]] per [[3]] caster levels"
+    },
+    "Static Blast": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; blast deals electricity damage; make a disarm attempt at range (CMB = your caster level + casting ability modifier, +[[4]] versus a target wielding a metal weapon) against a creature struck (or that failed the blast's Reflex save, if one was allowed)"
+    },
+    "Stone Blast": {
+      "modifiers": [],
+      "rider": "blast deals slashing, piercing, and bludgeoning damage; ignores spell resistance/turning/antimagic and is non-magical for DR, incorporeal, and anti-magic-save purposes; the stones vanish after [[1]] minute"
+    },
+    "Tenebrous Blast": {
+      "modifiers": [],
+      "rider": "blast deals negative energy damage; a living creature struck (or that failed the blast's Reflex save, if one was allowed) takes -[[2]] on attack rolls for [[1d4]] rounds; undead take no damage but are sickened for [[1]] round (bypasses undead immunities)"
+    },
+    "Thunder Blast": {
+      "modifiers": [],
+      "rider": "blast deals sonic damage; a creature that takes damage from the blast must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be deafened for [[2d4]] rounds"
+    },
+    "Vacuum Blast": {
+      "modifiers": [],
+      "rider": "blast deals bludgeoning damage; make a drag maneuver as a free action at range (CMB = your caster level + casting ability modifier) against a creature struck (or that failed the blast's Reflex save, if one was allowed), dragging it toward the point of origin (knocked prone if dragged into the ground); a target dragged into a solid object takes [[1d6]] bludgeoning +[[1d6]] per [[5]] ft past it; gaseous creatures are vulnerable to this damage"
+    },
+    "Wingbind": {
+      "modifiers": [],
+      "rider": "when using a blast type that entangles, a flying entangled target must succeed at an additional Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or lose flight and fall to the ground (does not affect creatures with magical flight)"
+    }
+  },
+  "Divination": {
+    "Divine Future": {
+      "modifiers": [
+        {
+          "formula": "1d4 + floor(@spheres.cl.total / 5)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "insight",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "applies to a single readied roll (this attack, or instead a skill check, saving throw, ability check, initiative, or combat maneuver); as an immediate action grant it to an ally who can see and hear you; only one readied use at a time per time this talent is taken (max [[5]] times)"
+    },
+    "Prescience": {
+      "modifiers": [
+        {
+          "formula": "1 + floor(@spheres.cl.total / 10)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "insight",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "spend [[1]] spell point to gain this sense; alternatively, dismiss the sense before an attack or combat maneuver to instead gain a [[10 + floor(@spheres.cl.total / 2)]] insight bonus to that single roll as a free action"
+    },
+    "Sensory Overload": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; target one creature you can see within range and flood all of its senses instead of gaining information, leaving it overwhelmed (Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]]; see the talent for the exact effect/duration)."
+    },
+    "Sniper’s Eye": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to activate this sense; while active, reduce environmental and range-increment penalties to your ranged attack rolls by [[floor(@spheres.cl.total / 2)]] (this can only reduce penalties, never grant a net bonus); also reduce distance-based Perception DC increases by [[@spheres.cl.total]]"
+    }
+  },
+  "Enhancement": {
+    "Alternative Energy": {
+      "modifiers": [
+        {
+          "formula": "1d6 + floor(@spheres.cl.total / 2)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "sonic"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "requires a weapon enhanced with Energy Enhancement; the energy becomes sonic (or force at caster level [[10]]) in place of a physical energy type, treated as the flaming weapon special ability"
+    },
+    "Cripple": {
+      "modifiers": [],
+      "rider": "apply to a creature (e.g. via Crippling Strike or Enhance): it takes -[[2 + floor(@spheres.cl.total / 5)]] on all attack rolls, saving throws, ability checks, and skill checks."
+    },
+    "Deadly Weapon": {
+      "modifiers": [],
+      "rider": "your weapon gains keen (its threat range is doubled) and +[[floor(@spheres.cl.total / 3)]] on rolls to confirm critical hits."
+    },
+    "Energy Enhancement": {
+      "modifiers": [
+        {
+          "formula": "max(1, floor(@spheres.cl.total / 2))",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "your weapon gains a chosen energy special ability (corrosive/flaming/frost/shock — change the damageType to acid/fire/cold/electricity to match), dealing +[[max(1, floor(@spheres.cl.total / 2))]] energy damage on each hit."
+    },
+    "Ragged Edges": {
+      "modifiers": [],
+      "rider": "your weapon deals +[[max(1, floor(@spheres.cl.total / 2))]] bleed damage on a hit (spend [[1]] spell point for the stronger version in the talent)."
+    },
+    "Spectral Enhancement": {
+      "modifiers": [],
+      "rider": "grants the weapon the ghost touch special ability (it strikes incorporeal creatures normally); if [[1]] additional spell point is spent, an undead or incorporeal creature damaged by the weapon must succeed at a Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be sickened for [[1]] round (bypasses any immunity to the sickened condition)"
+    },
+    "Crippling Strike": {
+      "modifiers": [],
+      "rider": "you may deliver enhancements through a melee touch attack, OR make a single weapon attack in conjunction with an enhancement (standard action, no provoke unless ranged); if the attack hits, the target is also subject to your enhancement. A scatter weapon applies it to a single target."
+    }
+  },
+  "Fallen Fey": {
+    "Banish To Faerie": {
+      "modifiers": [],
+      "rider": "standard action; spend [[1]] spell point; melee touch attack that provokes an attack of opportunity; on a hit the target must succeed on a Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be hurled into Faerie (teleportation); to return it must travel [[1d12]] miles to a fairy circle and arrives within [[1d6]] miles of its former location"
+    },
+    "Fairy Dust": {
+      "modifiers": [],
+      "rider": "Fairy Dust (weapon application): apply the pouch's chosen dust to a weapon, natural weapon, or piece of ammunition (a move action for one, or a standard action for a number equal to your casting modifier, minimum [[2]], within close range); the next creature struck within [[1]] round per caster level suffers that dust's effect (save vs sphere DC [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]]; a creature that saves is immune to that dust from you for [[24]] hours) - Bleed: Fortitude negates, else the next time it takes hit point damage it bleeds [[@spheres.cl.total]] per round (stopped by a DC [[15]] Heal check or any healing); Blind: Reflex negates, else it treats all creatures as concealed for [[1]] round per caster level; Charm: Will negates, else its attitude toward you improves by [[1]] step (max friendly) for [[1]] minute; Fear: Will negates, else shaken [[1]] round per caster level (spend an extra spell point to instead frighten [[1]] round per caster level on a failure and shaken [[1]] round on a success); Glitter: Stealth penalty equal to caster level and no concealment from invisibility for [[1]] round per caster level; Amnesia (extra spell point): Will negates, else it forgets the past minute; Poison (extra spell point): Fortitude negates, else itching poison - dazed [[1]] round and [[1d2]] Strength damage per round for [[1]] minute (new save each round to end early); Sleep (extra spell point): Will negates, else asleep [[1]] round per caster level"
+    },
+    "Feast And Famine": {
+      "modifiers": [],
+      "rider": "Putrid Vomit: standard-action ranged touch attack (range [[30]] ft, no range increment); on a hit the target must succeed on a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be sickened for [[1d4]] rounds; if you spend [[1]] spell point as part of the attack, on a failed save the target is instead nauseated for [[1d4]] rounds and on a successful save is sickened for [[1]] round"
+    },
+    "Pixie Sticks": {
+      "modifiers": [
+        {
+          "formula": "1 + floor(@spheres.cl.total / 5)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "insight",
+          "damageType": [],
+          "critical": "normal"
+        },
+        {
+          "formula": "1 + floor(@spheres.cl.total / 5)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "insight",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "Pixie Stick: while wielding a mostly-wooden weapon (club, quarterstaff, spear, etc.) or wooden ammunition (arrow, bolt) bonded by this fey-blessing"
+    },
+    "Shadow Collector": {
+      "modifiers": [],
+      "rider": "Steal Shadow: spend [[1]] spell point when making a Steal combat maneuver against a creature that has a shadow; on a successful Steal you take its shadow instead of an item, giving it [[1]] temporary negative level and causing it to lose [[1]] spell point (the spell-point loss increases by one die size - [[1d2]], [[1d3]], [[1d4]], etc. - for every [[5]] caster levels); a creature reduced below [[1]]st level instead takes a -[[2]] penalty to Constitution per negative level; you gain an equal number of temporary spell points, never more than the target loses, that expire after [[1]] round per caster level"
+    },
+    "Spores": {
+      "modifiers": [],
+      "rider": "Anxiety Spores: coat a weapon, natural weapon, or piece of ammunition (a swift or move action; a move action to coat a willing ally's); the next time the coated weapon deals damage to a creature, that creature must succeed on a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or contract anxiety spores (disease, injury; onset [[1]] round; frequency [[1]]/minute; effect cumulative -[[1]] penalty on saves against emotion and fear effects, maximum -[[5]]; cure [[2]] consecutive saves)"
+    },
+    "Steal Skin": {
+      "modifiers": [],
+      "rider": "full-round action to steal the skin of a dead, helpless, or willing Small, Medium, or Large creature of roughly humanoid shape; against a living creature you must land a coup de grace, and if it survives it is nauseated (pain effect), takes [[1d4]] Constitution bleed and bleed damage equal to three times your caster level ([[3 * @spheres.cl.total]]), and takes a -[[10]] penalty on saves against disease until its skin regrows via regeneration or similar; if this bleed is halted by any means it restarts in [[1d4]] rounds"
+    },
+    "Stunning Glance": {
+      "modifiers": [],
+      "rider": "as a standard action, gaze at one target within [[30]] ft; Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or the target is stunned for [[1]] round. A creature that succeeds is immune to this for [[24]] hours."
+    }
+  },
+  "Fate": {
+    "Align Object": {
+      "modifiers": [
+        {
+          "formula": "2d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[1]] spell point to place on a weapon; the bonus damage applies only against creatures of the opposite alignment, and the weapon becomes aligned (chaotic, evil, good, or lawful) and overcomes that alignment's damage reduction; lasts while you concentrate, or spend [[1]] more spell point to endure [[1]] minute per caster level without concentration"
+    },
+    "Shrieking Strike": {
+      "modifiers": [],
+      "rider": "you may deliver words via a melee touch attack, OR make a single weapon attack in conjunction with using a word (not immediate-action words); if the attack hits, the target is also affected by the word. A scatter weapon applies it to a single target."
+    }
+  },
+  "Illusion": {
+    "Overwhelming Sensations": {
+      "modifiers": [],
+      "rider": "as a trick, target one creature; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or it suffers extreme sensation for [[max(1, floor(@spheres.cl.total / 2))]] rounds (choose one effect from the talent Overwhelming Sensations table)."
+    }
+  },
+  "Life": {
+    "Affliction": {
+      "modifiers": [
+        {
+          "formula": "1d8 + @spheres.cl.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "negative"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "invert cure to negative energy on a melee or ranged touch attack (a ray at range); this damage harms only living creatures (no effect on undead) and the target may make a Will save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half; cannot be combined with Fount Of Life. Alternatively invert restore on a melee or ranged touch attack: Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be exhausted for [[2d6]] rounds (fatigued for [[2d6]] rounds on a success), ending when the duration expires. With Restore Capacity instead: entangled with all speeds halved for [[1d6]] rounds (Reflex negates). With Restore Health: nauseated for [[1d6]] rounds (sickened for [[1d6]] rounds on a success). With Restore Senses: confused for [[1d6]] rounds (Will negates). With Restore Spirit: cannot receive magical healing, fast healing, or regeneration for [[2d6]] rounds (Will negates)"
+    },
+    "Cure": {
+      "modifiers": [
+        {
+          "formula": "1d8 + @spheres.cl.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "positive"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[1]] spell point; vs undead or other creatures harmed by positive energy, delivered by a melee touch attack (harmless positive energy to living creatures); the target may make a Will save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] for half"
+    },
+    "Empathic Healing": {
+      "modifiers": [],
+      "rider": "requires the Affliction talent; when restoring body or mind (not soul) you may instead inflict the conditions removed onto an enemy within your restore's range, increasing the restore's cost by [[1]] spell point and requiring a melee or ranged touch attack; on a hit the target must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or gain every condition you just restored (except those it is immune to); on a miss or successful save the restored ally is still restored"
+    },
+    "Sanctify": {
+      "modifiers": [],
+      "rider": "a special application of restore vs a creature damaged by positive energy, delivered by a melee or ranged touch attack (a ray at range); the target gains [[1d2]] temporary negative levels for [[1]] hour per caster level with no save (the die size increases one step per [[5]] caster levels: 1d2, 1d3, 1d4, 1d6, ...); these stack but do not destroy an undead reduced to [[0]] Hit Dice, which instead takes [[4]] points of Constitution drain (or Charisma drain if it has no Constitution score) for the duration; if a negative level lasts longer than [[1]] day the target must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] per negative level or it becomes permanent"
+    },
+    "Taste Of Victory": {
+      "modifiers": [],
+      "rider": "on a successful hit (attack roll required) against a creature with at least half your character level in Hit Dice, spend [[1]] additional spell point to use a Life sphere ability as a swift action on any willing creature within range; no spell point is required if the hit was a critical hit, knocked the target unconscious, or reduced it to [[0]] or fewer hit points"
+    }
+  },
+  "Light": {
+    "Blinding Light": {
+      "modifiers": [],
+      "rider": "when the target glows it is dazzled (-[[1]] on attack rolls and Perception); or spend [[1]] spell point to create bright light that blinds the glowing target and creatures in the area, Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates."
+    },
+    "Flare": {
+      "modifiers": [],
+      "rider": "swift action: expend a glow on the target, ending it; the glowed target takes [[(max(1, floor(@spheres.cl.total / 2)))d4]] untyped damage and every creature within [[5 + 5 * floor(@spheres.cl.total / 5)]] ft is dazzled [[1]] round (Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates the dazzle)."
+    },
+    "Inner Sun": {
+      "modifiers": [
+        {
+          "formula": "1d4 + (floor(@spheres.cl.total / 4))d4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "fire"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "weapon of light deals this fire damage on a hit; it does not affect invisible or translucent targets (passing harmlessly through them), and reflective/mirror-like creatures have a [[50]]% miss chance against it"
+    },
+    "Irradiance": {
+      "modifiers": [],
+      "rider": "when the target glows it is sickened (-[[2]] on attack rolls, weapon damage, saves, and skill/ability checks); spending [[1]] spell point via bright light can worsen this."
+    },
+    "Solar Strike": {
+      "modifiers": [],
+      "rider": "standard action to make a single weapon attack while applying your glow (this casting cannot be reduced below a standard action and does not provoke attacks of opportunity, except as usual for a ranged attack); on a hit the target is also struck by your glow, delivering your chosen [light] effects; with a scatter weapon the blast applies to only [[1]] target chosen at the time of attack"
+    },
+    "Sunstroke": {
+      "modifiers": [],
+      "rider": "when the target glows it takes [[(max(1, floor(@spheres.cl.total / 2)))d4]] nonlethal fire each round the glow lasts; a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates that round, and two consecutive saves end it."
+    },
+    "Visual Overload": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; while the glow is on the target it must make a Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] each round or be staggered for [[1]] round."
+    },
+    "Glow": {
+      "modifiers": [],
+      "rider": "the Light sphere base: a melee OR ranged touch attack (SR applies) causes the target to glow for [[1]] minute per caster level, outlining it (a -[[20]] penalty to Stealth, denies concealment/invisibility from being unseen). Glow talents apply their effect through this glow."
+    }
+  },
+  "Mana": {
+    "Disorient": {
+      "modifiers": [],
+      "rider": "as an expunge, target one creature; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or it takes a -[[2]] penalty on caster level checks (and the further effects listed in the talent) while affected."
+    },
+    "Ignition": {
+      "modifiers": [
+        {
+          "formula": "1d8 + (floor((@spheres.cl.total - 1) / 3))d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "untyped"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "expunge (ranged touch attack) vs a creature that has a spell pool within your expunge range; for every [[5]] damage dealt the target loses [[1]] spell point and takes a -[[1]] penalty to its magic skill defense for [[1]] round (plus [[1]] additional round at caster level [[10]] and every [[10]] levels thereafter); Special (Transfer talent): a target that cannot store spell points instead takes an equal penalty to its next saving throw against a magical effect for the same duration"
+    }
+  },
+  "Mind": {
+    "Cerebral Strike": {
+      "modifiers": [
+        {
+          "formula": "(max(1, floor(@spheres.cl.total / 2)))d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "a psychic mind-affecting attack; NONLETHAL damage; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates. Greater Charm (if known) also deals [[1d4]] + [[1]] per [[5]] caster levels ability damage to the target Int, Wis, or Cha (your choice) on a failed save."
+    },
+    "Charming Strike": {
+      "modifiers": [],
+      "rider": "you may deliver charms via a melee touch attack, OR make a single weapon attack in conjunction with using a charm; if the attack hits, the target is also affected by the charm. A scatter weapon applies it to a single target."
+    }
+  },
+  "Nature": {
+    "Destroy Element": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; requires a melee OR ranged touch attack against a target within your geomancing range; on a hit you deconstruct your element on the target, applying a package-dependent effect (e.g. Air — Suffocation: Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or the target is staggered and cannot breathe; other packages impose or deal their own package effect). See the talent for the per-package result."
+    },
+    "Nature's Weapon": {
+      "modifiers": [],
+      "rider": "make one of your Nature package's special attacks (package-dependent — flung debris, an earthen slam, a lashing vine, a jet of water, a gout of flame, etc.), resolving it as the listed attack/save. You may also spend [[1]] spell point (standard action) to grant a target the ability to use one of these attacks for [[1]] round per caster level."
+    }
+  },
+  "Protection": {
+    "Vengeance": {
+      "modifiers": [
+        {
+          "formula": "@spheres.cl.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "when an enemy you can see successfully hits a creature bearing one of your aegises; as an immediate action, sacrifice an aegis on that creature to make this weapon or natural weapon attack against the attacker"
+    }
+  },
+  "Telekinesis": {
+    "Acceleration": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "the Bludgeon must move at least [[10]] ft in a straight line before striking (counts as a charge); with Dancing Weapon you may apply charge-related feats and combat talents to the Bludgeon"
+    },
+    "Bludgeon": {
+      "modifiers": [],
+      "rider": "once per turn, while lifting a creature or object with telekinesis you may spend its remaining movement to strike a target within its reach: a RANGED attack (benefits from ranged weapon/combat-talent feats; does not provoke except from the telekinesis casting) dealing the lifted object improvised damage. Making the attack is a standard action."
+    },
+    "Dancing Weapon": {
+      "modifiers": [
+        {
+          "formula": "@spheres.cam",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "your Bludgeon counts as a ranged, thrown, or melee weapon under your control (your choice, changeable once per round); apply appropriate feats and combat talents (e.g. Power Attack) to Bludgeon attacks, and a melee Bludgeon has reach and threatens as a creature of its size"
+    },
+    "Excessive Force": {
+      "modifiers": [
+        {
+          "formula": "(floor(@spheres.cl.total / 2))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "slam the target under your telekinesis into a wall, floor, or object (this ends your telekinesis on it); on a hit the target must make a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or fall prone, and the impacted surface takes the target's size-based Bludgeon damage. Alternatively, in place of an attack roll, both the Bludgeon and the target must make that Reflex save or take the damage and fall prone"
+    },
+    "Linear Acceleration": {
+      "modifiers": [
+        {
+          "formula": "(floor(@spheres.cl.total / 2))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "spend [[2]] spell points, standard action; hurl a lifted object at a target in line of sight up to [[5]] miles as a ranged touch attack (use your casting modifier in place of Dexterity); on a hit the target takes double the normal Bludgeon damage; on impact everyone within a [[30]] ft radius + [[5]] ft per [[5]] caster levels (including the target) takes this shockwave damage and is dazed for [[1]] round, Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates the daze (the initial target gets no daze save if the touch attack hit)"
+    },
+    "Sweeping Bludgeons": {
+      "modifiers": [],
+      "rider": "in place of an attack roll, swing the Bludgeon in a sweeping arc; the target must make a Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or both it and the Bludgeon take the Bludgeon's size-based damage; with Dancing Weapon, effects that add damage to a single attack still apply to that damage, while any penalty to the attack roll (e.g. Power Attack, Lancer impale) instead reduces the save DC by that amount"
+    },
+    "Telekinetic Crush": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (floor(@spheres.cl.total / 5))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "each round you maintain concentration on a creature or object held by your telekinesis (no attack roll or save); alternatively, make a Strength check (using your casting modifier plus your largest liftable size modifier) to break a held object"
+    },
+    "Telekinetic Push": {
+      "modifiers": [
+        {
+          "formula": "1d6 + (floor(@spheres.cl.total / 5))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "requires [[1]] spell point when used directly on a hostile target (allows no Will save); adds this to the falling damage a target suffers and may be dealt to a target you successfully tripped"
+    }
+  },
+  "Time": {
+    "Age": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; increase or decrease the target age by [[1]] category (an unwilling target gets a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] to negate), applying that age category physical ability-score changes."
+    },
+    "Improved Eject": {
+      "modifiers": [],
+      "rider": "spend [[5]] spell points; touch a target (melee touch attack vs an unwilling creature), Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates; on a failed save the creature is permanently ejected from the space-time continuum into suspended animation (only a freedom spell, Reclamation, or a wish/miracle can reveal or free it)"
+    },
+    "Lethargy": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; make a melee or ranged touch attack within range; on a hit the target is exhausted (Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates); a target already fatigued or exhausted instead falls asleep (helpless) on a failed save"
+    },
+    "Slow": {
+      "modifiers": [],
+      "rider": "the target movement speeds are halved (minimum [[5]] ft) and it takes -[[1]] on attack rolls, AC, and Reflex saves; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates."
+    },
+    "Time Clone": {
+      "modifiers": [],
+      "rider": "vs an unwilling target: requires a melee touch attack (ranged touch attack with Ranged Time), Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates; costs spell points equal to half the target's total Hit Dice (minimum [[1]]); on a hit and failed save you draw an alternate-timeline copy of the target that acts on your turn for [[floor(@spheres.cl.total / 2)]] rounds, sharing the target's statistics, movement, and abilities but vanishing instantly if it takes any damage or fails any saving throw"
+    },
+    "Time Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with using a single-target alter time effect (standard action, does not provoke unless it is a ranged attack); if the attack hits, the target is also subject to your alter time effect. A scatter weapon applies it to a single target chosen at the time of attack."
+    }
+  },
+  "War": {
+    "Adroitness": {
+      "modifiers": [
+        {
+          "formula": "4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "morale",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "mandate talent; only against an enemy that just missed your mandate partner; morale bonus to damage rolls"
+    },
+    "Damaging Momentum": {
+      "modifiers": [
+        {
+          "formula": "@spheres.cam",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "on a weapon, natural weapon, or unarmed hit; spend [[2]] points of momentum; adds your casting ability modifier as damage of the same type as the attack; only once per attack"
+    },
+    "Empower": {
+      "modifiers": [
+        {
+          "formula": "4",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "morale",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "spend [[1]] spell point as an immediate-action rally; lasts [[1]] round; this +[[4]] morale bonus also applies to CMB; alternatively apply the +[[4]] morale bonus to AC and CMD, to saving throws, or to concentration and spell-penetration checks; decide before the triggering attack or save is rolled"
+    },
+    "Totem Of Allegiance": {
+      "modifiers": [
+        {
+          "formula": "1 + floor(@spheres.cl.total / 10)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "spend [[1]] spell point to create the totem; only creatures within it that share the chosen alignment (one you possess) benefit; also grants the same +[[1 + floor(@spheres.cl.total / 10)]] circumstance bonus to all saving throws"
+    },
+    "Totem Of Courage": {
+      "modifiers": [
+        {
+          "formula": "1 + floor(@spheres.cl.total / 10)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "competence",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "spend [[1]] spell point to create the totem; you and allies within also gain a +[[1 + floor(@spheres.cl.total / 5)]] morale bonus to saves vs fear"
+    },
+    "Totem Of War": {
+      "modifiers": [
+        {
+          "formula": "2 + floor(@spheres.cl.total / 5)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "while within your Totem of War; you and allies gain this circumstance bonus to all weapon damage rolls"
+    },
+    "Vindictiveness": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "morale",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "mandate talent; only against an enemy that just hit your mandate partner; this +[[2]] morale bonus also applies to CMB"
+    }
+  },
+  "Warp": {
+    "Brutalizing Shunt": {
+      "modifiers": [
+        {
+          "formula": "(floor(@spheres.cl.total / 5))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "when a creature is shunted into an already-occupied space by your teleport or the end of your Create Gap; Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or be staggered for [[1]] round per caster level ([[@spheres.cl.total]] rounds)"
+    },
+    "Lethal Teleport": {
+      "modifiers": [],
+      "rider": "requires Unwilling Teleport; unwilling targets may be teleported into locations not in open areas or on solid surfaces, but gain +[[4]] to the save to resist; a creature teleported into the air falls and takes falling damage ([[1d6]] per [[10]] ft) unless it can fly; a creature teleported into an occupied space is shunted out, taking shunt damage as normal"
+    },
+    "Splinter": {
+      "modifiers": [
+        {
+          "formula": "(max(1, floor(@spheres.cl.total / 2)))d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "when teleporting a target (usually via Teleport Object or Unwilling Teleport); this damage bypasses all damage reduction, energy resistance, and hardness"
+    },
+    "Unwilling Teleport": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; requires a melee touch attack at touch range (or a ranged touch attack with Ranged Warp); Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates and the effect is subject to spell resistance; the target may only be teleported into an open area on a solid surface; +[[4]] to the save if the destination would be directly harmful (e.g. onto a bed of spikes)"
+    },
+    "Warping Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with a teleport or a (space) talent targeting a creature/object (standard action, no provoke unless ranged); if the attack hits, the target is also struck by the teleport/(space) effect (willing targets only unless you have Unwilling Teleport). A scatter weapon applies it to a single target."
+    }
+  },
+  "Weather": {
+    "Battering Winds": {
+      "modifiers": [],
+      "rider": "shroud; the target takes -[[2 + floor(@spheres.cl.total / 5)]] on Reflex saves and attack rolls."
+    },
+    "Boreal Glare": {
+      "modifiers": [
+        {
+          "formula": "1d6",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "cold"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "glare attack (a gaze attack), range [[30]] ft, affecting a single creature you focus on as a swift action, usable only while bearing your mantle in an area of Cold severity [[3]]+; +[[1d6]] cold per Cold severity level above [[3]]; a successful Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] halves the damage; not hindered by precipitation"
+    },
+    "Contaminated Blows": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "acid"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "melee attacks only, while bearing your mantle in an area of Fallout severity [[3]]+; +[[1]] acid per Fallout severity above [[4]]; a creature damaged must make a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or suffer the effects of low radiation, and an already-irradiated creature must instead save or have its radiation level raised one step (max low at severity [[4]], medium at [[5]], high at [[6]], extreme at [[7]])"
+    },
+    "Crackling Arc": {
+      "modifiers": [],
+      "rider": "shroud (SR applies; no save to apply); each round at the start of the target turn one random ally within close range takes [[1d6 + @spheres.cl.total]] electricity, Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] halves."
+    },
+    "Desiccant": {
+      "modifiers": [
+        {
+          "formula": "1d4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "on a natural attack, unarmed strike, or touch attack while bearing your mantle in an area of Aridity severity [[3]]+; nonlethal desiccation damage (no save); the die size increases by one step per Aridity severity above [[3]] (max [[1d12]] at severity [[7]])"
+    },
+    "Diamond Dust": {
+      "modifiers": [],
+      "rider": "shroud; at the start of each of the target turns it takes [[1d6 + @spheres.cl.total]] cold, Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] halves."
+    },
+    "Dust Cloud": {
+      "modifiers": [],
+      "rider": "shroud; at the start of each of the target turns it must make a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] or begin coughing, becoming staggered for [[1]] round."
+    },
+    "Fata Morgana": {
+      "modifiers": [
+        {
+          "formula": "2 + floor(@spheres.cl.total / 5)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "shroud; the target's AC is reduced by [[2 + floor(@spheres.cl.total / 5)]] (reflected by this attack bonus) and it takes the same penalty on saving throws against illusions."
+    },
+    "Heat Stroke": {
+      "modifiers": [],
+      "rider": "shroud; the target takes -[[2 + floor(@spheres.cl.total / 5)]] on Int- and Wis-based checks and skills and [[1d6 + floor(@spheres.cl.total / 2)]] nonlethal fire each round (half of it becomes lethal at caster level [[10]])."
+    },
+    "Karakaze": {
+      "modifiers": [],
+      "rider": "shroud; the target takes a [[1d6]] penalty to Dexterity that increases by [[1]] at the start of each of its turns (max [[floor(@spheres.cl.total / 2)]]; cannot reduce Dex below [[1]])."
+    },
+    "Lightning Rod": {
+      "modifiers": [
+        {
+          "formula": "2d4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "electricity"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "with a melee weapon primarily made of metal (or with a metal striking surface) while bearing your mantle in an area of Wind and Precipitation severity [[4]]+; on hit a small lightning bolt strikes the enemy (no save); +[[1d4]] electricity per severity category above storm"
+    },
+    "Personal Thunderhead": {
+      "modifiers": [],
+      "rider": "shroud; whenever the target takes a standard or full-round action it takes [[1d6 + @spheres.cl.total]] electricity, Reflex Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates."
+    },
+    "Razor Ice": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "slashing"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "unarmed strike or natural attack while bearing your mantle in an area of Cold severity [[4]]+; +[[2]] slashing per category above severity [[4]] (a creature that strikes the mantle-bearer with an unarmed strike or natural weapon also takes [[1]] slashing)"
+    },
+    "Sirocco": {
+      "modifiers": [],
+      "rider": "shroud; the target is fatigued (exhausted at caster level [[10]]) and takes [[1d6 + floor(@spheres.cl.total / 2)]] nonlethal each round; at the start of each turn a Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] halves the damage and staves off the fatigue for that round."
+    },
+    "Sodden": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "weapon attacks vs a creature with the fire subtype while bearing your mantle in an area of Precipitation severity [[3]]+; +[[1]] damage per category above severity [[3]]"
+    },
+    "This Sparks Joy": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "morale",
+          "damageType": [],
+          "critical": "normal"
+        },
+        {
+          "formula": "2",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "morale",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "while bearing your mantle in an area of Precipitation and Wind severity [[4]]+ (storm); +[[1]] per category above storm; also grants a +[[2]] morale bonus on Will saving throws"
+    },
+    "Weather Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with placing a mantle or shroud (standard action, no provoke unless ranged); if the attack hits, the target is also affected by that mantle/shroud. A scatter weapon applies it to a single target."
+    },
+    "Glare": {
+      "modifiers": [],
+      "rider": "shroud; the target is dazzled and treats creatures at higher elevation than it as having concealment; other creatures can pinpoint its square even in non-magical darkness."
+    },
+    "Illuminating Shaft": {
+      "modifiers": [],
+      "rider": "shroud; the target takes a Stealth penalty of [[10 + @spheres.cl.total]] and all ranged attacks against it gain +[[1 + floor(@spheres.cl.total / 5)]]."
+    },
+    "Melt Skin": {
+      "modifiers": [
+        {
+          "formula": "2 + floor(@spheres.cl.total / 5)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "shroud; the target takes -[[2 + floor(@spheres.cl.total / 5)]] to AC (reflected by this attack bonus), Fortitude saves, and Charisma-based skill checks."
+    }
+  }
+}

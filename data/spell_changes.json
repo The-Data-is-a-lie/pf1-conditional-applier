@@ -1,0 +1,1806 @@
+{
+  "Aid": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Aroden's Magic Army": {
+    "changes": [
+      {
+        "formula": "min(floor(@spells.primary.cl.total/5), 4)",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "min(floor(@spells.primary.cl.total/5), 4)",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Assumed Likeness": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Atavism": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Aura of Cannibalism": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "competence",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Baphomet's Blessing": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Barghest Feast": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "profane",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Black Spot": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Blade of Light": {
+    "name": "Blade of Light: infuses a weapon with pure sunlight, shedding light as daylight and functioning as a magic and good weapon for overcoming damage reduction; grants a +[[2]] sacred bonus on attack rolls and extra damage against undead, functions as ghost touch against incorporeal undead, and automatically confirms critical hits against foes vulnerable to sunlight. Duration [[1]] round/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "sacred",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Bless": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Blessed Fist": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Blessing of Fervor": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Blink": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Blood Scent": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Body Capacitance": {
+    "changes": [
+      {
+        "formula": "3",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Bomber's Eye": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Bone Fists": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Burst of Glory": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Call Weapon": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "circumstance",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "circumstance",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Contagious Zeal": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Coward's Cowl": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Dahak's Release": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Daybreak Arrow": {
+    "name": "Daybreak Arrow: ammunition exudes radiant energy, shedding light as a sunrod for [[1]] round after firing; creatures that take penalties in bright light suffer them for [[1]] round after being struck, and undead and creatures harmed by sunlight take extra radiant damage that is not subject to damage resistance. Duration [[10]] minutes/level; Fortitude negates (harmless, object).",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Deadly Juggernaut": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "luck",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "luck",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Delayed Blast Fireball": {
+    "name": "Delayed Blast Fireball: a fiery burst at long range that you can detonate immediately or delay for up to [[5]] rounds; deals fire damage per caster level (maximum [[20d6]]). Reflex half.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Desecrate": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "profane",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "profane",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Desperate Weapon": {
+    "name": "Desperate Weapon: conjures a one-handed improvised weapon appropriate to your surroundings that deals bludgeoning, piercing, or slashing damage of your choice ([[1d4]] for a Small creature); the spell ends if the weapon leaves your grasp. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Divine Favor": {
+    "changes": [
+      {
+        "formula": "min(max(floor(@spells.primary.cl.total/3), 1), 3)",
+        "target": "attack",
+        "type": "luck",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "min(max(floor(@spells.primary.cl.total/3), 1), 3)",
+        "target": "wdamage",
+        "type": "luck",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Divine Power": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "luck",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "luck",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Divine Vessel": {
+    "name": "Divine Vessel: (Oracle only.) accept otherworldly energies and transform into a Huge anarchic, axiomatic, celestial, or fiendish creature, gaining a +[[6]] size bonus to Strength and Constitution, +[[3]] natural armor, darkvision [[60]] ft., spell resistance [[12]] + caster level, and aspect-based abilities such as damage reduction, energy resistance [[10]], a +[[4]] bonus on saves vs. poison, a fly speed, and natural attacks (the anarchic aspect's bite deals the rolled damage). Duration [[1]] round/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Ectoplasmic Eruption": {
+    "name": "Ectoplasmic Eruption: an avalanche of ectoplasmic matter erupts in a [[30]]-ft. radius at medium range, dealing bludgeoning damage and entangling creatures for [[1]] round/caster level; it affects ethereal and incorporeal creatures normally, and each such creature must also succeed at a Will save or be pushed partially onto the Material Plane for [[1]] round/caster level. Reflex half and Will partial.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "6d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Elemental Mastery": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "circumstance",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Enlarge Tail": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Face of the Devourer": {
+    "name": "Face of the Devourer: transforms the target's face into a hideous shape, granting a +[[4]] circumstance bonus on Intimidate checks and a bite attack as a natural weapon ([[1d4]] if Small, [[1d8]] if Large) usable as a primary or secondary attack. Duration [[1]] minute/level; Fortitude negates (harmless).",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Find Fault": {
+    "changes": [
+      {
+        "formula": "5",
+        "target": "attack",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Firebelly": {
+    "name": "Firebelly: a magical fire warms your belly, granting fire resistance [[5]]; as a standard action you can breathe a [[15]]-foot cone of flame, reducing the spell's remaining duration by [[1]] minute each use. Duration [[1]] minute/level; Reflex half, spell resistance applies.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Flame Arrow": {
+    "name": "Flame Arrow: turns ammunition such as arrows, bolts, shuriken, and sling stones into fiery projectiles that deal extra fire damage on a hit and can ignite flammable objects (but not creatures). Duration [[10]] min./level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Flames of the Faithful": {
+    "name": "Flames of the Faithful: a glowing rune grants a wielded weapon the flaming property (or flaming burst if you are using the judgment class feature); the effect ends if the weapon leaves your hand and does not stack with an existing flaming property. Duration [[1]] round/level; Fortitude negates (object, harmless).",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Alien Dragon I": {
+    "name": "Form of the Alien Dragon I: become a Medium esoteric or outer dragon, gaining a +[[4]] size bonus to Strength, +[[2]] size bonus to Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, energy resistance, a once-per-casting breath weapon, and natural attacks (one bite [[1d8]], two claws [[1d6]], two wings [[1d4]]). Duration [[1]] minute/level; breath weapon allows a Reflex save to halve.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "6d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Alien Dragon II": {
+    "name": "Form of the Alien Dragon II: as Form of the Alien Dragon I, but become a Large esoteric or outer dragon, gaining a +[[6]] size bonus to Strength, +[[4]] size bonus to Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, damage reduction [[5]]/magic, energy resistance, a breath weapon, and natural attacks (one bite [[2d6]], two claws [[1d8]], a tail slap [[1d8]], two wings [[1d6]]); lines extend to [[80]] feet and cones to [[40]] feet. Duration [[1]] minute/level; breath weapon allows a Reflex save to halve.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "6d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Alien Dragon III": {
+    "name": "Form of the Alien Dragon III: as form of the alien dragon II, but you take the form of a Huge esoteric or outer dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one form of energy. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), two wings ([[1d8]]), and one tail slap ([[2d6]]). The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save to halve the breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "12d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Exotic Dragon I": {
+    "name": "Form of the Exotic Dragon I: you become a Medium imperial or primal dragon, gaining +[[4]] size Strength, +[[2]] size Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, a breath weapon, and resistance to one form of energy or another bonus. Natural attacks are one bite ([[1d8]]), two claws ([[1d6]]), and either a gore ([[1d8]]) for an imperial dragon or two wings ([[1d4]]) for a primal dragon. The breath weapon can be used only once per casting and allows a Reflex save to halve the breath damage; some dragon types grant added resistances and speeds. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "6d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Exotic Dragon II": {
+    "name": "Form of the Exotic Dragon II: as form of the exotic dragon I, but you take the form of a Large imperial or primal dragon, gaining +[[6]] size Strength, +[[4]] size Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, a breath weapon, DR [[5]]/magic, and resistance to one form of energy or another bonus. Natural attacks are one bite ([[2d6]]), two claws ([[1d8]]), a tail slap ([[1d8]]), and either a gore ([[2d6]]) for an imperial dragon or two wings ([[1d6]]) for a primal dragon. The breath weapon allows a Reflex save to halve the breath damage; lines become [[80]]-foot lines and cones become [[40]]-foot cones. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "8d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Exotic Dragon III": {
+    "name": "Form of the Exotic Dragon III: as form of the exotic dragon II, but you take the form of a Huge imperial or primal dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one form of energy. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), one tail slap ([[2d6]]), and either a gore ([[2d8]]) for an imperial dragon or two wings ([[1d8]]) for a primal dragon. The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save to halve the breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "12d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Dragon I": {
+    "name": "Form of the Dragon I: you become a Medium chromatic or metallic dragon, gaining +[[4]] size Strength, +[[2]] size Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, a breath weapon, and resistance to one element. Natural attacks are one bite ([[1d8]]), two claws ([[1d6]]), and two wings ([[1d4]]). The breath weapon can be used only once per casting and allows a Reflex save for half breath damage; breath shape, resistance, and extra abilities depend on the dragon type. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "6d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Dragon II": {
+    "name": "Form of the Dragon II: as form of the dragon I, but you take the form of a Large chromatic or metallic dragon, gaining +[[6]] size Strength, +[[4]] size Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, a breath weapon, DR [[5]]/magic, and resistance to one element. Natural attacks are one bite ([[2d6]]), two claws ([[1d8]]), two wings ([[1d6]]), and one tail slap ([[1d8]]). The breath weapon can be used twice per casting, waiting [[1d4]] rounds between uses, and allows a Reflex save for half breath damage; lines become [[80]]-foot lines and cones become [[40]]-foot cones. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "8d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Form of the Dragon III": {
+    "name": "Form of the Dragon III: as form of the dragon II, but you take the form of a Huge chromatic or metallic dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, a breath weapon, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one element. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), two wings ([[1d8]]), and one tail slap ([[2d6]]). The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save for half breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "12d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Geniekind": {
+    "name": "Geniekind: you transform to emulate a chosen genie (djinni, efreeti, marid, or shaitan), gaining a +[[2]] racial bonus on saves vs. paralysis, poison, sleep, and stunning, a +[[4]] enhancement bonus to natural armor, a +[[2]] enhancement bonus to Constitution, and a +[[5]] bonus on Diplomacy with creatures of your genie's elemental subtype. As an efreeti your unarmed strikes and melee weapons deal extra fire damage; you also gain a genie-specific movement and energy resistance [[10]] (electricity djinni, fire efreeti, cold marid, acid shaitan). Duration [[1]] round/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Gift of the Deep": {
+    "name": "Gift of the Deep: you give sahuagin targets one chosen mutant benefit. Four-Armed grants an extra pair of arms making claw attacks plus Multiattack and Multiweapon Fighting; other options grant Malenti disguise, Prehistoric enlargement, Shark-Blooded swimming, Sightless blindsense [[90]] feet, or Spined retaliation (any creature that grapples it or hits it with an unarmed strike or natural weapon takes [[1d4]] piercing damage). Range close ([[25]] ft. + [[5]] ft./[[2]] levels), Fortitude negates (harmless), duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Good Hope": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Gorum's Armor": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Gravity Bow": {
+    "name": "Gravity Bow: arrows or bolts fired from your bow or crossbow deal damage as if one size larger (a Medium longbow's [[1d8]] becomes [[2d6]]). Only you benefit; anyone else using your bow deals normal damage for their size. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Guidance": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "competence",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Haste": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Hedging Weapons": {
+    "name": "Hedging Weapons: a floating weapon of divine force appears (more at higher levels, max [[5]] at [[18]]th), each granting a +[[1]] deflection bonus to AC (max +[[5]]). As a standard action you grasp and throw one as a ranged attack at a target within [[30]] feet, dealing force damage that bypasses DR; each weapon thrown lowers the deflection bonus by [[1]] and vanishes, ending the spell when all are thrown. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "force"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Heroes' Feast": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Heroic Invocation": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "4",
+        "target": "wdamage",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Heroism": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Heroism, Greater": {
+    "changes": [
+      {
+        "formula": "4",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Holy Ice Weapon": {
+    "name": "Holy Ice Weapon: create a masterwork simple weapon or your deity's favored weapon made of ice and holy water that deals normal weapon damage plus [[1]] point of cold damage per caster level (max [[10]]); any creature susceptible to holy water struck by it also takes holy water damage. If it leaves your hands for more than [[1]] round it melts and the spell ends; at caster level [[6]]th it gains the returning property when thrown. Duration [[1]] minute/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Holy Sword": {
+    "changes": [
+      {
+        "formula": "5",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "5",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Holy Whisper": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Hunter's Blessing": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Hunter's Howl": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Inheritor's Smite": {
+    "changes": [
+      {
+        "formula": "5",
+        "target": "attack",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": [],
+    "rider": "on hit, free bull rush [[ d20 + @attributes.cmb.total + 5 ]] vs CMD (no AoO)"
+  },
+  "Inspiring Recovery": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Invoke Primal Power": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Last Azlanti's Defending Sword": {
+    "name": "Last Azlanti's Defending Sword: create a hovering sword of force (functions as mage's sword but gains no enhancement bonus) within close range ([[25]] ft. + [[5]] ft./[[2]] levels) for [[1]] round/level. While hovering it grants you a +[[4]] shield bonus to AC; the first time a foe damages you or makes you fail a save, the sword triggers and attacks that target, ending the shield bonus.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "3d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "force"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Lead Blades": {
+    "name": "Lead Blades: your melee weapons deal damage as if one size category larger for [[1]] minute/level; only you benefit.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Litany of Vengeance": {
+    "changes": [
+      {
+        "formula": "5",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Magic Boulder": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Magic Fang": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Magic Siege Engine": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Magic Stone": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Magic Weapon": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Marid's Mastery": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Mirror Strike": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Miserable Pity": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Molten Orb": {
+    "name": "Molten Orb: hurl a ball of molten metal as a splash weapon within close range ([[25]] ft. + [[5]] ft./[[2]] levels) for a direct fire hit. Creatures within [[5]] feet take [[1d6]] fire splash (Reflex half) and an additional [[1d6]] fire on their turn for the next [[1d3]] rounds unless cooled off (water, snow, or [[5]]+ cold damage).",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Natural Rhythm": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Polypurpose Panacea": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "competence",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Prayer": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "luck",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "luck",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Rain of Arrows": {
+    "name": "Rain of Arrows: conjure a cloud of magical arrows at long range ([[400]] ft. + [[40]] ft./level) that rain piercing damage per caster level (max [[20d6]]) on every creature and object in a [[15]]-foot radius; Reflex halves.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "piercing"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Reaper's Coterie": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "profane",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Reduce Person": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Release the Hounds": {
+    "name": "Release the Hounds: summon a swarm-like pack of canines within close range ([[25]] ft. + [[5]] ft./[[2]] levels) for [[1]] round/level. It has the distraction special attack (DC [[17]]) and may attempt a free trip combat maneuver against any creature it damages with its swarm attack.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "3d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Rift of Ruin": {
+    "name": "Rift of Ruin: tear an extradimensional Abyssal rift [[60]] feet deep at long range ([[400]] ft. + [[40]] ft./level) for [[1]] round/level. Large or smaller creatures must make a Reflex save or fall in, taking [[6d6]] falling damage; each round in the pit deals an additional [[6d6]] of a random energy or physical type (Reflex half). The pit walls are Climb DC [[25]]; when the spell ends, creatures still within take double environmental damage and are expelled prone. You may instead snap the rift shut to summon Abyssal denizens (as summon monster VII): [[1]] bebilith, [[1]] vrock, [[1d3]] succubi, [[1d3]] shadow demons, [[1d4]]+[[1]] babaus, or [[1d4]]+[[1]] brimoraks.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "6d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Righteous Blood": {
+    "name": "Righteous Blood: infuse the touched creature with holy energy for [[10]] minutes/level (Will negates, harmless). Any creature with the evil subtype that hits the target with a slashing or piercing melee weapon is sprayed with divine blood; if the target has the good subtype or an aura of good, the spray instead deals [[2d6]]. Creatures without the evil subtype or using reach weapons are unaffected.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Righteous Vigor": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Rock Whip": {
+    "name": "Rock Whip: a [[15]]-foot lash of crystal and earth springs from your hand for [[1]] round/level, treated as a nonmagical whip you can wield proficiently and that can't be disarmed or sundered. It ignores armor and natural armor (but deals no damage to earth-subtype outsiders) and passes through unworked stone, ignoring such cover. On a hit you may make a free bull rush using your caster level for BAB and your casting modifier for Strength.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "bludgeoning"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "on hit, free bull rush [[ d20 + @attributes.cmb.total - @attributes.bab.total + @spells.primary.cl.total ]] vs CMD"
+  },
+  "Rune of Rule": {
+    "changes": [
+      {
+        "formula": "5",
+        "target": "attack",
+        "type": "insight",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Saddle Surge": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Sense Vitals": {
+    "name": "Sense Vitals: for [[1]] round/level you see the vital areas of creatures within [[30]] feet, letting you sneak attack with any manufactured weapon; this precision damage increases by +[[1d6]] for every [[3]] caster levels beyond [[3]]rd (max +[[5d6]] at [[15]]th level) and stacks with other precision damage.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Shield of the Dawnflower": {
+    "name": "Shield of the Dawnflower: create a disk of sunlight on one arm for [[1]] round/level. Any creature that strikes you with a melee attack also takes fire damage +[[1]] per caster level (max +[[15]]); creatures using reach weapons are exempt. The shield sheds light as continual flame, only one instance may be active, and it doesn't stack with similar damaging-aura spells like fire shield.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Shield of the Dawnflower, Greater": {
+    "name": "Shield of the Dawnflower, Greater: create a disk of sunlight on one arm for [[1]] round/level. Any creature that strikes you with a melee attack takes damage +[[1]] per caster level (half fire, half holy); undead or creatures vulnerable to light instead take [[2d6]] +[[1]] per caster level. Creatures using reach weapons are exempt. The shield sheds light as daylight, only one instance may be active, and it doesn't stack with similar damaging-aura spells like fire shield.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Shillelagh": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Silver Darts": {
+    "name": "Silver Darts: a [[15]]-foot cone of silver darts springs from your hand, acting as a silver weapon dealing piercing damage per caster level (max [[10d6]]); Reflex half. Creatures with an armor bonus or natural armor bonus greater than +[[4]] take [[50]]% less damage.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "piercing"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Spectral Hand": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Sun Metal": {
+    "name": "Sun Metal: the touched weapon ignites into harmless flame; for [[1]] round/level, when its wielder hits, the strike deals extra fire (not multiplied on a crit). Ends if the weapon is submerged in water; Fortitude negates (object). Does not stack with flaming/flaming burst, and fails on frost or icy burst weapons.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Sundering Shards": {
+    "name": "Sundering Shards: touched weapon; for [[1]] hour/level or until discharged, if its wielder destroys an item with a sunder maneuver the shards strike the item's wearer/carrier/wielder (piercing and slashing) and any adjacent creature (Reflex negates) for the same. Shards count as the sundered item's special materials.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Sword to Snake": {
+    "name": "Sword to Snake: range close ([[25]] ft. + [[5]] ft./[[2]] levels); for [[1]] round/level the target item resembles a venomous animal and bites (resolved before the triggering action) whoever picks up, attacks with, activates, or manipulates it. Will negates (object); held items add the wielder's Will bonus. A nonmagical weapon attacks at your caster level + spellcasting modifier and bites for piercing; bitten creatures suffer snake venom (frequency [[1]]/round for [[6]] rounds; [[1d2]] Con; cure [[1]] save) at this spell's DC.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "piercing"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Telekinetic Charge": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Telekinetic Strikes": {
+    "name": "Telekinetic Strikes: the touched creature's limbs are charged with telekinetic force; for [[1]] minute/level its unarmed attacks or natural weapons deal extra force on each successful unarmed melee hit. Will negates (harmless).",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "force"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Thorn Body": {
+    "name": "Thorn Body: spines grow from your skin for [[1]] round/level; any creature striking you with a melee weapon, unarmed strike, or natural weapon takes piercing +[[1]] per caster level (max +[[15]]), reach weapons excepted. A creature that grapples you takes [[2d6]] piercing +[[1]] per caster level (max +[[15]]), and your own natural attacks and unarmed strikes deal extra piercing. Thorns persist through any new form (wild shape or polymorph).",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "piercing"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Thorny Entanglement": {
+    "name": "Thorny Entanglement: range long ([[400]] ft. + [[40]] ft./level); functions as entangle for [[1]] min./level, plus the plants grow thorns and fling them up to [[15]] feet. Any creature that moves within [[15]] feet is attacked once on its turn (your caster level as base attack bonus + your spellcasting modifier); a creature that enters or ends its turn in the area automatically takes piercing. Reflex partial (see text).",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "piercing"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Timely Inspiration": {
+    "changes": [
+      {
+        "formula": "3",
+        "target": "attack",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Transmute Blood To Acid": {
+    "name": "Transmute Blood To Acid: range close ([[25]] ft. + [[5]] ft./[[2]] levels); for concentration (max [[1]] round/[[5]] levels) the target takes [[1d6]] acid/[[2]] levels (max [[12d6]]) each round and is staggered and sickened. A Fortitude save each round halves the acid and negates the staggered condition for [[1]] round; reduced to [[0]] hp it dissolves. Anyone striking the target with a non-reach melee weapon, natural weapon, or unarmed attack takes [[3d6]] acid as the blood sprays (a piercing or slashing manufactured weapon takes this too). No effect on creatures immune to critical hits or bleed.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "acid"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "True Strike": {
+    "name": "True Strike: you gain intuitive insight into the immediate future; your next single attack roll (if made before the end of the next round) gains an insight bonus, and you ignore the miss chance for attacking a concealed target.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "20",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "insight",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ]
+  },
+  "Umbral Infusion": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "untyped",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Umbral Weapon": {
+    "name": "Umbral Weapon: a shadowy afterimage trails the touched weapon for [[1]] round/level; once per round, when its wielder misses, the wielder can reroll the attack, and on a hit the spell deals cold +[[1]] per [[2]] caster levels (max +[[10]]). Against a target with spell resistance, attempt a caster level check ([[1d20]] + caster level) the first time it would deal damage; on a failure the spell is dispelled.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "cold"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Unholy Sword": {
+    "changes": [
+      {
+        "formula": "5",
+        "target": "attack",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "5",
+        "target": "wdamage",
+        "type": "enhancement",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Urgathoa's Beacon": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "profane",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Vengeful Stinger": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Vigor": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "competence",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Vile Dog Transformation": {
+    "name": "Vile Dog Transformation: for [[1]] hour/level the touched dog (one per [[3]] caster levels, max [[5]] at 15th) becomes a hell hound without fire immunity/cold vulnerability, instead with acid, cold, and fire resistance [[5]]. Will negates (a trusting dog takes -[[4]]); its bite deals extra acid instead of fire, and its breath weapon becomes a [[10]]-foot cone dealing [[2d4]] acid. You command it as a summoned creature; at the end it dissolves into gore and bones.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "acid"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Wall of Sound": {
+    "name": "Wall of Sound: range medium ([[100]] ft. + [[10]] ft./level); a sonic barrier lasting concentration + [[1]] round/level deflects arrows, bolts, debris, and Small or smaller flying creatures like wind wall. Its discordant burst deals sonic to creatures within [[10]] feet of the trigger; touching or passing through deals [[2d6]] sonic +[[1]] per caster level (max +[[20]]). A silence spell suppresses the wall while it lasts.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "sonic"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Weapon of Awe": {
+    "changes": [
+      {
+        "formula": "2",
+        "target": "wdamage",
+        "type": "sacred",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Wind Blades": {
+    "name": "Wind Blades: invisible blades of hardened air surround the touched target for [[1]] round/level; on its turn it takes [[1d6]] slashing if it moves at least [[5]] feet, plus [[1d6]] for each additional [[10]] feet (not from burrowing, swimming, or teleportation). In strong wind it takes slashing each turn even if it doesn't move, plus [[1d8]] for every wind category above strong (lasting wind only, not instantaneous effects). Will negates.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "slashing"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  },
+  "Wrath": {
+    "changes": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      },
+      {
+        "formula": "1",
+        "target": "wdamage",
+        "type": "morale",
+        "operator": "add",
+        "priority": 0
+      }
+    ],
+    "contextNotes": []
+  },
+  "Wreath of Blades": {
+    "name": "Wreath of Blades: Four mithral daggers spin in a [[5]]-foot-radius emanation that moves with you; any creature starting its turn in the area takes [[1d4]] per two caster levels (max [[10d4]]), bypassing DR/silver, Reflex half. You do not provoke attacks of opportunity for casting spells. Lasts [[1]] round/level.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "cold"
+        ],
+        "critical": "nonCrit"
+      }
+    ]
+  }
+}
