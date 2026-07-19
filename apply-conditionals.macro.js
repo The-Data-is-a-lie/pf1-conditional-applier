@@ -22,6 +22,9 @@
   const MOD_NS = "pf1-conditional-applier";
   const DATA_BASE =
     "https://raw.githubusercontent.com/The-Data-is-a-lie/pf1-conditional-applier/main/data/";
+  // For a SELF-CONTAINED macro, build/bundle_macro.py replaces the next line with the full data
+  // object (-> apply-conditionals.bundled.js). Left null here, the macro fetches from DATA_BASE.
+  const EMBEDDED_DATA = null;
   const ID_ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
   // --- deterministic Foundry-style id from a seed (stable across re-runs so ids dedupe cleanly) ---
@@ -103,12 +106,14 @@
 
   // --- load the frozen data bundle ---
   async function loadData() {
+    if (EMBEDDED_DATA) return EMBEDDED_DATA;              // self-contained (bundled) build
     const files = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
                    "magic_talent_conditionals", "spell_damage_index"];
     const out = {};
     await Promise.all(files.map(async f => {
       const res = await fetch(DATA_BASE + f + ".json", { cache: "no-store" });
-      if (!res.ok) throw new Error(`${f}.json -> HTTP ${res.status}`);
+      if (!res.ok) throw new Error(`${f}.json -> HTTP ${res.status} `
+        + `(is the repo public? or use apply-conditionals.bundled.js, which needs no network)`);
       out[f] = await res.json();
     }));
     return out;
