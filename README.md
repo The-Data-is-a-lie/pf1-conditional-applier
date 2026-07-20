@@ -16,12 +16,21 @@ from a list), run the macro, and it scans the actor and attaches the relevant:
 
 ## Use it
 
-1. Open `apply-conditionals.macro.js`, copy its contents into a new **Script** macro in Foundry.
+**Use `apply-conditionals.bundled.js`** — the self-contained file (data embedded, no network):
+
+1. Copy the entire contents of `apply-conditionals.bundled.js` into a new **Script** macro in Foundry.
 2. Select the token (or none → you'll get a character chooser).
 3. Run the macro. Read the report. Delete the macro when done.
 
-Data is fetched at runtime from this repo's `/data/*.json` (raw GitHub URLs) — no module install
-needed. If you fork/rename the repo, update `DATA_BASE` at the top of the macro.
+That's it — no module install, no GitHub access needed. Regenerate it after any data change with
+`C:\Python310\python.exe build/bundle_macro.py`.
+
+### Source vs bundle
+
+- `apply-conditionals.bundled.js` — **the file you paste into Foundry** (generated; data inlined).
+- `src/apply-conditionals.macro.js` — the editable source. It can also fetch `/data/*.json` from raw
+  GitHub instead of embedding, but that needs the repo **public** (`DATA_BASE` at the top of the
+  file). Edit logic here, then re-run the bundler.
 
 ## Re-run safety
 

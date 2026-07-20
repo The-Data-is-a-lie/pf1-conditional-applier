@@ -14,7 +14,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 DATA = ROOT / "data"
-SRC = ROOT / "apply-conditionals.macro.js"
+SRC = ROOT / "src" / "apply-conditionals.macro.js"
 OUT = ROOT / "apply-conditionals.bundled.js"
 FILES = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
          "magic_talent_conditionals", "spell_damage_index"]
