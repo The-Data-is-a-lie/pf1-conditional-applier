@@ -46,6 +46,17 @@
   const stripSource = n => String(n).replace(/\s*[\(\[][^\)\]]*[\)\]]\s*$/, "").trim();  // "Foo (impale)" -> "Foo"
   const cap = s => { s = String(s || ""); return s ? s[0].toUpperCase() + s.slice(1) : ""; };
   const subInit = (s, init) => String(s == null ? "" : s).replaceAll("@INITMOD", `@abilities.${init}.mod`);
+  // Enriched spell riders restate the save DC as `[[ 10 + @slvl + @castMod ]]`. Substitute those two
+  // tokens to concrete forms from the spell item + the actor's spellbook (@cl stays as the native
+  // @spells.primary.cl.total the data already uses): @slvl -> spell level, @castMod -> casting mod.
+  const subSpell = (s, spellItem, actor) => {
+    const slot = spellItem?.system?.spellbook;
+    const books = actor?.system?.attributes?.spells?.spellbooks || {};
+    const ability = (books[slot] && books[slot].ability) || (books.primary && books.primary.ability) || "int";
+    return String(s == null ? "" : s)
+      .replaceAll("@slvl", String(spellItem?.system?.level ?? 0))
+      .replaceAll("@castMod", `@abilities.${ability}.mod`);
+  };
 
   function labelFormula(formula, srcName, init) {
     formula = subInit(formula, init);
@@ -139,6 +150,7 @@
       specs.push({
         name: rider ? `${it.name}: ${subInit(rider, init)}` : it.name,
         default: isStance, rawMods: entry.modifiers || [], srcName: clean,
+        section: "Path of War",
       });
     }
 
@@ -160,6 +172,7 @@
       specs.push({
         name: rider ? `${nm}: ${subInit(rider, init)}` : nm,
         default: !!entry.default, rawMods: entry.modifiers || [], srcName: nm,
+        section: "Spheres of Power/Might",
       });
     }
 
@@ -186,71 +199,222 @@
         }
         let name = e.name || (parts.length ? `${A.name}: ${parts.join(" & ")}` : A.name);
         if (e.rider) name += `; ${e.rider}`;
-        specs.push({ name, default: false, rawMods, srcName: String(A.name).split(":")[0] });
+        specs.push({ name: subSpell(name, it, actor), default: false, rawMods, srcName: String(A.name).split(":")[0], section: "Spells" });
       }
       if (BC) {
-        const e = BC.e, bits = [], save = e.save || {};
-        if (save.description || save.type) bits.push(String(save.description || `${cap(save.type)} save`));
-        for (const r of (e.riders || [])) bits.push(String(r));
+        const e = BC.e, save = e.save || {};
+        const riders = (e.riders || []).map(String);
+        // The enriched riders now carry a labeled `Save:` clause; only fall back to the raw save
+        // description when no rider states the save, so we don't duplicate it.
+        const ridersStateSave = riders.some(r => /\b(fortitude|reflex|will)\s+save\b/i.test(r));
+        const bits = [];
+        if (!ridersStateSave && (save.description || save.type)) bits.push(String(save.description || `${cap(save.type)} save`));
+        for (const r of riders) bits.push(r);
         const riderText = bits.filter(Boolean).join("; ");
         const rawMods = [];
         if (e.attack) for (const [formula, dtypes] of (dmg[it.name.toLowerCase()] || []))
           rawMods.push({ formula, target: "damage", subTarget: "allDamage", type: "untyped",
             damageType: Array.isArray(dtypes) ? dtypes : [], critical: "nonCrit" });
-        specs.push({ name: riderText ? `${BC.name}: ${subInit(riderText, init)}` : BC.name,
-          default: false, rawMods, srcName: BC.name });
+        specs.push({ name: subSpell(riderText ? `${BC.name}: ${subInit(riderText, init)}` : BC.name, it, actor),
+          default: false, rawMods, srcName: BC.name, section: "Spells" });
       }
     }
     return { specs, gaps };
   }
 
-  // --- apply the specs to every weapon, idempotently ---
-  function applyToWeapons(actor, specs, init) {
-    const weapons = actor.items.filter(i => i.type === "weapon" || i.type === "attack");
-    const updates = [];
-    let weaponsTouched = 0;
-    for (const w of weapons) {
-      const src = w.toObject();
-      const actions = src.system?.actions || [];
-      if (!actions.length) continue;
-      const action = actions[0];
-      if (!Array.isArray(action.conditionals)) action.conditionals = [];
-      const prev = new Set((src.flags?.[MOD_NS]?.condIds) || []);
-      action.conditionals = action.conditionals.filter(c => !(c && prev.has(c._id)));   // drop our old ones
-      const seen = new Set(action.conditionals.map(c => c && c.name));                  // keep hand-made
-      const newIds = [];
-      for (const spec of specs) {
-        if (seen.has(spec.name)) continue;
-        seen.add(spec.name);
-        const seed = `${w.id}|${spec.name}`;
-        const cid = detId(seed, 8);
-        action.conditionals.push({
-          _id: cid, name: spec.name, default: !!spec.default,
-          modifiers: (spec.rawMods || []).map((m, i) => mkMod(m, spec.srcName, seed, i, init)),
-        });
-        newIds.push(cid);
-      }
-      updates.push({ _id: w.id, "system.actions": actions, [`flags.${MOD_NS}.condIds`]: newIds });
-      weaponsTouched++;
+  // --- apply the chosen rows to ONE weapon's chosen action, idempotently ---
+  // Returns the embedded-document update object, or null if the weapon/action is unusable.
+  function applyToWeapon(actor, weaponId, actionIdx, rows, init) {
+    const w = actor.items.get(weaponId);
+    if (!w) return null;
+    const src = w.toObject();
+    const actions = src.system?.actions || [];
+    const action = actions[actionIdx] || actions[0];
+    if (!action) return null;
+    if (!Array.isArray(action.conditionals)) action.conditionals = [];
+    const prev = new Set((src.flags?.[MOD_NS]?.condIds) || []);
+    action.conditionals = action.conditionals.filter(c => !(c && prev.has(c._id)));   // drop our old ones
+    const seen = new Set(action.conditionals.map(c => c && c.name));                  // keep hand-made
+    const newIds = [];
+
+    // Inert section dividers (empty modifiers => an unchecked checkbox that does nothing) so the
+    // long attack-dialog list reads as grouped: General -> Path of War -> Spheres -> Spells.
+    const GENERAL_LABEL = "──────  GENERAL (FEATS & ITEMS)  ──────";
+    const SECT_LABEL = {
+      "Path of War": "──────  PATH OF WAR  ──────",
+      "Spheres of Power/Might": "──────  SPHERES  ──────",
+      "Spells": "──────  SPELLS  ──────",
+    };
+    const RANK = { "Path of War": 0, "Spheres of Power/Might": 1, "Spells": 2 };
+    const sep = (seed, name) => {
+      const sid = detId(seed, 8);
+      newIds.push(sid);
+      return { _id: sid, name, default: false, modifiers: [] };
+    };
+
+    // A "General" header above the feat/item conditionals already on the weapon (kept above, not in
+    // `rows`). Only when some remain, so a weapon with no feat/item conditionals gets no empty header.
+    if (action.conditionals.length) {
+      action.conditionals.unshift(sep(`${weaponId}|__sep__|general`, GENERAL_LABEL));
     }
-    return { updates, weaponsTouched };
+
+    // Enforce the section order (natural spec order already matches; this makes it robust).
+    const ordered = rows
+      .map((r, i) => ({ r, i }))
+      .sort((a, b) => ((RANK[a.r.section] ?? 9) - (RANK[b.r.section] ?? 9)) || (a.i - b.i))
+      .map(x => x.r);
+
+    let curSection = null;
+    for (const r of ordered) {
+      if (!r.include || !r.name || seen.has(r.name)) continue;
+      if (r.section && r.section !== curSection && SECT_LABEL[r.section]) {   // first row of a section
+        curSection = r.section;
+        action.conditionals.push(sep(`${weaponId}|__sep__|${r.section}`, SECT_LABEL[r.section]));
+      }
+      seen.add(r.name);
+      const seed = `${weaponId}|${r.origName}`;                 // seed on the STABLE build-time name
+      const cid = detId(seed, 8);
+      action.conditionals.push({
+        _id: cid, name: r.name, default: !!r.def,
+        modifiers: (r.rawMods || []).map((m, i) => mkMod(m, r.srcName, seed, i, init)),
+      });
+      newIds.push(cid);
+    }
+    return { _id: weaponId, "system.actions": actions, [`flags.${MOD_NS}.condIds`]: newIds };
   }
 
-  function report(actor, res, gaps, init) {
-    const li = arr => arr.length ? `<ul style="margin:.25em 0 .75em 1em">${arr.map(x => `<li>${x}</li>`).join("")}</ul>` : `<p style="margin:.25em 0 .75em 1em"><em>none</em></p>`;
+  // --- the per-weapon review/edit dialog (stays open; edits persist to an actor flag) ---
+  function openDialog(actor, specs, gaps, init) {
+    const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const weapons = actor.items.filter(i => i.type === "weapon" || i.type === "attack");
+    if (!weapons.length) { ui.notifications.warn(`${actor.name}: no weapon/attack items to apply to.`); return; }
+    // Persisted per-weapon overrides: { [weaponId]: { [origName]: {include, default, name} } }.
+    // Read/write the RAW flags object (not getFlag/setFlag — those reject an unregistered scope, and
+    // this macro isn't an installed module; a direct document update accepts any flag path, exactly
+    // like the per-weapon condIds flag below).
+    const overrides = foundry.utils.deepClone(actor.flags?.[MOD_NS]?.overrides || {});
+
+    // Build the editable row state for a weapon from specs + any saved overrides.
+    const rowsFor = weaponId => {
+      const ov = overrides[weaponId] || {};
+      return specs.map(s => {
+        const o = ov[s.name] || {};
+        return {
+          origName: s.name, srcName: s.srcName, rawMods: s.rawMods, section: s.section,
+          include: o.include !== undefined ? o.include : true,
+          def: o.default !== undefined ? o.default : !!s.default,
+          name: o.name !== undefined ? o.name : s.name,
+        };
+      });
+    };
+
+    let curWeaponId = weapons[0].id, curActionIdx = 0, curRows = [];
+
+    const rowHtml = (r, i) => {
+      const mods = (r.rawMods || []).map(m => `${m.formula} → ${m.target}`).join(", ") || "—";
+      const editable = String(r.name).split("; ").join(";\n");   // one clause per line for editing
+      return `<details class="cond-row" data-i="${i}" style="border:1px solid rgba(0,0,0,.15);border-radius:4px;margin:3px 0;padding:1px 6px">
+        <summary style="cursor:pointer;list-style:none">
+          <label style="cursor:pointer"><input type="checkbox" class="inc" ${r.include ? "checked" : ""}></label>
+          <strong>${esc(String(r.name).split(":")[0].slice(0, 70))}</strong>
+        </summary>
+        <div style="padding:4px 2px 6px">
+          <label style="font-size:.85em"><input type="checkbox" class="def" ${r.def ? "checked" : ""}> on by default (per-roll)</label>
+          <textarea class="txt" rows="4" style="width:100%;font-size:.82em;font-family:monospace">${esc(editable)}</textarea>
+          <div style="font-size:.78em;opacity:.7">modifiers: ${esc(mods)}</div>
+        </div>
+      </details>`;
+    };
+
+    const weaponOpts = weapons.map(w => `<option value="${w.id}">${esc(w.name)} [${w.type}]</option>`).join("");
+    const li = arr => arr.length ? `<ul style="margin:.2em 0 .5em 1em">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<em>none</em>`;
+    const gapCount = gaps.spells.length + gaps.maneuvers.length + gaps.talents.length;
     const content = `
-      <div style="max-height:60vh;overflow:auto">
-        <p><strong>${actor.name}</strong> — applied <strong>${res.applied}</strong> conditional(s)
-           to <strong>${res.weaponsTouched}</strong> weapon(s). Init ability: <code>${init}</code>.</p>
+      <div style="min-width:520px">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:4px">
+          <label>Weapon: <select id="weapon-sel" style="max-width:250px">${weaponOpts}</select></label>
+          <span id="action-wrap" style="display:none"></span>
+          <button type="button" id="toggle-all"><i class="fas fa-check-double"></i> All on/off</button>
+          <button type="button" id="apply-weapon"><i class="fas fa-check"></i> Apply to this weapon</button>
+        </div>
+        <p style="font-size:.78em;margin:.2em 0;opacity:.75">Uncheck to exclude a conditional; expand a row to edit its clauses or per-roll default. Edits persist per weapon and survive re-runs.</p>
+        <div id="cond-rows" style="max-height:52vh;overflow:auto"></div>
         <hr>
-        <p><strong>No conditional found (curation gaps):</strong></p>
-        <p style="margin:0"><strong>Spells (${gaps.spells.length})</strong></p>${li(gaps.spells)}
-        <p style="margin:0"><strong>Maneuvers (${gaps.maneuvers.length})</strong></p>${li(gaps.maneuvers)}
-        <p style="margin:0"><strong>Talents (${gaps.talents.length})</strong></p>${li(gaps.talents)}
+        <details style="font-size:.85em"><summary>Curation gaps (${gapCount})</summary>
+          <div style="max-height:22vh;overflow:auto">
+            <strong>Spells (${gaps.spells.length})</strong>${li(gaps.spells)}
+            <strong>Maneuvers (${gaps.maneuvers.length})</strong>${li(gaps.maneuvers)}
+            <strong>Talents (${gaps.talents.length})</strong>${li(gaps.talents)}
+          </div>
+        </details>
       </div>`;
-    new Dialog({ title: "Apply Conditionals — report", content,
-      buttons: { ok: { label: "Close" } }, default: "ok" }).render(true);
-    console.log(`[${MOD_NS}]`, { actor: actor.name, ...res, gaps });
+
+    new Dialog({
+      title: `Apply Conditionals — ${actor.name} (init: ${init})`,
+      content,
+      buttons: { done: { icon: '<i class="fas fa-flag-checkered"></i>', label: "Done" } },
+      default: "done",
+      render: html => {
+        const renderActionSel = () => {
+          const w = actor.items.get(curWeaponId);
+          const actions = w?.system?.actions || [];
+          const wrap = html.find("#action-wrap");
+          if (actions.length > 1) {
+            const opts = actions.map((a, idx) => `<option value="${idx}" ${idx === curActionIdx ? "selected" : ""}>${esc(a.name || ("action " + idx))}</option>`).join("");
+            wrap.html(`Action: <select id="action-sel">${opts}</select>`).show();
+          } else { wrap.empty().hide(); }
+        };
+        const sectionHeader = name => `<div class="cond-section" style="display:flex;align-items:center;gap:8px;margin:8px 0 2px;padding-bottom:2px;border-bottom:1px solid rgba(0,0,0,.25)">
+          <strong style="flex:1">${esc(name)}</strong>
+          <button type="button" class="toggle-section" data-section="${esc(name)}" style="font-size:.8em">All on/off</button>
+        </div>`;
+        const renderRows = () => {
+          curRows = rowsFor(curWeaponId);
+          if (!curRows.length) { html.find("#cond-rows").html("<p><em>Nothing to apply — actor has no matching spells/maneuvers/talents.</em></p>"); return; }
+          let out = "", lastSection = null;
+          curRows.forEach((r, i) => {
+            const sec = r.section || "Other";
+            if (sec !== lastSection) { out += sectionHeader(sec); lastSection = sec; }
+            out += rowHtml(r, i);
+          });
+          html.find("#cond-rows").html(out);
+        };
+        const rowIdx = ev => +ev.target.closest(".cond-row").dataset.i;
+
+        html.on("change", "#weapon-sel", ev => { curWeaponId = ev.target.value; curActionIdx = 0; renderActionSel(); renderRows(); });
+        html.on("change", "#action-sel", ev => { curActionIdx = +ev.target.value; });
+        html.on("change", ".cond-row .inc", ev => { curRows[rowIdx(ev)].include = ev.target.checked; });
+        html.on("change", ".cond-row .def", ev => { curRows[rowIdx(ev)].def = ev.target.checked; });
+        html.on("input", ".cond-row .txt", ev => { curRows[rowIdx(ev)].name = ev.target.value.replace(/\s*\n+\s*/g, "; ").trim(); });
+        const setInclude = (idxs) => {
+          const newState = !idxs.every(i => curRows[i].include);
+          for (const i of idxs) {
+            curRows[i].include = newState;
+            html.find(`.cond-row[data-i="${i}"] .inc`).prop("checked", newState);
+          }
+        };
+        html.on("click", "#toggle-all", ev => { ev.preventDefault(); setInclude(curRows.map((_, i) => i)); });
+        html.on("click", ".toggle-section", ev => {
+          ev.preventDefault();
+          const sec = ev.target.closest(".toggle-section").dataset.section;
+          setInclude(curRows.map((r, i) => [r, i]).filter(([r]) => (r.section || "Other") === sec).map(([, i]) => i));
+        });
+        html.on("click", "#apply-weapon", async ev => {
+          ev.preventDefault();
+          const upd = applyToWeapon(actor, curWeaponId, curActionIdx, curRows, init);
+          if (!upd) { ui.notifications.warn("Selected weapon has no attack action to apply to."); return; }
+          overrides[curWeaponId] = {};
+          for (const r of curRows) overrides[curWeaponId][r.origName] = { include: r.include, default: r.def, name: r.name };
+          await actor.update({ [`flags.${MOD_NS}.overrides`]: overrides });
+          await actor.updateEmbeddedDocuments("Item", [upd]);
+          const n = curRows.filter(r => r.include).length;
+          ui.notifications.info(`Applied ${n} conditional(s) to ${actor.items.get(curWeaponId)?.name}.`);
+        });
+
+        renderActionSel();
+        renderRows();
+      },
+    }, { width: 600, resizable: true }).render(true);
   }
 
   // --- run ---
@@ -260,12 +424,7 @@
     const data = await loadData();
     const init = initAttr(actor);
     const { specs, gaps } = buildSpecs(actor, data, init);
-    const { updates, weaponsTouched } = applyToWeapons(actor, specs, init);
-    if (!updates.length) { ui.notifications.warn(`${actor.name}: no weapons with an attack action to apply to.`); return; }
-    await actor.updateEmbeddedDocuments("Item", updates);
-    const applied = specs.length * weaponsTouched;
-    ui.notifications.info(`Applied ${applied} conditional(s) across ${weaponsTouched} weapon(s) on ${actor.name}.`);
-    report(actor, { applied, weaponsTouched }, gaps, init);
+    openDialog(actor, specs, gaps, init);
   } catch (err) {
     console.error(`[${MOD_NS}] error:`, err);
     ui.notifications.error(`Apply Conditionals failed: ${err.message}`);
