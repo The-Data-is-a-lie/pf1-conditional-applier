@@ -46,17 +46,64 @@
   const stripSource = n => String(n).replace(/\s*[\(\[][^\)\]]*[\)\]]\s*$/, "").trim();  // "Foo (impale)" -> "Foo"
   const cap = s => { s = String(s || ""); return s ? s[0].toUpperCase() + s.slice(1) : ""; };
   const subInit = (s, init) => String(s == null ? "" : s).replaceAll("@INITMOD", `@abilities.${init}.mod`);
-  // Enriched spell riders restate the save DC as `[[ 10 + @slvl + @castMod ]]`. Substitute those two
-  // tokens to concrete forms from the spell item + the actor's spellbook (@cl stays as the native
-  // @spells.primary.cl.total the data already uses): @slvl -> spell level, @castMod -> casting mod.
+  // Combined pf1-spell caster level (homebrew): each casting class contributes its FULL class level
+  // (high/med) or level-3 for a 'low' caster, summed over the spellbooks and floored to 1. Mirrors the
+  // generator module's spellCLExpr(). Uses @classes.<tag>.level -- pf1 leaves @spells.<book>.cl.total
+  // at full class level even for a low caster (casterType only drives slots), so summing raw tokens
+  // would over-count a low caster by 3.
+  function spellCLExpr(actor) {
+    const books = actor?.system?.attributes?.spells?.spellbooks || {};
+    const terms = ["primary", "secondary", "tertiary"]
+      .map(s => books[s]).filter(b => b && b.inUse && b.class)
+      .map(b => {
+        const lvl = `@classes.${b.class}.level`;
+        return b.casterType === "low" ? `max(${lvl} - 3, 0)` : lvl;   // only a positive 'low' gets -3
+      });
+    return `max(${terms.join(" + ") || "0"}, 1)`;
+  }
+  // Enriched spell riders restate the save DC as `[[ 10 + @slvl + @castMod ]]` and scale off
+  // `@spells.primary.cl.total`. Substitute all three to concrete forms at attach time: @slvl -> spell
+  // level, @castMod -> casting mod, and the CL token -> the combined+low-3 expression above.
   const subSpell = (s, spellItem, actor) => {
     const slot = spellItem?.system?.spellbook;
     const books = actor?.system?.attributes?.spells?.spellbooks || {};
     const ability = (books[slot] && books[slot].ability) || (books.primary && books.primary.ability) || "int";
     return String(s == null ? "" : s)
+      .replaceAll("@spells.primary.cl.total", spellCLExpr(actor))
       .replaceAll("@slvl", String(spellItem?.system?.level ?? 0))
       .replaceAll("@castMod", `@abilities.${ability}.mod`);
   };
+  // Spheres tokens only resolve when pf1spheres populates them (a real spheres class). For an actor
+  // with no native sphere CL (a dabbler, or a non-spheres actor), substitute them the way the
+  // generator module does: @spheres.cl.total -> a BAB-tier caster level (high=level, med=3/4, low=1/2,
+  // floored to 1) from the pf1 spellbooks, and @spheres.cam/@spheres.pam -> the casting/practitioner
+  // ability mod. A real spheres caster (native @spheres.cl.total > 0) keeps the native tokens.
+  function sphereCLExpr(actor) {
+    const books = actor?.system?.attributes?.spells?.spellbooks || {};
+    const terms = ["primary", "secondary", "tertiary"]
+      .map(s => books[s]).filter(b => b && b.inUse && b.class)
+      .map(b => {
+        const lvl = `@classes.${b.class}.level`;
+        if (b.casterType === "high") return lvl;
+        if (b.casterType === "med") return `floor(3 * ${lvl} / 4)`;
+        return `floor(${lvl} / 2)`;
+      });
+    return `max(${terms.join(" + ") || "0"}, 1)`;
+  }
+  function makeSubSph(actor) {
+    if (Number(actor?.system?.spheres?.cl?.total) > 0) return s => String(s == null ? "" : s);  // native
+    const ab = actor?.system?.abilities || {};
+    const bestMental = () => { let b = "cha", bv = -Infinity;
+      for (const s of ["int", "wis", "cha"]) { const v = ab[s]?.total ?? ab[s]?.value ?? 0; if (v > bv) { bv = v; b = s; } }
+      return b; };
+    const cam = actor?.flags?.pf1spheres?.castingAbility || bestMental();
+    const pam = actor?.flags?.pf1spheres?.practitionerAbility || initAttr(actor);
+    const clExpr = sphereCLExpr(actor);
+    return s => String(s == null ? "" : s)
+      .replaceAll("@spheres.cl.total", clExpr)
+      .replaceAll("@spheres.cam", `@abilities.${cam}.mod`)
+      .replaceAll("@spheres.pam", `@abilities.${pam}.mod`);
+  }
 
   function labelFormula(formula, srcName, init) {
     formula = subInit(formula, init);
@@ -134,6 +181,7 @@
   function buildSpecs(actor, data, init) {
     const specs = [];                              // {name, default, rawMods, srcName}
     const gaps = { maneuvers: [], talents: [], spells: [] };
+    const subSph = makeSubSph(actor);              // @spheres.* -> concrete forms for a dabbler (else no-op)
 
     // Path of War maneuvers / damaging stances
     const manTbl = {}; for (const [k, v] of Object.entries(data.maneuver_changes || {})) manTbl[norm(k)] = v;
@@ -170,9 +218,10 @@
       const hasMods = Array.isArray(entry.modifiers) && entry.modifiers.length;
       if (!rider && !hasMods) { gaps.talents.push(nm); continue; }
       specs.push({
-        name: rider ? `${nm}: ${subInit(rider, init)}` : nm,
-        default: !!entry.default, rawMods: entry.modifiers || [], srcName: nm,
-        section: "Spheres of Power/Might",
+        name: rider ? `${nm}: ${subInit(subSph(rider), init)}` : nm,
+        default: !!entry.default,
+        rawMods: (entry.modifiers || []).map(m => ({ ...m, formula: subSph(m.formula) })),
+        srcName: nm, section: "Spheres of Power/Might",
       });
     }
 
@@ -199,7 +248,9 @@
         }
         let name = e.name || (parts.length ? `${A.name}: ${parts.join(" & ")}` : A.name);
         if (e.rider) name += `; ${e.rider}`;
-        specs.push({ name: subSpell(name, it, actor), default: false, rawMods, srcName: String(A.name).split(":")[0], section: "Spells" });
+        specs.push({ name: subSpell(name, it, actor), default: false,
+          rawMods: rawMods.map(m => ({ ...m, formula: subSpell(m.formula, it, actor) })),
+          srcName: String(A.name).split(":")[0], section: "Spells" });
       }
       if (BC) {
         const e = BC.e, save = e.save || {};
@@ -213,7 +264,7 @@
         const riderText = bits.filter(Boolean).join("; ");
         const rawMods = [];
         if (e.attack) for (const [formula, dtypes] of (dmg[it.name.toLowerCase()] || []))
-          rawMods.push({ formula, target: "damage", subTarget: "allDamage", type: "untyped",
+          rawMods.push({ formula: subSpell(formula, it, actor), target: "damage", subTarget: "allDamage", type: "untyped",
             damageType: Array.isArray(dtypes) ? dtypes : [], critical: "nonCrit" });
         specs.push({ name: subSpell(riderText ? `${BC.name}: ${subInit(riderText, init)}` : BC.name, it, actor),
           default: false, rawMods, srcName: BC.name, section: "Spells" });
