@@ -322,8 +322,9 @@
       "Path of War": "──────  PATH OF WAR  ──────",
       "Spheres of Power/Might": "──────  SPHERES  ──────",
       "Spells": "──────  SPELLS  ──────",
+      "On Other Attacks": "──────  FROM OTHER ATTACKS  ──────",
     };
-    const RANK = { "Path of War": 0, "Spheres of Power/Might": 1, "Spells": 2 };
+    const RANK = { "Path of War": 0, "Spheres of Power/Might": 1, "Spells": 2, "On Other Attacks": 3 };
     const sep = (seed, name) => {
       const sid = detId(seed, 8);
       newIds.push(sid);
@@ -372,14 +373,52 @@
     // like the per-weapon condIds flag below).
     const overrides = foundry.utils.deepClone(actor.flags?.[MOD_NS]?.overrides || {});
 
-    // Build the editable row state for a weapon from specs + any saved overrides.
+    const prefixOf = n => {                         // the buff name = text before the first ":"
+      const s = String(n == null ? "" : n);
+      const i = s.indexOf(":");
+      return (i >= 0 ? s.slice(0, i) : s).trim();
+    };
+    // Conditionals that already live on the actor's OTHER, differently-named weapons/attacks, offered
+    // as an opt-in "On Other Attacks" section (default OFF) so you can copy any onto THIS weapon with
+    // its real modifiers. Excludes: this weapon's same-named twin; dividers / inert name-only entries;
+    // prefixes already offered by the built-in sections (base specs) or already on this weapon. Deduped
+    // by name prefix. Recomputed per selected weapon (rowsFor takes weaponId).
+    const otherAttackSpecs = weaponId => {
+      const w = actor.items.get(weaponId);
+      const baseP = new Set(specs.map(s => prefixOf(s.name)));
+      const ownP = new Set();
+      for (const act of (w?.system?.actions || []))
+        for (const c of (act.conditionals || [])) ownP.add(prefixOf(c && c.name));
+      const out = [], seen = new Set();
+      for (const it of actor.items) {
+        if (!(it.type === "weapon" || it.type === "attack")) continue;
+        if (it.id === weaponId || (w && it.name === w.name)) continue;    // skip self + same-named twin
+        for (const act of (it.system?.actions || [])) {
+          for (const c of (act.conditionals || [])) {
+            if (!c) continue;
+            const mods = c.modifiers || [];
+            if (!mods.length && !String(c.name).includes(":")) continue;  // dividers / inert name-only
+            const p = prefixOf(c.name);
+            if (!p || seen.has(p) || baseP.has(p) || ownP.has(p)) continue;
+            seen.add(p);
+            out.push({ name: c.name, srcName: p, rawMods: mods, section: "On Other Attacks",
+                       default: !!c.default, _defaultInclude: false });
+          }
+        }
+      }
+      return out.sort((a, b) => prefixOf(a.name).localeCompare(prefixOf(b.name)));
+    };
+
+    // Build the editable row state for a weapon from specs (+ the weapon-specific "On Other Attacks"
+    // rows) and any saved overrides.
     const rowsFor = weaponId => {
       const ov = overrides[weaponId] || {};
-      return specs.map(s => {
+      return specs.concat(otherAttackSpecs(weaponId)).map(s => {
         const o = ov[s.name] || {};
         return {
           origName: s.name, srcName: s.srcName, rawMods: s.rawMods, section: s.section,
-          include: o.include !== undefined ? o.include : true,
+          include: o.include !== undefined ? o.include
+                   : (s._defaultInclude !== undefined ? s._defaultInclude : true),
           def: o.default !== undefined ? o.default : !!s.default,
           name: o.name !== undefined ? o.name : s.name,
         };
