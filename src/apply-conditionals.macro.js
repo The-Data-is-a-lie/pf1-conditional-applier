@@ -2,6 +2,9 @@
  * Apply Conditionals — a run-on-demand Foundry (pf1, v13) macro.
  *
  * Scans the chosen actor and wires the relevant conditionals onto ALL its weapons' attack actions:
+ *   • Active feats                    (actor items of type "feat", matched by name)
+ *   • Weapon special abilities        (qualities read off the weapon's own description)
+ *   • Class-feature toggles           (rage powers, arcana, ki powers, rogue/ninja/slayer talents)
  *   • Path of War maneuvers/stances  (actor items of type "pf1-pow.maneuver")
  *   • Spheres of Power/Might talents  (actor items flagged flags.pf1spheres.sphere)
  *   • Spells                          (actor items of type "spell", matched by name)
@@ -44,7 +47,54 @@
   const norm = s => String(s).toLowerCase().replace(/['’`]/g, "").replace(/\s+/g, " ").trim();
   const stripPrefix = n => String(n).replace(/^\((?:Strike|Boost|Counter|Stance)\)\s*/i, "").trim();
   const stripSource = n => String(n).replace(/\s*[\(\[][^\)\]]*[\)\]]\s*$/, "").trim();  // "Foo (impale)" -> "Foo"
+  // "(Rage Power 4) Reckless Abandon" -> "Reckless Abandon": the generator labels every class-feature
+  // item with its bucket and the level it was gained at (updateClassFeatures -> mkFeature).
+  const stripLabel = n => String(n).replace(/^\([^)]*\)\s*/, "").trim();
+  // Curated class-feature key -- the backend's _cfe_key: drop a trailing (Su)/(Ex)/(Sp), then norm.
+  const cfKey = n => norm(String(n).replace(/\s*\((?:su|ex|sp)\)\s*$/i, ""));
+  // The buff name = the text before the first ":" (conditional names are "Name: rider text").
+  const prefixOf = n => {
+    const s = String(n == null ? "" : n);
+    const i = s.indexOf(":");
+    return (i >= 0 ? s.slice(0, i) : s).trim();
+  };
   const cap = s => { s = String(s || ""); return s ? s[0].toUpperCase() + s.slice(1) : ""; };
+  // Curated class-feature formulas name the CANONICAL class (@classes.rogue.level,
+  // @classes.barbarian.level) because the shared talent pools are authored once -- but the power may
+  // sit on a sibling class, and pf1 tags Unchained variants separately ("Barbarian (Unchained)" ->
+  // "barbarianUnchained"), so an Unchained Rogue's Crippling Strike would silently evaluate to 0.
+  // Retarget the token to a sibling the actor actually has (the backend's _bucket_classes mapping,
+  // plus the Unchained tags it misses). ok=false -> no class on this actor can resolve it, and the
+  // caller drops the conditional into the curation-gap list instead of applying a silent zero.
+  const CLASS_SIBLINGS = {
+    barbarian: ["barbarianUnchained", "skald"],
+    rogue: ["rogueUnchained", "ninja", "slayer"],
+    witch: ["shaman"],
+    monk: ["monkUnchained"],
+  };
+  const classTags = actor => new Set([...actor.items]
+    .filter(i => i.type === "class").map(i => i.system?.tag).filter(Boolean));
+  function retargetClassLevel(text, tags) {
+    let ok = true;
+    const out = String(text == null ? "" : text).replace(/@classes\.(\w+)\.level/g, (m, tag) => {
+      if (tags.has(tag)) return m;
+      const sib = (CLASS_SIBLINGS[tag] || []).find(s => tags.has(s));
+      if (sib) return `@classes.${sib}.level`;
+      ok = false;
+      return m;
+    });
+    return { text: out, ok };
+  }
+  // Melee/ranged intent: read off a curated conditional NAME ("-1 melee attack", "ranged attack") and
+  // off a pf1 action type (mwak/msak/mcman vs rwak/rsak/rcman). A row whose intent contradicts the
+  // action it would attach to (Power Attack on a bow) is offered UNCHECKED -- never hidden, and a
+  // saved override always wins.
+  const specWeaponType = n => /\branged\b|\bthrown\b/i.test(n) ? "ranged"
+                            : (/\bmelee\b/i.test(n) ? "melee" : null);
+  const actionWeaponType = a => {
+    const t = String((a && a.actionType) || "");
+    return /^r/.test(t) ? "ranged" : (/^m/.test(t) ? "melee" : null);
+  };
   const subInit = (s, init) => String(s == null ? "" : s).replaceAll("@INITMOD", `@abilities.${init}.mod`);
   // Combined pf1-spell caster level (homebrew): each casting class contributes its FULL class level
   // (high/med) or level-3 for a 'low' caster, summed over the spellbooks and floored to 1. Mirrors the
@@ -192,7 +242,8 @@
   async function loadData() {
     if (EMBEDDED_DATA) return EMBEDDED_DATA;              // self-contained (bundled) build
     const files = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
-                   "magic_talent_conditionals", "spell_damage_index"];
+                   "magic_talent_conditionals", "spell_damage_index", "feat_conditionals",
+                   "weapon_quality_conditionals", "class_feature_conditionals"];
     const out = {};
     await Promise.all(files.map(async f => {
       const res = await fetch(DATA_BASE + f + ".json", { cache: "no-store" });
@@ -205,9 +256,45 @@
 
   // --- build the weapon-independent conditional specs from what the actor knows ---
   function buildSpecs(actor, data, init) {
-    const specs = [];                              // {name, default, rawMods, srcName}
-    const gaps = { maneuvers: [], talents: [], spells: [] };
+    const specs = [];                              // {name, default, rawMods, srcName, weaponType?}
+    const gaps = { maneuvers: [], talents: [], spells: [], qualities: [], classFeatures: [] };
     const subSph = makeSubSph(actor);              // @spheres.* -> concrete forms for a dabbler (else no-op)
+
+    // Active-feat toggles (Power Attack, Deadly Aim, Combat Expertise, ...) and class-feature toggles
+    // (rage powers, magus arcana, ki powers, rogue/ninja/slayer talents) -- both live on `feat` items
+    // (class features are feat/subType "classFeat"). The generator attaches the feat ones to its main
+    // weapon only (addFeatConditionals) and never attaches the class-feature ones at all, so this is
+    // the only path that puts either on the attack twin or a second weapon.
+    const featTbl = {}; for (const [k, v] of Object.entries(data.feat_conditionals || {})) featTbl[norm(k)] = v;
+    // Class-feature sections are flattened: the rogue/ninja/slayer duplicates are identical, and the
+    // item name carries no bucket to key on beyond the label stripLabel() removes.
+    const cfTbl = {}; for (const pool of Object.values(data.class_feature_conditionals || {}))
+      for (const [k, v] of Object.entries(pool || {})) cfTbl[cfKey(k)] = v;
+    const tags = classTags(actor);
+    for (const it of actor.items) {
+      if (it.type !== "feat") continue;
+      const fEntry = featTbl[norm(it.name)];
+      if (fEntry && fEntry.name) {
+        specs.push({ name: fEntry.name, default: !!fEntry.default, rawMods: fEntry.modifiers || [],
+                     srcName: prefixOf(fEntry.name), section: "Feats",
+                     weaponType: specWeaponType(fEntry.name) });
+      }
+      for (const cond of (cfTbl[cfKey(stripLabel(it.name))] || [])) {
+        const resolved = [retargetClassLevel(cond.name || it.name, tags)];
+        const rawMods = (cond.modifiers || []).map(m => {
+          const r = retargetClassLevel(m.formula, tags);
+          resolved.push(r);
+          return { ...m, formula: r.text };
+        });
+        if (resolved.some(r => !r.ok)) {            // no class on this actor resolves its level
+          gaps.classFeatures.push(`${it.name}  (unresolved class level)`);
+          continue;
+        }
+        specs.push({ name: resolved[0].text, default: !!cond.default, rawMods,
+                     srcName: prefixOf(resolved[0].text), section: "Class Features",
+                     weaponType: specWeaponType(resolved[0].text) });
+      }
+    }
 
     // Path of War maneuvers / damaging stances
     const manTbl = {}; for (const [k, v] of Object.entries(data.maneuver_changes || {})) manTbl[norm(k)] = v;
@@ -296,8 +383,125 @@
           default: false, rawMods, srcName: BC.name, section: "Spells" });
       }
     }
+
+    // Weapon special abilities are per-weapon (weaponQualitySpecs), but the gap panel is rendered
+    // once, before a weapon is picked -- so collect the uncurated ones across every weapon/attack
+    // item here. Empty today (all 197 scraped qualities are curated); it catches hand-typed markup
+    // and anything the backend adds later.
+    const qualTbl = qualityTable(data), qSeen = new Set();
+    for (const it of actor.items) {
+      if (!(it.type === "weapon" || it.type === "attack")) continue;
+      for (const q of detectQualities(it)) {
+        const k = norm(q);
+        if (qualTbl[k] || qSeen.has(k)) continue;
+        qSeen.add(k);
+        gaps.qualities.push(q);
+      }
+    }
     return { specs, gaps };
   }
+
+  // --- weapon special abilities (Flaming, Keen, ...) carried by ONE weapon/attack item ---
+  // Detection is description-only, from the two blocks the generator writes:
+  //   appendEnhancementsToDescription -> "<strong>Special abilities:</strong> Corrosive, Keen"
+  //     (on BOTH the inventory weapon and its rollable attack twin)
+  //   appendQualityDescription        -> "<h3>Corrosive</h3><p>rules text</p>" (weapon item only)
+  // Matching quality names inside the ITEM NAME is deliberately NOT done: "Aldori Dueling Sword",
+  // "Throwing Axe" and "Flying Blade" all collide with real qualities (13 of the 474 base weapons
+  // do), and it buys nothing -- the generator only stamps qualities into the name when the leftover
+  // enhancement budget reaches +1.
+  const detectQualities = item => {
+    const desc = String(item?.system?.description?.value || "");
+    const out = [];
+    const line = desc.match(/<strong>\s*Special abilities:\s*<\/strong>([^<]*)/i);
+    if (line) for (const part of line[1].split(",")) { const s = part.trim(); if (s) out.push(s); }
+    for (const m of desc.matchAll(/<h3>([^<]+)<\/h3>/gi)) { const s = m[1].trim(); if (s) out.push(s); }
+    return out;
+  };
+  const qualityTable = data => {
+    const o = {};
+    for (const [k, v] of Object.entries(data.weapon_quality_conditionals || {})) o[norm(k)] = { name: k, conds: v };
+    return o;
+  };
+  function weaponQualitySpecs(actor, weaponId, data) {
+    const it = actor.items.get(weaponId);
+    if (!it) return [];
+    const tbl = qualityTable(data), out = [], seen = new Set();
+    for (const q of detectQualities(it)) {
+      const k = norm(q);
+      if (seen.has(k)) continue;
+      seen.add(k);
+      const hit = tbl[k];
+      if (!hit) continue;                          // uncurated -> reported by the gap panel
+      for (const cond of (hit.conds || [])) {
+        const name = cond.name || hit.name;
+        out.push({ name, default: cond.default !== false, rawMods: cond.modifiers || [],
+                   srcName: prefixOf(name), section: "Weapon Qualities",
+                   weaponType: specWeaponType(name) });
+      }
+    }
+    return out;
+  }
+
+  // Conditionals that already live on the actor's OTHER, differently-named weapons/attacks, offered
+  // as an opt-in "On Other Attacks" section (default OFF) so you can copy any onto THIS weapon with
+  // its real modifiers. Excludes: this weapon's same-named twin; dividers / inert name-only entries;
+  // prefixes already offered by the built-in sections (base specs + this weapon's quality rows) or
+  // already on this weapon. Deduped by name prefix. Recomputed per selected weapon.
+  function otherAttackSpecs(actor, specs, weaponId, extraPrefixes) {
+    const w = actor.items.get(weaponId);
+    const baseP = new Set(specs.map(s => prefixOf(s.name)));
+    for (const p of (extraPrefixes || [])) baseP.add(p);
+    const ownP = new Set();
+    for (const act of (w?.system?.actions || []))
+      for (const c of (act.conditionals || [])) ownP.add(prefixOf(c && c.name));
+    const out = [], seen = new Set();
+    for (const it of actor.items) {
+      if (!(it.type === "weapon" || it.type === "attack")) continue;
+      if (it.id === weaponId || (w && it.name === w.name)) continue;    // skip self + same-named twin
+      for (const act of (it.system?.actions || [])) {
+        for (const c of (act.conditionals || [])) {
+          if (!c) continue;
+          const mods = c.modifiers || [];
+          if (!mods.length && !String(c.name).includes(":")) continue;  // dividers / inert name-only
+          const p = prefixOf(c.name);
+          if (!p || seen.has(p) || baseP.has(p) || ownP.has(p)) continue;
+          seen.add(p);
+          out.push({ name: c.name, srcName: p, rawMods: mods, section: "On Other Attacks",
+                     default: !!c.default, _defaultInclude: false });
+        }
+      }
+    }
+    return out.sort((a, b) => prefixOf(a.name).localeCompare(prefixOf(b.name)));
+  }
+
+  // Editable row state for ONE weapon+action: the actor-wide specs, that weapon's own quality rows,
+  // the "On Other Attacks" rows, and any saved overrides on top. A row is unchecked by default when
+  // its melee/ranged intent contradicts the action's; a saved override always wins over both.
+  function buildRows(actor, specs, data, overrides, weaponId, actionIdx) {
+    const ov = overrides[weaponId] || {};
+    const w = actor.items.get(weaponId);
+    const actions = w?.system?.actions || [];
+    const aType = actionWeaponType(actions[actionIdx] || actions[0]);
+    const qSpecs = weaponQualitySpecs(actor, weaponId, data);
+    const others = otherAttackSpecs(actor, specs, weaponId, qSpecs.map(s => prefixOf(s.name)));
+    return specs.concat(qSpecs, others).map(s => {
+      const o = ov[s.name] || {};
+      const mismatch = !!(s.weaponType && aType && s.weaponType !== aType);
+      const defInclude = s._defaultInclude !== undefined ? s._defaultInclude : !mismatch;
+      return {
+        origName: s.name, srcName: s.srcName, rawMods: s.rawMods, section: s.section,
+        include: o.include !== undefined ? o.include : defInclude,
+        def: o.default !== undefined ? o.default : !!s.default,
+        name: o.name !== undefined ? o.name : s.name,
+      };
+    });
+  }
+
+  // Sections the macro rebuilds from curated source data that the GENERATOR also writes (or, for
+  // class features, would write) verbatim onto its main weapon -- the only ones eligible for the
+  // adopt-if-verbatim / near-duplicate handling in applyToWeapon.
+  const ADOPT_SECTIONS = new Set(["Feats", "Weapon Qualities", "Class Features"]);
 
   // --- apply the chosen rows to ONE weapon's chosen action, idempotently ---
   // Returns the embedded-document update object, or null if the weapon/action is unusable.
@@ -312,29 +516,48 @@
     if (!Array.isArray(action.conditionals)) action.conditionals = [];
     const prev = new Set((src.flags?.[MOD_NS]?.condIds) || []);
     action.conditionals = action.conditionals.filter(c => !(c && prev.has(c._id)));   // drop our old ones
+
+    // Adopt-if-verbatim. The generator writes its feat/quality toggles straight onto the main weapon
+    // with no condIds flag, so they read as hand-made here. When an existing conditional's name is
+    // byte-identical to the one we would generate from the curated data, it is provably unedited
+    // generator output: drop it now so our row re-emits it in its proper section AND tracks it in
+    // condIds, making it editable and removable from the dialog. A name you edited differs, so it
+    // stays untouched (and blocks our near-duplicate row below). Only rows actually being applied
+    // adopt -- an excluded row must never silently delete what the generator put there.
+    const genNames = new Set(rows.filter(r => r.include && ADOPT_SECTIONS.has(r.section))
+                                 .map(r => r.origName));
+    action.conditionals = action.conditionals.filter(c => !(c && genNames.has(c.name)));
+
     const seen = new Set(action.conditionals.map(c => c && c.name));                  // keep hand-made
+    const keptPrefixes = new Set(action.conditionals.map(c => norm(prefixOf(c && c.name))));
     const newIds = [];
 
-    // Inert section dividers (empty modifiers => an unchecked checkbox that does nothing) so the
-    // long attack-dialog list reads as grouped: General -> Path of War -> Spheres -> Spells.
-    const GENERAL_LABEL = "──────  GENERAL (FEATS & ITEMS)  ──────";
+    // Inert section dividers (empty modifiers => an unchecked checkbox that does nothing) so the long
+    // attack-dialog list reads as grouped: Other -> Feats -> Qualities -> Class Features -> PoW ->
+    // Spheres -> Spells -> Other Attacks.
+    const EXISTING_LABEL = "──────  OTHER (EXISTING)  ──────";
     const SECT_LABEL = {
+      "Feats": "──────  FEATS  ──────",
+      "Weapon Qualities": "──────  WEAPON QUALITIES  ──────",
+      "Class Features": "──────  CLASS FEATURES  ──────",
       "Path of War": "──────  PATH OF WAR  ──────",
       "Spheres of Power/Might": "──────  SPHERES  ──────",
       "Spells": "──────  SPELLS  ──────",
       "On Other Attacks": "──────  FROM OTHER ATTACKS  ──────",
     };
-    const RANK = { "Path of War": 0, "Spheres of Power/Might": 1, "Spells": 2, "On Other Attacks": 3 };
+    const RANK = { "Feats": 0, "Weapon Qualities": 1, "Class Features": 2, "Path of War": 3,
+                   "Spheres of Power/Might": 4, "Spells": 5, "On Other Attacks": 6 };
     const sep = (seed, name) => {
       const sid = detId(seed, 8);
       newIds.push(sid);
       return { _id: sid, name, default: false, modifiers: [] };
     };
 
-    // A "General" header above the feat/item conditionals already on the weapon (kept above, not in
-    // `rows`). Only when some remain, so a weapon with no feat/item conditionals gets no empty header.
+    // A header above whatever the macro does NOT own: hand-authored conditionals, generator rows you
+    // edited (so adoption skipped them), and families this macro doesn't curate. Only when some
+    // survive, so a weapon whose conditionals were all adopted gets no empty header.
     if (action.conditionals.length) {
-      action.conditionals.unshift(sep(`${weaponId}|__sep__|general`, GENERAL_LABEL));
+      action.conditionals.unshift(sep(`${weaponId}|__sep__|general`, EXISTING_LABEL));
     }
 
     // Enforce the section order (natural spec order already matches; this makes it robust).
@@ -346,6 +569,8 @@
     let curSection = null;
     for (const r of ordered) {
       if (!r.include || !r.name || seen.has(r.name)) continue;
+      // An edited generator row survived adoption -- don't stack a near-duplicate next to it.
+      if (ADOPT_SECTIONS.has(r.section) && keptPrefixes.has(norm(prefixOf(r.origName)))) continue;
       if (r.section && r.section !== curSection && SECT_LABEL[r.section]) {   // first row of a section
         curSection = r.section;
         action.conditionals.push(sep(`${weaponId}|__sep__|${r.section}`, SECT_LABEL[r.section]));
@@ -363,7 +588,7 @@
   }
 
   // --- the per-weapon review/edit dialog (stays open; edits persist to an actor flag) ---
-  function openDialog(actor, specs, gaps, init) {
+  function openDialog(actor, specs, gaps, init, data) {
     const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     const weapons = actor.items.filter(i => i.type === "weapon" || i.type === "attack");
     if (!weapons.length) { ui.notifications.warn(`${actor.name}: no weapon/attack items to apply to.`); return; }
@@ -373,57 +598,8 @@
     // like the per-weapon condIds flag below).
     const overrides = foundry.utils.deepClone(actor.flags?.[MOD_NS]?.overrides || {});
 
-    const prefixOf = n => {                         // the buff name = text before the first ":"
-      const s = String(n == null ? "" : n);
-      const i = s.indexOf(":");
-      return (i >= 0 ? s.slice(0, i) : s).trim();
-    };
-    // Conditionals that already live on the actor's OTHER, differently-named weapons/attacks, offered
-    // as an opt-in "On Other Attacks" section (default OFF) so you can copy any onto THIS weapon with
-    // its real modifiers. Excludes: this weapon's same-named twin; dividers / inert name-only entries;
-    // prefixes already offered by the built-in sections (base specs) or already on this weapon. Deduped
-    // by name prefix. Recomputed per selected weapon (rowsFor takes weaponId).
-    const otherAttackSpecs = weaponId => {
-      const w = actor.items.get(weaponId);
-      const baseP = new Set(specs.map(s => prefixOf(s.name)));
-      const ownP = new Set();
-      for (const act of (w?.system?.actions || []))
-        for (const c of (act.conditionals || [])) ownP.add(prefixOf(c && c.name));
-      const out = [], seen = new Set();
-      for (const it of actor.items) {
-        if (!(it.type === "weapon" || it.type === "attack")) continue;
-        if (it.id === weaponId || (w && it.name === w.name)) continue;    // skip self + same-named twin
-        for (const act of (it.system?.actions || [])) {
-          for (const c of (act.conditionals || [])) {
-            if (!c) continue;
-            const mods = c.modifiers || [];
-            if (!mods.length && !String(c.name).includes(":")) continue;  // dividers / inert name-only
-            const p = prefixOf(c.name);
-            if (!p || seen.has(p) || baseP.has(p) || ownP.has(p)) continue;
-            seen.add(p);
-            out.push({ name: c.name, srcName: p, rawMods: mods, section: "On Other Attacks",
-                       default: !!c.default, _defaultInclude: false });
-          }
-        }
-      }
-      return out.sort((a, b) => prefixOf(a.name).localeCompare(prefixOf(b.name)));
-    };
-
-    // Build the editable row state for a weapon from specs (+ the weapon-specific "On Other Attacks"
-    // rows) and any saved overrides.
-    const rowsFor = weaponId => {
-      const ov = overrides[weaponId] || {};
-      return specs.concat(otherAttackSpecs(weaponId)).map(s => {
-        const o = ov[s.name] || {};
-        return {
-          origName: s.name, srcName: s.srcName, rawMods: s.rawMods, section: s.section,
-          include: o.include !== undefined ? o.include
-                   : (s._defaultInclude !== undefined ? s._defaultInclude : true),
-          def: o.default !== undefined ? o.default : !!s.default,
-          name: o.name !== undefined ? o.name : s.name,
-        };
-      });
-    };
+    // Build the editable row state for the selected weapon+action.
+    const rowsFor = (weaponId, actionIdx) => buildRows(actor, specs, data, overrides, weaponId, actionIdx);
 
     let curWeaponId = weapons[0].id, curActionIdx = 0, curRows = [];
 
@@ -445,7 +621,8 @@
 
     const weaponOpts = weapons.map(w => `<option value="${w.id}">${esc(w.name)} [${w.type}]</option>`).join("");
     const li = arr => arr.length ? `<ul style="margin:.2em 0 .5em 1em">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<em>none</em>`;
-    const gapCount = gaps.spells.length + gaps.maneuvers.length + gaps.talents.length;
+    const gapCount = gaps.spells.length + gaps.maneuvers.length + gaps.talents.length
+                   + gaps.qualities.length + gaps.classFeatures.length;
     const content = `
       <div style="min-width:520px">
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:4px">
@@ -453,6 +630,7 @@
           <span id="action-wrap" style="display:none"></span>
           <button type="button" id="toggle-all"><i class="fas fa-check-double"></i> All on/off</button>
           <button type="button" id="apply-weapon"><i class="fas fa-check"></i> Apply to this weapon</button>
+          <button type="button" id="apply-all" title="Apply to every weapon and attack item, each with its own qualities and its own saved choices"><i class="fas fa-check-double"></i> Apply to all weapons</button>
         </div>
         <p style="font-size:.78em;margin:.2em 0;opacity:.75">Uncheck to exclude a conditional; expand a row to edit its clauses or per-roll default. Edits persist per weapon and survive re-runs.</p>
         <div id="cond-rows" style="max-height:52vh;overflow:auto"></div>
@@ -462,6 +640,8 @@
             <strong>Spells (${gaps.spells.length})</strong>${li(gaps.spells)}
             <strong>Maneuvers (${gaps.maneuvers.length})</strong>${li(gaps.maneuvers)}
             <strong>Talents (${gaps.talents.length})</strong>${li(gaps.talents)}
+            <strong>Weapon qualities (${gaps.qualities.length})</strong>${li(gaps.qualities)}
+            <strong>Class features (${gaps.classFeatures.length})</strong>${li(gaps.classFeatures)}
           </div>
         </details>
       </div>`;
@@ -486,7 +666,7 @@
           <button type="button" class="toggle-section" data-section="${esc(name)}" style="font-size:.8em">All on/off</button>
         </div>`;
         const renderRows = () => {
-          curRows = rowsFor(curWeaponId);
+          curRows = rowsFor(curWeaponId, curActionIdx);
           if (!curRows.length) { html.find("#cond-rows").html("<p><em>Nothing to apply — actor has no matching spells/maneuvers/talents.</em></p>"); return; }
           let out = "", lastSection = null;
           curRows.forEach((r, i) => {
@@ -499,7 +679,8 @@
         const rowIdx = ev => +ev.target.closest(".cond-row").dataset.i;
 
         html.on("change", "#weapon-sel", ev => { curWeaponId = ev.target.value; curActionIdx = 0; renderActionSel(); renderRows(); });
-        html.on("change", "#action-sel", ev => { curActionIdx = +ev.target.value; });
+        // Re-render on an action switch too: the melee/ranged default follows the action's type.
+        html.on("change", "#action-sel", ev => { curActionIdx = +ev.target.value; renderRows(); });
         html.on("change", ".cond-row .inc", ev => { curRows[rowIdx(ev)].include = ev.target.checked; });
         html.on("change", ".cond-row .def", ev => { curRows[rowIdx(ev)].def = ev.target.checked; });
         html.on("input", ".cond-row .txt", ev => { curRows[rowIdx(ev)].name = ev.target.value.replace(/\s*\n+\s*/g, "; ").trim(); });
@@ -528,10 +709,41 @@
           ui.notifications.info(`Applied ${n} conditional(s) to ${actor.items.get(curWeaponId)?.name}.`);
         });
 
+        // The generator only ever wires its main weapon, so the rollable attack twin and any backup
+        // weapon start empty. This applies to every weapon/attack item in one pass -- each with the
+        // qualities detected on THAT item, its own action's melee/ranged defaults, and its own saved
+        // choices (the selected weapon uses what is on screen, edits included).
+        html.on("click", "#apply-all", async ev => {
+          ev.preventDefault();
+          const updates = [], summary = [];
+          for (const w of weapons) {
+            const idx = w.id === curWeaponId ? curActionIdx : 0;
+            const rows = w.id === curWeaponId ? curRows : rowsFor(w.id, idx);
+            const upd = applyToWeapon(actor, w.id, idx, rows, init);
+            if (!upd) continue;                      // no attack action on this item
+            overrides[w.id] = {};
+            for (const r of rows) overrides[w.id][r.origName] = { include: r.include, default: r.def, name: r.name };
+            updates.push(upd);
+            summary.push(`${w.name}: ${rows.filter(r => r.include).length}`);
+          }
+          if (!updates.length) { ui.notifications.warn("No weapon/attack item has an attack action to apply to."); return; }
+          await actor.update({ [`flags.${MOD_NS}.overrides`]: overrides });
+          await actor.updateEmbeddedDocuments("Item", updates);
+          ui.notifications.info(`Applied to ${updates.length} item(s) — ${summary.join("; ")}.`);
+        });
+
         renderActionSel();
         renderRows();
       },
     }, { width: 600, resizable: true }).render(true);
+  }
+
+  // --- test hook: build/verify_specs.mjs sets the flag, evaluates this file and drives the pure
+  // functions directly. Inert in Foundry, where the flag is never set. ---
+  if (typeof globalThis !== "undefined" && globalThis.__PF1CA_TEST__) {
+    globalThis.__PF1CA_EXPORTS__ = { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs,
+                                     otherAttackSpecs, detectQualities, retargetClassLevel, classTags };
+    return;
   }
 
   // --- run ---
@@ -541,7 +753,7 @@
     const data = await loadData();
     const init = initAttr(actor);
     const { specs, gaps } = buildSpecs(actor, data, init);
-    openDialog(actor, specs, gaps, init);
+    openDialog(actor, specs, gaps, init, data);
   } catch (err) {
     console.error(`[${MOD_NS}] error:`, err);
     ui.notifications.error(`Apply Conditionals failed: ${err.message}`);

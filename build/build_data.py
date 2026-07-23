@@ -9,9 +9,13 @@ spells need their own dice as damage modifiers). Run whenever the source dicts c
 Sources (frozen snapshot -> ../data):
   backend  Backend/json/spells/spell_riders.json      (Bucket B/C: save + rider text)
   backend  Backend/json/spells/spell_changes.json     (Bucket A: self-buff toggles)
+  backend  Backend/json/feats/feat_conditionals.json  (active-feat toggles)
   module   maneuver_changes.json / stance_changes.json
   module   combat_talent_conditionals.json / magic_talent_conditionals.json
   module   every_spell.json  ->  spell_damage_index.json  ({nameLower: [[formula,[types]],...]})
+  backend  items/quality_effects.json  ->  weapon_quality_conditionals.json  ({quality: [cond,...]})
+  backend  class_data/effects/class_feature_effects.json
+             ->  class_feature_conditionals.json  ({section: {powerKey: [cond,...]}})
 """
 import json
 import shutil
@@ -28,6 +32,7 @@ MODULE_CS = Path(
 COPIES = [
     (BACKEND / "Backend" / "json" / "spells" / "spell_riders.json", "spell_riders.json"),
     (BACKEND / "Backend" / "json" / "spells" / "spell_changes.json", "spell_changes.json"),
+    (BACKEND / "Backend" / "json" / "feats" / "feat_conditionals.json", "feat_conditionals.json"),
     (MODULE_CS / "maneuver_changes.json", "maneuver_changes.json"),
     (MODULE_CS / "stance_changes.json", "stance_changes.json"),
     (MODULE_CS / "combat_talent_conditionals.json", "combat_talent_conditionals.json"),
@@ -35,6 +40,11 @@ COPIES = [
 ]
 EVERY_SPELL = MODULE_CS / "every_spell.json"
 DAMAGE_INDEX = DATA / "spell_damage_index.json"
+QUALITY_EFFECTS = BACKEND / "Backend" / "json" / "items" / "quality_effects.json"
+QUALITY_INDEX = DATA / "weapon_quality_conditionals.json"
+CLASS_FEATURE_EFFECTS = (BACKEND / "Backend" / "json" / "class_data" / "effects"
+                         / "class_feature_effects.json")
+CLASS_FEATURE_INDEX = DATA / "class_feature_conditionals.json"
 
 
 def spell_damage_parts(src):
@@ -81,6 +91,46 @@ def build_damage_index():
     return len(index), EVERY_SPELL.stat().st_size, DAMAGE_INDEX.stat().st_size
 
 
+def build_quality_index():
+    """quality_effects.json weapon section -> {qualityName: [conditional, ...]}.
+
+    Only the `conditionals` survive: the macro attaches them to the selected weapon's action, and
+    the rules text (`description`) is the FoundryVTT module's job -- it renders under the weapon
+    item, which the macro never touches. Armor/shield qualities are `changes`, not conditionals."""
+    src = json.loads(QUALITY_EFFECTS.read_text(encoding="utf-8"))
+    index = {}
+    for name, entry in (src.get("weapon") or {}).items():
+        conditionals = (entry or {}).get("conditionals") or []
+        if conditionals:
+            index[name] = conditionals
+    QUALITY_INDEX.write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")),
+                             encoding="utf-8")
+    return len(index)
+
+
+def build_class_feature_index():
+    """class_feature_effects.json -> {section: {powerKey: [conditional, ...]}}.
+
+    Sections are kept for provenance (the macro flattens them; the rogue/ninja/slayer duplicates are
+    identical). Auto-drafted entries ("review": true) are unvetted and ship contextNotes only, so
+    they are skipped -- same rule the backend applies when it builds
+    class_feature_conditionals_dict."""
+    src = json.loads(CLASS_FEATURE_EFFECTS.read_text(encoding="utf-8"))
+    index = {}
+    for section, pool in src.items():
+        if not isinstance(pool, dict):
+            continue                                   # "_readme"
+        for key, entry in pool.items():
+            if not isinstance(entry, dict) or entry.get("review"):
+                continue
+            conditionals = entry.get("conditionals") or []
+            if conditionals:
+                index.setdefault(section, {})[key] = conditionals
+    CLASS_FEATURE_INDEX.write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")),
+                                   encoding="utf-8")
+    return sum(len(p) for p in index.values())
+
+
 def main():
     DATA.mkdir(parents=True, exist_ok=True)
     for src, dst in COPIES:
@@ -91,6 +141,12 @@ def main():
     n, raw, slim = build_damage_index()
     print(f"  built  spell_damage_index.json               ({slim:>8,} bytes; "
           f"{n} damaging spells from {raw:,}-byte every_spell.json)")
+    nq = build_quality_index()
+    print(f"  built  weapon_quality_conditionals.json      "
+          f"({QUALITY_INDEX.stat().st_size:>8,} bytes; {nq} weapon qualities)")
+    ncf = build_class_feature_index()
+    print(f"  built  class_feature_conditionals.json       "
+          f"({CLASS_FEATURE_INDEX.stat().st_size:>8,} bytes; {ncf} curated powers)")
     print(f"data bundle refreshed -> {DATA}")
 
 

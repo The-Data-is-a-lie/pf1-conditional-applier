@@ -17,7 +17,8 @@ DATA = ROOT / "data"
 SRC = ROOT / "src" / "apply-conditionals.macro.js"
 OUT = ROOT / "apply-conditionals.bundled.js"
 FILES = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
-         "magic_talent_conditionals", "spell_damage_index"]
+         "magic_talent_conditionals", "spell_damage_index", "feat_conditionals",
+         "weapon_quality_conditionals", "class_feature_conditionals"]
 MARKER = "const EMBEDDED_DATA = null;"
 
 
