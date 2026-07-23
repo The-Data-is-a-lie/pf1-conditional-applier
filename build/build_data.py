@@ -60,7 +60,9 @@ def spell_damage_parts(src):
                 continue
             if formula and formula not in seen:
                 seen.add(formula)
-                out.append([formula, types])
+                # A typeless compendium part (e.g. detonate, poisonous cloud) would render the damage
+                # type "undefined" on the sheet -- default to ["untyped"] so it always shows a chip.
+                out.append([formula, types or ["untyped"]])
     return out
 
 

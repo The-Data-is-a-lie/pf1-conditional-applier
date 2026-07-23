@@ -110,7 +110,33 @@
     if (formula && !/\[.*\]/.test(formula)) formula += `[${String(srcName).replace(/[\[\]]/g, "").trim()}]`;
     return formula;
   }
-  function mkMod(m, srcName, seed, idx, init) {
+  // Base damage type(s) of the weapon a conditional is applied to (first damage part) -- handles pf1
+  // v11 {type:{values:[...]}} and the older {types:[...]}.
+  const weaponDamageTypes = (action) => {
+    for (const p of ((action && action.system && action.system.damage && action.system.damage.parts)
+                     || (action && action.damage && action.damage.parts) || [])) {
+      const t = p && p.type;
+      let vals = [];
+      if (t && Array.isArray(t.values)) vals = t.values;
+      else if (Array.isArray(p && p.types)) vals = p.types;
+      else if (Array.isArray(t)) vals = t;
+      vals = (vals || []).filter(Boolean);
+      if (vals.length) return vals.slice();
+    }
+    return [];
+  };
+  // Resolve a DAMAGE modifier's damageType at attach time: ["as-weapon"] -> the weapon's own type(s)
+  // (bonus weapon dice show the real slashing/bludgeoning/piercing), untyped fallback; empty on a DICE
+  // instance -> ["untyped"] (an empty Set renders "undefined"). Curated elements / attack / flat left.
+  const dmgTypeOrUntyped = (dt, target, formula, weaponTypes) => {
+    const arr = Array.isArray(dt) ? dt.slice() : [];
+    if ((target || "damage") !== "damage") return arr;
+    if (arr.length === 1 && arr[0] === "as-weapon")
+      return (Array.isArray(weaponTypes) && weaponTypes.length) ? weaponTypes.slice() : ["untyped"];
+    if (arr.length === 0 && /[\d)]d\d/.test(String(formula || ""))) return ["untyped"];
+    return arr;
+  };
+  function mkMod(m, srcName, seed, idx, init, weaponTypes) {
     const isAttack = m.target === "attack";
     return {
       _id: detId(`${seed}|m${idx}`, 8),
@@ -118,7 +144,7 @@
       target: m.target || "damage",
       subTarget: m.subTarget || (isAttack ? "allAttack" : "allDamage"),
       type: m.type || "untyped",
-      damageType: Array.isArray(m.damageType) ? m.damageType : [],
+      damageType: dmgTypeOrUntyped(m.damageType, m.target, m.formula, weaponTypes),
       critical: m.critical || "normal",
     };
   }
@@ -282,6 +308,7 @@
     const actions = src.system?.actions || [];
     const action = actions[actionIdx] || actions[0];
     if (!action) return null;
+    const wpnTypes = weaponDamageTypes(action);   // resolves ["as-weapon"] modifiers to this weapon's type
     if (!Array.isArray(action.conditionals)) action.conditionals = [];
     const prev = new Set((src.flags?.[MOD_NS]?.condIds) || []);
     action.conditionals = action.conditionals.filter(c => !(c && prev.has(c._id)));   // drop our old ones
@@ -327,7 +354,7 @@
       const cid = detId(seed, 8);
       action.conditionals.push({
         _id: cid, name: r.name, default: !!r.def,
-        modifiers: (r.rawMods || []).map((m, i) => mkMod(m, r.srcName, seed, i, init)),
+        modifiers: (r.rawMods || []).map((m, i) => mkMod(m, r.srcName, seed, i, init, wpnTypes)),
       });
       newIds.push(cid);
     }
