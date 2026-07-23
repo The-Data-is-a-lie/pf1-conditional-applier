@@ -24,10 +24,15 @@ OUT = ROOT / "apply-conditionals.bundled.js"
 # HTTP, so the one-time loader macro (src/load-latest.macro.js) fetches this file and a rebuild takes
 # effect with no re-paste. Override with PF1CA_DEPLOY; skipped with a note when the folder is absent
 # (another machine, no Foundry install), so the bundler never fails because of it.
+#
+# Note the FILENAME differs from the repo copy on purpose. That folder may be a clone of this repo
+# (it is on this machine), and writing the tracked apply-conditionals.bundled.js there would leave
+# the checkout permanently dirty and make `git pull` refuse. `.deployed.js` is gitignored instead, so
+# the deploy write and the checkout never touch the same file.
 DEPLOY = Path(os.environ.get(
     "PF1CA_DEPLOY",
     r"C:\Users\Daniel\AppData\Local\FoundryVTT\Data\pf1-conditional-applier"
-    r"\apply-conditionals.bundled.js"))
+    r"\apply-conditionals.deployed.js"))
 FILES = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
          "magic_talent_conditionals", "spell_damage_index", "feat_conditionals",
          "weapon_quality_conditionals", "class_feature_conditionals"]

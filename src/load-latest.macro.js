@@ -7,14 +7,16 @@
  * last wrote is what runs — no re-paste after a data refresh or a macro edit.
  *
  * Requires the deploy copy that build/bundle_macro.py writes on every build:
- *   <FoundryVTT user data>/Data/pf1-conditional-applier/apply-conditionals.bundled.js
- * Change PATH below if you keep it somewhere else under Data/.
+ *   <FoundryVTT user data>/Data/pf1-conditional-applier/apply-conditionals.deployed.js
+ * That is deliberately NOT the repo's apply-conditionals.bundled.js: the deploy folder may be a
+ * clone of the repo, and a build overwriting a tracked file there would block git pull. Change PATH
+ * below (and PF1CA_DEPLOY on the bundler side) if you keep it somewhere else under Data/.
  *
  * Prefer no moving parts? apply-conditionals.bundled.js still works pasted directly — it just has to
  * be re-pasted whenever it is rebuilt.
  */
 (async () => {
-  const PATH = "pf1-conditional-applier/apply-conditionals.bundled.js";
+  const PATH = "pf1-conditional-applier/apply-conditionals.deployed.js";
   try {
     // Cache-bust so a rebuild is picked up in the same session, not served from the browser cache.
     const res = await fetch(`${PATH}?v=${Date.now()}`, { cache: "no-store" });

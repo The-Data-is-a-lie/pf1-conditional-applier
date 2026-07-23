@@ -47,9 +47,13 @@ couldn't match) sits at the bottom of the dialog.
 The loader fetches the bundle from the FoundryVTT user Data dir, which
 `C:\Python310\python.exe build/bundle_macro.py` writes on **every** build (alongside the repo copy) —
 so a data refresh or macro edit takes effect on the next run with nothing to re-paste. The deploy
-path is `<Foundry user data>/Data/pf1-conditional-applier/apply-conditionals.bundled.js`; override it
-with the `PF1CA_DEPLOY` environment variable, and the bundler simply notes and skips it when the
-folder doesn't exist. That folder is a plain deploy target — not a git checkout.
+path is `<Foundry user data>/Data/pf1-conditional-applier/apply-conditionals.deployed.js`; override
+it with the `PF1CA_DEPLOY` environment variable, and the bundler simply notes and skips it when the
+folder doesn't exist.
+
+The deploy copy is deliberately named `.deployed.js`, not `.bundled.js`, and is gitignored: that
+folder may be a clone of this repo, and a build overwriting a tracked file there would leave the
+checkout dirty and block `git pull`.
 
 **Or paste the bundle directly** — `apply-conditionals.bundled.js` is self-contained (data embedded,
 no network). Same steps, but you re-paste it every time it is rebuilt.
