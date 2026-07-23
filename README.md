@@ -39,18 +39,28 @@ couldn't match) sits at the bottom of the dialog.
 
 ## Use it
 
-**Use `apply-conditionals.bundled.js`** — the self-contained file (data embedded, no network):
+**Recommended — the loader macro (paste once, auto-updates):**
 
-1. Copy the entire contents of `apply-conditionals.bundled.js` into a new **Script** macro in Foundry.
-2. Select the token (or none → you'll get a character chooser).
-3. Run the macro. Read the report. Delete the macro when done.
+1. Copy `src/load-latest.macro.js` into a new **Script** macro in Foundry, once.
+2. Select the token (or none → you'll get a character chooser) and run it.
 
-That's it — no module install, no GitHub access needed. Regenerate it after any data change with
-`C:\Python310\python.exe build/bundle_macro.py`.
+The loader fetches the bundle from the FoundryVTT user Data dir, which
+`C:\Python310\python.exe build/bundle_macro.py` writes on **every** build (alongside the repo copy) —
+so a data refresh or macro edit takes effect on the next run with nothing to re-paste. The deploy
+path is `<Foundry user data>/Data/pf1-conditional-applier/apply-conditionals.bundled.js`; override it
+with the `PF1CA_DEPLOY` environment variable, and the bundler simply notes and skips it when the
+folder doesn't exist. That folder is a plain deploy target — not a git checkout.
+
+**Or paste the bundle directly** — `apply-conditionals.bundled.js` is self-contained (data embedded,
+no network). Same steps, but you re-paste it every time it is rebuilt.
+
+Either way: no module install, no GitHub access needed. Delete the macro when done.
 
 ### Source vs bundle
 
-- `apply-conditionals.bundled.js` — **the file you paste into Foundry** (generated; data inlined).
+- `src/load-latest.macro.js` — the paste-once loader that runs whatever the bundler last deployed.
+- `apply-conditionals.bundled.js` — **the generated, self-contained macro** (data inlined); written to
+  the repo root and to the Foundry deploy path on every build.
 - `src/apply-conditionals.macro.js` — the editable source. It can also fetch `/data/*.json` from raw
   GitHub instead of embedding, but that needs the repo **public** (`DATA_BASE` at the top of the
   file). Edit logic here, then re-run the bundler.

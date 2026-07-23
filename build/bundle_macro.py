@@ -5,10 +5,14 @@ NO network — paste it into a Foundry Script macro and run. Regenerate after bu
 
     C:\\Python310\\python.exe build/bundle_macro.py
 
+Writes TWO copies: the repo file (committed) and the FoundryVTT user Data copy the loader macro
+fetches, so a rebuild reaches Foundry with no extra step. See DEPLOY below.
+
 Data is embedded as ASCII-escaped JSON (\\uXXXX), which is always valid inside a JS source file, so
 there are no UTF-8 / line-separator pitfalls.
 """
 import json
+import os
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -16,6 +20,14 @@ ROOT = HERE.parent
 DATA = ROOT / "data"
 SRC = ROOT / "src" / "apply-conditionals.macro.js"
 OUT = ROOT / "apply-conditionals.bundled.js"
+# Second copy, written into the FoundryVTT user Data dir on every build: Foundry serves that dir over
+# HTTP, so the one-time loader macro (src/load-latest.macro.js) fetches this file and a rebuild takes
+# effect with no re-paste. Override with PF1CA_DEPLOY; skipped with a note when the folder is absent
+# (another machine, no Foundry install), so the bundler never fails because of it.
+DEPLOY = Path(os.environ.get(
+    "PF1CA_DEPLOY",
+    r"C:\Users\Daniel\AppData\Local\FoundryVTT\Data\pf1-conditional-applier"
+    r"\apply-conditionals.bundled.js"))
 FILES = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
          "magic_talent_conditionals", "spell_damage_index", "feat_conditionals",
          "weapon_quality_conditionals", "class_feature_conditionals"]
@@ -34,6 +46,11 @@ def main():
               "// macro and run. To refresh, edit the source macro / data and re-run the bundler.\n")
     out = banner + src.replace(MARKER, f"const EMBEDDED_DATA = {blob};")
     OUT.write_text(out, encoding="utf-8")
+    if DEPLOY.parent.is_dir():
+        DEPLOY.write_text(out, encoding="utf-8")
+        print(f"deployed to Foundry -> {DEPLOY}")
+    else:
+        print(f"deploy target missing, skipped -> {DEPLOY.parent}")
     counts = {f: len(bundle[f]) for f in FILES}
     print(f"wrote {OUT.name}  ({OUT.stat().st_size:,} bytes)")
     print("  embedded entry counts:")
