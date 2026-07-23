@@ -69,7 +69,10 @@ const desc = v => ({ description: { value: v } });
 // a pristine quality, a pristine feat toggle, an EDITED quality, and a hand-authored one.
 const GREATSWORD_DESC =
   "<p>A big sword.</p><p><strong>Special abilities:</strong> Flaming, Keen</p>" +
-  "<h3>Flaming</h3><p>rules text</p><h3>Keen</h3><p>rules text</p>";
+  "<h3>Flaming</h3><p>rules text</p><h3>Keen</h3><p>rules text</p>" +
+  // A compendium magic weapon's own rules text carries unrelated <h3> blocks -- these must never be
+  // mistaken for a quality (an exported character had "<h3>Construction</h3>" on a named bow).
+  "<h3>Construction</h3><p>Requirements …</p>";
 const existingConds = () => [
   { _id: "pre-flam", name: FLAMING, default: true, modifiers: [{ _id: "m1", formula: "1d6[Flaming]", target: "damage", subTarget: "allDamage", type: "untyped", damageType: ["fire"], critical: "nonCrit" }] },
   { _id: "pre-pwra", name: POWER_ATTACK, default: false, modifiers: [] },
@@ -80,8 +83,13 @@ const existingConds = () => [
 const makeActor = ({ classTag = "rogueUnchained", swordDesc = GREATSWORD_DESC } = {}) => {
   const items = Items.from([
     mkItem({ id: "cls-1", type: "class", name: "Rogue (Unchained)", system: { tag: classTag, level: 8 } }),
-    mkItem({ id: "ft-pa", type: "feat", name: "Power Attack", system: { subType: "feat" } }),
-    mkItem({ id: "ft-da", type: "feat", name: "Deadly Aim", system: { subType: "feat" } }),
+    // Real generator label shapes (from an exported character): a placement label, a class-bonus
+    // prefix, a trainer label, and a feat-tax chain whose LAST segment is the curated feat.
+    mkItem({ id: "ft-pa", type: "feat", name: "(Feat 7) Power Attack", system: { subType: "feat" } }),
+    mkItem({ id: "ft-da", type: "feat", name: "Fighter 6: Deadly Aim", system: { subType: "feat" } }),
+    mkItem({ id: "ft-ce", type: "feat", name: "(Trainer 1): Combat Expertise", system: { subType: "feat" } }),
+    mkItem({ id: "ft-bb", type: "feat", name: "(Feat 11) Back to Back > Improved Back to Back", system: { subType: "feat" } }),
+    mkItem({ id: "ft-div", type: "feat", name: "__________________________ Feats __________________________", system: { subType: "feat" } }),
     mkItem({ id: "ft-cs", type: "feat", name: "(Rogue Talent 4) Crippling Strike", system: { subType: "classFeat" } }),
     mkItem({ id: "ft-ba", type: "feat", name: "(Rogue Talent 6) Bleeding Attack", system: { subType: "classFeat" } }),
     mkItem({ id: "ft-ra", type: "feat", name: "(Rage Power 4) Reckless Abandon", system: { subType: "classFeat" } }),
@@ -112,8 +120,13 @@ const { specs, gaps } = buildSpecs(actor, data, "int");
 const featSpecs = specs.filter(s => s.section === "Feats");
 const cfSpecs = specs.filter(s => s.section === "Class Features");
 
-ok(featSpecs.some(s => s.name === POWER_ATTACK), "Power Attack is offered as a Feats row");
-ok(featSpecs.some(s => s.name === DEADLY_AIM), "Deadly Aim is offered as a Feats row");
+ok(featSpecs.some(s => s.name === POWER_ATTACK), "'(Feat 7) Power Attack' matches through its label");
+ok(featSpecs.some(s => s.name === DEADLY_AIM), "'Fighter 6: Deadly Aim' matches through its class prefix");
+ok(featSpecs.some(s => s.name === data.feat_conditionals["Combat Expertise"].name),
+   "'(Trainer 1): Combat Expertise' matches through a colon label");
+ok(featSpecs.some(s => s.name === data.feat_conditionals["Improved Back to Back"].name),
+   "a feat-tax chain matches on its final segment");
+eq(featSpecs.length, 4, "the divider item matches nothing");
 eq(featSpecs.find(s => s.name === POWER_ATTACK)?.weaponType, "melee", "Power Attack reads as melee");
 eq(featSpecs.find(s => s.name === DEADLY_AIM)?.weaponType, "ranged", "Deadly Aim reads as ranged");
 eq(cfSpecs.length, 2, "both resolvable rogue talents survive");
@@ -125,7 +138,7 @@ ok(bleed && !bleed.name.includes("@classes.rogue.level"), "no canonical rogue to
 ok(gaps.classFeatures.some(g => g.includes("Reckless Abandon")),
    "Reckless Abandon is gap-listed (no barbarian/skald class on this actor)");
 ok(!specs.some(s => s.name.includes(RECKLESS.split(":")[0])), "gap-listed row is not applied");
-eq(gaps.qualities, [], "no quality gaps when every detected quality is curated");
+eq(gaps.qualities, [], "an unrelated <h3> heading is not reported as an uncurated quality");
 
 section("specs: quality detection is per item and description-only");
 const qGs = weaponQualitySpecs(actor, "wpn-gs", data).map(s => s.name);
@@ -139,9 +152,14 @@ bowNamed.items.get("wpn-bow").name = "Aldori Dueling Sword";
 eq(weaponQualitySpecs(bowNamed, "wpn-bow", data), [], "a quality word in the ITEM NAME never matches");
 
 section("specs: uncurated quality is reported, not applied");
-const zorbo = makeActor({ swordDesc: GREATSWORD_DESC + "<h3>Zorbo</h3><p>homebrew</p>" });
+// A real uncurated quality is NAMED on the abilities line -- that list is what the generator writes
+// and is authoritative. (An unknown <h3> is just rules-text markup; covered above.)
+const zorbo = makeActor({ swordDesc:
+  "<p><strong>Special abilities:</strong> Flaming, Keen, Zorbo</p><h3>Construction</h3><p>…</p>" });
 eq(buildSpecs(zorbo, data, "int").gaps.qualities, ["Zorbo"], "uncurated quality lands in the gap panel");
 ok(!weaponQualitySpecs(zorbo, "wpn-gs", data).some(s => s.name === "Zorbo"), "…and produces no row");
+ok(weaponQualitySpecs(zorbo, "wpn-gs", data).some(s => s.name === FLAMING),
+   "…while the curated ones beside it still apply");
 
 section("specs: unresolvable class level when no sibling exists");
 const noClass = makeActor({ classTag: "fighter" });

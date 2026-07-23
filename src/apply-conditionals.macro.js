@@ -47,9 +47,26 @@
   const norm = s => String(s).toLowerCase().replace(/['’`]/g, "").replace(/\s+/g, " ").trim();
   const stripPrefix = n => String(n).replace(/^\((?:Strike|Boost|Counter|Stance)\)\s*/i, "").trim();
   const stripSource = n => String(n).replace(/\s*[\(\[][^\)\]]*[\)\]]\s*$/, "").trim();  // "Foo (impale)" -> "Foo"
-  // "(Rage Power 4) Reckless Abandon" -> "Reckless Abandon": the generator labels every class-feature
-  // item with its bucket and the level it was gained at (updateClassFeatures -> mkFeature).
-  const stripLabel = n => String(n).replace(/^\([^)]*\)\s*/, "").trim();
+  // The generator labels a placed feat / class feature with WHERE it came from, and a feat-tax
+  // bundle chains a whole upgrade line into one item:
+  //     "(Feat 7) Shake It Off"        "(Trainer 1): Bludgeoner"      "(Rage Power 3) brawler"
+  //     "Fighter 6: Shield Focus (EitR)"   "(Feat 11) Back to Back > Improved Back to Back"
+  // Curated data is keyed on the bare feat/power name, so match against every reading of the item
+  // name: as written; minus a leading "(label)" or "<Class> N:" prefix; each chain segment; and each
+  // of those minus a trailing "(Source)" tag. Ordered most- to least-specific, first hit wins.
+  function nameForms(name) {
+    const out = [];
+    const push = s => { s = String(s).trim(); if (s && !out.includes(s)) out.push(s); };
+    const variants = s => { push(s); push(stripSource(s)); };
+    const raw = String(name == null ? "" : name).trim();
+    variants(raw);
+    const noLabel = raw.replace(/^\([^)]*\)\s*:?\s*/, "");
+    variants(noLabel);
+    const noClass = noLabel.replace(/^[A-Za-z][A-Za-z' ]*\s*\d*\s*:\s*/, "");
+    variants(noClass);
+    for (const part of noClass.split(/\s*>\s*/)) variants(part);   // feat-tax chain
+    return out;
+  }
   // Curated class-feature key -- the backend's _cfe_key: drop a trailing (Su)/(Ex)/(Sp), then norm.
   const cfKey = n => norm(String(n).replace(/\s*\((?:su|ex|sp)\)\s*$/i, ""));
   // The buff name = the text before the first ":" (conditional names are "Name: rider text").
@@ -273,13 +290,14 @@
     const tags = classTags(actor);
     for (const it of actor.items) {
       if (it.type !== "feat") continue;
-      const fEntry = featTbl[norm(it.name)];
+      const forms = nameForms(it.name);
+      const fEntry = forms.map(f => featTbl[norm(f)]).find(Boolean);
       if (fEntry && fEntry.name) {
         specs.push({ name: fEntry.name, default: !!fEntry.default, rawMods: fEntry.modifiers || [],
                      srcName: prefixOf(fEntry.name), section: "Feats",
                      weaponType: specWeaponType(fEntry.name) });
       }
-      for (const cond of (cfTbl[cfKey(stripLabel(it.name))] || [])) {
+      for (const cond of (forms.map(f => cfTbl[cfKey(f)]).find(Boolean) || [])) {
         const resolved = [retargetClassLevel(cond.name || it.name, tags)];
         const rawMods = (cond.modifiers || []).map(m => {
           const r = retargetClassLevel(m.formula, tags);
@@ -391,7 +409,7 @@
     const qualTbl = qualityTable(data), qSeen = new Set();
     for (const it of actor.items) {
       if (!(it.type === "weapon" || it.type === "attack")) continue;
-      for (const q of detectQualities(it)) {
+      for (const q of detectQualities(it).stated) {          // stated only -- headings over-report
         const k = norm(q);
         if (qualTbl[k] || qSeen.has(k)) continue;
         qSeen.add(k);
@@ -410,13 +428,16 @@
   // "Throwing Axe" and "Flying Blade" all collide with real qualities (13 of the 474 base weapons
   // do), and it buys nothing -- the generator only stamps qualities into the name when the leftover
   // enhancement budget reaches +1.
+  // `stated` is the authoritative list (the abilities line names exactly the qualities the item has);
+  // `headings` are only a matching hint, because a compendium item's own rules text carries unrelated
+  // <h3> blocks too ("Construction" on a specific magic weapon). So headings can MATCH a curated
+  // quality, but an unknown heading is never reported as an uncurated one.
   const detectQualities = item => {
     const desc = String(item?.system?.description?.value || "");
-    const out = [];
     const line = desc.match(/<strong>\s*Special abilities:\s*<\/strong>([^<]*)/i);
-    if (line) for (const part of line[1].split(",")) { const s = part.trim(); if (s) out.push(s); }
-    for (const m of desc.matchAll(/<h3>([^<]+)<\/h3>/gi)) { const s = m[1].trim(); if (s) out.push(s); }
-    return out;
+    const stated = line ? line[1].split(",").map(s => s.trim()).filter(Boolean) : [];
+    const headings = [...desc.matchAll(/<h3>([^<]+)<\/h3>/gi)].map(m => m[1].trim()).filter(Boolean);
+    return { stated, headings, all: stated.concat(headings) };
   };
   const qualityTable = data => {
     const o = {};
@@ -427,7 +448,7 @@
     const it = actor.items.get(weaponId);
     if (!it) return [];
     const tbl = qualityTable(data), out = [], seen = new Set();
-    for (const q of detectQualities(it)) {
+    for (const q of detectQualities(it).all) {
       const k = norm(q);
       if (seen.has(k)) continue;
       seen.add(k);
