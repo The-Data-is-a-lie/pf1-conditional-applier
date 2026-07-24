@@ -1,7 +1,7 @@
 /**
  * Compile a JSON array of Foundry documents into a LevelDB compendium pack -- the on-disk format
- * FoundryVTT v11+ reads directly. Same shape as pack_pf1_leveldb.js, with the collection prefix
- * parameterised so it can build the Macro pack this module ships.
+ * FoundryVTT v11+ reads directly, with the collection prefix parameterised so it can build the
+ * Macro pack this module ships.
  *
  * Each document is stored under `!<collection>!<_id>`, value = the document itself. The pack dir is
  * wiped and rewritten each run so rebuilds are clean.
