@@ -12,6 +12,28 @@
   min-width: 520px;
 }
 
+/* --- the trigger button injected into each owned actor sheet's header (see scripts/main.js) --- */
+/* Sits in the flex .window-header next to the title; sized down so it reads as a header control,
+ * not a giant form button, under either a light or dark Foundry theme. */
+.pf1ca-apply-btn {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: auto;
+  margin: 0 4px;
+  padding: 0 8px;
+  height: calc(100% - 8px);
+  line-height: 1;
+  font-size: .8em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.pf1ca-apply-btn > i {
+  margin: 0;
+}
+
 /* --- toolbar: weapon picker, optional action picker, the three buttons --- */
 .pf1ca .pf1ca-toolbar {
   display: flex;

@@ -870,9 +870,11 @@ function openDialog(actor, specs, gaps, init, data) {
 }
 
 // --- run: the module's single entry point (see scripts/main.js) ---
-export async function apply() {
+// actorArg lets a caller that already knows the actor (e.g. the character-sheet button) skip the
+// chooser; passing nothing (macro, scene-control tool, keybinding) falls through to resolveActor().
+export async function apply(actorArg = null) {
   try {
-    const actor = await resolveActor();
+    const actor = actorArg ?? await resolveActor();
     if (!actor) return;
     const data = await loadData();
     const init = initAttr(actor);
