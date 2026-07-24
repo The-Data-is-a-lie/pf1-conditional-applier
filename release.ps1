@@ -150,16 +150,21 @@ Ok "version=$($mjObj.version)  minimum=$($mjObj.compatibility.minimum)  verified
 Step 'Rolling changelog.md (Unreleased -> versioned)'
 $cl  = [System.IO.File]::ReadAllText($ChangelogPath)
 $nlC = if ($cl -match "`r`n") { "`r`n" } else { "`n" }
-# Stop at the first line that BEGINS with "Version " (multiline ^) so an empty Unreleased section
+# Stop at the first line that BEGINS with "## Version " (multiline ^) so an empty Unreleased section
 # cannot swallow the previous release's notes. A lookahead rather than a match, so end-of-file also
 # terminates the section -- that is the very first release, where there is no earlier version yet.
-$m   = [regex]::Match($cl, '(?sm)^Unreleased\r?\n(.*?)(?=^Version |\z)')
-if (-not $m.Success) { Fail "changelog.md: couldn't find an 'Unreleased' section -- roll aborted." }
+# The "### Added/Changed/Fixed" subheadings inside a section are carried along in $body untouched.
+$m   = [regex]::Match($cl, '(?sm)^## Unreleased\r?\n(.*?)(?=^## Version |\z)')
+if (-not $m.Success) { Fail "changelog.md: couldn't find a '## Unreleased' section -- roll aborted." }
 $body = $m.Groups[1].Value.Trim()
-if (-not $body) { Fail 'The Unreleased section is empty -- nothing to release.' }
+# Require an actual entry, not just leftover "### Added" scaffolding with nothing under it.
+if ($body -notmatch '(?m)^\s*-') { Fail 'The Unreleased section has no entries -- nothing to release.' }
 $date     = Get-Date -Format 'yyyy-MM-dd'
+# Everything above the Unreleased heading -- the "# Changelog" title block. Preserved explicitly:
+# $newCl is rebuilt from the heading down, so anything before it would otherwise be dropped.
+$head     = $cl.Substring(0, $m.Index)
 $rest     = $cl.Substring($m.Index + $m.Length)      # previous releases; "" on a first release
-$newCl    = "Unreleased$nlC$nlC" + "Version $Version ($date)$nlC$nlC" + $body + "$nlC$nlC" + $rest
+$newCl    = $head + "## Unreleased$nlC$nlC" + "## Version $Version ($date)$nlC$nlC" + $body + "$nlC$nlC" + $rest
 Write-Utf8NoBom $ChangelogPath ($newCl.TrimEnd() + $nlC)
 $ReleaseNotes = $body
 $entryCount   = ($body -split "`n" | Where-Object { $_ -match '^\s*-' }).Count
