@@ -10,8 +10,15 @@ Desktop.ini
 __pycache__/
 *.pyc
 
-# The Foundry deploy copy bundle_macro.py writes on every build (src/load-latest.macro.js fetches
-# it). Deliberately a DIFFERENT name from the tracked apply-conditionals.bundled.js: the deploy
-# folder may be a clone of this repo, and a build writing a tracked file there would leave that
-# checkout permanently dirty and block git pull.
-apply-conditionals.deployed.js
+# Node (dev tooling only — nothing under node_modules ships)
+node_modules/
+
+# Release secrets read by release.ps1
+.env
+
+# LevelDB scratch inside the compendium packs. The pack DATA (*.ldb, the numbered *.log, CURRENT,
+# MANIFEST-*) IS committed and shipped; these three are recreated on every open, so tracking them
+# would dirty the tree every time Foundry runs.
+packs/**/LOCK
+packs/**/LOG
+packs/**/LOG.old

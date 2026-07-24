@@ -1,4 +1,7 @@
-"""Refresh the /data bundle the apply-conditionals macro fetches at runtime.
+"""Refresh the /data files the module loads at runtime.
+
+Author-time only: the sources below live outside the module, but their frozen snapshots in ../data
+are committed and ship in the zip, so nothing at runtime depends on them.
 
 Copies the curated conditional dicts out of the backend + the live Foundry module into ../data,
 and derives a SLIM spell-damage index from the module's 11 MB every_spell.json (Bucket-B touch
@@ -10,12 +13,14 @@ Sources (frozen snapshot -> ../data):
   backend  Backend/json/spells/spell_riders.json      (Bucket B/C: save + rider text)
   backend  Backend/json/spells/spell_changes.json     (Bucket A: self-buff toggles)
   backend  Backend/json/feats/feat_conditionals.json  (active-feat toggles)
-  module   maneuver_changes.json / stance_changes.json
+  module   maneuver_changes.json  (damaging stances come through here too)
   module   combat_talent_conditionals.json / magic_talent_conditionals.json
   module   every_spell.json  ->  spell_damage_index.json  ({nameLower: [[formula,[types]],...]})
   backend  items/quality_effects.json  ->  weapon_quality_conditionals.json  ({quality: [cond,...]})
   backend  class_data/effects/class_feature_effects.json
              ->  class_feature_conditionals.json  ({section: {powerKey: [cond,...]}})
+  backend  items/item_changes.json + item_changes_overrides.json
+             ->  item_changes.json  ({itemNameLower: {changes, contextNotes}})
 """
 import json
 import shutil
@@ -33,8 +38,9 @@ COPIES = [
     (BACKEND / "Backend" / "json" / "spells" / "spell_riders.json", "spell_riders.json"),
     (BACKEND / "Backend" / "json" / "spells" / "spell_changes.json", "spell_changes.json"),
     (BACKEND / "Backend" / "json" / "feats" / "feat_conditionals.json", "feat_conditionals.json"),
+    # No stance_changes.json: buildSpecs() reads stances out of maneuver_changes (a stance with no
+    # modifiers belongs on a buff, not a weapon), so copying it only bloated the shipped zip.
     (MODULE_CS / "maneuver_changes.json", "maneuver_changes.json"),
-    (MODULE_CS / "stance_changes.json", "stance_changes.json"),
     (MODULE_CS / "combat_talent_conditionals.json", "combat_talent_conditionals.json"),
     (MODULE_CS / "magic_talent_conditionals.json", "magic_talent_conditionals.json"),
 ]
@@ -45,6 +51,9 @@ QUALITY_INDEX = DATA / "weapon_quality_conditionals.json"
 CLASS_FEATURE_EFFECTS = (BACKEND / "Backend" / "json" / "class_data" / "effects"
                          / "class_feature_effects.json")
 CLASS_FEATURE_INDEX = DATA / "class_feature_conditionals.json"
+ITEM_CHANGES = BACKEND / "Backend" / "json" / "items" / "item_changes.json"
+ITEM_CHANGES_OVERRIDES = BACKEND / "Backend" / "json" / "items" / "item_changes_overrides.json"
+ITEM_INDEX = DATA / "item_changes.json"
 
 
 def spell_damage_parts(src):
@@ -131,6 +140,32 @@ def build_class_feature_index():
     return sum(len(p) for p in index.values())
 
 
+def build_item_index():
+    """item_changes.json + item_changes_overrides.json -> {itemNameLower: {changes, contextNotes}}.
+
+    The overrides are a FULL REPLACEMENT per item (the backend layers them the same way), and the
+    keys are lowercased here so the module can look an actor's item up directly. Entries with
+    neither a change nor a note are dropped -- there are plenty, and they only bloat the zip.
+
+    Both halves ship: `contextNotes` targeting "attack" become weapon conditionals (the Items
+    section), everything else overlays the equipment item itself."""
+    src = json.loads(ITEM_CHANGES.read_text(encoding="utf-8"))
+    src.update(json.loads(ITEM_CHANGES_OVERRIDES.read_text(encoding="utf-8")))
+    index = {}
+    for name, entry in src.items():
+        if not isinstance(entry, dict):
+            continue
+        changes = entry.get("changes") or []
+        notes = entry.get("contextNotes") or []
+        if changes or notes:
+            index[str(name).lower()] = {"changes": changes, "contextNotes": notes}
+    ITEM_INDEX.write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")),
+                          encoding="utf-8")
+    attack = sum(1 for e in index.values()
+                 for n in e["contextNotes"] if isinstance(n, dict) and n.get("target") == "attack")
+    return len(index), attack
+
+
 def main():
     DATA.mkdir(parents=True, exist_ok=True)
     for src, dst in COPIES:
@@ -147,6 +182,9 @@ def main():
     ncf = build_class_feature_index()
     print(f"  built  class_feature_conditionals.json       "
           f"({CLASS_FEATURE_INDEX.stat().st_size:>8,} bytes; {ncf} curated powers)")
+    ni, na = build_item_index()
+    print(f"  built  item_changes.json                     "
+          f"({ITEM_INDEX.stat().st_size:>8,} bytes; {ni} items, {na} attack-note toggles)")
     print(f"data bundle refreshed -> {DATA}")
 
 

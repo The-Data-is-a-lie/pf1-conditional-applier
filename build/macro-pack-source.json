@@ -1,0 +1,15 @@
+[
+  {
+    "_id": "pf1caApplyCond01",
+    "name": "Apply Conditionals",
+    "type": "script",
+    "img": "icons/sundries/scrolls/scroll-runed-brown-purple.webp",
+    "scope": "global",
+    "command": "game.modules.get(\"pf1-conditional-applier\").api.apply();",
+    "author": null,
+    "folder": null,
+    "sort": 0,
+    "ownership": { "default": 0 },
+    "flags": {}
+  }
+]

@@ -1,0 +1,7 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# ...except the LevelDB compendium packs, which are byte-exact. CURRENT in particular is a bare
+# "MANIFEST-000002\n" pointer: normalize that to CRLF on checkout and LevelDB can no longer find its
+# manifest, so the pack fails to open in Foundry.
+packs/** -text

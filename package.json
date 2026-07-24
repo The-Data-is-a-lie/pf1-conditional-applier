@@ -1,0 +1,15 @@
+{
+  "name": "pf1-conditional-applier",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dev tooling for the pf1-conditional-applier Foundry module. Nothing here ships: the module itself is plain ESM + JSON that Foundry loads directly.",
+  "type": "module",
+  "scripts": {
+    "test": "node build/verify_specs.mjs",
+    "pack:macros": "node build/pack_macro_pack.js build/macro-pack-source.json packs/macros",
+    "data": "python build/build_data.py"
+  },
+  "devDependencies": {
+    "classic-level": "^1.4.1"
+  }
+}

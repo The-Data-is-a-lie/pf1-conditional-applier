@@ -6,8 +6,8 @@
  * `_key` field; `_id` matches the key), mirroring a real pf1 pack. The target pack dir is wiped and
  * rewritten each run so rebuilds are clean.
  *
- * Requires the `classic-level` package (the exact LevelDB binding Foundry uses):
- *     npm install classic-level          # in this folder, or point NODE_PATH at an install
+ * Requires the `classic-level` package (the exact LevelDB binding Foundry uses), which `npm install`
+ * pulls in as a devDependency of this repo.
  *
  * IMPORTANT: Foundry holds an exclusive lock on every pack it has open. Only run this against a pack
  * Foundry is NOT currently serving -- a brand-new pack dir (Foundry learns about it on restart) is
@@ -16,9 +16,8 @@
  * Usage:
  *     node pack_pf1_leveldb.js <items.json> <pack-dir>
  */
-'use strict';
-const fs = require('fs');
-const { ClassicLevel } = require('classic-level');
+import fs from 'node:fs';
+import { ClassicLevel } from 'classic-level';
 
 async function main() {
   const [, , itemsPath, packDir] = process.argv;

@@ -1,0 +1,39 @@
+{
+  "id": "pf1-conditional-applier",
+  "name": "pf1-conditional-applier",
+  "title": "PF1 Conditional Applier",
+  "description": "Wires curated conditionals onto a character's weapons: active feats, weapon special abilities, class-feature toggles, Path of War maneuvers, Spheres talents and spells. Run the bundled macro, review what it found per weapon, apply. Re-runnable — it only ever replaces what it added.",
+  "version": "1.0.0",
+  "author": "TableTopSoftware",
+  "authors": [
+    { "name": "TableTopSoftware" }
+  ],
+  "esmodules": [ "scripts/main.js" ],
+  "styles": [ "styles/apply-conditionals.css" ],
+  "packs": [
+    {
+      "name": "macros",
+      "label": "Conditional Applier",
+      "path": "packs/macros",
+      "type": "Macro",
+      "system": "pf1",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    }
+  ],
+  "system": "pf1",
+  "relationships": {
+    "systems": [
+      { "id": "pf1", "type": "system", "compatibility": {} }
+    ]
+  },
+  "compatibility": {
+    "minimum": "12",
+    "verified": "13"
+  },
+  "url": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier",
+  "manifest": "https://raw.githubusercontent.com/The-Data-is-a-lie/pf1-conditional-applier/main/module.json",
+  "download": "https://raw.githubusercontent.com/The-Data-is-a-lie/pf1-conditional-applier/main/downloads/pf1-conditional-applier.zip",
+  "readme": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier/blob/main/README.md",
+  "changelog": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier/blob/main/changelog.md",
+  "license": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier/blob/main/LICENSE"
+}
