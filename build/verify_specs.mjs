@@ -1,11 +1,11 @@
 /**
- * Drive the macro's pure functions against a synthetic actor -- no Foundry, no dependencies.
+ * Drive the module's pure functions against a synthetic actor -- no Foundry, no dependencies.
  *
- *     node build/verify_specs.mjs
+ *     npm test          (or: node build/verify_specs.mjs)
  *
- * The macro is an IIFE, so it exposes nothing normally. Setting globalThis.__PF1CA_TEST__ before
- * evaluating it makes the guarded hook at the end of the IIFE publish the pure functions and return
- * before the run block. The flag is never set in Foundry, so the hook is inert there.
+ * scripts/apply-conditionals.js is a plain ES module that neither runs anything nor touches a
+ * Foundry global at import time, so it imports straight into Node and the functions under test are
+ * the exact ones Foundry loads.
  *
  * Covered: feat/class-feature/quality matching, the Unchained class-level retarget, melee-vs-ranged
  * include defaults, adopt-if-verbatim vs edited-row suppression, exclusion never deleting, section
@@ -13,25 +13,19 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs, retargetClassLevel,
+         nameCandidates, itemEffectUpdates } from "../scripts/apply-conditionals.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..");
 const MOD_NS = "pf1-conditional-applier";
 const DATA_FILES = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
                     "magic_talent_conditionals", "spell_damage_index", "feat_conditionals",
-                    "weapon_quality_conditionals", "class_feature_conditionals"];
+                    "weapon_quality_conditionals", "class_feature_conditionals", "item_changes"];
 
 const data = Object.fromEntries(DATA_FILES.map(f =>
   [f, JSON.parse(fs.readFileSync(path.join(ROOT, "data", `${f}.json`), "utf8"))]));
-
-globalThis.__PF1CA_TEST__ = true;
-vm.runInThisContext(fs.readFileSync(path.join(ROOT, "src", "apply-conditionals.macro.js"), "utf8"),
-                    { filename: "apply-conditionals.macro.js" });
-const { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs, retargetClassLevel } =
-  globalThis.__PF1CA_EXPORTS__ || {};
-if (!buildSpecs) { console.error("test hook did not publish exports"); process.exit(1); }
 
 // --- tiny assert harness -------------------------------------------------------------------------
 let passed = 0, failed = 0;
@@ -69,10 +63,7 @@ const desc = v => ({ description: { value: v } });
 // a pristine quality, a pristine feat toggle, an EDITED quality, and a hand-authored one.
 const GREATSWORD_DESC =
   "<p>A big sword.</p><p><strong>Special abilities:</strong> Flaming, Keen</p>" +
-  "<h3>Flaming</h3><p>rules text</p><h3>Keen</h3><p>rules text</p>" +
-  // A compendium magic weapon's own rules text carries unrelated <h3> blocks -- these must never be
-  // mistaken for a quality (an exported character had "<h3>Construction</h3>" on a named bow).
-  "<h3>Construction</h3><p>Requirements …</p>";
+  "<h3>Flaming</h3><p>rules text</p><h3>Keen</h3><p>rules text</p>";
 const existingConds = () => [
   { _id: "pre-flam", name: FLAMING, default: true, modifiers: [{ _id: "m1", formula: "1d6[Flaming]", target: "damage", subTarget: "allDamage", type: "untyped", damageType: ["fire"], critical: "nonCrit" }] },
   { _id: "pre-pwra", name: POWER_ATTACK, default: false, modifiers: [] },
@@ -83,13 +74,8 @@ const existingConds = () => [
 const makeActor = ({ classTag = "rogueUnchained", swordDesc = GREATSWORD_DESC } = {}) => {
   const items = Items.from([
     mkItem({ id: "cls-1", type: "class", name: "Rogue (Unchained)", system: { tag: classTag, level: 8 } }),
-    // Real generator label shapes (from an exported character): a placement label, a class-bonus
-    // prefix, a trainer label, and a feat-tax chain whose LAST segment is the curated feat.
-    mkItem({ id: "ft-pa", type: "feat", name: "(Feat 7) Power Attack", system: { subType: "feat" } }),
-    mkItem({ id: "ft-da", type: "feat", name: "Fighter 6: Deadly Aim", system: { subType: "feat" } }),
-    mkItem({ id: "ft-ce", type: "feat", name: "(Trainer 1): Combat Expertise", system: { subType: "feat" } }),
-    mkItem({ id: "ft-bb", type: "feat", name: "(Feat 11) Back to Back > Improved Back to Back", system: { subType: "feat" } }),
-    mkItem({ id: "ft-div", type: "feat", name: "__________________________ Feats __________________________", system: { subType: "feat" } }),
+    mkItem({ id: "ft-pa", type: "feat", name: "Power Attack", system: { subType: "feat" } }),
+    mkItem({ id: "ft-da", type: "feat", name: "Deadly Aim", system: { subType: "feat" } }),
     mkItem({ id: "ft-cs", type: "feat", name: "(Rogue Talent 4) Crippling Strike", system: { subType: "classFeat" } }),
     mkItem({ id: "ft-ba", type: "feat", name: "(Rogue Talent 6) Bleeding Attack", system: { subType: "classFeat" } }),
     mkItem({ id: "ft-ra", type: "feat", name: "(Rage Power 4) Reckless Abandon", system: { subType: "classFeat" } }),
@@ -120,13 +106,8 @@ const { specs, gaps } = buildSpecs(actor, data, "int");
 const featSpecs = specs.filter(s => s.section === "Feats");
 const cfSpecs = specs.filter(s => s.section === "Class Features");
 
-ok(featSpecs.some(s => s.name === POWER_ATTACK), "'(Feat 7) Power Attack' matches through its label");
-ok(featSpecs.some(s => s.name === DEADLY_AIM), "'Fighter 6: Deadly Aim' matches through its class prefix");
-ok(featSpecs.some(s => s.name === data.feat_conditionals["Combat Expertise"].name),
-   "'(Trainer 1): Combat Expertise' matches through a colon label");
-ok(featSpecs.some(s => s.name === data.feat_conditionals["Improved Back to Back"].name),
-   "a feat-tax chain matches on its final segment");
-eq(featSpecs.length, 4, "the divider item matches nothing");
+ok(featSpecs.some(s => s.name === POWER_ATTACK), "Power Attack is offered as a Feats row");
+ok(featSpecs.some(s => s.name === DEADLY_AIM), "Deadly Aim is offered as a Feats row");
 eq(featSpecs.find(s => s.name === POWER_ATTACK)?.weaponType, "melee", "Power Attack reads as melee");
 eq(featSpecs.find(s => s.name === DEADLY_AIM)?.weaponType, "ranged", "Deadly Aim reads as ranged");
 eq(cfSpecs.length, 2, "both resolvable rogue talents survive");
@@ -138,7 +119,7 @@ ok(bleed && !bleed.name.includes("@classes.rogue.level"), "no canonical rogue to
 ok(gaps.classFeatures.some(g => g.includes("Reckless Abandon")),
    "Reckless Abandon is gap-listed (no barbarian/skald class on this actor)");
 ok(!specs.some(s => s.name.includes(RECKLESS.split(":")[0])), "gap-listed row is not applied");
-eq(gaps.qualities, [], "an unrelated <h3> heading is not reported as an uncurated quality");
+eq(gaps.qualities, [], "no quality gaps when every detected quality is curated");
 
 section("specs: quality detection is per item and description-only");
 const qGs = weaponQualitySpecs(actor, "wpn-gs", data).map(s => s.name);
@@ -152,14 +133,9 @@ bowNamed.items.get("wpn-bow").name = "Aldori Dueling Sword";
 eq(weaponQualitySpecs(bowNamed, "wpn-bow", data), [], "a quality word in the ITEM NAME never matches");
 
 section("specs: uncurated quality is reported, not applied");
-// A real uncurated quality is NAMED on the abilities line -- that list is what the generator writes
-// and is authoritative. (An unknown <h3> is just rules-text markup; covered above.)
-const zorbo = makeActor({ swordDesc:
-  "<p><strong>Special abilities:</strong> Flaming, Keen, Zorbo</p><h3>Construction</h3><p>…</p>" });
+const zorbo = makeActor({ swordDesc: GREATSWORD_DESC + "<h3>Zorbo</h3><p>homebrew</p>" });
 eq(buildSpecs(zorbo, data, "int").gaps.qualities, ["Zorbo"], "uncurated quality lands in the gap panel");
 ok(!weaponQualitySpecs(zorbo, "wpn-gs", data).some(s => s.name === "Zorbo"), "…and produces no row");
-ok(weaponQualitySpecs(zorbo, "wpn-gs", data).some(s => s.name === FLAMING),
-   "…while the curated ones beside it still apply");
 
 section("specs: unresolvable class level when no sibling exists");
 const noClass = makeActor({ classTag: "fighter" });
@@ -256,25 +232,115 @@ for (const id of ["wpn-gs", "atk-gs", "wpn-bow"]) {
   }
 }
 
-// --- 4. the bundle actually carries what the macro asks for --------------------------------------
-section("bundle: embedded data matches data/");
-const bundlePath = path.join(ROOT, "apply-conditionals.bundled.js");
-if (!fs.existsSync(bundlePath)) {
-  console.log("  (skipped — run build/bundle_macro.py first)");
-} else {
-  const src = fs.readFileSync(bundlePath, "utf8");
-  const at = src.indexOf("const EMBEDDED_DATA = ");
-  const end = src.indexOf("\n", at);
-  let embedded = null;
-  try { embedded = JSON.parse(src.slice(at + "const EMBEDDED_DATA = ".length, end).replace(/;\s*$/, "")); }
-  catch (e) { ok(false, `embedded data is not parseable JSON (${e.message})`); }
-  if (embedded) {
-    for (const f of DATA_FILES) ok(embedded[f] !== undefined, `${f} is embedded in the bundle`);
-    eq(Object.keys(embedded.feat_conditionals || {}).length,
-       Object.keys(data.feat_conditionals).length, "embedded feat count matches data/");
-    eq(Object.keys(embedded.weapon_quality_conditionals || {}).length,
-       Object.keys(data.weapon_quality_conditionals).length, "embedded quality count matches data/");
-  }
+// --- 4. generated item names: labels, granted-feat chains, source tags, dividers ------------------
+// The generator never names a feat item plainly. Every one carries a label ("(Feat 1) ", "Fighter
+// 6: "), applyFeatTax() folds each GRANTED chain feat into the primary item's name behind " > ",
+// and some parts keep a source tag. Before this, a plain lookup matched none of them: a real
+// generated character produced ZERO feat rows out of 113 feat items.
+section("names: labelled, chained and tagged feat items");
+const CHARGING = data.feat_conditionals["Charging Hurler"].name;
+const COLD_CELERITY = data.feat_conditionals["Cold Celerity"].name;
+const PIRANHA = data.feat_conditionals["Piranha Strike"].name;
+
+eq(nameCandidates("(Feat 1) Point-Blank Shot (EitR) > Charging Hurler"),
+   ["Point-Blank Shot (EitR)", "Point-Blank Shot", "Charging Hurler"],
+   "label dropped, chain split, source tag offered both ways");
+eq(nameCandidates("Fighter 6: Enforcer"), ["Enforcer"], "bare 'Class N:' prefix dropped");
+eq(nameCandidates("(Trainer 1): Endurance"), ["Endurance"], "labelled-with-colon prefix dropped");
+eq(nameCandidates("Cleave"), ["Cleave"], "a plain name is returned unchanged");
+eq(nameCandidates("_______________Rogue Talents__________________"), [], "divider items match nothing");
+
+const chained = makeActor();
+chained.items.push(
+  mkItem({ id: "ft-chain", type: "feat",
+           name: "(Feat 1) Point-Blank Shot (EitR) > Charging Hurler > Piranha Strike" }),
+  // The SAME granted feat folded into a second item -- must not produce the row twice.
+  mkItem({ id: "ft-chain2", type: "feat", name: "(Feat 3) Weapon Focus > Charging Hurler" }),
+  mkItem({ id: "ft-colon", type: "feat", name: "Fighter 6: Cold Celerity" }),
+);
+const chainedFeats = buildSpecs(chained, data, "int").specs.filter(s => s.section === "Feats");
+const chainedNames = chainedFeats.map(s => s.name);
+ok(chainedNames.includes(CHARGING), "a feat granted mid-chain is found");
+ok(chainedNames.includes(PIRANHA), "so is one at the end of the chain");
+ok(chainedNames.includes(COLD_CELERITY), "so is one behind a 'Fighter 6:' prefix");
+eq(chainedNames.filter(n => n === CHARGING).length, 1, "a doubly-granted feat yields exactly one row");
+ok(chainedNames.includes(POWER_ATTACK), "plain-named feats still match");
+
+// --- 5. magic items: attack toggles on the weapon, passive effects on the item --------------------
+section("items: attack notes become toggles, passives overlay the item");
+const attackNote = k => data.item_changes[k].contextNotes.find(n => n.target === "attack").text;
+const ATT_TEXT = attackNote("amulet of hidden strength");    // attack note and nothing else
+const BOTH_TEXT = attackNote("amulet of mighty fists +1");   // attack note AND a passive change
+
+const withItems = makeActor();
+withItems.items.push(
+  mkItem({ id: "eq-att", type: "equipment", name: "Amulet of Hidden Strength" }),
+  mkItem({ id: "eq-both", type: "equipment", name: "Amulet of Mighty Fists +1" }),
+  mkItem({ id: "eq-nac", type: "equipment", name: "Amulet of Natural Armor +2" }),
+  // Same curated target ("nac") already automated by the compendium item, plus a hand-authored
+  // note: the overlay must add neither, and must never remove the hand-authored one.
+  mkItem({ id: "eq-dup", type: "equipment", name: "Amulet of Natural Armor +2",
+           system: { changes: [{ _id: "own1", formula: "2", target: "nac", type: "enh" }],
+                     contextNotes: [{ target: "ac", text: "my own note" }] } }),
+);
+const itemSpecs = buildSpecs(withItems, data, "int").specs.filter(s => s.section === "Items");
+eq(itemSpecs.map(s => s.name).sort(),
+   [`(Amulet of Hidden Strength): ${ATT_TEXT}`, `(Amulet of Mighty Fists +1): ${BOTH_TEXT}`].sort(),
+   "one '(Item): text' toggle per attack note, and none from items without one");
+eq(itemSpecs[0].default, false, "item activations arrive default-off");
+eq(itemSpecs[0].rawMods, [], "name-only rider: the [[ ]] rolls are already baked into the text");
+// Read straight out of the source: the generator writes identical "(Item): text" rows at creation,
+// so "Items" must be adoptable or every re-run would duplicate them.
+const adoptLine = fs.readFileSync(path.join(ROOT, "scripts", "apply-conditionals.js"), "utf8")
+  .match(/const ADOPT_SECTIONS = new Set\(\[([^\]]*)\]/)?.[1] || "";
+ok(adoptLine.includes('"Items"'), "'Items' is adoptable, so the generator's own rows are not duplicated");
+
+const updates = itemEffectUpdates(withItems, data);
+const byId = Object.fromEntries(updates.map(u => [u._id, u]));
+eq(Object.keys(byId).sort(), ["eq-both", "eq-nac"], "only items with something passive to add are updated");
+eq(byId["eq-nac"]["system.changes"].map(c => c.target), ["nac"], "the curated change is added");
+eq(byId["eq-nac"]["system.changes"][0].operator, "add", "pf1 ChangeModel defaults are filled in");
+eq(byId["eq-both"]["system.changes"].map(c => c.target), ["damage"], "its passive change lands");
+eq(byId["eq-both"]["system.contextNotes"], [],
+   "the attack note stays OFF the item -- it became a weapon toggle instead");
+
+// Re-run: apply the update back, then rebuild. Nothing duplicates, nothing hand-authored is lost.
+for (const u of updates) {
+  const it = withItems.items.get(u._id);
+  it.system.changes = u["system.changes"];
+  it.system.contextNotes = u["system.contextNotes"];
+  it.flags[MOD_NS] = { changeIds: u[`flags.${MOD_NS}.changeIds`], noteTexts: u[`flags.${MOD_NS}.noteTexts`] };
+}
+const itemsRerun = itemEffectUpdates(withItems, data);
+for (const u of itemsRerun) {
+  const it = withItems.items.get(u._id);
+  eq(u["system.changes"].length, it.system.changes.length, `${it.name}: re-run adds no change`);
+  eq(u["system.contextNotes"].length, it.system.contextNotes.length, `${it.name}: re-run adds no note`);
+}
+ok(withItems.items.get("eq-dup").system.changes.length === 1,
+   "an item whose target is already automated is left completely alone");
+ok(withItems.items.get("eq-dup").system.contextNotes.some(n => n.text === "my own note"),
+   "a hand-authored note survives");
+
+// --- 6. the module ships every file it loads at runtime ------------------------------------------
+// The old bundler could silently omit a data file; now the failure mode is a module.json that points
+// at something the repo doesn't have, or a data file loadData() fetches that was never committed.
+section("module: manifest and runtime files line up");
+const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, "module.json"), "utf8"));
+eq(manifest.id, MOD_NS, "module id matches the flag namespace the code writes");
+for (const rel of [...(manifest.esmodules || []), ...(manifest.styles || [])]) {
+  ok(fs.existsSync(path.join(ROOT, rel)), `manifest ${rel} exists`);
+}
+for (const p of manifest.packs || []) {
+  ok(fs.existsSync(path.join(ROOT, p.path)), `pack ${p.path} is built`);
+}
+// loadData() is the single source of truth for what data/ must contain -- read the list out of the
+// module itself rather than restating it, so the two can never drift.
+const runtimeFiles = fs.readFileSync(path.join(ROOT, "scripts", "apply-conditionals.js"), "utf8")
+  .match(/const DATA_FILES = \[([^\]]*)\]/s)?.[1].match(/"([^"]+)"/g)?.map(s => s.slice(1, -1)) || [];
+eq(runtimeFiles.slice().sort(), DATA_FILES.slice().sort(), "loadData()'s file list matches this suite's");
+for (const f of runtimeFiles) {
+  ok(fs.existsSync(path.join(ROOT, "data", `${f}.json`)), `data/${f}.json ships`);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

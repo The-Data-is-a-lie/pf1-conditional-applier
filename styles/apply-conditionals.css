@@ -1,0 +1,106 @@
+/* Styling for the Apply Conditionals review dialog.
+ *
+ * Everything is scoped under .pf1ca, the root div of the dialog's content, so nothing here can leak
+ * into a sheet or another module's dialog. The JS hooks (#weapon-sel, .cond-row, .inc, .def, .txt,
+ * .toggle-section) keep their names — this file only supplies what used to be inline style="".
+ *
+ * Colours are deliberately expressed as rgba over whatever the dialog's own background is, so the
+ * dialog stays legible under a light or dark Foundry theme without hard-coding either.
+ */
+
+.pf1ca {
+  min-width: 520px;
+}
+
+/* --- toolbar: weapon picker, optional action picker, the three buttons --- */
+.pf1ca .pf1ca-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.pf1ca .pf1ca-toolbar select {
+  max-width: 250px;
+}
+
+.pf1ca .pf1ca-hint {
+  font-size: .78em;
+  margin: .2em 0;
+  opacity: .75;
+}
+
+/* --- the scrolling list of conditional rows --- */
+.pf1ca #cond-rows {
+  max-height: 52vh;
+  overflow: auto;
+}
+
+.pf1ca .cond-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 2px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(128, 128, 128, .5);
+}
+
+.pf1ca .cond-section > strong {
+  flex: 1;
+}
+
+.pf1ca .toggle-section {
+  font-size: .8em;
+}
+
+.pf1ca .cond-row {
+  border: 1px solid rgba(128, 128, 128, .3);
+  border-radius: 4px;
+  margin: 3px 0;
+  padding: 1px 6px;
+}
+
+/* list-style:none kills the native disclosure triangle; the checkbox is the affordance. */
+.pf1ca .cond-row > summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.pf1ca .cond-row > summary label {
+  cursor: pointer;
+}
+
+.pf1ca .cond-row-body {
+  padding: 4px 2px 6px;
+}
+
+.pf1ca .cond-row-body > label {
+  font-size: .85em;
+}
+
+/* Clause editor: one clause per line, monospace so the @-token substitutions stay readable. */
+.pf1ca .cond-row .txt {
+  width: 100%;
+  font-size: .82em;
+  font-family: monospace;
+}
+
+.pf1ca .cond-row-mods {
+  font-size: .78em;
+  opacity: .7;
+}
+
+/* --- the collapsible "everything I couldn't match" list at the bottom --- */
+.pf1ca .pf1ca-gaps {
+  font-size: .85em;
+}
+
+.pf1ca .pf1ca-gaps-body {
+  max-height: 22vh;
+  overflow: auto;
+}
+
+.pf1ca .pf1ca-gaps-body ul {
+  margin: .2em 0 .5em 1em;
+}
