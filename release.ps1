@@ -6,8 +6,10 @@
     distributable zip from source, commit + tag, push to GitHub (main + tag), create a GitHub
     Release, then submit the version to the FoundryVTT package registry via the Package Release API.
 
-    The manifest/download URLs are pinned to the new tag (immutable per release, per Foundry's
-    recommendation), so users always get exactly the code that shipped with that version.
+    The download URL is pinned to the new tag's release asset, and the immutable per-version
+    manifest URL is what gets submitted to the Foundry registry -- so a given release always
+    resolves to exactly the code that shipped with it. The "manifest" field inside module.json
+    itself stays on main, because that is the URL Foundry re-checks for updates.
 
     Prerequisites (one-time):
       gh auth login               # the GitHub CLI creates the Release
@@ -118,8 +120,8 @@ if (-not (Test-Path (Join-Path $Root 'packs\macros\CURRENT'))) {
 }
 Ok 'Specs pass, macro pack present.'
 
-# ---- 3. bump module.json (version, compat, pinned URLs) -------------------------------------------
-Step "Bumping $ManifestRel -> version $Version, pinned to tag v$Version"
+# ---- 3. bump module.json (version, compat, download URL) ------------------------------------------
+Step "Bumping $ManifestRel -> version $Version"
 $mj  = [System.IO.File]::ReadAllText($ManifestPath)
 $nlM = if ($mj -match "`r`n") { "`r`n" } else { "`n" }
 $mj  = $mj -creplace '("version"\s*:\s*")[^"]*(")', ('${1}' + $Version + '${2}')
@@ -131,7 +133,12 @@ if ($Maximum) {
         $mj = $mj -creplace '("verified"\s*:\s*"[^"]*")', ('${1},' + $nlM + '    "maximum": "' + $Maximum + '"')
     }
 }
-$mj = $mj -creplace '("manifest"\s*:\s*")[^"]*(")', ('${1}' + $PinnedManifest + '${2}')
+# "manifest" is deliberately NOT rewritten to the tag. Foundry re-fetches whatever URL is stored in
+# an installed module's manifest field to check for updates, so pinning it to v$Version would freeze
+# every manifest-URL install at the version they first installed -- they would never be offered an
+# update again. It stays on main, which always describes the current release. The REGISTRY still
+# gets the immutable per-version URL: $PinnedManifest is sent in the Package Release API payload in
+# step 8, which is where Foundry's "manifests must be immutable per release" guidance actually applies.
 $mj = $mj -creplace '("download"\s*:\s*")[^"]*(")', ('${1}' + $PinnedDownload + '${2}')
 
 try { $mjObj = $mj | ConvertFrom-Json } catch { Fail "module.json no longer parses after edit: $($_.Exception.Message)" }
