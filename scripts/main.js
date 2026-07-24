@@ -4,37 +4,63 @@
  *
  * apply() is exposed on the module API and reached three ways, all equivalent:
  *   • the "Apply Conditionals" macro in the module's compendium (a one-liner calling api.apply()),
- *   • a button in each owned actor sheet's header  -> api.apply(thatActor)  (skips the chooser),
- *   • a (user-assigned) keybinding                  -> api.apply().
+ *   • a button on each owned actor sheet    -> api.apply(thatActor)  (skips the chooser),
+ *   • a (user-assigned) keybinding          -> api.apply().
  * Because the macro and keybinding pass no actor, apply() falls through to its own resolveActor()
  * (single controlled token, else a chooser) — so every surface works with nothing selected.
+ *
+ * The sheet button has two homes — the window header, and the Settings tab's "Utility Functions"
+ * section alongside pf1's own Point Buy Calculator.
  */
 import { apply } from "./apply-conditionals.js";
 
 const MOD_NS = "pf1-conditional-applier";
+const HEADER_BTN = "pf1ca-apply-btn";
+const UTILITY_BTN = "pf1ca-utility-btn";
+const TIP = "Wire curated conditionals onto this character's weapons.";
 
 const runApply = (actor) => game.modules.get(MOD_NS)?.api?.apply(actor);
 
-// --- character-sheet header button --------------------------------------------------------------
-// Fires on every (re)render, so it removes any button it already added before adding a fresh one.
-// Uses app.element (the outer window) rather than the render hook's html arg, because AppV1 only
-// hands the inner content there — the .window-header lives on the outer element in both v1 and v2.
+function makeButton(cls, actor, label) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = cls;
+  btn.title = TIP;
+  // `inert` on the icon mirrors pf1's own buttons — it keeps the <i> from becoming the click target.
+  btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles" inert></i> ${label}`;
+  btn.addEventListener("click", (ev) => { ev.preventDefault(); ev.stopPropagation(); runApply(actor); });
+  return btn;
+}
+
+// --- sheet buttons ------------------------------------------------------------------------------
+// Fires on every (re)render, so each button is removed before being re-added — no duplicates.
+//
+// Uses app.element (the outer window) rather than the render hook's html arg: AppV1 only hands the
+// inner content there, while .window-header lives on the outer element. The outer element also
+// contains the tab content, so one root serves both injection sites.
 function onRenderActorSheet(app) {
   try {
     const actor = app?.actor ?? app?.document;
     if (!actor?.items || actor.isOwner === false) return;
-    const appEl = app?.element?.jquery ? app.element[0] : app?.element;
-    const header = appEl?.querySelector?.(".window-header");
-    if (!header) return;
-    header.querySelector(".pf1ca-apply-btn")?.remove();
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "pf1ca-apply-btn";
-    btn.title = "Wire curated conditionals onto this character's weapons.";
-    btn.innerHTML = `<i class="fas fa-wand-magic-sparkles"></i> Conditionals`;
-    btn.addEventListener("click", (ev) => { ev.preventDefault(); ev.stopPropagation(); runApply(actor); });
-    const title = header.querySelector(".window-title");
-    if (title) title.after(btn); else header.prepend(btn);
+    const root = app?.element?.jquery ? app.element[0] : app?.element;
+    if (!root?.querySelector) return;
+
+    root.querySelector(`.${HEADER_BTN}`)?.remove();
+    root.querySelector(`.${UTILITY_BTN}`)?.remove();
+
+    const header = root.querySelector(".window-header");
+    if (header) {
+      const btn = makeButton(HEADER_BTN, actor, "Conditionals");
+      const title = header.querySelector(".window-title");
+      if (title) title.after(btn); else header.prepend(btn);
+    }
+
+    // The Utility Functions column has no class of its own, but the point-buy button inside it
+    // does — so take that button's parent. Falls back to the column's position under .base-setup.
+    // Absent entirely on sheets without point buy (loot, vehicle…), in which case we just skip.
+    const col = root.querySelector('.tab[data-tab="settings"] button.pointbuy-calculator')?.parentElement
+             ?? root.querySelector('.tab[data-tab="settings"] .base-setup > div.flexcol:not(.spellbook-usage)');
+    if (col) col.appendChild(makeButton(UTILITY_BTN, actor, "Apply Conditionals"));
   } catch (err) {
     console.error(`[${MOD_NS}] sheet button error:`, err);
   }
