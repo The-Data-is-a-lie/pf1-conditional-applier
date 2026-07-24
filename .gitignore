@@ -16,6 +16,11 @@ node_modules/
 # Release secrets read by release.ps1
 .env
 
+# The distributable zip. Built by release.ps1 and uploaded as a GitHub release asset, which is what
+# module.json's "download" points at -- so it never needs to be committed. Tracking it would add
+# ~500 KB of duplicate binary to git history on every single release.
+downloads/
+
 # LevelDB scratch inside the compendium packs. The pack DATA (*.ldb, the numbered *.log, CURRENT,
 # MANIFEST-*) IS committed and shipped; these three are recreated on every open, so tracking them
 # would dirty the tree every time Foundry runs.

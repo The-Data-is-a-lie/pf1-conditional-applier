@@ -33,7 +33,7 @@
   },
   "url": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier",
   "manifest": "https://raw.githubusercontent.com/The-Data-is-a-lie/pf1-conditional-applier/main/module.json",
-  "download": "https://raw.githubusercontent.com/The-Data-is-a-lie/pf1-conditional-applier/main/downloads/pf1-conditional-applier.zip",
+  "download": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier/releases/download/v1.0.0/pf1-conditional-applier.zip",
   "readme": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier/blob/main/README.md",
   "changelog": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier/blob/main/changelog.md",
   "license": "https://github.com/The-Data-is-a-lie/pf1-conditional-applier/blob/main/LICENSE"

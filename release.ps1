@@ -47,16 +47,19 @@ $Root           = $PSScriptRoot
 $ModName        = 'pf1-conditional-applier'
 $ManifestRel    = 'module.json'
 $ChangelogRel   = 'changelog.md'
-$ZipRel         = "downloads/$ModName.zip"
 $ManifestPath   = Join-Path $Root 'module.json'
 $ChangelogPath  = Join-Path $Root 'changelog.md'
+# downloads/ is gitignored: the zip is a build artifact, published as a GitHub release asset rather
+# than committed. Keeping it out of git is what stops the repo growing ~500 KB per release forever.
 $ZipPath        = Join-Path $Root "downloads\$ModName.zip"
 $EnvPath        = Join-Path $Root '.env'
 $Repo           = 'The-Data-is-a-lie/pf1-conditional-applier'
 $FoundryId      = $ModName          # already the hyphenated slug Foundry registers
 $RawBase        = "https://raw.githubusercontent.com/$Repo/v$Version"
 $PinnedManifest = "$RawBase/module.json"
-$PinnedDownload = "$RawBase/downloads/$ModName.zip"
+# The release asset uploaded by `gh release create` in step 7 -- immutable per tag, and served by
+# GitHub's asset CDN rather than raw.githubusercontent (a source-file endpoint, not a binary host).
+$PinnedDownload = "https://github.com/$Repo/releases/download/v$Version/$ModName.zip"
 $FoundryApi     = 'https://foundryvtt.com/_api/packages/release_version/'
 $PkgUrl         = "https://foundryvtt.com/packages/$FoundryId"
 
@@ -223,7 +226,7 @@ Ok "Zip: $zipTarget  (${zipKB} KB, $($names.Count) entries)"
 if ($DryRun) {
     Write-Host ''
     Step 'DRY-RUN summary (no commit / tag / push / publish performed)'
-    Note "module.json + changelog.md were edited in place; the tracked zip was left untouched (built to TEMP)."
+    Note "module.json + changelog.md were edited in place; the zip was built to TEMP, so downloads/ is untouched."
     Note "Inspect:  git --no-pager diff -- $ManifestRel $ChangelogRel"
     Note "Revert:   git restore -- $ManifestRel $ChangelogRel"
     Write-Host ''
@@ -241,7 +244,7 @@ if ($DryRun) {
 
 # ---- 6. commit + tag + push ----------------------------------------------------------------------
 Step "Committing release + tagging v$Version"
-& git add -- $ManifestRel $ChangelogRel $ZipRel
+& git add -- $ManifestRel $ChangelogRel
 if ($LASTEXITCODE -ne 0) { Fail 'git add failed.' }
 & git commit -q -m "chore(release): v$Version"
 if ($LASTEXITCODE -ne 0) { Fail 'git commit failed (nothing staged?).' }
