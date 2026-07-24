@@ -6,6 +6,8 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+## Version 1.0.0 (2026-07-24)
+
 ### Added
 
 - Initial release as a Foundry module. Previously a pasted script macro with a generated 1.2 MB data bundle; everything now ships inside the module and nothing is fetched from outside it.
