@@ -1,12 +1,14 @@
 {
   "id": "pf1-conditional-applier",
-  "name": "pf1-conditional-applier",
   "title": "PF1 Conditional Applier",
   "description": "Wires curated conditionals onto a character's weapons: active feats, weapon special abilities, class-feature toggles, Path of War maneuvers, Spheres talents and spells. Run the bundled macro, review what it found per weapon, apply. Re-runnable — it only ever replaces what it added.",
   "version": "1.0.0",
   "author": "TableTopSoftware",
   "authors": [
-    { "name": "TableTopSoftware" }
+    {
+      "name": "TableTopSoftware",
+      "url": "https://github.com/The-Data-is-a-lie"
+    }
   ],
   "esmodules": [ "scripts/main.js" ],
   "styles": [ "styles/apply-conditionals.css" ],
@@ -20,10 +22,9 @@
       "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
     }
   ],
-  "system": "pf1",
   "relationships": {
     "systems": [
-      { "id": "pf1", "type": "system", "compatibility": {} }
+      { "id": "pf1", "type": "system", "compatibility": { "minimum": "11" } }
     ]
   },
   "compatibility": {
