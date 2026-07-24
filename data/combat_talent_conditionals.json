@@ -372,6 +372,19 @@
         }
       ],
       "rider": "Range: ranged, [[30]] ft; thrown weapon charge attack; -[[2]] AC until the start of your next turn"
+    },
+    "Wall Stunt": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "requires the Mobile Striker talent and kicking off a wall for the rest of your movement; applies to an attack you make while airborne, and increases by [[1]] for every [[5]] ranks in Acrobatics you possess"
     }
   },
   "Barrage": {
@@ -524,6 +537,10 @@
     "Monster Breaker": {
       "modifiers": [],
       "rider": "use Bronco Buster on any creature suitable to serve as your mount; a creature with Intelligence greater than [[2]] may make its Will save ([[ 10 + floor(@attributes.bab.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]]) as a free action at the start of its turn, and on a failed save you may only direct it to move (not attack or use other abilities)"
+    },
+    "Coordinated Attack": {
+      "modifiers": [],
+      "rider": "attack action only; one animal ally also attacks your target with a single natural weapon as a joint swift action; if both you and the ally deal damage, the ally may move [[5]] ft as a free action (does not provoke)"
     }
   },
   "Berserker": {
@@ -720,6 +737,22 @@
     "Disarming Jab": {
       "modifiers": [],
       "rider": "on hit with counter punch, free disarm attempt (no AoO): [[ d20 + @attributes.cmb.total ]] vs CMD; success: auto-retrieve dropped item"
+    },
+    "Cutting Comeback": {
+      "modifiers": [],
+      "rider": "ready a demoralize (Intimidate), a Warleader shout that affects enemies, or a Fencing feint as a counter punch; on success one afflicted target within [[30]] ft takes [[4 + (floor(@attributes.bab.total / 4)) * 4]] nonlethal damage (twice your counter punch bonus damage); language-based mind-altering effect"
+    },
+    "Dug In Blow": {
+      "modifiers": [],
+      "rider": "on a successful counter punch you gain DR [[2 + floor(@attributes.bab.total / 3)]]/- until the start of your next turn (lost if you move more than [[5]] ft during your turn)"
+    },
+    "Ko Focus": {
+      "modifiers": [],
+      "rider": "when you deal damage with your counter punch to a creature of CR at least half your character level (minimum 1/2), spend an immediate action to regain your martial focus"
+    },
+    "Sucker Punch": {
+      "modifiers": [],
+      "rider": "once per round, expend martial focus to treat an attack of opportunity made with a counter-punch-capable weapon as a counter punch; you then become staggered for [[1]] round"
     }
   },
   "Brute": {
@@ -849,6 +882,21 @@
         }
       ],
       "rider": "on a successful maneuver (manhandle); Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] halves the sonic damage and negates the deafen; on a failed save the target is deafened for [[1]] minute; you may expend martial focus to instead deal [[1d6]] sonic per [[2]] points of base attack bonus"
+    },
+    "Greater Shove": {
+      "modifiers": [
+        {
+          "formula": "floor(@attributes.bab.total / 2)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "bludgeoning"
+          ],
+          "critical": "normal"
+        }
+      ],
+      "rider": "applies to a successful shove; you may also augment the shove with feats and talents such as Power Attack even though it is a touch attack"
     }
   },
   "Dual Wielding": {
@@ -924,6 +972,19 @@
     "Repositioning Routine": {
       "modifiers": [],
       "rider": "attempt a reposition combat maneuver as a free action (no attack of opportunity): [[ d20 + @attributes.cmb.total ]] vs CMD"
+    },
+    "Mixed Assault": {
+      "modifiers": [
+        {
+          "formula": "2 + floor(@attributes.bab.total / 5) * 2",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "requires wielding a melee weapon in one hand and a ranged weapon in the other; applies only after you strike two different creatures more than [[5]] ft apart in the same round you make an attack action; the bonus lasts against each such creature until the end of your next turn"
     }
   },
   "Duelist": {
@@ -1076,6 +1137,10 @@
     "Whisking Disarm": {
       "modifiers": [],
       "rider": "on a successful disarm attempt, the target gains the battered condition until the end of your next turn, and the disarmed weapon lands up to [[10]] feet away (+[[5]] feet per [[5]] points of BAB)"
+    },
+    "Cut Free": {
+      "modifiers": [],
+      "rider": "when you deal bleed damage with an attack action, one creature grappled, pinned, impaled, or swallowed whole by the target (this may include you) may immediately attempt to escape (a combat maneuver or Escape Artist check) with a bonus equal to the bleed damage the target is taking; a creature no longer impaled still takes its bleed as normal"
     }
   },
   "Equipment": {
@@ -1217,6 +1282,45 @@
     "Palm Throw": {
       "modifiers": [],
       "rider": "throwing two shuriken as a single attack instead of two; damage die increases to [[1d6]] (Medium) or [[1d4]] (Small) in place of a second attack"
+    },
+    "Duelist’s Grip": {
+      "modifiers": [
+        {
+          "formula": "floor(@abilities.str.mod / 2)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only while wielding a single one-handed melee weapon (not a natural attack) in one hand and making no attacks with any other hand or natural weapon"
+    },
+    "Ninjutsu Training": {
+      "modifiers": [
+        {
+          "formula": "1",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "on your first attack against a creature that is unaware of your presence"
+    },
+    "Pikeman Training": {
+      "modifiers": [
+        {
+          "formula": "2 + 2 * min(1, floor(@attributes.bab.total / 10))",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "only on a readied attack with a brace weapon against a target moving into your threatened area"
     }
   },
   "Fencing": {
@@ -1384,6 +1488,14 @@
     "Cow Enemy": {
       "modifiers": [],
       "rider": "when you deal damage or succeed on a combat maneuver check against a creature using an attack or standard action; you may attempt an Intimidate check to demoralize that creature as a swift action"
+    },
+    "Fear Eater": {
+      "modifiers": [],
+      "rider": "expend martial focus; when you damage a demoralized creature with an attack action you may gain temporary hit points equal to your Intimidate ranks (doubled if you have [[10]]+ ranks) as a free action, lasting [[1]] minute"
+    },
+    "Punish The Meek": {
+      "modifiers": [],
+      "rider": "when you use an attack action to deal damage to a creature you have demoralized; extend the duration of that demoralization by [[1]] round"
     }
   },
   "Guardian": {
@@ -1423,6 +1535,10 @@
     "Singularity": {
       "modifiers": [],
       "rider": "Fortitude Save [[ 10 + floor(@attributes.bab.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Defiant Boar": {
+      "modifiers": [],
+      "rider": "while in this stance; whenever you damage a creature with an attack action, remove hit point damage from your delayed damage pool equal to the damage dealt, to a maximum of [[@attributes.bab.total]]"
     }
   },
   "Lancer": {
@@ -1743,6 +1859,18 @@
     "Counter Theft": {
       "modifiers": [],
       "rider": "expend martial focus as an immediate action; when a creature within your natural reach attacks you with a manufactured melee weapon, before the attack resolves you may attempt a steal combat maneuver against that creature to disarm it of the weapon being used (any bonuses it has against disarm checks, such as a locked gauntlet, apply to its CMD)"
+    },
+    "Broke And Broken": {
+      "modifiers": [],
+      "rider": "requires martial focus; on a successful dirty trick combat maneuver, you may attempt a steal combat maneuver against the same target as a free action"
+    },
+    "Clever Fox’s Heist": {
+      "modifiers": [],
+      "rider": "you may perform a dirty trick or steal combat maneuver as an attack of opportunity (to apply (trick) talents to it, expend martial focus or spend an additional attack of opportunity); when such a maneuver made as an attack of opportunity succeeds, as an immediate action you may move up to half your base speed without provoking from the target (subtract this from your movement on your next turn)"
+    },
+    "Cut And Run": {
+      "modifiers": [],
+      "rider": "requires martial focus; on a successful dirty trick or steal combat maneuver, you may move up to half your base speed as a free action without provoking an attack of opportunity from the target"
     }
   },
   "Scout": {
@@ -1877,6 +2005,14 @@
     "Steady Shot": {
       "modifiers": [],
       "rider": "When performing a deadly shot, ignore the cover bonus to AC and the miss chance from anything less than total cover/concealment (total cover/total concealment still apply normally). At BAB [[10]]+, also ignore total concealment."
+    },
+    "Fragmenting Shot": {
+      "modifiers": [],
+      "rider": "if this deadly shot reduces the target to [[0]] or fewer hit points it is instantly killed; each creature within [[10]] ft takes bludgeoning and piercing damage equal to your weapon's base damage die + your base attack bonus ([[@attributes.bab.total]]), Reflex [[ 10 + floor(@attributes.bab.total / 2) + @spheres.pam ]] half"
+    },
+    "Targeted Assault": {
+      "modifiers": [],
+      "rider": "attack action only; on a hit the target's damage reduction, energy resistance, or hardness is reduced by [[floor(@attributes.bab.total / 2)]] (minimum [[1]]) against this attack"
     }
   },
   "Trap": {
@@ -2014,6 +2150,22 @@
     "Snares": {
       "modifiers": [],
       "rider": "Reflex Save [[ 10 + floor(@attributes.bab.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Blunt Dart": {
+      "modifiers": [],
+      "rider": "the dart deals nonlethal bludgeoning damage and its damage die increases by one step"
+    },
+    "Deadly Dart": {
+      "modifiers": [],
+      "rider": "the dart deals both piercing and slashing damage, its damage die becomes d8, and its critical threat range improves to [[19]]-[[20]]/x[[3]]"
+    },
+    "Penetrating Trap": {
+      "modifiers": [],
+      "rider": "your damage-dealing traps overcome damage reduction based on your ranks in Craft (traps): magic at [[4]] ranks, cold iron and silver at [[8]], adamantine at [[12]], and all alignments at [[16]]"
+    },
+    "Thaumic Sink": {
+      "modifiers": [],
+      "rider": "as a dart, the struck creature is affected as if inside an antimagic field (per the spell) for [[1]] round per rank in Craft (traps), or until the dart is removed (a full-round action; removing it as a standard action instead deals the dart's minimum damage); as a snare, a [[10]]-ft radius around the triggering square is filled with an antimagic field for [[1]] round per rank in Craft (traps); this is a spell-like ability using your Craft (traps) ranks as caster level"
     }
   },
   "Warleader": {
@@ -2074,6 +2226,14 @@
     "Distracting Cacophony": {
       "modifiers": [],
       "rider": "Will Save [[ 10 + floor(@attributes.bab.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Marauding Monkey": {
+      "modifiers": [],
+      "rider": "while in this stance; when you damage a creature with an attack action or attack of opportunity, you may extend one of your active warleader abilities (once per shout or tactic per round) — an active shout by [[1]] round, or an active tactic so that the next time you maintain it you may do so as a free action and recenter it"
+    },
+    "Triumph": {
+      "modifiers": [],
+      "rider": "when you succeed on an attack action you may use a Warleader shout as a swift action; expend martial focus to instead make that shout as a free action"
     }
   },
   "Wrestling": {
@@ -2212,6 +2372,10 @@
     "Test Of Strength": {
       "modifiers": [],
       "rider": "if you win the opposed grapple check, target provokes an attack of opportunity from an ally of your choice; if it declines the opposed check instead, it takes a -[[2]] penalty to CMD until the start of its next round"
+    },
+    "Chink In The Armor": {
+      "modifiers": [],
+      "rider": "make a melee attack that deals damage as normal but ignores any armor and shield bonuses to the target's Armor Class"
     }
   },
   "Leadership": {

@@ -196,6 +196,10 @@
     "Twisted Shapeshift": {
       "modifiers": [],
       "rider": "spend [[1]] spell point; Fortitude Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates; targets that fail take [[(ceil(@spheres.cl.total / 2))d6]] (minimum [[1d6]]) untyped damage"
+    },
+    "Transforming Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with making a shapeshift (standard action, does not provoke unless it is a ranged attack); if the attack hits, the target is also subject to your shapeshift. A scatter weapon applies it to a single target chosen at the time of attack."
     }
   },
   "Bear": {
@@ -246,6 +250,10 @@
     "Fursome Aura": {
       "modifiers": [],
       "rider": "Range: ranged, [[30]] ft; Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Slumbear": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point; one target creature falls into a deep slumber for [[1]] minute (a sleep effect; Will Save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] negates when used on an unwilling creature). A willing target instead recovers [[1]] hp per level on waking."
     }
   },
   "Blood": {
@@ -1009,6 +1017,34 @@
     "Wingbind": {
       "modifiers": [],
       "rider": "when using a blast type that entangles, a flying entangled target must succeed at an additional Reflex save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] or lose flight and fall to the ground (does not affect creatures with magical flight)"
+    },
+    "Energetic Response": {
+      "modifiers": [],
+      "rider": "blast shape: make attacks of opportunity with your destructive blast as if it were a melee weapon (you are considered armed with it); this use cannot increase the blast's casting time nor spend a spell point to boost its damage"
+    },
+    "Energy Leap": {
+      "modifiers": [],
+      "rider": "spend [[1]] spell point to move in a straight line up to the blast's range (provokes normally); overrun creatures in the way as a free action (using caster level + casting modifier for the check), and any creature that tries to impede you suffers the blast (Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] half) whether or not it stops you; you may crash through objects or barriers, dealing the blast's damage to them; if stopped, your movement ends and you are staggered for [[1]] round"
+    },
+    "Extended Range": {
+      "modifiers": [],
+      "rider": "increase the blast's range by [[1]] range level (close to medium, medium to long); may be taken multiple times, with the effects stacking"
+    },
+    "Extreme Range": {
+      "modifiers": [],
+      "rider": "the blast has a range of [[1000]] ft +[[100]] ft per caster level; beyond long range it can target only squares or large objects (not individual creatures) and takes effect [[1]] round after use"
+    },
+    "Gather Energy": {
+      "modifiers": [],
+      "rider": "increase the blast's casting time by [[1]] step to reduce its spell point cost by [[1]] (minimum [[0]])"
+    },
+    "Selective Blast": {
+      "modifiers": [],
+      "rider": "exclude [[1]] creature +[[1]] per [[10]] caster levels from the area of your instantaneous-duration blasts; spend [[1]] spell point to exclude an additional number equal to your casting ability modifier (minimum +[[1]])"
+    },
+    "Spirit Blast": {
+      "modifiers": [],
+      "rider": "the blast affects ethereal and incorporeal targets normally, extending into the Ethereal Plane and dealing full damage with no [[50]]% miss chance against incorporeal creatures"
     }
   },
   "Divination": {
@@ -1082,6 +1118,29 @@
     "Spectral Enhancement": {
       "modifiers": [],
       "rider": "grants the weapon the ghost touch special ability (it strikes incorporeal creatures normally); if [[1]] additional spell point is spent, an undead or incorporeal creature damaged by the weapon must succeed at a Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] or be sickened for [[1]] round (bypasses any immunity to the sickened condition)"
+    },
+    "Alternative Energy": {
+      "modifiers": [
+        {
+          "formula": "1d6 + floor(@spheres.cl.total / 2)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "sonic"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "requires a weapon enhanced with Energy Enhancement; the energy becomes sonic (or force at caster level [[10]]) in place of a physical energy type, treated as the flaming weapon special ability"
+    },
+    "Deadly Weapon": {
+      "modifiers": [],
+      "rider": "your weapon gains keen (its threat range is doubled) and +[[floor(@spheres.cl.total / 3)]] on rolls to confirm critical hits."
+    },
+    "Crippling Strike": {
+      "modifiers": [],
+      "rider": "you may deliver enhancements through a melee touch attack, OR make a single weapon attack in conjunction with an enhancement (standard action, no provoke unless ranged); if the attack hits, the target is also subject to your enhancement. A scatter weapon applies it to a single target."
     }
   },
   "Fallen Fey": {
@@ -1167,6 +1226,27 @@
     "Unseelie Aura": {
       "modifiers": [],
       "rider": "Range: ranged, [[30]] ft; Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Pixie Sticks": {
+      "modifiers": [
+        {
+          "formula": "1 + floor(@spheres.cl.total / 5)",
+          "target": "attack",
+          "subTarget": "allAttack",
+          "type": "insight",
+          "damageType": [],
+          "critical": "normal"
+        },
+        {
+          "formula": "1 + floor(@spheres.cl.total / 5)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "insight",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "Pixie Stick: while wielding a mostly-wooden weapon (club, quarterstaff, spear, etc.) or wooden ammunition (arrow, bolt) bonded by this fey-blessing"
     }
   },
   "Fate": {
@@ -1283,6 +1363,10 @@
     "Villainy": {
       "modifiers": [],
       "rider": "spend [[1]] spell point; Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Shrieking Strike": {
+      "modifiers": [],
+      "rider": "you may deliver words via a melee touch attack, OR make a single weapon attack in conjunction with using a word (not immediate-action words); if the attack hits, the target is also affected by the word. A scatter weapon applies it to a single target."
     }
   },
   "Illusion": {
@@ -1353,6 +1437,10 @@
     "Sanctify": {
       "modifiers": [],
       "rider": "a special application of restore vs a creature damaged by positive energy, delivered by a melee or ranged touch attack (a ray at range); the target gains [[1d2]] temporary negative levels for [[1]] hour per caster level with no save (the die size increases one step per [[5]] caster levels: [[1d2]], [[1d3]], [[1d4]], [[1d6]], ...); these stack but do not destroy an undead reduced to [[0]] Hit Dice, which instead takes [[4]] points of Constitution drain (or Charisma drain if it has no Constitution score) for the duration; if a negative level lasts longer than [[1]] day the target must succeed at a Fortitude save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] per negative level or it becomes permanent"
+    },
+    "Taste Of Victory": {
+      "modifiers": [],
+      "rider": "on a successful hit (attack roll required) against a creature with at least half your character level in Hit Dice, spend [[1]] additional spell point to use a Life sphere ability as a swift action on any willing creature within range; no spell point is required if the hit was a critical hit, knocked the target unconscious, or reduced it to [[0]] or fewer hit points"
     }
   },
   "Light": {
@@ -1613,6 +1701,10 @@
     "Vision": {
       "modifiers": [],
       "rider": "Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Charming Strike": {
+      "modifiers": [],
+      "rider": "you may deliver charms via a melee touch attack, OR make a single weapon attack in conjunction with using a charm; if the attack hits, the target is also affected by the charm. A scatter weapon applies it to a single target."
     }
   },
   "Nature": {
@@ -2018,6 +2110,10 @@
     "Steal Time": {
       "modifiers": [],
       "rider": "spend [[1]] spell point; Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates; on a failed save the target is dazed for [[1]] round and you immediately gain an additional standard action (a target cannot suffer this effect more than once per round, and you cannot gain more than one standard action per round from this ability)"
+    },
+    "Time Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with using a single-target alter time effect (standard action, does not provoke unless it is a ranged attack); if the attack hits, the target is also subject to your alter time effect. A scatter weapon applies it to a single target chosen at the time of attack."
     }
   },
   "War": {
@@ -2165,6 +2261,32 @@
     "Divisive Totem": {
       "modifiers": [],
       "rider": "spend [[1]] spell point; Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Adroitness": {
+      "modifiers": [
+        {
+          "formula": "4",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "morale",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "mandate talent; only against an enemy that just missed your mandate partner; morale bonus to damage rolls"
+    },
+    "Totem Of War": {
+      "modifiers": [
+        {
+          "formula": "2 + floor(@spheres.cl.total / 5)",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "circumstance",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "while within your Totem of War; you and allies gain this circumstance bonus to all weapon damage rolls"
     }
   },
   "Warp": {
@@ -2259,6 +2381,10 @@
     "Looped Space": {
       "modifiers": [],
       "rider": "spend [[1]] spell point; Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Warping Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with a teleport or a (space) talent targeting a creature/object (standard action, no provoke unless ranged); if the attack hits, the target is also struck by the teleport/(space) effect (willing targets only unless you have Unwilling Teleport). A scatter weapon applies it to a single target."
     }
   },
   "Weather": {
@@ -2514,12 +2640,80 @@
     "Interference Cloud": {
       "modifiers": [],
       "rider": "shroud; [[20]]% chance (+[[10]]% per [[5]] levels) the target's charge/spell-point equipment fails when used"
+    },
+    "Sodden": {
+      "modifiers": [
+        {
+          "formula": "2",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "weapon attacks vs a creature with the fire subtype while bearing your mantle in an area of Precipitation severity [[3]]+; +[[1]] damage per category above severity [[3]]"
+    },
+    "Weather Strike": {
+      "modifiers": [],
+      "rider": "make a single weapon attack in conjunction with placing a mantle or shroud (standard action, no provoke unless ranged); if the attack hits, the target is also affected by that mantle/shroud. A scatter weapon applies it to a single target."
     }
   },
   "Conjuration": {
     "Entrapping Circle": {
       "modifiers": [],
       "rider": "spend [[2]] spell points; Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Draconic Creature": {
+      "modifiers": [],
+      "rider": "companion gains a breath weapon usable once per [[1d4]] rounds: a [[30]]-ft cone or [[60]]-ft line (chosen when gained) dealing [[1d8]] acid, cold, electricity, or fire damage (chosen when gained) per [[2]] Hit Dice (minimum [[1d8]]); Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.con.mod ]] halves"
+    },
+    "Elemental Creature": {
+      "modifiers": [],
+      "rider": "each of the companion's natural attacks deals an extra [[1d3]] acid, cold, electricity, or fire damage (chosen when gained); this die increases one step per [[5]] Hit Dice"
+    },
+    "Explosive Companion": {
+      "modifiers": [],
+      "rider": "when the companion is reduced to [[0]] hit points or fewer it explodes, dealing [[1d6]] acid, cold, electricity, or fire damage (chosen when gained) per Hit Die to all creatures within [[5]] ft + [[5]] ft per [[5]] Hit Dice; Reflex save [[ 10 + floor(@spheres.cl.total / 2) + @spheres.cam ]] halves"
+    },
+    "Infectious Creature": {
+      "modifiers": [],
+      "rider": "when a creature takes damage from the companion's manufactured or natural weapon attack it must make a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.con.mod ]] or immediately contract the chosen disease (no onset period); whether it saves or fails it is immune to this ability from the companion for [[24]] hours"
+    },
+    "Ooze Companion": {
+      "modifiers": [],
+      "rider": "(taken twice) as a standard action the companion moves up to its speed and engulfs any creature smaller than itself in its path; a target that forgoes its attack of opportunity may make a Reflex save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.str.mod ]] to avoid (on a success it is pushed aside), otherwise it is engulfed: pinned, in danger of suffocating, and taking [[1d4]] slam damage each round (escape as a pin)"
+    },
+    "Ravenous Creature": {
+      "modifiers": [],
+      "rider": "companion gains swallow whole: a successful grapple check at the start of its turn (standard action) swallows a grappled creature up to one size smaller (dealing bite damage if it has a bite); each round swallowed the target is pinned, may suffocate, and takes [[1d6]] bludgeoning + [[1d6]] acid per [[3]] Hit Dice; it can cut free with a light slashing or piercing weapon after dealing [[1/10]] the companion's total hit points"
+    },
+    "Roguish Creature": {
+      "modifiers": [],
+      "rider": "the companion deals an extra [[1d6]] precision (sneak attack) damage against foes that are flat-footed or denied their Dexterity bonus, increasing to [[2d6]] at [[7]] Hit Dice and [[3d6]] at [[14]] Hit Dice"
+    },
+    "Sanguine Creature": {
+      "modifiers": [],
+      "rider": "(Bleed option) one chosen natural attack inflicts [[1d2]] bleed on a hit (die increases one step per [[4]] Hit Dice: [[1d3]], [[1d4]], [[1d6]], [[1d8]]), stopped by a [[DC 15]] Heal check or any magical healing; alternatively (Blood Drain) [[1]] Constitution damage at end of turn while grappling (scaling to [[1d2]] at [[5]] Hit Dice), or (Thirst) gain temporary hit points equal to the grappled creature's Hit Dice on a blood drain"
+    },
+    "Shocking Creature": {
+      "modifiers": [
+        {
+          "formula": "1d8 + (floor(@attributes.bab.total / 2))d8",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [
+            "electric"
+          ],
+          "critical": "nonCrit"
+        }
+      ],
+      "rider": "standard-action melee touch attack (provokes no attack of opportunity) delivering the electricity damage; if a creature grapples the companion it may instead deal it as an immediate action with no attack roll but a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.con.mod ]] for half; while in water it becomes a [[10]]-ft-radius burst (Fortitude save for half; creatures from [[10]] to [[30]] ft take half, then Fortitude save for half again); cannot be used again for [[1d4]] rounds"
+    },
+    "Stinking Companion": {
+      "modifiers": [],
+      "rider": "(Nauseating Spray) standard action, [[15]]-ft cone: each creature makes a Fortitude save [[ 10 + floor(@attributes.bab.total / 2) + @abilities.con.mod ]] or is sickened for [[1d6]] rounds (poison); or (Stench) any creature other than you adjacent to the companion must make the same Fortitude save or be sickened until [[1d6]] rounds after it is no longer adjacent (a success grants immunity for [[24]] hours; poison)"
     }
   },
   "Protection": {
@@ -2534,6 +2728,19 @@
     "Repel Chaos/evil/good/law": {
       "modifiers": [],
       "rider": "Will Save [[ 10 + floor(@spheres.cl.total / 2) + max(@abilities.int.mod, @abilities.wis.mod, @abilities.cha.mod) ]] negates"
+    },
+    "Vengeance": {
+      "modifiers": [
+        {
+          "formula": "@spheres.cl.total",
+          "target": "damage",
+          "subTarget": "allDamage",
+          "type": "untyped",
+          "damageType": [],
+          "critical": "normal"
+        }
+      ],
+      "rider": "when an enemy you can see successfully hits a creature bearing one of your aegises; as an immediate action, sacrifice an aegis on that creature to make this weapon or natural weapon attack against the attacker"
     }
   }
 }
