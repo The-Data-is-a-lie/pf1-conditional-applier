@@ -110,9 +110,11 @@ ship:
 | `npm run pack:macros` | Recompiles `packs/macros` from `build/macro-pack-source.json`. **Close Foundry first** — it holds a LevelDB lock on every pack it has open. |
 | `./release.ps1 -Version X.Y.Z -DryRun` | Local rehearsal of a release: bumps the manifest, rolls the changelog, builds and validates the zip, touches nothing remote. Drop `-DryRun` to tag, push, cut a GitHub release and submit to the Foundry registry. |
 
-`build/` also keeps a copy of the LevelDB item packer (`pack_pf1_leveldb.js`) and the old spell-item
-compendium builder, in case a browsable class→level **reference pack** is wanted later. Nothing in
-`build/` ships in the zip.
+Nothing in `build/` ships in the zip. `release.ps1` stages the release from an explicit allowlist —
+`module.json`, `scripts/`, `styles/`, `data/`, `packs/`, and the three doc files — so a new file
+elsewhere in the tree can never ship by accident, and a shipped file that goes missing fails the
+build. The zip itself is published as a GitHub release asset (`downloads/` is gitignored, never
+committed).
 
 ## Related
 

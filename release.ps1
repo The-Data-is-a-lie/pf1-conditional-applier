@@ -166,21 +166,34 @@ $stageMod  = Join-Path $stageRoot $ModName
 if (Test-Path $stageRoot) { Remove-Item $stageRoot -Recurse -Force }
 New-Item -ItemType Directory -Path $stageRoot -Force | Out-Null
 
-# Mirror the repo minus everything that is dev tooling or release plumbing. What ships is exactly
-# what Foundry loads: module.json, scripts/, styles/, data/, packs/, and the docs.
+# Copy in exactly what ships -- an ALLOWLIST, not a mirror-minus-exclusions. A denylist silently
+# ships anything new that lands in a shipped directory (a stray 0-byte scripts/image did exactly
+# that once); an allowlist cannot. The failure mode flips from "junk ships quietly" to "a forgotten
+# entry here fails the $RequiredFiles check below loudly".
 # /R:1 /W:1 -- robocopy's DEFAULT is a million retries 30s apart, so one file held open (Foundry on
 # a pack, an editor on a JSON) would hang the release for days instead of failing the build.
 # LOCK/LOG/LOG.old are LevelDB's own scratch inside packs/. They are gitignored for the same reason
 # they are skipped here: LevelDB recreates them whenever it opens the pack, and robocopy cannot even
-# stat LOCK (ERROR 2 while changing attributes), which fails the whole mirror. The pack DATA
+# stat LOCK (ERROR 2 while changing attributes), which fails the whole copy. The pack DATA
 # (*.ldb, the numbered *.log, CURRENT, MANIFEST-*) still ships, which is all Foundry needs.
-& robocopy $Root $stageMod /MIR /R:1 /W:1 `
-    /XD .git .claude node_modules build downloads `
-    /XF *.bak *.tmp .env .gitignore .gitattributes package.json package-lock.json release.ps1 `
-       LOCK LOG LOG.old `
-    /NFL /NDL /NJH /NJS /NP | Out-Null
-if ($LASTEXITCODE -ge 8) { Fail "robocopy failed (exit $LASTEXITCODE)." }
-$global:LASTEXITCODE = 0
+$ShipFiles = @('module.json', 'README.md', 'changelog.md', 'LICENSE')
+$ShipDirs  = @('scripts', 'styles', 'data', 'packs')
+
+New-Item -ItemType Directory -Path $stageMod -Force | Out-Null
+foreach ($f in $ShipFiles) {
+    $src = Join-Path $Root $f
+    if (-not (Test-Path $src)) { Fail "Shipped file is missing from the working tree: $f" }
+    Copy-Item $src $stageMod
+}
+foreach ($d in $ShipDirs) {
+    $src = Join-Path $Root $d
+    if (-not (Test-Path $src)) { Fail "Shipped directory is missing from the working tree: $d/" }
+    & robocopy $src (Join-Path $stageMod $d) /E /R:1 /W:1 `
+        /XF *.bak *.tmp LOCK LOG LOG.old `
+        /NFL /NDL /NJH /NJS /NP | Out-Null
+    if ($LASTEXITCODE -ge 8) { Fail "robocopy failed on $d/ (exit $LASTEXITCODE)." }
+    $global:LASTEXITCODE = 0
+}
 
 if (Test-Path $zipTarget) { Remove-Item $zipTarget -Force }
 New-Item -ItemType Directory -Force -Path (Split-Path $zipTarget) | Out-Null
