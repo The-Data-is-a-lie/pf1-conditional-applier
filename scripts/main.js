@@ -9,8 +9,8 @@
  * Because the macro and keybinding pass no actor, apply() falls through to its own resolveActor()
  * (single controlled token, else a chooser) — so every surface works with nothing selected.
  *
- * The sheet button has two homes — the window header, and the Settings tab's "Utility Functions"
- * section alongside pf1's own Point Buy Calculator.
+ * The sheet button has two possible homes — the window header and the Settings tab's "Utility
+ * Functions" section — each switched on or off by a world setting (both on by default).
  */
 import { apply } from "./apply-conditionals.js";
 
@@ -20,6 +20,15 @@ const UTILITY_BTN = "pf1ca-utility-btn";
 const TIP = "Wire curated conditionals onto this character's weapons.";
 
 const runApply = (actor) => game.modules.get(MOD_NS)?.api?.apply(actor);
+const showing = (key) => { try { return game.settings.get(MOD_NS, key); } catch { return true; } };
+
+// Re-render every open actor sheet so a flipped setting takes effect without reopening. AppV1 keeps
+// its windows in ui.windows; AppV2 (v13) tracks them in foundry.applications.instances.
+function rerenderActorSheets() {
+  const apps = [...Object.values(ui.windows ?? {}),
+                ...(foundry.applications?.instances?.values?.() ?? [])];
+  for (const app of apps) if (app?.actor) app.render(false);
+}
 
 function makeButton(cls, actor, label) {
   const btn = document.createElement("button");
@@ -33,7 +42,8 @@ function makeButton(cls, actor, label) {
 }
 
 // --- sheet buttons ------------------------------------------------------------------------------
-// Fires on every (re)render, so each button is removed before being re-added — no duplicates.
+// Fires on every (re)render. Both buttons are removed up front and only the enabled ones re-added,
+// which is what makes turning a setting off actually clear the button on the next render.
 //
 // Uses app.element (the outer window) rather than the render hook's html arg: AppV1 only hands the
 // inner content there, while .window-header lives on the outer element. The outer element also
@@ -48,19 +58,23 @@ function onRenderActorSheet(app) {
     root.querySelector(`.${HEADER_BTN}`)?.remove();
     root.querySelector(`.${UTILITY_BTN}`)?.remove();
 
-    const header = root.querySelector(".window-header");
-    if (header) {
-      const btn = makeButton(HEADER_BTN, actor, "Conditionals");
-      const title = header.querySelector(".window-title");
-      if (title) title.after(btn); else header.prepend(btn);
+    if (showing("showHeaderButton")) {
+      const header = root.querySelector(".window-header");
+      if (header) {
+        const btn = makeButton(HEADER_BTN, actor, "Conditionals");
+        const title = header.querySelector(".window-title");
+        if (title) title.after(btn); else header.prepend(btn);
+      }
     }
 
-    // The Utility Functions column has no class of its own, but the point-buy button inside it
-    // does — so take that button's parent. Falls back to the column's position under .base-setup.
-    // Absent entirely on sheets without point buy (loot, vehicle…), in which case we just skip.
-    const col = root.querySelector('.tab[data-tab="settings"] button.pointbuy-calculator')?.parentElement
-             ?? root.querySelector('.tab[data-tab="settings"] .base-setup > div.flexcol:not(.spellbook-usage)');
-    if (col) col.appendChild(makeButton(UTILITY_BTN, actor, "Apply Conditionals"));
+    if (showing("showUtilityButton")) {
+      // The Utility Functions column has no class of its own, but the point-buy button inside it
+      // does — so take that button's parent. Falls back to the column's position under .base-setup.
+      // Absent entirely on sheets without point buy (loot, vehicle…), in which case we just skip.
+      const col = root.querySelector('.tab[data-tab="settings"] button.pointbuy-calculator')?.parentElement
+               ?? root.querySelector('.tab[data-tab="settings"] .base-setup > div.flexcol:not(.spellbook-usage)');
+      if (col) col.appendChild(makeButton(UTILITY_BTN, actor, "Apply Conditionals"));
+    }
   } catch (err) {
     console.error(`[${MOD_NS}] sheet button error:`, err);
   }
@@ -68,6 +82,20 @@ function onRenderActorSheet(app) {
 
 Hooks.once("init", () => {
   game.modules.get(MOD_NS).api = { apply };
+
+  // Where the sheet button may appear. World-scoped: the GM decides for the whole table. Registered
+  // here so they exist before the first sheet renders and reads them.
+  game.settings.register(MOD_NS, "showHeaderButton", {
+    name: "Button in the sheet header",
+    hint: "Show an Apply Conditionals button in the actor sheet's title bar.",
+    scope: "world", config: true, type: Boolean, default: true, onChange: rerenderActorSheets,
+  });
+  game.settings.register(MOD_NS, "showUtilityButton", {
+    name: "Button in Utility Functions",
+    hint: "Show an Apply Conditionals button at the bottom of the character sheet's "
+      + "Settings tab, under Utility Functions.",
+    scope: "world", config: true, type: Boolean, default: true, onChange: rerenderActorSheets,
+  });
 
   // AppV1 sheets fire renderActorSheet; AppV2 (pf1 on Foundry v13) fires renderActorSheetV2.
   for (const hook of ["renderActorSheet", "renderActorSheetV2"]) Hooks.on(hook, onRenderActorSheet);
