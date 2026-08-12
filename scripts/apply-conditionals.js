@@ -208,11 +208,25 @@ const dmgTypeOrUntyped = (dt, target, formula, weaponTypes) => {
   if (arr.length === 0 && /[\d)]d\d/.test(String(formula || ""))) return ["untyped"];
   return arr;
 };
-function mkMod(m, srcName, seed, idx, init, weaponTypes) {
+// First damage part's formula of the action a conditional is applied to -- the weapon's base dice.
+// Resolves "as-weapon-dice" formula placeholders (Vital Strike chain: extra rolls of THIS weapon's
+// dice). Same part-walk as weaponDamageTypes; empty when the action has no damage parts.
+const weaponBaseDice = (action) => {
+  for (const p of ((action && action.system && action.system.damage && action.system.damage.parts)
+                   || (action && action.damage && action.damage.parts) || [])) {
+    const f = p && (p.formula != null ? p.formula : p[0]);
+    if (f) return String(f);
+  }
+  return "";
+};
+function mkMod(m, srcName, seed, idx, init, weaponTypes, weaponDice) {
   const isAttack = m.target === "attack";
+  let formula = String(m.formula == null ? "" : m.formula);
+  if (formula.includes("as-weapon-dice"))
+    formula = formula.replaceAll("as-weapon-dice", weaponDice ? `(${weaponDice})` : "0");
   return {
     _id: detId(`${seed}|m${idx}`, 8),
-    formula: labelFormula(m.formula, srcName, init),
+    formula: labelFormula(formula, srcName, init),
     target: m.target || "damage",
     subTarget: m.subTarget || (isAttack ? "allAttack" : "allDamage"),
     type: m.type || "untyped",
@@ -623,6 +637,7 @@ function applyToWeapon(actor, weaponId, actionIdx, rows, init) {
   const action = actions[actionIdx] || actions[0];
   if (!action) return null;
   const wpnTypes = weaponDamageTypes(action);   // resolves ["as-weapon"] modifiers to this weapon's type
+  const wpnDice = weaponBaseDice(action);       // resolves "as-weapon-dice" formulas to this weapon's dice
   if (!Array.isArray(action.conditionals)) action.conditionals = [];
   const prev = new Set((src.flags?.[MOD_NS]?.condIds) || []);
   action.conditionals = action.conditionals.filter(c => !(c && prev.has(c._id)));   // drop our old ones
@@ -691,7 +706,7 @@ function applyToWeapon(actor, weaponId, actionIdx, rows, init) {
     const cid = detId(seed, 8);
     action.conditionals.push({
       _id: cid, name: r.name, default: !!r.def,
-      modifiers: (r.rawMods || []).map((m, i) => mkMod(m, r.srcName, seed, i, init, wpnTypes)),
+      modifiers: (r.rawMods || []).map((m, i) => mkMod(m, r.srcName, seed, i, init, wpnTypes, wpnDice)),
     });
     newIds.push(cid);
   }
