@@ -27,3 +27,6 @@ downloads/
 packs/**/LOCK
 packs/**/LOG
 packs/**/LOG.old
+
+# Local ticket/inventory scratch (to-tickets convention) -- working notes, never shipped.
+.scratch/
