@@ -6,6 +6,8 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+## Version 1.1.0 (2026-08-12)
+
 ### Added
 
 - Feat coverage more than doubles, from 238 to 496 conditionals. Every PF1 style feat now has a row: all 88 style chains (Overwatch, Startoss, Jabbing, Kirin, Pummeling, Snake, Panther, and the rest — 242 feats, each verified against d20pfsrd), including the missing members of chains that were only partly covered before (Crane Wing, Janni Style, Mantis Style, Snapping Turtle Style, Djinni Style, and more).
