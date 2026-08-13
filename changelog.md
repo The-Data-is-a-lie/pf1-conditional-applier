@@ -6,6 +6,13 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+### Added
+
+- Feat coverage more than doubles, from 238 to 496 conditionals. Every PF1 style feat now has a row: all 88 style chains (Overwatch, Startoss, Jabbing, Kirin, Pummeling, Snake, Panther, and the rest — 242 feats, each verified against d20pfsrd), including the missing members of chains that were only partly covered before (Crane Wing, Janni Style, Mantis Style, Snapping Turtle Style, Djinni Style, and more).
+- Vital Strike, Improved Vital Strike and Greater Vital Strike roll your weapon's own damage dice: a new `as-weapon-dice` placeholder is resolved against the weapon at apply time, the same way `as-weapon` damage types already are, and the extra dice correctly don't multiply on a crit.
+- New core-feat rows: Point-Blank Shot and Arcane Strike with real modifiers; Precise Shot, Improved Precise Shot, Far Shot, Sap Adept, Sap Master, Deadly Stroke, Dirty Fighting, Spirited Charge, Ride-By Attack, Charge Through and Rhino Charge as reminder rows.
+- Feats whose effect can't be expressed as an attack or damage modifier (AC, combat-maneuver, save-DC or action-economy effects, and multipliers like Spirited Charge) appear as reminder-only checkboxes — the row shows what the feat does at the moment you roll, without changing the numbers.
+
 ## Version 1.0.0 (2026-07-24)
 
 ### Added
