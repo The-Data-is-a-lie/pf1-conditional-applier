@@ -6,6 +6,8 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+## Version 1.2.0 (2026-08-13)
+
 ### Added
 
 - 57 new feat conditionals (496 → 553), each verified against d20pfsrd, filling the families the style-feat expansion left open:
