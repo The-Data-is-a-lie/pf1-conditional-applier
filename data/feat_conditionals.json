@@ -5048,5 +5048,444 @@
     "default": false,
     "modifiers": [],
     "tier": "B"
+  },
+  "Critical Focus": {
+    "name": "Critical Focus: +[[4]] bonus on attack rolls made to confirm critical hits",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "4",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "crit"
+      }
+    ],
+    "tier": "B"
+  },
+  "Bleeding Critical": {
+    "name": "Bleeding Critical: Effect: on a critical hit with a slashing or piercing weapon, the target takes [[2d6]] bleed damage each round on its turn, stacking with further hits; stopped by a DC [[15]] Heal check or magical healing",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Blinding Critical": {
+    "name": "Blinding Critical: Activation: on confirming a critical hit; Save: Fortitude DC [[ 10 + @attributes.bab.total ]] reduces blindness to dazzled for [[1d4]] rounds; Effect: target is permanently blinded (no effect on creatures without eyes or with more than two eyes)",
+    "default": false,
+    "modifiers": [],
+    "tier": "A"
+  },
+  "Deafening Critical": {
+    "name": "Deafening Critical: Activation: on confirming a critical hit; Save: Fortitude DC [[ 10 + @attributes.bab.total ]] reduces deafness to [[1]] round; Effect: target is permanently deafened (no effect on creatures already deaf)",
+    "default": false,
+    "modifiers": [],
+    "tier": "A"
+  },
+  "Sickening Critical": {
+    "name": "Sickening Critical: Activation: on confirming a critical hit; Effect: target is sickened for [[1]] minute (does not stack; additional hits extend the duration)",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Staggering Critical": {
+    "name": "Staggering Critical: Activation: on confirming a critical hit; Save: Fortitude DC [[ 10 + @attributes.bab.total ]] reduces the duration to [[1]] round; Effect: target is staggered for [[1d4+1]] rounds (does not stack; additional hits extend the duration)",
+    "default": false,
+    "modifiers": [],
+    "tier": "A"
+  },
+  "Stunning Critical": {
+    "name": "Stunning Critical: Activation: on confirming a critical hit; Save: Fortitude DC [[ 10 + @attributes.bab.total ]] reduces stun to staggered for [[1d4]] rounds; Effect: target is stunned for [[1d4]] rounds (does not stack; additional hits extend the duration)",
+    "default": false,
+    "modifiers": [],
+    "tier": "A"
+  },
+  "Tiring Critical": {
+    "name": "Tiring Critical: Activation: on confirming a critical hit; Effect: target becomes fatigued (no additional effect on a fatigued or exhausted creature)",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Exhausting Critical": {
+    "name": "Exhausting Critical: Activation: on confirming a critical hit; Effect: target becomes exhausted (no effect on an already exhausted creature)",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Critical Mastery": {
+    "name": "Critical Mastery: Effect: when you score a critical hit, apply the effects of two critical feats you possess in addition to the damage dealt, instead of just one",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Critical Versatility": {
+    "name": "Critical Versatility: Cost: [[1]] hour of practice, usable once per day; Effect: gain the benefits of one critical feat you meet the prerequisites for, until you spend another hour to switch to a different one",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Precise Strike": {
+    "name": "Precise Strike: Activation: an ally with this feat is flanking the same creature with you; Effect: melee attacks against that creature deal an additional [[1d6]] points of precision damage (stacks with other precision damage such as sneak attack), not multiplied on a critical hit",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ],
+    "tier": "B"
+  },
+  "Gang Up": {
+    "name": "Gang Up: Effect: you count as flanking an opponent whenever at least two of your allies are threatening it, regardless of your actual positioning",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Paired Opportunists": {
+    "name": "Paired Opportunists: Activation: an ally with this feat is adjacent to you; Effect: +[[4]] bonus on attacks of opportunity against creatures you both threaten; you also gain an attack of opportunity whenever that ally does against a creature you threaten, even if the situation would normally deny you the attack (still only one attack of opportunity per triggering action)",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "4",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "4",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "crit"
+      }
+    ],
+    "tier": "B"
+  },
+  "Coordinated Charge": {
+    "name": "Coordinated Charge: Activation: an ally with this feat charges a creature no farther away from you than your speed; Effect: as an immediate action, you may also charge that creature, following all normal charge rules",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Coordinated Shot": {
+    "name": "Coordinated Shot: Activation: an ally with this feat is threatening the target of your ranged attack without providing it cover; Effect: +[[1]] bonus on that ranged attack roll (+[[2]] instead if that ally is also flanking the target with another ally, even one without this feat)",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "tier": "B"
+  },
+  "Enfilading Fire": {
+    "name": "Enfilading Fire: Activation: the target is flanked by one or more allies with this feat; Effect: +[[2]] bonus on ranged attacks made against that target",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "tier": "B"
+  },
+  "Distracting Charge": {
+    "name": "Distracting Charge: Activation: an ally with this feat charges and hits its target; Effect: +[[2]] bonus on your next attack roll against that target before the ally's next turn",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "tier": "B"
+  },
+  "Target of Opportunity": {
+    "name": "Target of Opportunity: Cost: an immediate action; Activation: an ally with this feat makes a ranged attack and hits an opponent within [[30]] feet of you, and your ranged weapon is in hand, loaded, and ready; Effect: make one ranged attack against that opponent",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Seize the Moment": {
+    "name": "Seize the Moment: Activation: an ally with this feat confirms a critical hit against an opponent you also threaten; Effect: make an attack of opportunity against that opponent",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Wounded Paw Gambit": {
+    "name": "Wounded Paw Gambit: Activation: an ally uses Broken Wing Gambit and an opponent attacks that ally as a result, and you are within [[30]] feet of that opponent with a ranged weapon in hand, loaded, and ready; Effect: as an immediate action, attempt a ranged attack against that opponent",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Cornugon Smash": {
+    "name": "Cornugon Smash: Activation: free action; Effect: when a Power Attack melee hit damages the foe, make an immediate Intimidate check to demoralize it",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Dreadful Carnage": {
+    "name": "Dreadful Carnage: Activation: free action; Range: 30 ft.; Effect: when you reduce an enemy to 0 or fewer hit points, make an Intimidate check to demoralize all enemies in range who can see you and the fallen foe",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Shatter Defenses": {
+    "name": "Shatter Defenses: Effect: a shaken, frightened, or panicked opponent hit this round (including by additional attacks) is flat-footed against your attacks until the end of your next turn",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Dazzling Display": {
+    "name": "Dazzling Display: Activation: full-round action; Range: 30 ft.; Effect: while wielding your Weapon Focus weapon, make an Intimidate check to demoralize all foes who can see your display",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Clustered Shots": {
+    "name": "Clustered Shots: Effect: on a full-attack with ranged weapons against a single target, total the damage from all hits before applying that target's damage reduction",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Snap Shot": {
+    "name": "Snap Shot: Effect: while wielding a ranged weapon you have Weapon Focus with, you threaten squares within [[5]] feet and can make attacks of opportunity with it; a ranged attack of opportunity does not provoke",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Improved Snap Shot": {
+    "name": "Improved Snap Shot: Effect: increases the area you threaten with Snap Shot by an additional [[5]] feet",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Point-Blank Master": {
+    "name": "Point-Blank Master: Effect: firing your chosen ranged weapon while threatened does not provoke an attack of opportunity",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Pinpoint Targeting": {
+    "name": "Pinpoint Targeting: Activation: standard action; Effect: a ranged attack ignores the target's armor, natural armor, and shield bonuses to AC; no benefit if you moved this round",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Lunge": {
+    "name": "Lunge: Activation: decide to use before making any attacks this turn; Cost: -[[2]] AC until your next turn; Effect: increase the reach of your melee attacks by [[5]] feet until the end of your turn",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Cleave": {
+    "name": "Cleave: Cost: -[[2]] AC until your next turn; Effect: as a standard action, make one melee attack at your full base attack bonus against a foe within reach; if it hits, make one additional attack at your full base attack bonus against a foe adjacent to the first and also within reach (once per round)",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Great Cleave": {
+    "name": "Great Cleave: Cost: -[[2]] AC until your next turn; Effect: as a standard action, make one melee attack at your full base attack bonus against a foe within reach; each hit lets you make another attack at your full base attack bonus against a foe adjacent to the previous one and within reach, never attacking the same foe twice",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Cleaving Finish": {
+    "name": "Cleaving Finish: Effect: when a melee attack drops your target to 0 or fewer hit points, make one additional melee attack at your highest base attack bonus against another foe within reach (once per round)",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Spring Attack": {
+    "name": "Spring Attack: Effect: as a full-round action, move up to your speed and make one melee attack without provoking an attack of opportunity from the target; you must move at least [[10]] feet before the attack, may move both before and after it, and cannot attack a foe that started adjacent to you",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mounted Combat": {
+    "name": "Mounted Combat: Cost: one Ride check as an immediate action; Effect: once per round when your mount is hit in combat, attempt a Ride check; the hit is negated if your check result is greater than the attacker's attack roll",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Unseat": {
+    "name": "Unseat: Effect: after a successful mounted melee charge attack with a lance, make a free bull rush in addition to normal damage; on success the target is knocked from its mount and lands prone in a space adjacent to the mount directly away from you",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mounted Skirmisher": {
+    "name": "Mounted Skirmisher: Effect: if your mount moves its speed or less this round, you can still take a full-attack action (normally moving more than [[5]] feet limits you to a single attack action)",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Wheeling Charge": {
+    "name": "Wheeling Charge: Effect: while mounted and using the charge action, your mount may turn up to [[90]] degrees as part of the move as long as each leg of the move is at least [[10]] feet, and you may make a melee attack during any part of the move; total movement can't exceed twice your mounted speed, and you can't attack from or end your move in an ally's space",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Trick Riding": {
+    "name": "Trick Riding: Effect: while wearing light or no armor, you need not attempt Ride checks for tasks with a DC of [[15]] or lower, you take no penalty for riding bareback, and you can use Mounted Combat to negate hits on your mount twice per round instead of once",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Stunning Fist": {
+    "name": "Stunning Fist: Cost: [[1]] use per day per [[4]] character levels, no more than once per round; Activation: declare before making the attack roll; Save: Fortitude DC [[10 + floor(@attributes.hd.total/2) + @abilities.wis.mod]] negates; Effect: a target damaged by your unarmed melee attack is stunned for [[1]] round; has no effect on constructs, oozes, plants, undead, incorporeal creatures, or creatures immune to critical hits",
+    "default": false,
+    "modifiers": [],
+    "tier": "A"
+  },
+  "Double Slice": {
+    "name": "Double Slice: Effect: add your full Strength bonus to damage rolls made with your off-hand weapon, instead of only half your Strength modifier",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Power Attack": {
+    "name": "Mythic Power Attack: Cost: [[1]] use of mythic power to ignore the melee attack and CMB penalties from Power Attack for 1 minute; Effect: +[[1+floor(@attributes.bab.total/4)]] additional melee damage bonus (a +3 bonus per increment instead of +2); the total Power Attack damage bonus is doubled before being multiplied by the weapon's critical multiplier on a critical hit",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1+floor(@attributes.bab.total/4)",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "tier": "B"
+  },
+  "Mythic Deadly Aim": {
+    "name": "Mythic Deadly Aim: Effect: +[[1+floor(@attributes.bab.total/4)]] additional ranged damage bonus (a +3 bonus per increment instead of +2)",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1+floor(@attributes.bab.total/4)",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "tier": "B"
+  },
+  "Mythic Combat Expertise": {
+    "name": "Mythic Combat Expertise: Cost: [[1]] use of mythic power to negate the melee attack and CMB penalties from Combat Expertise for 1 minute; Effect: +[[2]] dodge bonus to AC while using Combat Expertise",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Vital Strike": {
+    "name": "Mythic Vital Strike: Effect: when using Vital Strike, Improved Vital Strike, or Greater Vital Strike, your Strength bonus, magic bonus, and other bonuses normally multiplied on a critical hit are instead multiplied by the number of weapon damage dice rolled for that feat (x2 for Vital Strike, x3 for Improved Vital Strike, x4 for Greater Vital Strike); extra damage that wouldn't normally be multiplied on a critical hit still isn't multiplied by this feat",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Improved Critical": {
+    "name": "Mythic Improved Critical: Effect: the critical multiplier of your chosen weapon increases by [[1]] (maximum x6); if taken again, applies to a different weapon's Improved Critical feat",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Manyshot": {
+    "name": "Mythic Manyshot: Effect: full-attack action with a bow only; on your ranged attacks with Manyshot, both your first and second attacks (not just the first) fire two arrows, each attack resolved as a normal Manyshot attack -- apply precision and critical damage once per attack, other damage bonuses separately per arrow",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Point-Blank Shot": {
+    "name": "Mythic Point-Blank Shot: Cost: [[1]] use of mythic power as a swift action for an additional bonus on attack and damage rolls equal to half your mythic tier; Effect: the Point-Blank Shot bonus on attack and damage rolls with ranged weapons within 30 ft increases to +[[2]] (up from +1)",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "1",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "tier": "B"
+  },
+  "Mythic Precise Shot": {
+    "name": "Mythic Precise Shot: Cost: [[1]] use of mythic power for your ranged attacks to also affect ethereal and insubstantial foes for 1 minute; Effect: ranged attacks can damage swarms and ignore miss chances from spells or magic effects (such as blink, blur, and mirror image)",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Rapid Shot": {
+    "name": "Mythic Rapid Shot: Effect: when using Rapid Shot, choose one -- either ignore the feat's -[[2]] penalty on ranged attack rolls this round, or make two additional ranged attacks (instead of one) at your highest attack bonus",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Two-Weapon Fighting": {
+    "name": "Mythic Two-Weapon Fighting: Cost: [[1]] use of mythic power as an immediate action to negate the penalties on melee attack rolls for two-weapon fighting for a number of rounds equal to your mythic tier",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Weapon Finesse": {
+    "name": "Mythic Weapon Finesse: Effect: while using Weapon Finesse, you may use your Dexterity modifier instead of your Strength modifier on melee damage rolls, and a carried shield's armor check penalty no longer applies to your attack or damage rolls",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Cleave": {
+    "name": "Mythic Cleave: Cost: [[1]] use of mythic power to keep making Cleave or Great Cleave melee attacks against foes within reach regardless of position, as long as you keep hitting (no foe attacked more than once per round); Effect: one of your Cleave or Great Cleave attacks can target a foe within reach even if not adjacent to the foe you first attacked",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Lunge": {
+    "name": "Mythic Lunge: Cost: [[1]] use of mythic power to negate the Lunge -[[2]] AC penalty whether you hit or miss, and gain a +[[2]] bonus on attacks of opportunity while Lunge is in effect; Effect: if you hit a creature with your Lunge melee attack, you no longer take the -[[2]] penalty to AC against that creature",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Spring Attack": {
+    "name": "Mythic Spring Attack: Cost: [[1]] use of mythic power when you start a Spring Attack so the movement you make during it doesn't provoke attacks of opportunity from anyone; Effect: you can make your Spring Attack melee attack without the normal requirement to move at least 10 feet beforehand",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
+  },
+  "Mythic Whirlwind Attack": {
+    "name": "Mythic Whirlwind Attack: Cost: [[2]] uses of mythic power to make your full attack routine against every foe within melee reach instead of just one; Effect: as a full-round action, make your full attack routine against one foe within melee reach, plus one additional attack at your highest base attack bonus against every other foe within reach",
+    "default": false,
+    "modifiers": [],
+    "tier": "B"
   }
 }
