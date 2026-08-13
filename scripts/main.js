@@ -13,6 +13,7 @@
  * Functions" section — each switched on or off by a world setting (both on by default).
  */
 import { apply } from "./apply-conditionals.js";
+import "./compact-headers.js"; // side effects only: the compact-header-buttons setting + tooltips
 
 const MOD_NS = "pf1-conditional-applier";
 const HEADER_BTN = "pf1ca-apply-btn";

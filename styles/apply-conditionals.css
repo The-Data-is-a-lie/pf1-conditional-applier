@@ -138,3 +138,24 @@
 .pf1ca .pf1ca-gaps-body ul {
   margin: .2em 0 .5em 1em;
 }
+
+/* --- compact header buttons (scripts/compact-headers.js) ----------------------------------------
+ * Collapses every AppV1 title-bar button to its icon so the close X survives however many modules
+ * inject header buttons. font-size:0 hides the bare text node (the label is not in an element of
+ * its own, so this is the only pure-CSS way to hide it); the <i> gets its size back. Scoped under
+ * the body class the world setting toggles, so turning the setting off restores labels instantly.
+ * AppV2 windows use button.header-control, are icon-only natively, and are untouched here.
+ * Our own Conditionals <button> collapses with the rest — its icon sizing/margin is already right,
+ * so it only needs the font-size treatment. */
+body.pf1ca-compact-headers .window-app .window-header :is(a.header-button, button.pf1ca-apply-btn) {
+  font-size: 0;
+}
+
+body.pf1ca-compact-headers .window-app .window-header a.header-button > i {
+  font-size: var(--font-size-14, 14px);
+  margin: 0;
+}
+
+body.pf1ca-compact-headers .window-app .window-header .pf1ca-apply-btn > i {
+  font-size: .8rem;
+}
