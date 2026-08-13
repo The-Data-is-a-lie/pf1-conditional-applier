@@ -6,6 +6,16 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+### Added
+
+- 57 new feat conditionals (496 → 553), each verified against d20pfsrd, filling the families the style-feat expansion left open:
+  - **Critical feats** — Critical Focus as a real +4 to critical confirmation rolls; Bleeding/Blinding/Deafening/Sickening/Staggering/Stunning/Tiring/Exhausting Critical, Critical Mastery and Critical Versatility as reminder rows carrying their save DCs.
+  - **Teamwork feats** — Precise Strike (+1d6 while flanking with the ally), Gang Up, Paired Opportunists, Coordinated Charge, Coordinated Shot, Enfilading Fire, Distracting Charge, Target of Opportunity, Seize the Moment and Wounded Paw Gambit — each row names its ally requirement, and all arrive unchecked at roll time.
+  - **Debuff-on-hit and ranged support** — Cornugon Smash, Dreadful Carnage, Shatter Defenses, Dazzling Display, Clustered Shots, Snap Shot, Improved Snap Shot, Point-Blank Master and Pinpoint Targeting.
+  - **Mobility, mounted and unarmed** — Lunge, Cleave, Great Cleave, Cleaving Finish, Spring Attack, Mounted Combat, Unseat, Mounted Skirmisher, Wheeling Charge, Trick Riding, Stunning Fist (with its Fortitude DC) and Double Slice.
+  - **Mythic feats** — fifteen combat-relevant mythic feats (Mythic Power Attack, Mythic Deadly Aim, Mythic Vital Strike, Mythic Improved Critical, Mythic Manyshot, and more), each modeling only the delta on top of its base feat's row so the two toggles stack correctly.
+- **Compact header buttons**, a world setting (on by default): every window title-bar button collapses to just its icon, with the name shown on hover — so the close X stays visible at any sheet size, no matter how many modules add their own header buttons. Covers every classic-style window (character sheets, item sheets, journals, dialogs), not just this module's own button. Turn it off in module settings to get the labels back.
+
 ## Version 1.1.0 (2026-08-12)
 
 ### Added
