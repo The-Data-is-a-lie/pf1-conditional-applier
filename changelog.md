@@ -6,6 +6,28 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+### Added
+
+- **Every spell now has a conditional.** All 3,029 compendium spells are covered. Spells with an attack, damage or save get a full row (save DC, range, cost and effect, with caster-level scaling worked out for you), and attack spells roll their first damage dice automatically when Foundry's compendium has them. Every other spell (utility, defensive, healing…) gets a reminder row. A spell only shows as uncurated (†) now if it is a hand-made spell item.
+- **Remove list.** ✕ on any row in the dialog takes that conditional off the whole character: the Conditionals item and every weapon it was applied to. It stays off on re-runs. Removed conditionals are listed at the bottom of the dialog and under Utility Functions on the sheet's Settings tab, each with a restore button. A new world setting, *Removed conditionals on the sheet*, hides the sheet list.
+- **Spell switches**, remembered per player and per character:
+  - **Only recommended spells** leaves out the reminder spells and keeps only spells with an attack, damage or save.
+  - **Show full information** adds each spell's casting time, duration, area or targets, and school to its row.
+- **Foldable sections.** ▾ on any section header (Feats, Path of War, Spells…) hides its rows to tidy the view. Folded rows are still applied. Your folded sections are remembered per player and per character.
+
+### Changed
+
+- **Full now means everything.** Uncurated (†) and passive rows sit in a *Not Recommended* section at the end of the list, on the Conditionals item only (never on a weapon), under a *NOT RECOMMENDED* divider at the bottom of each tab. Clear them with the section's All on/off, a row's checkbox, or ✕. This replaces the old *Curation gaps* list and the *UNCURATED* divider.
+- Spell rows read `(Spell N) [Name]: …` and are ordered by spell level, then name, so the Spells tab reads like a spellbook. Choices saved for spell rows under the old names won't carry over.
+- Attack spells roll only their first damage part. A secondary or alternative damage roll is described in the row text instead.
+- Every section header shows how many rows it holds.
+
+### Fixed
+
+- Edits saved for a row whose name contains a dot (a formula like `@attributes.bab.total`, or "5 ft.") are no longer lost. Edits that were saved in the old, broken form are recovered the next time the dialog opens.
+- Save spells no longer start with a stray save word ("Cone of Cold: half; …").
+- Adding or removing a conditional on a weapon's Conditionals tab no longer jumps the action sheet back to the top.
+
 ## Version 1.3.0 (2026-11-15)
 
 ### Added
