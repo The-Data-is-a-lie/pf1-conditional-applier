@@ -6,6 +6,8 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+## Version 1.3.0 (2026-11-15)
+
 ### Added
 
 - **A "Conditionals" inventory item, kept up to date on every run.** The first time it runs on a character, the module creates a weapon called *Conditionals* in the inventory. Every later run brings it up to date. Each tab of its attack is one group: **Conditionals** (feats, class features, magic items), **Path of War** (sorted Boost → Stance → Strike → Counter, then by maneuver level), **SoP** (Spheres of Power and Might talents), **Counters** (every Counter maneuver and anything marked "(Counter)", copied from its own tab) and **Spells**. A tab only appears once it has something in it. If the character already has a hand-made *Conditionals* item, the module takes it over: every row you wrote yourself is kept, and where you already have a row for something (say "(Boost) Bronze Knuckle: …"), the module doesn't add a second one.
