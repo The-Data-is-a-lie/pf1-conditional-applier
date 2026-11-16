@@ -1,4 +1,22 @@
 {
+  "Acid Maw": {
+    "name": "Acid Maw: +[[1d4]] acid on companion bite",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "acid"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Range: [[25 + 5*@spells.primary.cl.total]] ft; Your animal companion's bite deals an additional acid damage and the acid deals another [[1d4]] acid damage on the next round, continuing for [[1 + floor(@spells.primary.cl.total/4)]] additional rounds (maximum [[6]] total rounds); ongoing acid damage does not stack from multiple attacks, but the duration resets if a newer bite would last longer than the remaining duration; does not harm the animal companion; duration [[@spells.primary.cl.total]] minutes; spell resistance applies",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: your animal companion; School: transmutation [acid]"
+  },
   "Aid": {
     "changes": [
       {
@@ -9,7 +27,32 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: living creature touched; School: enchantment (compulsion) [mind-affecting]"
+  },
+  "Anticipate Thoughts": {
+    "name": "Anticipate Thoughts: +[[2]] insight attack & damage vs target",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "insight",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "2",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "insight",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: [[25 + 5*floor(@spells.primary.cl.total/2)]] ft; You gain +[[2]] insight bonus to AC against the target's attacks; if the target fails its Will save DC [[ 10 + @slvl + @castMod ]] the bonus also applies to your attack and damage rolls against it (a successful save leaves only the AC bonus); bonuses apply only while the target is within range and resume if it returns; each time the target misses you with an attack the bonuses increase by [[1]] (maximum +[[5]]); duration [[@spells.primary.cl.total]] rounds; spell resistance applies",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: one creature; School: divination [mind-affecting]"
   },
   "Aroden's Magic Army": {
     "changes": [
@@ -28,7 +71,24 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours; Targets: weapons carried by allies; School: transmutation"
+  },
+  "Aspect of the Falcon": {
+    "name": "Aspect of the Falcon: +[[1]] competence ranged attacks",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "competence",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: personal; Lasts [[@spells.primary.cl.total]] minutes; +[[3]] competence bonus on Perception checks; the critical threat range for your bows and crossbows becomes [[19]]-[[20]]/x3, which does not stack with Improved Critical, keen, or other threat range expansions",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: you; School: transmutation (polymorph)"
   },
   "Assumed Likeness": {
     "changes": [
@@ -40,7 +100,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes (D); Targets: [[@spells.primary.cl.total]] creatures, no two of which can be more than [[30]] ft. apart; School: illusion (phantasm) [emotionUM, mind-affecting]"
   },
   "Atavism": {
     "changes": [
@@ -52,7 +113,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: one animal; School: transmutation"
   },
   "Aura of Cannibalism": {
     "changes": [
@@ -64,7 +126,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Area: [[20]]-ft.-radius emanation centered on you; School: necromancy [evil]"
   },
   "Baphomet's Blessing": {
     "changes": [
@@ -83,7 +146,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: one living creature; School: transmutation (polymorph)"
   },
   "Barghest Feast": {
     "changes": [
@@ -95,7 +159,24 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes; see text; Targets: creature touched; School: transmutation [evil]"
+  },
+  "Bit of Luck": {
+    "name": "Bit of Luck: +[[1d8]] luck attack, spend points",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d8",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "luck",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: personal; Gain a reservoir of [[floor(@spells.primary.cl.total/2)]] luck points for [[10*@spells.primary.cl.total]] minutes; spend [[1]] point when making an attack roll or skill check to add a luck bonus to the d20 result, before or after the roll is revealed; ends when all points are spent or when cast on the target again; at 8th level you can spend [[4]] points for +[[2d8]] instead; at 16th level you can spend [[8]] points for +[[3d8]] instead; skill check use is not modeled",
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes; Targets: you; School: evocation"
   },
   "Black Spot": {
     "changes": [
@@ -114,10 +195,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: permanent; Targets: creature touched; School: necromancy"
   },
   "Blade of Light": {
-    "name": "Blade of Light: infuses a weapon with pure sunlight, shedding light as daylight and functioning as a magic and good weapon for overcoming damage reduction; grants a +[[2]] sacred bonus on attack rolls and extra damage against undead, functions as ghost touch against incorporeal undead, and automatically confirms critical hits against foes vulnerable to sunlight. Duration [[1]] round/level.",
+    "name": "Blade of Light: infuses a weapon with pure sunlight, shedding light as daylight and functioning as a magic and good weapon for overcoming damage reduction; grants a +[[2]] sacred bonus on attack rolls and extra damage against undead, functions as ghost touch against incorporeal undead, and automatically confirms critical hits against foes vulnerable to sunlight. Duration [[@spells.primary.cl.total]] rounds.",
     "default": false,
     "modifiers": [
       {
@@ -138,7 +220,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: one melee weapon; School: transmutation [good]"
   },
   "Bless": {
     "changes": [
@@ -150,7 +233,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Area: The caster and all allies within a [[50]]-ft. burst, centered on the caster; School: enchantment (compulsion) [mind-affecting]"
   },
   "Blessed Fist": {
     "changes": [
@@ -169,7 +253,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: creature touched; School: transmutation [good]"
   },
   "Blessing of Fervor": {
     "changes": [
@@ -181,7 +266,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: [[@spells.primary.cl.total]] creatures, no two of which can be more than [[30]] ft. apart; School: transmutation"
   },
   "Blink": {
     "changes": [
@@ -193,7 +279,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D); Targets: you; School: transmutation"
   },
   "Blood Scent": {
     "changes": [
@@ -212,7 +299,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: [[floor(@spells.primary.cl.total/2)]] creatures, no two of which can be more than [[30]] ft. apart; School: transmutation"
   },
   "Body Capacitance": {
     "changes": [
@@ -224,7 +312,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes or until discharged (see text); Targets: you; School: transmutation [electricity]"
   },
   "Bomber's Eye": {
     "changes": [
@@ -236,7 +325,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: transmutation"
   },
   "Bone Fists": {
     "changes": [
@@ -248,7 +338,24 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: [[@spells.primary.cl.total]] creatures, no two of which can be more than [[30]] feet apart; School: necromancy"
+  },
+  "Bristle": {
+    "name": "Bristle: Trade natural armor for natural damage",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "min(5,floor(@spells.primary.cl.total/3))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: touch; Each round as a swift action at the start of its turn the creature can reduce some or all of its natural armor bonus to AC (not below [[0]]) and gain an enhancement bonus on damage rolls for natural attacks equal to that amount; the reduction can't exceed [[floor(@spells.primary.cl.total/3)]] point (maximum -[[5]]/+[[5]] at 15th level); attacks against the creature use its adjusted AC until the start of its next turn; creatures with no Intelligence always opt for the maximum reduction and bonus; duration [[@spells.primary.cl.total]] minutes; spell resistance applies",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: one creature; School: transmutation"
   },
   "Burst of Glory": {
     "changes": [
@@ -260,7 +367,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D; see text); Area: [[10]]-ft.-radius burst, centered on you; School: enchantment (compulsion) [mind-affecting]"
   },
   "Call Weapon": {
     "changes": [
@@ -279,7 +387,24 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] swift action; Duration: instantaneous; Targets: one melee weapon wielded by an ally; School: transmutation"
+  },
+  "Channel Vigor": {
+    "name": "Channel Vigor: +[[4]] competence ranged attacks (Mind focus)",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "4",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "competence",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Choose one focus target when cast and change it as a move action; you can benefit from only one channel vigor spell at a time; Limbs gives the benefits of a haste spell; Mind gives a [[4]] competence bonus on Knowledge and Perception skill checks (the ranged attack bonus is applied as a modifier); Spirit gives a [[6]] competence bonus on Will saving throws and Bluff and Intimidate checks; Torso gives a [[6]] competence bonus on Fortitude saving throws and concentration checks; duration [[@spells.primary.cl.total]] rounds",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: transmutation"
   },
   "Contagious Zeal": {
     "changes": [
@@ -298,7 +423,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: one creature; School: enchantment (compulsion) [emotion, mind-affecting]"
   },
   "Coward's Cowl": {
     "changes": [
@@ -310,7 +436,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: one creature; School: enchantment [mind-affecting]"
   },
   "Dahak's Release": {
     "changes": [
@@ -329,10 +456,59 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: creature touched; School: enchantment (compulsion) [draconic, evil, mind-affecting]"
+  },
+  "Dance of a Hundred Cuts": {
+    "name": "Dance of a Hundred Cuts: +[[min(5,floor(@spells.primary.cl.total/3))]] morale melee attack & damage",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "min(5,floor(@spells.primary.cl.total/3))",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "morale",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "min(5,floor(@spells.primary.cl.total/3))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "morale",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: personal; Also gain the same morale bonus on Acrobatics checks and to Armor Class; the AC bonus is lost whenever you would lose your Dexterity bonus to AC; duration [[@spells.primary.cl.total]] rounds; you must keep moving: if in any round you neither move at least [[10]] ft. nor make a melee attack, the spell ends",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: transmutation"
+  },
+  "Dance of a Thousand Cuts": {
+    "name": "Dance of a Thousand Cuts: +[[min(5,floor(@spells.primary.cl.total/3))]] morale melee attack & damage, haste",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "min(5,floor(@spells.primary.cl.total/3))",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "morale",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "min(5,floor(@spells.primary.cl.total/3))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "morale",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: personal; Functions as dance of a hundred cuts, also gaining the benefits of haste; morale bonus equals [[min(5,floor(@spells.primary.cl.total/3))]] on melee attack rolls, melee damage rolls, Acrobatics checks and to AC; the AC bonus is lost whenever you would lose your Dexterity bonus to AC; duration [[@spells.primary.cl.total]] rounds; you must keep moving: if in any round you neither move at least [[10]] ft. nor make a melee attack, the spell ends",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: transmutation"
   },
   "Daybreak Arrow": {
-    "name": "Daybreak Arrow: ammunition exudes radiant energy, shedding light as a sunrod for [[1]] round after firing; creatures that take penalties in bright light suffer them for [[1]] round after being struck, and undead and creatures harmed by sunlight take extra radiant damage that is not subject to damage resistance. Duration [[10]] minutes/level; Fortitude negates (harmless, object).",
+    "name": "Daybreak Arrow: ammunition exudes radiant energy, shedding light as a sunrod for [[1]] round after firing; creatures that take penalties in bright light suffer them for [[1]] round after being struck, and undead and creatures harmed by sunlight take extra radiant damage that is not subject to damage resistance. Duration [[10*@spells.primary.cl.total]] minutes; Fortitude negates (harmless, object).",
     "default": false,
     "modifiers": [
       {
@@ -345,7 +521,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes; Targets: up to [[50]] pieces of ammunition, all of which must be together at the time of casting; School: evocation [light]"
   },
   "Deadly Juggernaut": {
     "changes": [
@@ -364,7 +541,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: you; School: necromancy [death]"
   },
   "Delayed Blast Fireball": {
     "name": "Delayed Blast Fireball: a fiery burst at long range that you can detonate immediately or delay for up to [[5]] rounds; deals fire damage per caster level (maximum [[20d6]]). Reflex half.",
@@ -380,7 +558,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[5]] rounds or less; see text; Area: [[20]]-ft.-radius spread; School: evocation [fire]"
   },
   "Desecrate": {
     "changes": [
@@ -399,10 +578,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[2*@spells.primary.cl.total]] hours; Area: [[20]]-ft.-radius emanation; School: evocation [evil]"
   },
   "Desperate Weapon": {
-    "name": "Desperate Weapon: conjures a one-handed improvised weapon appropriate to your surroundings that deals bludgeoning, piercing, or slashing damage of your choice ([[1d4]] for a Small creature); the spell ends if the weapon leaves your grasp. Duration [[1]] minute/level.",
+    "name": "Desperate Weapon: conjures a one-handed improvised weapon appropriate to your surroundings that deals bludgeoning, piercing, or slashing damage of your choice ([[1d4]] for a Small creature); the spell ends if the weapon leaves your grasp. Duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -415,7 +595,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] swift action; Duration: [[@spells.primary.cl.total]] minutes; Area/Effect: one-handed improvised weapon; School: conjuration (creation)"
   },
   "Divine Favor": {
     "changes": [
@@ -434,7 +615,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[1]] minute; Targets: you; School: evocation"
   },
   "Divine Power": {
     "changes": [
@@ -453,10 +635,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: evocation"
   },
   "Divine Vessel": {
-    "name": "Divine Vessel: (Oracle only.) accept otherworldly energies and transform into a Huge anarchic, axiomatic, celestial, or fiendish creature, gaining a +[[6]] size bonus to Strength and Constitution, +[[3]] natural armor, darkvision [[60]] ft., spell resistance [[12]] + caster level, and aspect-based abilities such as damage reduction, energy resistance [[10]], a +[[4]] bonus on saves vs. poison, a fly speed, and natural attacks (the anarchic aspect's bite deals the rolled damage). Duration [[1]] round/level.",
+    "name": "Divine Vessel: (Oracle only.) accept otherworldly energies and transform into a Huge anarchic, axiomatic, celestial, or fiendish creature, gaining a +[[6]] size bonus to Strength and Constitution, +[[3]] natural armor, darkvision [[60]] ft., spell resistance [[12]] + caster level, and aspect-based abilities such as damage reduction, energy resistance [[10]], a +[[4]] bonus on saves vs. poison, a fly speed, and natural attacks (the anarchic aspect's bite deals the rolled damage). Duration [[@spells.primary.cl.total]] rounds.",
     "default": false,
     "modifiers": [
       {
@@ -469,10 +652,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D); Targets: you; School: transmutation [chaotic, evil, good, or lawful]"
   },
   "Ectoplasmic Eruption": {
-    "name": "Ectoplasmic Eruption: an avalanche of ectoplasmic matter erupts in a [[30]]-ft. radius at medium range, dealing bludgeoning damage and entangling creatures for [[1]] round/caster level; it affects ethereal and incorporeal creatures normally, and each such creature must also succeed at a Will save or be pushed partially onto the Material Plane for [[1]] round/caster level. Reflex half and Will partial.",
+    "name": "Ectoplasmic Eruption: an avalanche of ectoplasmic matter erupts in a [[30]]-ft. radius at medium range, dealing bludgeoning damage and entangling creatures for [[@spells.primary.cl.total]] rounds; it affects ethereal and incorporeal creatures normally, and each such creature must also succeed at a Will save or be pushed partially onto the Material Plane for [[@spells.primary.cl.total]] rounds. Reflex half and Will partial.",
     "default": false,
     "modifiers": [
       {
@@ -485,7 +669,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Area: [[30]]-ft.-radius burst; School: evocation"
   },
   "Elemental Mastery": {
     "changes": [
@@ -497,7 +682,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: you; School: transmutation [see text]"
   },
   "Enlarge Tail": {
     "changes": [
@@ -516,10 +702,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours; Targets: your tail; School: transmutation"
   },
   "Face of the Devourer": {
-    "name": "Face of the Devourer: transforms the target's face into a hideous shape, granting a +[[4]] circumstance bonus on Intimidate checks and a bite attack as a natural weapon ([[1d4]] if Small, [[1d8]] if Large) usable as a primary or secondary attack. Duration [[1]] minute/level; Fortitude negates (harmless).",
+    "name": "Face of the Devourer: transforms the target's face into a hideous shape, granting a +[[4]] circumstance bonus on Intimidate checks and a bite attack as a natural weapon ([[1d4]] if Small, [[1d8]] if Large) usable as a primary or secondary attack. Duration [[@spells.primary.cl.total]] minutes; Fortitude negates (harmless).",
     "default": false,
     "modifiers": [
       {
@@ -532,7 +719,26 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: creature touched; School: transmutation (polymorph)"
+  },
+  "Fiery Runes": {
+    "name": "Fiery Runes: +[[1d4+1]] fire on discharge",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "(max(1, 1 + floor((min(11,@spells.primary.cl.total) - 3)/2)))d4 + max(1, 1 + floor((min(11,@spells.primary.cl.total) - 3)/2))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Range: touch; Weapon touched is charged with a fire rune; when the wielder hits a foe in melee, the wielder can discharge the rune as a swift action to deal the extra fire damage to the target, not multiplied on a critical hit; if the target has spell resistance you make a caster level check ([[1d20]] + caster level) when discharged, and if resisted the spell is dispelled; damage scales by [[floor(@spells.primary.cl.total/2)]] extra step beyond [[3]], maximum at caster level [[11]]; lasts [[@spells.primary.cl.total]] minutes or until discharged; spell resistance applies (see text)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes or until discharged (see text); Targets: melee weapon touched; School: evocation [fire]"
   },
   "Find Fault": {
     "changes": [
@@ -544,10 +750,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: instantaneous; Targets: [[1]] creature; School: divination"
   },
   "Firebelly": {
-    "name": "Firebelly: a magical fire warms your belly, granting fire resistance [[5]]; as a standard action you can breathe a [[15]]-foot cone of flame, reducing the spell's remaining duration by [[1]] minute each use. Duration [[1]] minute/level; Reflex half, spell resistance applies.",
+    "name": "Firebelly: a magical fire warms your belly, granting fire resistance [[5]]; as a standard action you can breathe a [[15]]-foot cone of flame, reducing the spell's remaining duration by [[1]] minute each use. Duration [[@spells.primary.cl.total]] minutes; Reflex half, spell resistance applies.",
     "default": false,
     "modifiers": [
       {
@@ -560,10 +767,29 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: you; School: abjuration"
+  },
+  "Firebrand": {
+    "name": "Firebrand: +[[1d6]] fire weapon damage",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "fire"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Marks [[floor(@spells.primary.cl.total/4)]] allies, no two more than [[30]] ft. apart, with a flaming rune that sheds torchlight; marked creatures are immune to your fire spells; their natural and manufactured weapons also deal +[[1d6]] fire damage on a hit, stacking with existing fire damage; once during the duration a marked creature can launch a beam of fire at a target within [[30]] ft. as a swift action, a ranged touch attack dealing [[6d6]] fire damage, which ends the spell for that creature; lasts [[@spells.primary.cl.total]] rounds; spell resistance applies (harmless)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: [[floor(@spells.primary.cl.total/4)]] creatures, no two of which can be more than [[30]] ft. apart; School: transmutation [fire]"
   },
   "Flame Arrow": {
-    "name": "Flame Arrow: turns ammunition such as arrows, bolts, shuriken, and sling stones into fiery projectiles that deal extra fire damage on a hit and can ignite flammable objects (but not creatures). Duration [[10]] min./level.",
+    "name": "Flame Arrow: turns ammunition such as arrows, bolts, shuriken, and sling stones into fiery projectiles that deal extra fire damage on a hit and can ignite flammable objects (but not creatures). Duration [[10*@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -576,10 +802,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes; Targets: fifty projectiles, all of which must be together at the time of casting; School: transmutation [fire]"
   },
   "Flames of the Faithful": {
-    "name": "Flames of the Faithful: a glowing rune grants a wielded weapon the flaming property (or flaming burst if you are using the judgment class feature); the effect ends if the weapon leaves your hand and does not stack with an existing flaming property. Duration [[1]] round/level; Fortitude negates (object, harmless).",
+    "name": "Flames of the Faithful: a glowing rune grants a wielded weapon the flaming property (or flaming burst if you are using the judgment class feature); the effect ends if the weapon leaves your hand and does not stack with an existing flaming property. Duration [[@spells.primary.cl.total]] rounds; Fortitude negates (object, harmless).",
     "default": false,
     "modifiers": [
       {
@@ -592,10 +819,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: weapon touched; School: transmutation [fire]"
   },
   "Form of the Alien Dragon I": {
-    "name": "Form of the Alien Dragon I: become a Medium esoteric or outer dragon, gaining a +[[4]] size bonus to Strength, +[[2]] size bonus to Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, energy resistance, a once-per-casting breath weapon, and natural attacks (one bite [[1d8]], two claws [[1d6]], two wings [[1d4]]). Duration [[1]] minute/level; breath weapon allows a Reflex save to halve.",
+    "name": "Form of the Alien Dragon I: become a Medium esoteric or outer dragon, gaining a +[[4]] size bonus to Strength, +[[2]] size bonus to Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, energy resistance, a once-per-casting breath weapon, and natural attacks (one bite [[1d8]], two claws [[1d6]], two wings [[1d4]]). Duration [[@spells.primary.cl.total]] minutes; breath weapon allows a Reflex save to halve.",
     "default": false,
     "modifiers": [
       {
@@ -608,10 +836,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
   },
   "Form of the Alien Dragon II": {
-    "name": "Form of the Alien Dragon II: as Form of the Alien Dragon I, but become a Large esoteric or outer dragon, gaining a +[[6]] size bonus to Strength, +[[4]] size bonus to Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, damage reduction [[5]]/magic, energy resistance, a breath weapon, and natural attacks (one bite [[2d6]], two claws [[1d8]], a tail slap [[1d8]], two wings [[1d6]]); lines extend to [[80]] feet and cones to [[40]] feet. Duration [[1]] minute/level; breath weapon allows a Reflex save to halve.",
+    "name": "Form of the Alien Dragon II: as Form of the Alien Dragon I, but become a Large esoteric or outer dragon, gaining a +[[6]] size bonus to Strength, +[[4]] size bonus to Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, damage reduction [[5]]/magic, energy resistance, a breath weapon, and natural attacks (one bite [[2d6]], two claws [[1d8]], a tail slap [[1d8]], two wings [[1d6]]); lines extend to [[80]] feet and cones to [[40]] feet. Duration [[@spells.primary.cl.total]] minutes; breath weapon allows a Reflex save to halve.",
     "default": false,
     "modifiers": [
       {
@@ -624,10 +853,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
   },
   "Form of the Alien Dragon III": {
-    "name": "Form of the Alien Dragon III: as form of the alien dragon II, but you take the form of a Huge esoteric or outer dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one form of energy. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), two wings ([[1d8]]), and one tail slap ([[2d6]]). The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save to halve the breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[1]] minute/level.",
+    "name": "Form of the Alien Dragon III: as form of the alien dragon II, but you take the form of a Huge esoteric or outer dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one form of energy. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), two wings ([[1d8]]), and one tail slap ([[2d6]]). The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save to halve the breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -640,58 +870,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
-  },
-  "Form of the Exotic Dragon I": {
-    "name": "Form of the Exotic Dragon I: you become a Medium imperial or primal dragon, gaining +[[4]] size Strength, +[[2]] size Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, a breath weapon, and resistance to one form of energy or another bonus. Natural attacks are one bite ([[1d8]]), two claws ([[1d6]]), and either a gore ([[1d8]]) for an imperial dragon or two wings ([[1d4]]) for a primal dragon. The breath weapon can be used only once per casting and allows a Reflex save to halve the breath damage; some dragon types grant added resistances and speeds. Duration [[1]] minute/level.",
-    "default": false,
-    "modifiers": [
-      {
-        "formula": "6d8",
-        "target": "damage",
-        "subTarget": "allDamage",
-        "type": "untyped",
-        "damageType": [
-          "untyped"
-        ],
-        "critical": "nonCrit"
-      }
-    ]
-  },
-  "Form of the Exotic Dragon II": {
-    "name": "Form of the Exotic Dragon II: as form of the exotic dragon I, but you take the form of a Large imperial or primal dragon, gaining +[[6]] size Strength, +[[4]] size Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, a breath weapon, DR [[5]]/magic, and resistance to one form of energy or another bonus. Natural attacks are one bite ([[2d6]]), two claws ([[1d8]]), a tail slap ([[1d8]]), and either a gore ([[2d6]]) for an imperial dragon or two wings ([[1d6]]) for a primal dragon. The breath weapon allows a Reflex save to halve the breath damage; lines become [[80]]-foot lines and cones become [[40]]-foot cones. Duration [[1]] minute/level.",
-    "default": false,
-    "modifiers": [
-      {
-        "formula": "8d8",
-        "target": "damage",
-        "subTarget": "allDamage",
-        "type": "untyped",
-        "damageType": [
-          "untyped"
-        ],
-        "critical": "nonCrit"
-      }
-    ]
-  },
-  "Form of the Exotic Dragon III": {
-    "name": "Form of the Exotic Dragon III: as form of the exotic dragon II, but you take the form of a Huge imperial or primal dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one form of energy. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), one tail slap ([[2d6]]), and either a gore ([[2d8]]) for an imperial dragon or two wings ([[1d8]]) for a primal dragon. The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save to halve the breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[1]] minute/level.",
-    "default": false,
-    "modifiers": [
-      {
-        "formula": "12d8",
-        "target": "damage",
-        "subTarget": "allDamage",
-        "type": "untyped",
-        "damageType": [
-          "untyped"
-        ],
-        "critical": "nonCrit"
-      }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
   },
   "Form of the Dragon I": {
-    "name": "Form of the Dragon I: you become a Medium chromatic or metallic dragon, gaining +[[4]] size Strength, +[[2]] size Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, a breath weapon, and resistance to one element. Natural attacks are one bite ([[1d8]]), two claws ([[1d6]]), and two wings ([[1d4]]). The breath weapon can be used only once per casting and allows a Reflex save for half breath damage; breath shape, resistance, and extra abilities depend on the dragon type. Duration [[1]] minute/level.",
+    "name": "Form of the Dragon I: you become a Medium chromatic or metallic dragon, gaining +[[4]] size Strength, +[[2]] size Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, a breath weapon, and resistance to one element. Natural attacks are one bite ([[1d8]]), two claws ([[1d6]]), and two wings ([[1d4]]). The breath weapon can be used only once per casting and allows a Reflex save for half breath damage; breath shape, resistance, and extra abilities depend on the dragon type. Duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -704,10 +887,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
   },
   "Form of the Dragon II": {
-    "name": "Form of the Dragon II: as form of the dragon I, but you take the form of a Large chromatic or metallic dragon, gaining +[[6]] size Strength, +[[4]] size Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, a breath weapon, DR [[5]]/magic, and resistance to one element. Natural attacks are one bite ([[2d6]]), two claws ([[1d8]]), two wings ([[1d6]]), and one tail slap ([[1d8]]). The breath weapon can be used twice per casting, waiting [[1d4]] rounds between uses, and allows a Reflex save for half breath damage; lines become [[80]]-foot lines and cones become [[40]]-foot cones. Duration [[1]] minute/level.",
+    "name": "Form of the Dragon II: as form of the dragon I, but you take the form of a Large chromatic or metallic dragon, gaining +[[6]] size Strength, +[[4]] size Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, a breath weapon, DR [[5]]/magic, and resistance to one element. Natural attacks are one bite ([[2d6]]), two claws ([[1d8]]), two wings ([[1d6]]), and one tail slap ([[1d8]]). The breath weapon can be used twice per casting, waiting [[1d4]] rounds between uses, and allows a Reflex save for half breath damage; lines become [[80]]-foot lines and cones become [[40]]-foot cones. Duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -720,10 +904,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
   },
   "Form of the Dragon III": {
-    "name": "Form of the Dragon III: as form of the dragon II, but you take the form of a Huge chromatic or metallic dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, a breath weapon, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one element. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), two wings ([[1d8]]), and one tail slap ([[2d6]]). The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save for half breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[1]] minute/level.",
+    "name": "Form of the Dragon III: as form of the dragon II, but you take the form of a Huge chromatic or metallic dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, a breath weapon, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one element. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), two wings ([[1d8]]), and one tail slap ([[2d6]]). The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save for half breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -736,10 +921,78 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
+  },
+  "Form of the Exotic Dragon I": {
+    "name": "Form of the Exotic Dragon I: you become a Medium imperial or primal dragon, gaining +[[4]] size Strength, +[[2]] size Constitution, +[[4]] natural armor, fly [[60]] feet (poor), darkvision [[60]] feet, a breath weapon, and resistance to one form of energy or another bonus. Natural attacks are one bite ([[1d8]]), two claws ([[1d6]]), and either a gore ([[1d8]]) for an imperial dragon or two wings ([[1d4]]) for a primal dragon. The breath weapon can be used only once per casting and allows a Reflex save to halve the breath damage; some dragon types grant added resistances and speeds. Duration [[@spells.primary.cl.total]] minutes.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "6d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "untyped"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
+  },
+  "Form of the Exotic Dragon II": {
+    "name": "Form of the Exotic Dragon II: as form of the exotic dragon I, but you take the form of a Large imperial or primal dragon, gaining +[[6]] size Strength, +[[4]] size Constitution, +[[6]] natural armor, fly [[90]] feet (poor), darkvision [[60]] feet, a breath weapon, DR [[5]]/magic, and resistance to one form of energy or another bonus. Natural attacks are one bite ([[2d6]]), two claws ([[1d8]]), a tail slap ([[1d8]]), and either a gore ([[2d6]]) for an imperial dragon or two wings ([[1d6]]) for a primal dragon. The breath weapon allows a Reflex save to halve the breath damage; lines become [[80]]-foot lines and cones become [[40]]-foot cones. Duration [[@spells.primary.cl.total]] minutes.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "8d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "untyped"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
+  },
+  "Form of the Exotic Dragon III": {
+    "name": "Form of the Exotic Dragon III: as form of the exotic dragon II, but you take the form of a Huge imperial or primal dragon, gaining +[[10]] size Strength, +[[8]] size Constitution, +[[8]] natural armor, fly [[120]] feet (poor), blindsense [[60]] feet, darkvision [[120]] feet, DR [[10]]/magic, frightful presence (DC = this spell's DC), and immunity to one form of energy. Natural attacks are one bite ([[2d8]]), two claws ([[2d6]]), one tail slap ([[2d6]]), and either a gore ([[2d8]]) for an imperial dragon or two wings ([[1d8]]) for a primal dragon. The breath weapon recharges after [[1d4]] rounds between uses and allows a Reflex save to halve the breath damage; lines become [[100]]-foot lines and cones become [[50]]-foot cones. Duration [[@spells.primary.cl.total]] minutes.",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "12d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "untyped"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation (polymorph)"
+  },
+  "Free Spirit": {
+    "name": "Free Spirit: -[[2]] untyped attack penalty (drunk)",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "-2",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: personal; Gain the benefits of freedom of movement and +[[4]] bonus on saves against fear effects; you are drunk, taking the -[[2]] penalty on attack rolls and also on ability checks, skill checks and concentration checks; if you remove or avoid these penalties the spell ends; duration [[@spells.primary.cl.total]] minutes",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: you; School: abjuration"
   },
   "Geniekind": {
-    "name": "Geniekind: you transform to emulate a chosen genie (djinni, efreeti, marid, or shaitan), gaining a +[[2]] racial bonus on saves vs. paralysis, poison, sleep, and stunning, a +[[4]] enhancement bonus to natural armor, a +[[2]] enhancement bonus to Constitution, and a +[[5]] bonus on Diplomacy with creatures of your genie's elemental subtype. As an efreeti your unarmed strikes and melee weapons deal extra fire damage; you also gain a genie-specific movement and energy resistance [[10]] (electricity djinni, fire efreeti, cold marid, acid shaitan). Duration [[1]] round/level.",
+    "name": "Geniekind: you transform to emulate a chosen genie (djinni, efreeti, marid, or shaitan), gaining a +[[2]] racial bonus on saves vs. paralysis, poison, sleep, and stunning, a +[[4]] enhancement bonus to natural armor, a +[[2]] enhancement bonus to Constitution, and a +[[5]] bonus on Diplomacy with creatures of your genie's elemental subtype. As an efreeti your unarmed strikes and melee weapons deal extra fire damage; you also gain a genie-specific movement and energy resistance [[10]] (electricity djinni, fire efreeti, cold marid, acid shaitan). Duration [[@spells.primary.cl.total]] rounds.",
     "default": false,
     "modifiers": [
       {
@@ -752,10 +1005,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: transmutation (polymorph)"
   },
   "Gift of the Deep": {
-    "name": "Gift of the Deep: you give sahuagin targets one chosen mutant benefit. Four-Armed grants an extra pair of arms making claw attacks plus Multiattack and Multiweapon Fighting; other options grant Malenti disguise, Prehistoric enlargement, Shark-Blooded swimming, Sightless blindsense [[90]] feet, or Spined retaliation (any creature that grapples it or hits it with an unarmed strike or natural weapon takes [[1d4]] piercing damage). Range close ([[25]] ft. + [[5]] ft./[[2]] levels), Fortitude negates (harmless), duration [[1]] minute/level.",
+    "name": "Gift of the Deep: you give sahuagin targets one chosen mutant benefit. Four-Armed grants an extra pair of arms making claw attacks plus Multiattack and Multiweapon Fighting; other options grant Malenti disguise, Prehistoric enlargement, Shark-Blooded swimming, Sightless blindsense [[90]] feet, or Spined retaliation (any creature that grapples it or hits it with an unarmed strike or natural weapon takes [[1d4]] piercing damage). Range close ([[25]] ft. + [[5*floor(@spells.primary.cl.total/2)]] ft.), Fortitude negates (harmless), duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -768,7 +1022,32 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: [[@spells.primary.cl.total]] non-mutated sahuagin, no two of which can be more than [[30]] ft. apart; School: transmutation (polymorph)"
+  },
+  "Glimpse of the Akashic": {
+    "name": "Glimpse of the Akashic: +[[CL]] circumstance attack & damage",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "@spells.primary.cl.total",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "circumstance",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "@spells.primary.cl.total",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "circumstance",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: personal; For [[1]] day you can activate the stored knowledge as a free action; for [[1]] minute you also gain the same circumstance bonus on all skill checks, ability checks, saving throws, and combat maneuver checks; afterward you are stunned for [[2]] rounds and then sickened for [[1]] minute; lasts until discharged",
+    "details": "Activation: [[1]] full-round action; Duration: [[1]] day or until discharged (see text); Targets: you; School: divination"
   },
   "Good Hope": {
     "changes": [
@@ -780,7 +1059,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: [[@spells.primary.cl.total]] living creature, no two of which may be more than [[30]] ft. apart; School: enchantment (compulsion) [mind-affecting, emotion]"
   },
   "Gorum's Armor": {
     "changes": [
@@ -799,10 +1079,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes; Targets: [[1]] suit of metal armor or [[1]] metal shield; School: transmutation"
   },
   "Gravity Bow": {
-    "name": "Gravity Bow: arrows or bolts fired from your bow or crossbow deal damage as if one size larger (a Medium longbow's [[1d8]] becomes [[2d6]]). Only you benefit; anyone else using your bow deals normal damage for their size. Duration [[1]] minute/level.",
+    "name": "Gravity Bow: arrows or bolts fired from your bow or crossbow deal damage as if one size larger (a Medium longbow's [[1d8]] becomes [[2d6]]). Only you benefit; anyone else using your bow deals normal damage for their size. Duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -815,7 +1096,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: transmutation"
   },
   "Guidance": {
     "changes": [
@@ -827,7 +1109,44 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[1]] minute or until discharged; Targets: creature touched; School: divination"
+  },
+  "Halfling Vengeance": {
+    "name": "Halfling Vengeance: +[[1d6]] precision damage with daggers, slings",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "(min(5, 1 + floor(max(0,@spells.primary.cl.total-3)/4)))d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "precision"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Target must be a Small or smaller creature; lasts [[@spells.primary.cl.total]] rounds; deals an additional [[1d6]] precision damage on successful attacks with daggers or slings against foes within [[30]] ft. who are denied their Dexterity bonus to AC or are flanked by the target; the damage increases by [[1d6]] for every [[4]] caster levels beyond 3rd, to a maximum of [[5d6]] at 19th level; stacks with other precision damage such as sneak attack; bonus damage is not multiplied on a critical hit; once per round on a successful attack that deals this precision damage, the target can forgo [[2d6]] precision damage (from this spell or other sources) to inflict one condition on the attacked foe for [[1]] round: it can't make attacks of opportunity against smaller creatures, or it is denied its Dexterity bonus to AC against dagger or sling attacks, or it takes a -[[2]] penalty on attacks against smaller creatures, or it can't take [[5]]-foot steps; a creature can benefit from only one halfling vengeance spell at a time; spell resistance applies (harmless)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: one Small or smaller creature touched; School: divination"
+  },
+  "Halfling Vengeance, Mass": {
+    "name": "Halfling Vengeance, Mass: +[[1d6]] precision damage with daggers, slings",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "(min(5, 1 + floor(max(0,@spells.primary.cl.total-3)/4)))d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "precision"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Functions like halfling vengeance, except it affects multiple creatures; targets are [[@spells.primary.cl.total]] Small or smaller creatures, no two of which can be more than [[30]] ft. apart; lasts [[@spells.primary.cl.total]] rounds; each target deals an additional [[1d6]] precision damage on dagger or sling attacks, increasing by [[1d6]] for every [[4]] caster levels beyond 3rd, to a maximum of [[5d6]]; spell resistance applies",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: [[@spells.primary.cl.total]] Small or smaller creature, no two of which can be more than [[30]] ft. apart; School: divination"
   },
   "Haste": {
     "changes": [
@@ -839,10 +1158,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: [[@spells.primary.cl.total]] creatures, no two of which can be more than [[30]] ft. apart; School: transmutation"
   },
   "Hedging Weapons": {
-    "name": "Hedging Weapons: a floating weapon of divine force appears (more at higher levels, max [[5]] at [[18]]th), each granting a +[[1]] deflection bonus to AC (max +[[5]]). As a standard action you grasp and throw one as a ranged attack at a target within [[30]] feet, dealing force damage that bypasses DR; each weapon thrown lowers the deflection bonus by [[1]] and vanishes, ending the spell when all are thrown. Duration [[1]] minute/level.",
+    "name": "Hedging Weapons: a floating weapon of divine force appears (more at higher levels, max [[5]] at 18th), each granting a +[[1]] deflection bonus to AC (max +[[5]]). As a standard action you grasp and throw one as a ranged attack at a target within [[30]] feet, dealing force damage that bypasses DR; each weapon thrown lowers the deflection bonus by [[1]] and vanishes, ending the spell when all are thrown. Duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -855,7 +1175,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: abjuration [force]"
   },
   "Heroes' Feast": {
     "changes": [
@@ -867,7 +1188,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[10]] minutes; Duration: [[1]] hour plus [[12]] hours; see text; Area/Effect: feast for [[@spells.primary.cl.total]] creatures; School: conjuration (creation)"
   },
   "Heroic Invocation": {
     "changes": [
@@ -886,7 +1208,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[10]] minutes; Duration: [[10*@spells.primary.cl.total]] minutes; Targets: one or more creatures, no two of which can be more than [[30]] ft. apart; School: enchantment (compulsion) [mind-affecting]"
   },
   "Heroism": {
     "changes": [
@@ -898,7 +1221,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes; Targets: creature touched; School: enchantment (compulsion) [mind-affecting]"
   },
   "Heroism, Greater": {
     "changes": [
@@ -910,10 +1234,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: creature touched; School: enchantment (compulsion) [mind-affecting]"
   },
   "Holy Ice Weapon": {
-    "name": "Holy Ice Weapon: create a masterwork simple weapon or your deity's favored weapon made of ice and holy water that deals normal weapon damage plus [[1]] point of cold damage per caster level (max [[10]]); any creature susceptible to holy water struck by it also takes holy water damage. If it leaves your hands for more than [[1]] round it melts and the spell ends; at caster level [[6]]th it gains the returning property when thrown. Duration [[1]] minute/level.",
+    "name": "Holy Ice Weapon: create a masterwork simple weapon or your deity's favored weapon made of ice and holy water that deals normal weapon damage plus [[@spells.primary.cl.total]] point of cold damage (max [[10]]); any creature susceptible to holy water struck by it also takes holy water damage. If it leaves your hands for more than [[1]] round it melts and the spell ends; at caster level 6th it gains the returning property when thrown. Duration [[@spells.primary.cl.total]] minutes.",
     "default": false,
     "modifiers": [
       {
@@ -926,7 +1251,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Area/Effect: one ice weapon; School: transmutation [cold, good, water]"
   },
   "Holy Sword": {
     "changes": [
@@ -945,7 +1271,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: melee weapon touched; School: evocation [good]"
   },
   "Holy Whisper": {
     "changes": [
@@ -964,7 +1291,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: instantaneous; Area: cone-shaped burst; School: evocation [good]"
   },
   "Hunter's Blessing": {
     "changes": [
@@ -983,7 +1311,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours; Targets: [[@spells.primary.cl.total]] creatures, no two of which can be more than [[30]] ft. apart; School: transmutation"
   },
   "Hunter's Howl": {
     "changes": [
@@ -1002,7 +1331,32 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Area: [[20]]-ft.-radius burst; School: necromancy [fear, mind-affecting, emotion]"
+  },
+  "Huntmaster's Spear": {
+    "name": "Huntmaster's Spear: +[[1]] enhancement attack & damage vs chosen type",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "1",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: touch; Choose one creature type (and subtype, if applicable) from the ranger's favored enemy list; the touched nonmagical spear functions as a +[[1]] spear only against creatures of the chosen type; lasts [[24]] hours or until discharged; discharge the spell to make an especially powerful attack: the spear's critical range becomes [[18]]-[[20]] and its critical multiplier becomes x3; if the attack is part of a charge, gain a +[[30]] ft. enhancement bonus to base speed during the charge; if thrown as part of this attack, its range increment becomes [[80]] ft.; if cast on a masterwork spear, it also gains the bane special ability against the chosen creature type and automatically bypasses any damage reduction (except DR/-) regardless of the creature's type; after the attack the spear is destroyed in a burst of energy; creatures other than you treat the spear as a normal weapon; only one huntmaster's spear can be in effect at a time and casting again ends any previous instance; expending a monster trophy of the chosen type as an optional material component reduces casting time to [[1]] round; spell resistance applies",
+    "details": "Activation: [[10]] minutes; Duration: [[24]] hours or until discharged; Targets: nonmagical spear touched; School: transmutation"
   },
   "Inheritor's Smite": {
     "changes": [
@@ -1015,7 +1369,8 @@
       }
     ],
     "contextNotes": [],
-    "rider": "Range: personal; on hit, free bull rush [[ d20 + @attributes.cmb.total + 5 ]] vs CMD (no AoO)"
+    "rider": "Range: personal; on hit, free bull rush [[ d20 + @attributes.cmb.total + 5 ]] vs CMD (no AoO)",
+    "details": "Activation: [[1]] swift action; Duration: see text; Targets: you; School: transmutation"
   },
   "Inspiring Recovery": {
     "changes": [
@@ -1034,7 +1389,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: instantaneous and [[1]] minute; Targets: one target creature and all its allies within [[60]] feet; see text; School: conjuration (healing) [mind-affecting]"
   },
   "Invoke Primal Power": {
     "changes": [
@@ -1053,10 +1409,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] swift action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: transmutation"
   },
   "Last Azlanti's Defending Sword": {
-    "name": "Last Azlanti's Defending Sword: create a hovering sword of force (functions as mage's sword but gains no enhancement bonus) within close range ([[25]] ft. + [[5]] ft./[[2]] levels) for [[1]] round/level. While hovering it grants you a +[[4]] shield bonus to AC; the first time a foe damages you or makes you fail a save, the sword triggers and attacks that target, ending the shield bonus.",
+    "name": "Last Azlanti's Defending Sword: create a hovering sword of force (functions as mage's sword but gains no enhancement bonus) within close range ([[25]] ft. + [[5*floor(@spells.primary.cl.total/2)]] ft.) for [[@spells.primary.cl.total]] rounds. While hovering it grants you a +[[4]] shield bonus to AC; the first time a foe damages you or makes you fail a save, the sword triggers and attacks that target, ending the shield bonus.",
     "default": false,
     "modifiers": [
       {
@@ -1069,10 +1426,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D); Area/Effect: one sword; School: evocation [force]"
   },
   "Lead Blades": {
-    "name": "Lead Blades: your melee weapons deal damage as if one size category larger for [[1]] minute/level; only you benefit.",
+    "name": "Lead Blades: your melee weapons deal damage as if one size category larger for [[@spells.primary.cl.total]] minutes; only you benefit.",
     "default": false,
     "modifiers": [
       {
@@ -1085,7 +1443,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: touch; School: transmutation"
   },
   "Litany of Vengeance": {
     "changes": [
@@ -1097,7 +1456,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] swift action; Duration: [[1]] round; Targets: one creature; School: transmutation [language-dependent]"
   },
   "Magic Boulder": {
     "changes": [
@@ -1116,7 +1476,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[30]] minutes or until discharged; Targets: up to three boulders touched; School: transmutation [earth]"
   },
   "Magic Fang": {
     "changes": [
@@ -1135,7 +1496,32 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: living creature touched; School: transmutation"
+  },
+  "Magic Fang, Greater": {
+    "name": "Magic Fang, Greater: +[[max(1,min(5,floor(@spells.primary.cl.total/4)))]] enhancement natural weapon attack & damage",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "max(1,min(5,floor(@spells.primary.cl.total/4)))",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "max(1,min(5,floor(@spells.primary.cl.total/4)))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: [[25 + 5*floor(@spells.primary.cl.total/2)]] ft; One natural weapon gets the enhancement bonus; alternatively imbue all of the creature's natural weapons with a +[[1]] enhancement bonus regardless of caster level; does not let a natural weapon or unarmed strike bypass damage reduction aside from magic; duration [[@spells.primary.cl.total]] hours; can be made permanent with permanency; spell resistance applies (harmless)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours; Targets: one living creature; School: transmutation"
   },
   "Magic Siege Engine": {
     "changes": [
@@ -1147,7 +1533,32 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: one siege engine touched; School: transmutation"
+  },
+  "Magic Siege Engine, Greater": {
+    "name": "Magic Siege Engine, Greater: +[[min(5,floor(@spells.primary.cl.total/4))]] enhancement siege targeting & damage",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "min(5,floor(@spells.primary.cl.total/4))",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "min(5,floor(@spells.primary.cl.total/4))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: [[25 + 5*floor(@spells.primary.cl.total/2)]] ft; Functions like magic siege weapon on an indirect fire siege weapon; used on a direct-fire siege weapon it functions as greater magic weapon; duration [[@spells.primary.cl.total]] hours; spell resistance applies (harmless, object)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours; Targets: one siege engine touched; School: transmutation"
   },
   "Magic Stone": {
     "changes": [
@@ -1166,7 +1577,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[30]] minutes or until discharged; Targets: up to three pebbles touched; School: transmutation"
   },
   "Magic Weapon": {
     "changes": [
@@ -1185,7 +1597,48 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: weapon touched; School: transmutation"
+  },
+  "Magic Weapon, Greater": {
+    "name": "Magic Weapon, Greater: +[[max(1,min(5,floor(@spells.primary.cl.total/4)))]] enhancement attack & damage",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "max(1,min(5,floor(@spells.primary.cl.total/4)))",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "max(1,min(5,floor(@spells.primary.cl.total/4)))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: [[25 + 5*floor(@spells.primary.cl.total/2)]] ft; Functions like magic weapon, applied to one weapon, or alternatively to as many as [[50]] arrows, bolts, or bullets of the same kind kept together; does not allow a weapon to bypass damage reduction aside from magic; projectiles (not thrown weapons) lose their transmutation after use; treat shuriken as projectiles; duration [[@spells.primary.cl.total]] hours; spell resistance applies (harmless, object)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours; Targets: one weapon or [[50]] projectiles (all of which must be together at the time of casting); School: transmutation"
+  },
+  "Mantle of Calm": {
+    "name": "Mantle of Calm: [[-2]] untyped attack penalty",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "-2",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: personal; Opponents gain a [[2]] bonus on saving throws against spells you cast; any creature affected by a rage effect that strikes you with a melee attack must make a Will save DC [[ 10 + @slvl + @castMod ]] without the rage effect's bonus to Will, and on a failure the rage effect ends; if you become affected by a rage effect, this spell immediately ends; if your rage comes from a skald's raging song it ends only for you and you cannot regain the song's effects; lasts [[@spells.primary.cl.total]] rounds; spell resistance applies to the Will save DC [[ 10 + @slvl + @castMod ]] of raging attackers",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D); Targets: you; School: enchantment (compulsion) [emotion, mind-affecting]"
   },
   "Marid's Mastery": {
     "changes": [
@@ -1204,7 +1657,24 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: willing creature touched; School: transmutation [water]"
+  },
+  "Mindshock": {
+    "name": "Mindshock: +[[1d4]] nonlethal damage on weapon attacks",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d4",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Range: personal; Lasts [[@spells.primary.cl.total]] rounds; creatures immune to mind-affecting or pain effects ignore the extra nonlethal damage; when you confirm a critical hit the target is confused for [[1]] round by the pain (creatures immune to critical hits, mind-affecting or pain effects ignore it); an individual creature can be confused only once by a single casting of mindshock",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D); Targets: you; School: divination [mind-affecting, painUM]"
   },
   "Mirror Strike": {
     "changes": [
@@ -1216,7 +1686,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: see text; Targets: you; School: transmutation"
   },
   "Miserable Pity": {
     "changes": [
@@ -1228,10 +1699,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds and [[1]] minute; see text; Targets: creature touched; School: abjuration [emotion, mind-affecting]"
   },
   "Molten Orb": {
-    "name": "Molten Orb: hurl a ball of molten metal as a splash weapon within close range ([[25]] ft. + [[5]] ft./[[2]] levels) for a direct fire hit. Creatures within [[5]] feet take [[1d6]] fire splash (Reflex half) and an additional [[1d6]] fire on their turn for the next [[1d3]] rounds unless cooled off (water, snow, or [[5]]+ cold damage).",
+    "name": "Molten Orb: hurl a ball of molten metal as a splash weapon within close range ([[25]] ft. + [[5*floor(@spells.primary.cl.total/2)]] ft.) for a direct fire hit. Creatures within [[5]] feet take [[1d6]] fire splash (Reflex half) and an additional [[1d6]] fire on their turn for the next [[1d3]] rounds unless cooled off (water, snow, or [[5]]+ cold damage).",
     "default": false,
     "modifiers": [
       {
@@ -1244,7 +1716,56 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: instantaneous; Area/Effect: ranged attack; School: evocation [earth, fire]"
+  },
+  "Moonrise Arrow": {
+    "name": "Moonrise Arrow: +[[1d8]] damage vs incorporeal undead, shapechangers",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d8",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Affects up to [[50]] pieces of ammunition (including shuriken) that must be together when cast; the ammunition counts as magic and silver for overcoming damage reduction, in addition to any other special material; the ammunition sheds dim light in a [[5]]-foot radius for [[1]] round after it is fired or thrown; duration [[10*@spells.primary.cl.total]] minutes; spell resistance applies",
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes; Targets: up to [[50]] pieces of ammunition, all of which must be together at the time of casting; School: evocation [light]"
+  },
+  "Named Bullet": {
+    "name": "Named Bullet: +[[min(20,@spells.primary.cl.total)]] damage vs chosen creature",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "min(20,@spells.primary.cl.total)",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Range: touch; Imbues one piece of ammunition or one thrown weapon with deadly accuracy against a selected creature type (and subtype for humanoids or outsiders) or a specific creature you know and can name; against the selected creature the ammunition never misfires, is unaffected by concealment (but not total concealment), and at [[30]] feet or less targets touch AC; when it hits the selected creature you must overcome its spell resistance or the spell has no effect; a normal hit is considered a critical threat; the extra damage is not multiplied on a critical hit, but on a natural critical hit the same extra damage is multiplied; the spell is discharged once the target is used against the selected creature, hit or miss; duration [[10*@spells.primary.cl.total]] minutes or until discharged; spell resistance applies (harmless, object)",
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes or until discharged; Targets: one piece of ammunition or one thrown weapon; School: divination"
+  },
+  "Named Bullet, Greater": {
+    "name": "Named Bullet, Greater: +[[min(40,2*@spells.primary.cl.total)]] damage vs chosen creature",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "min(40,2*@spells.primary.cl.total)",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Range: touch; Functions as named bullet except it deals extra damage of [[2*@spells.primary.cl.total]] points (maximum [[40]]); imbues one piece of ammunition or one thrown weapon with deadly accuracy against a selected creature or creature type; against the selected creature the ammunition never misfires, is unaffected by concealment (but not total concealment), and at [[30]] feet or less targets touch AC; when it hits the selected creature you must overcome its spell resistance or the spell has no effect; a normal hit is considered a critical threat; the spell is discharged once the target is used against the selected creature; duration [[10*@spells.primary.cl.total]] minutes or until discharged; spell resistance applies (harmless, object)",
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes or until discharged; Targets: one piece of ammunition or one thrown weapon; School: divination"
   },
   "Natural Rhythm": {
     "changes": [
@@ -1256,7 +1777,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: creature touched; School: transmutation"
   },
   "Polypurpose Panacea": {
     "changes": [
@@ -1268,7 +1790,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: see below; Targets: you; School: transmutation"
   },
   "Prayer": {
     "changes": [
@@ -1287,10 +1810,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Area: all allies and foes within a [[40]]-ft.-radius burst centered on you; School: enchantment (compulsion) [mind-affecting]"
   },
   "Rain of Arrows": {
-    "name": "Rain of Arrows: conjure a cloud of magical arrows at long range ([[400]] ft. + [[40]] ft./level) that rain piercing damage per caster level (max [[20d6]]) on every creature and object in a [[15]]-foot radius; Reflex halves.",
+    "name": "Rain of Arrows: conjure a cloud of magical arrows at long range ([[400]] ft. + [[40*@spells.primary.cl.total]] ft.) that rain piercing damage per caster level (max [[20d6]]) on every creature and object in a [[15]]-foot radius; Reflex halves.",
     "default": false,
     "modifiers": [
       {
@@ -1303,7 +1827,24 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: instantaneous; Area/Effect: [[15]]-ft.-radius cloud of arrows; School: conjuration (creation)"
+  },
+  "Rally Point": {
+    "name": "Rally Point: +[[2]] morale attack for good creatures",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "morale",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: [[5]] ft; Creates a [[5]]-ft. square for [[@spells.primary.cl.total]] minutes; a good creature entering it also gains a [[+2]] morale bonus on saving throws and [[@spells.primary.cl.total*2]] temporary hit points for [[1]] round; nongood creatures gain no benefit; a creature can't benefit more than once from the same casting; spell resistance applies (harmless)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Area: one [[5]]-ft. square; School: enchantment (compulsion) [good, mind-affecting, emotion]"
   },
   "Reaper's Coterie": {
     "changes": [
@@ -1315,7 +1856,24 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: weapon touched; School: necromancy [evil]"
+  },
+  "Redcap's Touch": {
+    "name": "Redcap's Touch: +[[2]] damage from blood-infused hat",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "2",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: touch; Target is a non-magical hat that occupies the head slot as a magic item while worn; the wearer regains [[1d4]] hit points whenever they deal the killing blow to a living creature; lasts [[@spells.primary.cl.total]] minutes; spell resistance applies (harmless, object)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: one non-magical hat touched; School: transmutation"
   },
   "Reduce Person": {
     "changes": [
@@ -1327,10 +1885,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] round; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: one humanoid creature; School: transmutation"
   },
   "Release the Hounds": {
-    "name": "Release the Hounds: summon a swarm-like pack of canines within close range ([[25]] ft. + [[5]] ft./[[2]] levels) for [[1]] round/level. It has the distraction special attack (DC [[17]]) and may attempt a free trip combat maneuver against any creature it damages with its swarm attack.",
+    "name": "Release the Hounds: summon a swarm-like pack of canines within close range ([[25]] ft. + [[5*floor(@spells.primary.cl.total/2)]] ft.) for [[@spells.primary.cl.total]] rounds. It has the distraction special attack (DC [[17]]) and may attempt a free trip combat maneuver against any creature it damages with its swarm attack.",
     "default": false,
     "modifiers": [
       {
@@ -1343,10 +1902,29 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D); Area/Effect: one pack of canines; School: conjuration (summoning)"
+  },
+  "Resounding Blow": {
+    "name": "Resounding Blow: +[[1d6]] sonic damage on melee hits",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [
+          "sonic"
+        ],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Range: personal; Requires a melee weapon in hand; lasts [[@spells.primary.cl.total]] rounds; the weapon is not harmed; if you are using judgment or smite against the target, it is staggered for [[1]] round on a successful attack; on a critical hit the target is stunned for [[1]] round and deafened for [[1d6]] rounds; a Fortitude save DC [[ 10 + @slvl + @castMod ]] negates the staggering, stunning and deafening (only a single save if judgment or smite is also used); ends immediately if the weapon leaves your hand; stacks with the thundering weapon property",
+    "details": "Activation: [[1]] swift action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: evocation [sonic]"
   },
   "Rift of Ruin": {
-    "name": "Rift of Ruin: tear an extradimensional Abyssal rift [[60]] feet deep at long range ([[400]] ft. + [[40]] ft./level) for [[1]] round/level. Large or smaller creatures must make a Reflex save or fall in, taking [[6d6]] falling damage; each round in the pit deals an additional [[6d6]] of a random energy or physical type (Reflex half). The pit walls are Climb DC [[25]]; when the spell ends, creatures still within take double environmental damage and are expelled prone. You may instead snap the rift shut to summon Abyssal denizens (as summon monster VII): [[1]] bebilith, [[1]] vrock, [[1d3]] succubi, [[1d3]] shadow demons, [[1d4]]+[[1]] babaus, or [[1d4]]+[[1]] brimoraks.",
+    "name": "Rift of Ruin: tear an extradimensional Abyssal rift [[60]] feet deep at long range ([[400]] ft. + [[40*@spells.primary.cl.total]] ft.) for [[@spells.primary.cl.total]] rounds. Large or smaller creatures must make a Reflex save or fall in, taking [[6d6]] falling damage; each round in the pit deals an additional [[6d6]] of a random energy or physical type (Reflex half). The pit walls are Climb DC [[25]]; when the spell ends, creatures still within take double environmental damage and are expelled prone. You may instead snap the rift shut to summon Abyssal denizens (as summon monster VII): [[1]] bebilith, [[1]] vrock, [[1d3]] succubi, [[1d3]] shadow demons, [[1d4]]+[[1]] babaus, or [[1d4]]+[[1]] brimoraks.",
     "default": false,
     "modifiers": [
       {
@@ -1359,10 +1937,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (see text); Targets: [[5]]-ft.-wide, [[60]]-ft.-deep extradimensional hole, up to [[5*@spells.primary.cl.total]] ft. long; School: conjuration (calling) [chaotic, evil]"
   },
   "Righteous Blood": {
-    "name": "Righteous Blood: infuse the touched creature with holy energy for [[10]] minutes/level (Will negates, harmless). Any creature with the evil subtype that hits the target with a slashing or piercing melee weapon is sprayed with divine blood; if the target has the good subtype or an aura of good, the spray instead deals [[2d6]]. Creatures without the evil subtype or using reach weapons are unaffected.",
+    "name": "Righteous Blood: infuse the touched creature with holy energy for [[10*@spells.primary.cl.total]] minutes (Will negates, harmless). Any creature with the evil subtype that hits the target with a slashing or piercing melee weapon is sprayed with divine blood; if the target has the good subtype or an aura of good, the spray instead deals [[2d6]]. Creatures without the evil subtype or using reach weapons are unaffected.",
     "default": false,
     "modifiers": [
       {
@@ -1375,7 +1954,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes (D); Targets: one creature of good alignment; School: abjuration [good]"
   },
   "Righteous Vigor": {
     "changes": [
@@ -1387,10 +1967,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: creature touched; School: enchantment (compulsion) [mind-affecting]"
   },
   "Rock Whip": {
-    "name": "Rock Whip: a [[15]]-foot lash of crystal and earth springs from your hand for [[1]] round/level, treated as a nonmagical whip you can wield proficiently and that can't be disarmed or sundered. It ignores armor and natural armor (but deals no damage to earth-subtype outsiders) and passes through unworked stone, ignoring such cover. On a hit you may make a free bull rush using your caster level for BAB and your casting modifier for Strength.",
+    "name": "Rock Whip: a [[15]]-foot lash of crystal and earth springs from your hand for [[@spells.primary.cl.total]] rounds, treated as a nonmagical whip you can wield proficiently and that can't be disarmed or sundered. It ignores armor and natural armor (but deals no damage to earth-subtype outsiders) and passes through unworked stone, ignoring such cover. On a hit you may make a free bull rush using your caster level for BAB and your casting modifier for Strength.",
     "default": false,
     "modifiers": [
       {
@@ -1404,7 +1985,8 @@
         "critical": "nonCrit"
       }
     ],
-    "rider": "Range: [[0]] ft; on hit, free bull rush [[ d20 + @attributes.cmb.total - @attributes.bab.total + @spells.primary.cl.total ]] vs CMD"
+    "rider": "Range: [[0]] ft; on hit, free bull rush [[ d20 + @attributes.cmb.total - @attributes.bab.total + @spells.primary.cl.total ]] vs CMD",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D); Area/Effect: whip of earth and stone; School: conjuration (creation)"
   },
   "Rune of Rule": {
     "changes": [
@@ -1416,7 +1998,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] minute; Duration: [[1]] day or until activated (see description); Targets: one living creature; School: transmutation"
   },
   "Saddle Surge": {
     "changes": [
@@ -1428,10 +2011,35 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; see text (D); Targets: you and your mount; School: transmutation"
+  },
+  "Scale Spikes, Greater": {
+    "name": "Scale Spikes, Greater: +[[1]] per [[4]] levels enhancement spike attack & damage",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "max(1,min(5,floor(@spells.primary.cl.total/4)))",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "max(1,min(5,floor(@spells.primary.cl.total/4)))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: [[25 + 5*floor(@spells.primary.cl.total/2)]] ft; Functions like scale spikes but duration is [[@spells.primary.cl.total]] hours; the spikes have an enhancement bonus on attack and damage rolls equal to +[[1]] per [[4]] caster levels (maximum +[[5]]); this bonus does not let the spikes bypass damage reduction aside from magic; affects [[@spells.primary.cl.total]] reptile, dragon, or reptilian-subtype creatures with natural armor bonus of at least +[[1]]",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours; Targets: [[@spells.primary.cl.total]] living creature that is a reptile, has the dragon type, or has the reptilian subtype, and also has a natural armor bonus of at least +[[1]]; School: transmutation"
   },
   "Sense Vitals": {
-    "name": "Sense Vitals: for [[1]] round/level you see the vital areas of creatures within [[30]] feet, letting you sneak attack with any manufactured weapon; this precision damage increases by +[[1d6]] for every [[3]] caster levels beyond [[3]]rd (max +[[5d6]] at [[15]]th level) and stacks with other precision damage.",
+    "name": "Sense Vitals: for [[@spells.primary.cl.total]] rounds you see the vital areas of creatures within [[30]] feet, letting you sneak attack with any manufactured weapon; this precision damage increases by +[[1d6]] for every [[3]] caster levels beyond 3rd (max +[[5d6]] at 15th level) and stacks with other precision damage.",
     "default": false,
     "modifiers": [
       {
@@ -1444,10 +2052,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: divination"
   },
   "Shield of the Dawnflower": {
-    "name": "Shield of the Dawnflower: create a disk of sunlight on one arm for [[1]] round/level. Any creature that strikes you with a melee attack also takes fire damage +[[1]] per caster level (max +[[15]]); creatures using reach weapons are exempt. The shield sheds light as continual flame, only one instance may be active, and it doesn't stack with similar damaging-aura spells like fire shield.",
+    "name": "Shield of the Dawnflower: create a disk of sunlight on one arm for [[@spells.primary.cl.total]] rounds. Any creature that strikes you with a melee attack also takes fire damage +[[1]] per caster level (max +[[15]]); creatures using reach weapons are exempt. The shield sheds light as continual flame, only one instance may be active, and it doesn't stack with similar damaging-aura spells like fire shield.",
     "default": false,
     "modifiers": [
       {
@@ -1460,10 +2069,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: evocation [fire, good, light]"
   },
   "Shield of the Dawnflower, Greater": {
-    "name": "Shield of the Dawnflower, Greater: create a disk of sunlight on one arm for [[1]] round/level. Any creature that strikes you with a melee attack takes damage +[[1]] per caster level (half fire, half holy); undead or creatures vulnerable to light instead take [[2d6]] +[[1]] per caster level. Creatures using reach weapons are exempt. The shield sheds light as daylight, only one instance may be active, and it doesn't stack with similar damaging-aura spells like fire shield.",
+    "name": "Shield of the Dawnflower, Greater: create a disk of sunlight on one arm for [[@spells.primary.cl.total]] rounds. Any creature that strikes you with a melee attack takes damage +[[1]] per caster level (half fire, half holy); undead or creatures vulnerable to light instead take [[2d6]] +[[1]] per caster level. Creatures using reach weapons are exempt. The shield sheds light as daylight, only one instance may be active, and it doesn't stack with similar damaging-aura spells like fire shield.",
     "default": false,
     "modifiers": [
       {
@@ -1476,7 +2086,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: evocation [fire, good, light]"
   },
   "Shillelagh": {
     "changes": [
@@ -1495,7 +2106,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: one touched nonmagical oak club or quarterstaff; School: transmutation"
   },
   "Silver Darts": {
     "name": "Silver Darts: a [[15]]-foot cone of silver darts springs from your hand, acting as a silver weapon dealing piercing damage per caster level (max [[10d6]]); Reflex half. Creatures with an armor bonus or natural armor bonus greater than +[[4]] take [[50]]% less damage.",
@@ -1511,7 +2123,32 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: instantaneous; Area: cone-shaped burst; School: conjuration (creation)"
+  },
+  "Smite Abomination": {
+    "name": "Smite Abomination: Cha/Wis attack, +CL damage vs undead",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "max(@abilities.cha.mod, @abilities.wis.mod)",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "@spells.primary.cl.total",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: personal; Choose one undead creature as your target for [[@spells.primary.cl.total]] rounds; your melee attacks against it also bypass its damage reduction; the bonuses do not stack with a paladin's smite",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: evocation"
   },
   "Spectral Hand": {
     "changes": [
@@ -1523,10 +2160,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Area/Effect: one spectral hand; School: necromancy"
   },
   "Sun Metal": {
-    "name": "Sun Metal: the touched weapon ignites into harmless flame; for [[1]] round/level, when its wielder hits, the strike deals extra fire (not multiplied on a crit). Ends if the weapon is submerged in water; Fortitude negates (object). Does not stack with flaming/flaming burst, and fails on frost or icy burst weapons.",
+    "name": "Sun Metal: the touched weapon ignites into harmless flame; for [[@spells.primary.cl.total]] rounds, when its wielder hits, the strike deals extra fire (not multiplied on a crit). Ends if the weapon is submerged in water; Fortitude negates (object). Does not stack with flaming/flaming burst, and fails on frost or icy burst weapons.",
     "default": false,
     "modifiers": [
       {
@@ -1539,10 +2177,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (see text); Targets: one melee weapon; School: transmutation [fire]"
   },
   "Sundering Shards": {
-    "name": "Sundering Shards: touched weapon; for [[1]] hour/level or until discharged, if its wielder destroys an item with a sunder maneuver the shards strike the item's wearer/carrier/wielder (piercing and slashing) and any adjacent creature (Reflex negates) for the same. Shards count as the sundered item's special materials.",
+    "name": "Sundering Shards: touched weapon; for [[@spells.primary.cl.total]] hours or until discharged, if its wielder destroys an item with a sunder maneuver the shards strike the item's wearer/carrier/wielder (piercing and slashing) and any adjacent creature (Reflex negates) for the same. Shards count as the sundered item's special materials.",
     "default": false,
     "modifiers": [
       {
@@ -1555,10 +2194,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours or until discharged; Targets: melee weapon touched; School: transmutation"
   },
   "Sword to Snake": {
-    "name": "Sword to Snake: range close ([[25]] ft. + [[5]] ft./[[2]] levels); for [[1]] round/level the target item resembles a venomous animal and bites (resolved before the triggering action) whoever picks up, attacks with, activates, or manipulates it. Will negates (object); held items add the wielder's Will bonus. A nonmagical weapon attacks at your caster level + spellcasting modifier and bites for piercing; bitten creatures suffer snake venom (frequency [[1]]/round for [[6]] rounds; [[1d2]] Con; cure [[1]] save) at this spell's DC.",
+    "name": "Sword to Snake: range close ([[25]] ft. + [[5*floor(@spells.primary.cl.total/2)]] ft.); for [[@spells.primary.cl.total]] rounds the target item resembles a venomous animal and bites (resolved before the triggering action) whoever picks up, attacks with, activates, or manipulates it. Will negates (object); held items add the wielder's Will bonus. A nonmagical weapon attacks at your caster level + spellcasting modifier and bites for piercing; bitten creatures suffer snake venom (frequency [[1]]/round for [[6]] rounds; [[1d2]] Con; cure [[1]] save) at this spell's DC.",
     "default": false,
     "modifiers": [
       {
@@ -1571,7 +2211,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds (D); Targets: one Medium or smaller item; School: transmutation [poisonUM]"
   },
   "Telekinetic Charge": {
     "changes": [
@@ -1583,10 +2224,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: instantaneous; Targets: one willing creature; School: evocation [force]"
   },
   "Telekinetic Strikes": {
-    "name": "Telekinetic Strikes: the touched creature's limbs are charged with telekinetic force; for [[1]] minute/level its unarmed attacks or natural weapons deal extra force on each successful unarmed melee hit. Will negates (harmless).",
+    "name": "Telekinetic Strikes: the touched creature's limbs are charged with telekinetic force; for [[@spells.primary.cl.total]] minutes its unarmed attacks or natural weapons deal extra force on each successful unarmed melee hit. Will negates (harmless).",
     "default": false,
     "modifiers": [
       {
@@ -1599,10 +2241,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: one creature; School: evocation [force]"
   },
   "Thorn Body": {
-    "name": "Thorn Body: spines grow from your skin for [[1]] round/level; any creature striking you with a melee weapon, unarmed strike, or natural weapon takes piercing +[[1]] per caster level (max +[[15]]), reach weapons excepted. A creature that grapples you takes [[2d6]] piercing +[[1]] per caster level (max +[[15]]), and your own natural attacks and unarmed strikes deal extra piercing. Thorns persist through any new form (wild shape or polymorph).",
+    "name": "Thorn Body: spines grow from your skin for [[@spells.primary.cl.total]] rounds; any creature striking you with a melee weapon, unarmed strike, or natural weapon takes piercing +[[1]] per caster level (max +[[15]]), reach weapons excepted. A creature that grapples you takes [[2d6]] piercing +[[1]] per caster level (max +[[15]]), and your own natural attacks and unarmed strikes deal extra piercing. Thorns persist through any new form (wild shape or polymorph).",
     "default": false,
     "modifiers": [
       {
@@ -1615,10 +2258,11 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: transmutation"
   },
   "Thorny Entanglement": {
-    "name": "Thorny Entanglement: range long ([[400]] ft. + [[40]] ft./level); functions as entangle for [[1]] min./level, plus the plants grow thorns and fling them up to [[15]] feet. Any creature that moves within [[15]] feet is attacked once on its turn (your caster level as base attack bonus + your spellcasting modifier); a creature that enters or ends its turn in the area automatically takes piercing. Reflex partial (see text).",
+    "name": "Thorny Entanglement: range long ([[400]] ft. + [[40*@spells.primary.cl.total]] ft.); functions as entangle for [[@spells.primary.cl.total]] minutes, plus the plants grow thorns and fling them up to [[15]] feet. Any creature that moves within [[15]] feet is attacked once on its turn (your caster level as base attack bonus + your spellcasting modifier); a creature that enters or ends its turn in the area automatically takes piercing. Reflex partial (see text).",
     "default": false,
     "modifiers": [
       {
@@ -1631,7 +2275,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Area: plants in a [[40]]-ft.-radius spread; School: transmutation"
   },
   "Timely Inspiration": {
     "changes": [
@@ -1643,10 +2288,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] immediate action; Duration: instantaneous; Targets: one creature; School: divination"
   },
   "Transmute Blood To Acid": {
-    "name": "Transmute Blood To Acid: range close ([[25]] ft. + [[5]] ft./[[2]] levels); for concentration (max [[1]] round/[[5]] levels) the target takes [[1d6]] acid/[[2]] levels (max [[12d6]]) each round and is staggered and sickened. A Fortitude save each round halves the acid and negates the staggered condition for [[1]] round; reduced to [[0]] hp it dissolves. Anyone striking the target with a non-reach melee weapon, natural weapon, or unarmed attack takes [[3d6]] acid as the blood sprays (a piercing or slashing manufactured weapon takes this too). No effect on creatures immune to critical hits or bleed.",
+    "name": "Transmute Blood To Acid: range close ([[25]] ft. + [[5*floor(@spells.primary.cl.total/2)]] ft.); for concentration (max [[floor(@spells.primary.cl.total/5)]] rounds) the target takes [[1d6]] acid/[[2]] levels (max [[12d6]]) each round and is staggered and sickened. A Fortitude save each round halves the acid and negates the staggered condition for [[1]] round; reduced to [[0]] hp it dissolves. Anyone striking the target with a non-reach melee weapon, natural weapon, or unarmed attack takes [[3d6]] acid as the blood sprays (a piercing or slashing manufactured weapon takes this too). No effect on creatures immune to critical hits or bleed.",
     "default": false,
     "modifiers": [
       {
@@ -1659,7 +2305,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: concentration (maximum [[floor(@spells.primary.cl.total/5)]] rounds); Targets: one living creature; School: transmutation [acid, pain]"
   },
   "True Strike": {
     "name": "True Strike: you gain intuitive insight into the immediate future; your next single attack roll (if made before the end of the next round) gains an insight bonus, and you ignore the miss chance for attacking a concealed target.",
@@ -1673,7 +2320,8 @@
         "damageType": [],
         "critical": "normal"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: see text; Targets: you; School: divination"
   },
   "Umbral Infusion": {
     "changes": [
@@ -1685,10 +2333,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: one mindless undead creature; School: necromancy [shadowUM]"
   },
   "Umbral Weapon": {
-    "name": "Umbral Weapon: a shadowy afterimage trails the touched weapon for [[1]] round/level; once per round, when its wielder misses, the wielder can reroll the attack, and on a hit the spell deals cold +[[1]] per [[2]] caster levels (max +[[10]]). Against a target with spell resistance, attempt a caster level check ([[1d20]] + caster level) the first time it would deal damage; on a failure the spell is dispelled.",
+    "name": "Umbral Weapon: a shadowy afterimage trails the touched weapon for [[@spells.primary.cl.total]] rounds; once per round, when its wielder misses, the wielder can reroll the attack, and on a hit the spell deals cold +[[1]] per [[2]] caster levels (max +[[10]]). Against a target with spell resistance, attempt a caster level check ([[1d20]] + caster level) the first time it would deal damage; on a failure the spell is dispelled.",
     "default": false,
     "modifiers": [
       {
@@ -1701,7 +2350,56 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: melee weapon touched; School: illusion [cold, shadow]"
+  },
+  "Unhallowed Blows": {
+    "name": "Unhallowed Blows: +[[1]] enhancement attack & damage, undead natural",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "1",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Range: [[25 + 5*floor(@spells.primary.cl.total/2)]] ft; Affects up to [[@spells.primary.cl.total]] undead creatures no two more than [[30]] ft. apart for [[@spells.primary.cl.total]] minutes; applies only to unarmed strikes or attacks with one natural attack of the target undead; can make an undead's unarmed strike deal lethal damage, but then it gains no enhancement bonus; can be made permanent with permanency (caster level 9th, [[2500]] gp of diamond dust); spell resistance applies (harmless)",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: [[@spells.primary.cl.total]] undead creature, no two of which can be more than [[30]] ft. apart; School: transmutation [evil]"
+  },
+  "Unhallowed Blows, Greater": {
+    "name": "Unhallowed Blows, Greater: +[[1]] per [[4]] levels enhancement, undead natural",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "min(5, max(1, floor(@spells.primary.cl.total/4)))",
+        "target": "attack",
+        "subTarget": "allAttack",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      },
+      {
+        "formula": "min(5, max(1, floor(@spells.primary.cl.total/4)))",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "enhancement",
+        "damageType": [],
+        "critical": "normal"
+      }
+    ],
+    "rider": "Functions as unhallowed blows, except range is medium, affecting up to [[@spells.primary.cl.total]] undead creatures no two more than [[30]] ft. apart (or one undead creature) for [[@spells.primary.cl.total]] hours; alternatively you can imbue all of one creature's natural weapons with a +[[1]] enhancement bonus regardless of caster level; can be made permanent with permanency (caster level 11th, [[7500]] gp of diamond dust); spell resistance applies",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours; Targets: [[@spells.primary.cl.total]] undead creature, no two of which can be more than [[30]] ft. apart, or one undead creature; see text; School: transmutation [evil]"
   },
   "Unholy Sword": {
     "changes": [
@@ -1720,7 +2418,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: melee weapon touched; School: evocation [evil]"
   },
   "Urgathoa's Beacon": {
     "changes": [
@@ -1732,7 +2431,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] hours (D); Area: [[@spells.primary.cl.total]] [[5]]-ft. cube; School: necromancy (haunted) [emotionUM, evil, fear, mind-affecting]"
   },
   "Vengeful Stinger": {
     "changes": [
@@ -1744,7 +2444,8 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: you; School: transmutation (polymorph) [poison]"
   },
   "Vigor": {
     "changes": [
@@ -1756,10 +2457,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[1]] minute or until discharged; Targets: creature touched; School: transmutation"
   },
   "Vile Dog Transformation": {
-    "name": "Vile Dog Transformation: for [[1]] hour/level the touched dog (one per [[3]] caster levels, max [[5]] at 15th) becomes a hell hound without fire immunity/cold vulnerability, instead with acid, cold, and fire resistance [[5]]. Will negates (a trusting dog takes -[[4]]); its bite deals extra acid instead of fire, and its breath weapon becomes a [[10]]-foot cone dealing [[2d4]] acid. You command it as a summoned creature; at the end it dissolves into gore and bones.",
+    "name": "Vile Dog Transformation: for [[@spells.primary.cl.total]] hours the touched dog (one per [[3]] caster levels, max [[5]] at 15th) becomes a hell hound without fire immunity/cold vulnerability, instead with acid, cold, and fire resistance [[5]]. Will negates (a trusting dog takes -[[4]]); its bite deals extra acid instead of fire, and its breath weapon becomes a [[10]]-foot cone dealing [[2d4]] acid. You command it as a summoned creature; at the end it dissolves into gore and bones.",
     "default": false,
     "modifiers": [
       {
@@ -1772,10 +2474,27 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[10]] minutes; Duration: [[@spells.primary.cl.total]] hours; Targets: one or more dogs touched; School: transmutation (polymorph) [evil]"
+  },
+  "Vine Strike": {
+    "name": "Vine Strike: +[[1d6]] damage natural/unarmed attacks",
+    "default": false,
+    "modifiers": [
+      {
+        "formula": "1d6",
+        "target": "damage",
+        "subTarget": "allDamage",
+        "type": "untyped",
+        "damageType": [],
+        "critical": "nonCrit"
+      }
+    ],
+    "rider": "Range: personal; Your natural and unarmed attacks deal additional damage; any creature hit by your natural or unarmed strike must succeed at a Reflex save DC [[ 10 + @slvl + @castMod ]] or be entangled for the duration; an entangled creature can spend a standard action to remove the vines but can be entangled again by further strikes; duration [[@spells.primary.cl.total]] minutes; spell resistance applies",
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes (D); Targets: you; School: conjuration (creation)"
   },
   "Wall of Sound": {
-    "name": "Wall of Sound: range medium ([[100]] ft. + [[10]] ft./level); a sonic barrier lasting concentration + [[1]] round/level deflects arrows, bolts, debris, and Small or smaller flying creatures like wind wall. Its discordant burst deals sonic to creatures within [[10]] feet of the trigger; touching or passing through deals [[2d6]] sonic +[[1]] per caster level (max +[[20]]). A silence spell suppresses the wall while it lasts.",
+    "name": "Wall of Sound: range medium ([[100]] ft. + [[10*@spells.primary.cl.total]] ft.); a sonic barrier lasting concentration + [[@spells.primary.cl.total]] rounds deflects arrows, bolts, debris, and Small or smaller flying creatures like wind wall. Its discordant burst deals sonic to creatures within [[10]] feet of the trigger; touching or passing through deals [[2d6]] sonic +[[1]] per caster level (max +[[20]]). A silence spell suppresses the wall while it lasts.",
     "default": false,
     "modifiers": [
       {
@@ -1788,7 +2507,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: concentration + [[@spells.primary.cl.total]] rounds; Area/Effect: translucent wall of sound up to [[20*@spells.primary.cl.total]] ft. long or a ring of sound with a radius of up to [[5]] ft./two levels; either form [[20]] ft. high; School: evocation [sonic]"
   },
   "Weapon of Awe": {
     "changes": [
@@ -1800,10 +2520,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] minutes; Targets: weapon touched; School: transmutation [emotion]"
   },
   "Wind Blades": {
-    "name": "Wind Blades: invisible blades of hardened air surround the touched target for [[1]] round/level; on its turn it takes [[1d6]] slashing if it moves at least [[5]] feet, plus [[1d6]] for each additional [[10]] feet (not from burrowing, swimming, or teleportation). In strong wind it takes slashing each turn even if it doesn't move, plus [[1d8]] for every wind category above strong (lasting wind only, not instantaneous effects). Will negates.",
+    "name": "Wind Blades: invisible blades of hardened air surround the touched target for [[@spells.primary.cl.total]] rounds; on its turn it takes [[1d6]] slashing if it moves at least [[5]] feet, plus [[1d6]] for each additional [[10]] feet (not from burrowing, swimming, or teleportation). In strong wind it takes slashing each turn even if it doesn't move, plus [[1d8]] for every wind category above strong (lasting wind only, not instantaneous effects). Will negates.",
     "default": false,
     "modifiers": [
       {
@@ -1816,7 +2537,8 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Targets: creature touched; School: transmutation [air]"
   },
   "Wrath": {
     "changes": [
@@ -1835,10 +2557,11 @@
         "priority": 0
       }
     ],
-    "contextNotes": []
+    "contextNotes": [],
+    "details": "Activation: [[1]] standard action; Duration: [[1]] minute; Targets: you; School: enchantment (compulsion) [mind-affecting, emotion]"
   },
   "Wreath of Blades": {
-    "name": "Wreath of Blades: Four mithral daggers spin in a [[5]]-foot-radius emanation that moves with you; any creature starting its turn in the area takes [[1d4]] per two caster levels (max [[10d4]]), bypassing DR/silver, Reflex half. You do not provoke attacks of opportunity for casting spells. Lasts [[1]] round/level.",
+    "name": "Wreath of Blades: Four mithral daggers spin in a [[5]]-foot-radius emanation that moves with you; any creature starting its turn in the area takes [[1d4]] per two caster levels (max [[10d4]]), bypassing DR/silver, Reflex half. You do not provoke attacks of opportunity for casting spells. Lasts [[@spells.primary.cl.total]] rounds.",
     "default": false,
     "modifiers": [
       {
@@ -1851,6 +2574,7 @@
         ],
         "critical": "nonCrit"
       }
-    ]
+    ],
+    "details": "Activation: [[1]] standard action; Duration: [[@spells.primary.cl.total]] rounds; Area: [[5]]-foot-radius emanation centered on you; Targets: you; School: abjuration"
   }
 }

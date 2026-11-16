@@ -407,7 +407,7 @@ function initAttr(actor) {
 // --- load the frozen data bundle, from inside the module ---
 // Foundry serves every installed module's own directory, so these are same-origin reads of files
 // that shipped in the zip -- no network, no bundler, and data/ stays editable in place.
-const DATA_FILES = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
+const DATA_FILES = ["spell_riders", "spell_changes", "spell_reminders", "maneuver_changes", "combat_talent_conditionals",
                     "magic_talent_conditionals", "spell_damage_index", "feat_conditionals",
                     "weapon_quality_conditionals", "class_feature_conditionals", "item_changes",
                     "maneuver_index", "local_conditionals"];
@@ -714,21 +714,54 @@ function buildSpecs(actor, data, init) {
     }
   }
 
-  // Spells: A (spell_changes) and/or B/C (spell_riders)
-  const chg = {}; for (const [k, v] of Object.entries(data.spell_changes || {})) chg[norm(k)] = { name: k, e: v };
-  const rid = {}; for (const [k, v] of Object.entries(data.spell_riders || {})) rid[norm(k)] = { name: k, e: v };
-  const dmg = data.spell_damage_index || {};
+  // Spells: A (spell_changes) and/or B/C (spell_riders), else R (spell_reminders: utility, defensive
+  // and harmless spells -- a reminder row on the Conditionals item's Spells tab, never on a weapon).
+  // Every compendium spell is in one of the three; only a hand-made spell item can still be a gap.
+  // Indexed by nkey, so hand-typed drift ("Blindness-Deafness", a trailing ".") still matches.
+  const byKey = tbl => { const o = {}; for (const [k, v] of Object.entries(tbl || {})) o[nkey(k)] = { name: k, e: v }; return o; };
+  const chg = byKey(data.spell_changes), rid = byKey(data.spell_riders), rem = byKey(data.spell_reminders);
+  const dmg = {}; for (const [k, v] of Object.entries(data.spell_damage_index || {})) dmg[nkey(k)] = v;
+  // Save + rider text -> one "Name: …" row body (shared by B/C and R).
+  const riderBody = e => {
+    const save = e.save || {};
+    const riders = (e.riders || []).map(String);
+    // The enriched riders now carry a labeled `Save:` clause; only fall back to the raw save
+    // description when no rider states the save, so we don't duplicate it.
+    // A labeled "Save: Reflex DC …" clause states it too -- without this check the bare result
+    // ("half", "negates") was prefixed to the row: "Cone of Cold: half; …; Save: Reflex DC … half".
+    const ridersStateSave = riders.some(r => /\b(fortitude|reflex|will)\s+save\b|(^|;\s*)save\s*:/i.test(r));
+    const bits = [];
+    if (!ridersStateSave && (save.description || save.type)) bits.push(String(save.description || `${cap(save.type)} save`));
+    for (const r of riders) bits.push(r);
+    return bits.filter(Boolean).join("; ");
+  };
+  // Collected, then pushed in spell-level order (then name), so the Spells tab reads like a spellbook.
+  // Every row is labelled "(Spell N) [Name]"; rowLabel() keys it on the bare name.
+  const spellSpecs = [];
+  const pushSpell = (s, it) => spellSpecs.push({ ...s, _lvl: Number(it.system?.level) || 0, _nm: it.name });
+  const spellLabel = it => `(Spell ${Number(it.system?.level) || 0}) [${it.name}]`;
+  const relabel = (name, it) => { const i = String(name).indexOf(":");
+    return i >= 0 ? `${spellLabel(it)}: ${String(name).slice(i + 1).trim()}` : spellLabel(it); };
   for (const it of actor.items) {
     if (it.type !== "spell") continue;
-    const key = norm(it.name);
+    const key = nkey(it.name);
     const slot = it.system?.spellbook;
     const cls = actor.system?.attributes?.spells?.spellbooks?.[slot]?.class || slot || "?";
-    const A = chg[key], BC = rid[key];
+    const A = chg[key], BC = rid[key], R = rem[key];
+    // Reminder spells (bucket R) go everywhere attack/damage/save spells do; "Only recommended
+    // spells" (recOnly) is what drops them, via recSpell:false.
+    if (!A && !BC && R) {
+      const body = riderBody(R.e);
+      pushSpell({ name: subSpell(body ? `${spellLabel(it)}: ${subInit(body, init)}` : spellLabel(it), it, actor),
+        default: false, rawMods: [], srcName: R.name, section: "Spells", tab: "Spells", curated: true,
+        recSpell: false, details: R.e.details ? subSpell(R.e.details, it, actor) : undefined }, it);
+      continue;
+    }
     if (!A && !BC) {
       gaps.spells.push(`${it.name}  (${cls})`);
       const text = benefitOf(it.system?.description?.value);
-      push({ name: `${it.name}†${text ? `: ${text}` : ""}`, default: false, rawMods: [], srcName: it.name,
-             section: "Spells", tab: "Spells", curated: false });
+      pushSpell({ name: `${spellLabel(it)}†${text ? `: ${text}` : ""}`, default: false, rawMods: [], srcName: it.name,
+             section: "Spells", tab: "Spells", curated: false }, it);
       continue;
     }
     if (A) {
@@ -743,28 +776,27 @@ function buildSpecs(actor, data, init) {
       }
       let name = e.name || (parts.length ? `${A.name}: ${parts.join(" & ")}` : A.name);
       if (e.rider) name += `; ${e.rider}`;
-      push({ name: subSpell(name, it, actor), default: false,
+      pushSpell({ name: subSpell(relabel(name, it), it, actor), default: false,
         rawMods: rawMods.map(m => ({ ...m, formula: subSpell(m.formula, it, actor) })),
-        srcName: String(A.name).split(":")[0], section: "Spells", tab: "Spells", curated: true });
+        srcName: String(A.name).split(":")[0], section: "Spells", tab: "Spells", curated: true,
+        details: e.details ? subSpell(e.details, it, actor) : undefined }, it);
     }
     if (BC) {
-      const e = BC.e, save = e.save || {};
-      const riders = (e.riders || []).map(String);
-      // The enriched riders now carry a labeled `Save:` clause; only fall back to the raw save
-      // description when no rider states the save, so we don't duplicate it.
-      const ridersStateSave = riders.some(r => /\b(fortitude|reflex|will)\s+save\b/i.test(r));
-      const bits = [];
-      if (!ridersStateSave && (save.description || save.type)) bits.push(String(save.description || `${cap(save.type)} save`));
-      for (const r of riders) bits.push(r);
-      const riderText = bits.filter(Boolean).join("; ");
+      const e = BC.e;
+      const riderText = riderBody(e);
       const rawMods = [];
-      if (e.attack) for (const [formula, dtypes] of (dmg[it.name.toLowerCase()] || []))
+      // Only the FIRST damage part rolls: later parts are a secondary hit (Touch of Combustion's 1d4
+      // burn) or an alternative (Coin Shot's coin sizes), which the rider text states instead.
+      if (e.attack) for (const [formula, dtypes] of (dmg[key] || []).slice(0, 1))
         rawMods.push({ formula: subSpell(formula, it, actor), target: "damage", subTarget: "allDamage", type: "untyped",
           damageType: Array.isArray(dtypes) ? dtypes : [], critical: "nonCrit" });
-      push({ name: subSpell(riderText ? `${BC.name}: ${subInit(riderText, init)}` : BC.name, it, actor),
-        default: false, rawMods, srcName: BC.name, section: "Spells", tab: "Spells", curated: true });
+      pushSpell({ name: subSpell(riderText ? `${spellLabel(it)}: ${subInit(riderText, init)}` : spellLabel(it), it, actor),
+        default: false, rawMods, srcName: BC.name, section: "Spells", tab: "Spells", curated: true,
+        details: e.details ? subSpell(e.details, it, actor) : undefined }, it);
     }
   }
+  spellSpecs.sort((a, b) => (a._lvl - b._lvl) || a._nm.localeCompare(b._nm));
+  for (const { _lvl, _nm, ...s } of spellSpecs) push(s);
 
   // Weapon special abilities are per-weapon (weaponQualitySpecs), but the gap panel is rendered
   // once, before a weapon is picked -- so collect the uncurated ones across every weapon/attack

@@ -22,7 +22,7 @@ import { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs, retargetClass
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..");
 const MOD_NS = "pf1-conditional-applier";
-const DATA_FILES = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
+const DATA_FILES = ["spell_riders", "spell_changes", "spell_reminders", "maneuver_changes", "combat_talent_conditionals",
                     "magic_talent_conditionals", "spell_damage_index", "feat_conditionals",
                     "weapon_quality_conditionals", "class_feature_conditionals", "item_changes",
                     "maneuver_index", "local_conditionals"];

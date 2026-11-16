@@ -12,6 +12,7 @@ spells need their own dice as damage modifiers). Run whenever the source dicts c
 Sources (frozen snapshot -> ../data):
   backend  Backend/json/spells/spell_riders.json      (Bucket B/C: save + rider text)
   backend  Backend/json/spells/spell_changes.json     (Bucket A: self-buff toggles)
+  backend  Backend/json/spells/spell_reminders.json   (Bucket R: utility/defensive reminder rows)
   backend  Backend/json/feats/feat_conditionals.json  (active-feat toggles)
   module   maneuver_changes.json  (damaging stances come through here too)
   module   combat_talent_conditionals.json / magic_talent_conditionals.json
@@ -44,6 +45,7 @@ MODULE_CS = Path(
 COPIES = [
     (BACKEND / "Backend" / "json" / "spells" / "spell_riders.json", "spell_riders.json"),
     (BACKEND / "Backend" / "json" / "spells" / "spell_changes.json", "spell_changes.json"),
+    (BACKEND / "Backend" / "json" / "spells" / "spell_reminders.json", "spell_reminders.json"),
     (BACKEND / "Backend" / "json" / "feats" / "feat_conditionals.json", "feat_conditionals.json"),
     # No stance_changes.json: buildSpecs() reads stances out of maneuver_changes (a stance with no
     # modifiers belongs on a buff, not a weapon), so copying it only bloated the shipped zip.

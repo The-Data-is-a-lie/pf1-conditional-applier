@@ -18,6 +18,7 @@ ship:
 |---|---|---|
 | `spell_riders.json` | backend `Backend/json/spells/` | Bucket B/C: save + rider text |
 | `spell_changes.json` | backend `Backend/json/spells/` | Bucket A: self-buff toggles |
+| `spell_reminders.json` | backend `Backend/json/spells/` | Bucket R: utility/defensive reminder rows (every other compendium spell) |
 | `maneuver_changes.json` | Foundry module | PoW maneuver modifiers + riders |
 | `combat_talent_conditionals.json` | Foundry module | Spheres of Might talents |
 | `magic_talent_conditionals.json` | Foundry module | Spheres of Power talents |

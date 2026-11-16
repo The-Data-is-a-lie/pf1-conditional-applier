@@ -224,6 +224,7 @@ $RequiredFiles = @(
     'packs/macros/CURRENT'
     'data/spell_riders.json'
     'data/spell_changes.json'
+    'data/spell_reminders.json'
     'data/maneuver_changes.json'
     'data/combat_talent_conditionals.json'
     'data/magic_talent_conditionals.json'
