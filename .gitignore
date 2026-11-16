@@ -33,3 +33,6 @@ packs/**/LOG.old
 
 # Local ticket/inventory scratch (to-tickets convention) -- working notes, never shipped.
 .scratch/
+
+# Local Claude Code config (project agents for the data runs) -- never shipped.
+.claude/
