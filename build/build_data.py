@@ -21,10 +21,17 @@ Sources (frozen snapshot -> ../data):
              ->  class_feature_conditionals.json  ({section: {powerKey: [cond,...]}})
   backend  items/item_changes.json + item_changes_overrides.json
              ->  item_changes.json  ({itemNameLower: {changes, contextNotes}})
+  backend  class_data/path_of_war/Martial_Disciplines.json
+             ->  maneuver_index.json  ({nameLower: {name, type, level, discipline, text}})
+
+NOT touched here: data/local_conditionals.json is hand-maintained in this repo (entries the upstream
+pipeline cannot hold -- see its _readme).
 """
 import json
+import re
 import shutil
 from pathlib import Path
+from urllib.parse import unquote
 
 HERE = Path(__file__).resolve().parent
 DATA = HERE.parent / "data"
@@ -54,6 +61,9 @@ CLASS_FEATURE_INDEX = DATA / "class_feature_conditionals.json"
 ITEM_CHANGES = BACKEND / "Backend" / "json" / "items" / "item_changes.json"
 ITEM_CHANGES_OVERRIDES = BACKEND / "Backend" / "json" / "items" / "item_changes_overrides.json"
 ITEM_INDEX = DATA / "item_changes.json"
+MARTIAL_DISCIPLINES = (BACKEND / "Backend" / "json" / "class_data" / "path_of_war"
+                       / "Martial_Disciplines.json")
+MANEUVER_INDEX = DATA / "maneuver_index.json"
 
 
 def spell_damage_parts(src):
@@ -166,6 +176,45 @@ def build_item_index():
     return len(index), attack
 
 
+MANEUVER_TYPE = re.compile(r"\b(boost|strike|counter|stance)\b", re.I)
+MANEUVER_LEVEL = re.compile(r"\blevel\s*:?\s*(\d+)", re.I)
+FIRST_SENTENCE = re.compile(r"^(.{40,}?[.!?])(?:\s|$)")
+
+
+def build_maneuver_index():
+    """Martial_Disciplines.json -> {nameLower: {name, type, level, discipline, text}}.
+
+    maneuver_changes.json carries only modifiers + rider, but the Conditionals item sorts its Path
+    of War tab Boost -> Stance -> Strike -> Counter and by level, and Full mode needs a line of rules
+    text for the maneuvers nobody curated. The scrape is messy -- the "Discipline" key is sometimes
+    misspelled ("iscipline", "Discpline"), and the level may sit in its own "Level" key -- so both
+    are read loosely: the first Boost/Strike/Counter/Stance word and the first "Level N"."""
+    src = json.loads(MARTIAL_DISCIPLINES.read_text(encoding="utf-8"))
+    index = {}
+    for discipline, maneuvers in src.items():
+        if not isinstance(maneuvers, dict):
+            continue
+        for key, m in maneuvers.items():
+            if not isinstance(m, dict):
+                continue
+            name = unquote(key).replace("_", " ").strip()
+            head = " ".join(str(v) for k, v in m.items() if "isc" in k.lower() or "level" in k.lower())
+            t, lv = MANEUVER_TYPE.search(head), MANEUVER_LEVEL.search(head)
+            desc = re.sub(r"\s+", " ", str(m.get("Description", ""))).strip()
+            first = FIRST_SENTENCE.match(desc)
+            index[name.lower()] = {
+                "name": name,
+                "type": t.group(1).capitalize() if t else None,
+                "level": int(lv.group(1)) if lv else None,
+                "discipline": discipline.replace("_", " "),
+                "text": (first.group(1) if first else desc)[:240],
+            }
+    MANEUVER_INDEX.write_text(json.dumps(index, ensure_ascii=False, separators=(",", ":")),
+                              encoding="utf-8")
+    typed = sum(1 for e in index.values() if e["type"])
+    return len(index), typed
+
+
 def main():
     DATA.mkdir(parents=True, exist_ok=True)
     for src, dst in COPIES:
@@ -185,6 +234,9 @@ def main():
     ni, na = build_item_index()
     print(f"  built  item_changes.json                     "
           f"({ITEM_INDEX.stat().st_size:>8,} bytes; {ni} items, {na} attack-note toggles)")
+    nm, nt = build_maneuver_index()
+    print(f"  built  maneuver_index.json                   "
+          f"({MANEUVER_INDEX.stat().st_size:>8,} bytes; {nm} maneuvers, {nt} typed)")
     print(f"data bundle refreshed -> {DATA}")
 
 

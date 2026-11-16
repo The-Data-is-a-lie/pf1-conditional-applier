@@ -26,6 +26,12 @@ ship:
 | `weapon_quality_conditionals.json` | derived from backend `items/quality_effects.json` | Weapon special abilities (197), conditionals only |
 | `class_feature_conditionals.json` | derived from backend `class_data/effects/` | Curated class-feature toggles (297); `"review": true` drafts skipped |
 | `item_changes.json` | backend `items/item_changes.json` + its overrides | Magic items (883): `contextNotes` targeting *attack* become weapon toggles, the rest overlays the item |
+| `maneuver_index.json` | derived from backend `class_data/path_of_war/Martial_Disciplines.json` | `{nameLower: {name, type, level, discipline, text}}` (1033): Path of War tab order and Full-mode text for uncurated maneuvers |
+| `local_conditionals.json` | **hand-maintained here** — `build_data.py` never writes it | What upstream can't hold: class-feature toggles absent from the generator's export (the backend gate rejects them) and `passive` abilities (known, deliberately not a toggle) |
+
+> **Drift warning:** `feat_conditionals.json` here carries 57 feats (commit `c91280c`) that the
+> backend's copy does not. `npm run data` would silently drop them, so after a refresh restore that
+> file (`git checkout -- data/feat_conditionals.json`) until those entries are upstreamed.
 
 `DATA_FILES` in `scripts/apply-conditionals.js` is the source of truth for what must be present;
 `npm test` fails if the manifest, that list, and `data/` ever drift apart.

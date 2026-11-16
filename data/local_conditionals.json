@@ -1,0 +1,17 @@
+{
+  "_readme": "Hand-maintained in this repo; build_data.py never touches it. Holds what the upstream pipeline cannot: classFeatures = toggles for features the generator's every_class_feature.json does not carry (so the backend gate rejects them), same shape as class_feature_conditionals.json pools ({key: [conditional, ...]}, key = lowercase name without (Su)/(Ex)/(Sp)). passive = abilities that are known and deliberately NOT a per-attack toggle ({Name: why}); they leave the curation-gap list, stay out of Bespoke mode, and show as text-only reminder rows in Full mode.",
+  "classFeatures": {
+    "snake feint": [
+      {
+        "name": "Snake Feint: Activation: combine a standard action spent moving (a move action if you can feint as a move action) with a feint; Effect: at 11th level, once per round declare your square and [[1]] adjacent square ([[2]] at 15th) as the origin of your attacks for flanking until your next turn",
+        "default": false,
+        "modifiers": []
+      }
+    ]
+  },
+  "passive": {
+    "Perfect Break": "an improvised weapon that would be destroyed instead breaks into two improvised weapons one size smaller",
+    "Brawler's Strike": "unarmed strikes count as magic (5th), cold iron and silver (9th), an alignment (12th) and adamantine (17th) for overcoming DR",
+    "Violent Ki": "already automated by a permanent ki-damage buff; a toggle here would double-count it"
+  }
+}
