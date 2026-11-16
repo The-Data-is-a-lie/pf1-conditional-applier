@@ -6,6 +6,8 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+## Version 1.4.0 (2026-11-16)
+
 ### Added
 
 - **Every spell now has a conditional.** All 3,029 compendium spells are covered. Spells with an attack, damage or save get a full row (save DC, range, cost and effect, with caster-level scaling worked out for you), and attack spells roll their first damage dice automatically when Foundry's compendium has them. Every other spell (utility, defensive, healing…) gets a reminder row. A spell only shows as uncurated (†) now if it is a hand-made spell item.
