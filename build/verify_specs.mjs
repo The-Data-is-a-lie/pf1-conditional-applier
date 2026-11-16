@@ -15,14 +15,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs, retargetClassLevel,
-         nameCandidates, itemEffectUpdates } from "../scripts/apply-conditionals.js";
+         nameCandidates, itemEffectUpdates, conditionalsItemRows, conditionalsItemUpdate,
+         descEntries, parseMarkedName, buildIndex, COND_KEY } from "../scripts/apply-conditionals.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..");
 const MOD_NS = "pf1-conditional-applier";
 const DATA_FILES = ["spell_riders", "spell_changes", "maneuver_changes", "combat_talent_conditionals",
                     "magic_talent_conditionals", "spell_damage_index", "feat_conditionals",
-                    "weapon_quality_conditionals", "class_feature_conditionals", "item_changes"];
+                    "weapon_quality_conditionals", "class_feature_conditionals", "item_changes",
+                    "maneuver_index", "local_conditionals"];
 
 const data = Object.fromEntries(DATA_FILES.map(f =>
   [f, JSON.parse(fs.readFileSync(path.join(ROOT, "data", `${f}.json`), "utf8"))]));
@@ -322,7 +324,162 @@ ok(withItems.items.get("eq-dup").system.changes.length === 1,
 ok(withItems.items.get("eq-dup").system.contextNotes.some(n => n.text === "my own note"),
    "a hand-authored note survives");
 
-// --- 6. the module ships every file it loads at runtime ------------------------------------------
+// --- 6. hand-built actors: "<" chains, trainers, combat talents --------------------------------
+// A hand-built actor writes chains as "Vital Strike<Improved<Greater" (no spaces, followers
+// abbreviated) and keeps whole feat lists inside trainer descriptions. Before, such an actor
+// matched almost nothing.
+section("hand-built: chain shorthand expands");
+const known = buildIndex(data).known;
+eq(nameCandidates("(Level 5) Vital Strike<Improved<Greater", known),
+   ["Vital Strike", "Improved Vital Strike", "Greater Vital Strike"], "modifier words expand against the base");
+eq(nameCandidates("(Level 11) Improved Feint<Greater", known), ["Improved Feint", "Greater Feint"],
+   "the base's own modifier is dropped first (Greater Feint, not Greater Improved Feint)");
+eq(nameCandidates("(Level 1) Cleave<Great<Finish<Improved", known),
+   ["Cleave", "Great Cleave", "Cleaving Finish", "Improved Cleaving Finish"],
+   "a one-word irregular resolves by stem (Finish -> Cleaving Finish), and expansion continues from it");
+eq(nameCandidates("(Flaw) Point Blank Shot<Precise Shot<Rapid Shot<Manyshot", known),
+   ["Point Blank Shot", "Precise Shot", "Rapid Shot", "Manyshot"], "full names pass through untouched");
+eq(nameCandidates("(Backstory) Mounted Combat<Many", known), ["Mounted Combat", "Many"],
+   "an unresolvable follower stays exactly as written");
+
+section("hand-built: trainer descriptions and maneuver markers");
+const STYLE_TRAINER = "<p><strong>Street Style (Combat, Style)</strong></p><p>You use the urban environment.</p>"
+  + "<p>Prerequisite(s): Str 15.</p><p>Benefit(s): While using this style, deal an extra 1d6.</p>"
+  + "<p><strong>Toughness</strong></p><p>You have enhanced physical stamina.</p><p>Benefit: You gain +3 hit points.</p>";
+eq(descEntries(STYLE_TRAINER).map(e => e.name), ["Street Style", "Toughness"],
+   "headings followed by Prerequisite/Benefit are found, tags stripped");
+eq(descEntries(STYLE_TRAINER)[1].text, "You gain +3 hit points.", "the Benefit line is the row text");
+eq(descEntries("<p>10 Barroom Talents</p>"), [], "a plain note is not a heading");
+eq(parseMarkedName("(Lvl 2 Maneuver) Bronze Knuckle - Boost"),
+   { name: "Bronze Knuckle", hints: { maneuver: true, level: 2, mType: "Boost" } }, "maneuver label + type suffix");
+eq(parseMarkedName("(Stance) Iron Hand Stance").hints.mType, "Stance", "(Stance) prefix");
+eq(parseMarkedName("Disarming Jab (Counter)"), { name: "Disarming Jab", hints: { counter: true } },
+   "a '(Counter)' talent is marked a counter");
+
+const VITAL = n => data.feat_conditionals[n].name;
+const talent = (id, name, sphere, d = "") =>
+  mkItem({ id, type: "feat", name, flags: { pf1spheres: { sphere } }, system: { subType: "combatTalent", ...desc(d) } });
+const makeBiff = () => ({
+  name: "Biff", flags: {}, system: { abilities: { int: { total: 10 }, wis: { total: 10 }, cha: { total: 10 } } },
+  items: Items.from([
+    mkItem({ id: "cls-b", type: "class", name: "Brawler", system: { tag: "brawler", level: 12 } }),
+    mkItem({ id: "f-vs", type: "feat", name: "(Level 1 Story) Vital Strike<Improved<Greater", system: { subType: "feat" } }),
+    mkItem({ id: "f-cl", type: "feat", name: "(Level 1) Cleave<Great<Finish<Improved", system: { subType: "feat" } }),
+    mkItem({ id: "f-tr", type: "feat", name: "Trainer: Style Training", system: { subType: "feat", ...desc(STYLE_TRAINER) } }),
+    mkItem({ id: "f-bs", type: "feat", name: "Brawler's Strike", system: { subType: "classFeat", ...desc("<p>Magic for DR.</p>") } }),
+    mkItem({ id: "f-tb", type: "feat", name: "(Trait) Brawler", system: { subType: "trait" } }),
+    mkItem({ id: "f-hp", type: "feat", name: "Hero Points", system: { subType: "classFeat" } }),
+    talent("t-sh", "Shatter", "barroom"),
+    talent("t-pb", "Perfect Break", "barroom", "<p>Breaks into two smaller weapons.</p>"),
+    talent("t-zz", "Zany Uncurated Talent", "barroom", "<p>Does something wild when you attack.</p>"),
+    mkItem({ id: "w-1", type: "weapon", name: "Weapon", system: { actions: [mkAction("Attack", "mwak")] } }),
+  ]),
+});
+const biff = makeBiff();
+const bs = buildSpecs(biff, data, "int");
+const bName = n => bs.specs.find(s => s.name === n || prefixOf(s.name) === n);
+for (const n of ["Vital Strike", "Improved Vital Strike", "Greater Vital Strike", "Cleaving Finish", "Street Style"])
+  ok(bs.specs.some(s => s.curated && s.name === VITAL(n)), `${n} is a curated row`);
+ok(bName("(SoP) Shatter")?.curated, "a curated barroom talent rides as (SoP)");
+eq(bName("Improved Cleaving Finish†")?.curated, false, "an expanded-but-uncurated feat is a gap row");
+ok(bs.gaps.feats.includes("Improved Cleaving Finish"), "…and is listed in the gap panel");
+eq(bName("(SoP) Perfect Break (passive)")?.passive, true, "a known passive is marked passive, not a gap");
+ok(!bs.gaps.talents.includes("Perfect Break"), "…and stays out of the gap list");
+ok(bName("Brawler's Strike (passive)"), "a passive class feature gets a reminder row");
+ok(!bs.specs.some(s => s.name.startsWith(data.class_feature_conditionals.rage_powers.brawler[0].name.split(":")[0] + ":")),
+   "a trait named 'Brawler' does not pick up the barbarian rage power");
+ok(!bs.gaps.feats.includes("Hero Points"), "an empty bookkeeping item is not offered as a gap");
+ok(!bs.specs.some(s => /Barroom Talents/.test(s.name)), "a trainer's plain note produces no row");
+
+section("hand-built: Bespoke vs Full");
+const bespokeRows = buildRows(biff, bs.specs, data, {}, "w-1", 0, "bespoke");
+const fullRows = buildRows(biff, bs.specs, data, {}, "w-1", 0, "full");
+ok(bespokeRows.every(r => r.curated), "Bespoke weapon rows are all curated");
+ok(fullRows.some(r => r.origName.startsWith("(SoP) Zany Uncurated Talent†")), "Full adds the uncurated talent…");
+ok(fullRows.some(r => r.section === "Uncurated"), "…and uncurated feats, under their own section");
+ok(fullRows.length > bespokeRows.length, "Full is a superset of Bespoke");
+const fullNames = applyToWeapon(biff, "w-1", 0, fullRows, "int")["system.actions"][0].conditionals.map(nameOf);
+ok(fullNames.includes("──────  UNCURATED  ──────"), "the weapon gets an UNCURATED divider in Full mode");
+
+// --- 7. the Conditionals item -------------------------------------------------------------------
+section("conditionals item: created with only the tabs that have rows");
+const created = conditionalsItemUpdate(biff, bs.specs, {}, "bespoke", "int");
+ok(created.create && !created.update, "no item yet -> a create");
+eq(created.create.name, "Conditionals", "named Conditionals");
+eq(created.create.flags[MOD_NS].conditionalsItem, true, "flagged as ours");
+eq(created.create.system.actions.map(a => a.name), ["Conditionals", "SoP"], "Biff gets the General and SoP tabs only");
+const tabNames = (r, tab) => ((r.create?.system.actions) || r.update["system.actions"])
+  .find(a => a.name === tab)?.conditionals.map(nameOf) || [];
+ok(!tabNames(created, "SoP").some(n => n.includes("Perfect Break")), "Bespoke leaves passives off the item");
+const createdFull = conditionalsItemUpdate(biff, bs.specs, {}, "full", "int");
+ok(tabNames(createdFull, "SoP").includes("──────  UNCURATED  ──────"), "Full adds an UNCURATED divider…");
+ok(tabNames(createdFull, "SoP").some(n => n.startsWith("(SoP) Perfect Break (passive)")), "…and the passive reminder");
+eq(createdFull.create.system.actions[0].damage.parts[0].formula, "1", "each tab rolls a flat 1, like the hand-built one");
+
+section("conditionals item: PoW as combat talents, an existing hand-built item");
+// The table files PoW maneuvers as combatTalent items under a meaningless sphere ("alchemy").
+const ROW_BRONZE_MINE = "(Boost) Bronze Knuckle: +2d6 damage to all attacks for the turn";
+const makeIke = (handPow = [ROW_BRONZE_MINE]) => ({
+  name: "Ike", flags: {}, system: { abilities: { int: { total: 10 }, wis: { total: 14 }, cha: { total: 10 } } },
+  items: Items.from([
+    talent("m-ib", "(Lvl 4 Maneuver) Iron-Breaking Palm - Strike", "alchemy"),
+    talent("m-cs", "(Lvl 2 Maneuver) Counter Step - Counter", "alchemy"),
+    talent("m-bk", "(Lvl 2 Maneuver) Bronze Knuckle - Boost", "alchemy"),
+    talent("m-st", "(Stance) Iron Hand Stance", "alchemy"),
+    talent("t-dj", "Disarming Jab (Counter)", "boxing"),
+    talent("m-dv", "_______________Path of War", "alchemy"),
+    mkItem({ id: "p-1", type: "feat", name: "Profession Rank 5: (Pit Fighter) Duelist Sphere, Debilitating Injuries",
+             system: { subType: "feat" } }),
+    mkItem({ id: "ci", type: "weapon", name: "Conditionals", system: { actions: [
+      { ...mkAction("Conditionals", "mwak", [{ _id: "h1", name: "My Note: hand-made", default: false, modifiers: [] }]) },
+      { ...mkAction("Path of War", "mwak", handPow.map((n, i) => ({ _id: `hp${i}`, name: n, default: false, modifiers: [] }))) },
+    ] } }),
+  ]),
+});
+// A curated rider-only stance, to exercise the buff-only path (none ships today).
+const dataStance = { ...data, maneuver_changes: { ...data.maneuver_changes,
+  "Iron Hand Stance": { modifiers: [], rider: "palms count as weapons" } } };
+const ike = makeIke();
+const is = buildSpecs(ike, dataStance, "wis");
+const pow = is.specs.filter(s => s.tab === "Path of War").map(s => prefixOf(s.name));
+eq(pow, ["(Boost) Bronze Knuckle", "(Stance) Iron Hand Stance", "(Strike) Iron-Breaking Palm", "(Counter) Counter Step"],
+   "maneuvers filed as combat talents land in Path of War, Boost -> Stance -> Strike -> Counter");
+ok(is.specs.find(s => prefixOf(s.name) === "(Stance) Iron Hand Stance")?.buffOnly, "a rider-only stance is buff-only");
+ok(!buildRows(ike, is.specs, dataStance, {}, "ci", 0, "full").some(r => r.origName.startsWith("(Stance) Iron Hand")),
+   "…so it never reaches a weapon");
+ok(is.specs.some(s => prefixOf(s.name) === "(SoP) Debilitating Injuries"), "a talent listed in a profession name is found");
+ok(!is.gaps.talents.includes("Duelist Sphere") && !is.gaps.feats.includes("Duelist Sphere"), "a sphere name is not a gap");
+ok(!is.specs.some(s => s.name.includes("____")), "divider items filed as talents are skipped");
+
+const upd1 = conditionalsItemUpdate(ike, is.specs, {}, "bespoke", "wis");
+ok(upd1.update && !upd1.create, "an existing 'Conditionals' item is adopted (update, not create)");
+const powNames = tabNames(upd1, "Path of War");
+eq(powNames.filter(n => n.startsWith("(Boost) Bronze Knuckle")), [ROW_BRONZE_MINE],
+   "your hand-written Bronze Knuckle wins; ours is skipped");
+ok(powNames.includes(is.specs.find(s => s.name.startsWith("(Strike) Iron-Breaking Palm")).name), "the rest is added");
+ok(tabNames(upd1, "Conditionals").includes("My Note: hand-made"), "hand rows in other tabs are untouched");
+eq(tabNames(upd1, "Counters").map(prefixOf), ["(Counter) Counter Step", "(SoP) Disarming Jab"],
+   "Counters copies the PoW counter and the (Counter)-marked talent");
+ok(tabNames(upd1, "SoP").some(n => n.startsWith("(SoP) Disarming Jab")), "…which also stay in their own tab");
+eq(upd1.update["system.actions"].map(a => a.name), ["Conditionals", "Path of War", "SoP", "Counters"],
+   "missing tabs are appended after the existing ones");
+
+section("conditionals item: re-run is idempotent and honours overrides");
+const applyItem = (actor, u) => {
+  const it = actor.items.get(u._id);
+  it.system.actions = JSON.parse(JSON.stringify(u["system.actions"]));
+  it.flags[MOD_NS] = { conditionalsItem: true, condIdsByAction: u[`flags.${MOD_NS}.condIdsByAction`] };
+};
+applyItem(ike, upd1.update);
+const upd2 = conditionalsItemUpdate(ike, buildSpecs(ike, dataStance, "wis").specs, {}, "bespoke", "wis");
+eq(upd2.update["system.actions"].map(a => a.conditionals.map(nameOf)),
+   upd1.update["system.actions"].map(a => a.conditionals.map(nameOf)), "a second run changes nothing");
+const palm = is.specs.find(s => s.name.startsWith("(Strike) Iron-Breaking Palm")).name;
+const upd3 = conditionalsItemUpdate(ike, is.specs, { [COND_KEY]: { [palm]: { include: false } } }, "bespoke", "wis");
+ok(!tabNames(upd3, "Path of War").includes(palm), "an excluded row is removed from the item on re-push");
+ok(conditionalsItemRows(is.specs, {}, "bespoke").every(r => r.curated), "Bespoke item rows are curated only");
+
+// --- 8. the module ships every file it loads at runtime ------------------------------------------
 // The old bundler could silently omit a data file; now the failure mode is a module.json that points
 // at something the repo doesn't have, or a data file loadData() fetches that was never committed.
 section("module: manifest and runtime files line up");

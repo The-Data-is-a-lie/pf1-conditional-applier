@@ -232,6 +232,8 @@ $RequiredFiles = @(
     'data/weapon_quality_conditionals.json'
     'data/class_feature_conditionals.json'
     'data/item_changes.json'
+    'data/maneuver_index.json'
+    'data/local_conditionals.json'
 )
 
 # sanity: right root, no forbidden files, every runtime file present, plausible size
