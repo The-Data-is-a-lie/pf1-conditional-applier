@@ -16,7 +16,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs, retargetClassLevel,
          nameCandidates, itemEffectUpdates, conditionalsItemRows, conditionalsItemUpdate,
-         descEntries, parseMarkedName, buildIndex, COND_KEY } from "../scripts/apply-conditionals.js";
+         descEntries, parseMarkedName, buildIndex, COND_KEY,
+         decodeOverrides, encodeOverrides, ovHasLegacy } from "../scripts/apply-conditionals.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..");
@@ -478,6 +479,51 @@ const palm = is.specs.find(s => s.name.startsWith("(Strike) Iron-Breaking Palm")
 const upd3 = conditionalsItemUpdate(ike, is.specs, { [COND_KEY]: { [palm]: { include: false } } }, "bespoke", "wis");
 ok(!tabNames(upd3, "Path of War").includes(palm), "an excluded row is removed from the item on re-push");
 ok(conditionalsItemRows(is.specs, {}, "bespoke").every(r => r.curated), "Bespoke item rows are curated only");
+
+section("saved overrides: row names with dots survive Foundry's key expansion");
+// Foundry's actor.update() runs expandObject over the update: every "." in a key nests an object.
+const expand = obj => {
+  const out = {};
+  for (const [k, v] of Object.entries(obj)) {
+    const parts = k.split("."); let o = out;
+    for (const p of parts.slice(0, -1)) o = (o[p] && typeof o[p] === "object") ? o[p] : (o[p] = {});
+    const last = parts[parts.length - 1];
+    o[last] = (v && typeof v === "object" && !Array.isArray(v)) ? expand(v) : v;
+  }
+  return out;
+};
+const DOTTED = "Power Attack: -[[1+floor(@attributes.bab.total/4)]] melee attack";
+const FT = "Step Up: move [[5]] ft.";
+const saved = { w1: { [DOTTED]: { include: false, default: false, name: DOTTED },
+                      [FT]: { include: true, default: true, name: "renamed" },
+                      Plain: { include: false } } };
+// Old write path: the raw map went straight through expandObject.
+const legacy = expand(saved);
+ok(!legacy.w1[DOTTED], "the unencoded name is mangled by expansion (the bug)");
+ok(ovHasLegacy(legacy), "legacy nested junk is detected");
+eq(decodeOverrides(legacy), saved, "legacy junk migrates back to the original names");
+// New write path: encoded keys hold no dots, so expansion leaves them alone.
+const stored = expand(encodeOverrides(saved));
+ok(!ovHasLegacy(stored), "an encoded map is flat after expansion");
+eq(decodeOverrides(stored), saved, "an encoded map round-trips");
+eq(decodeOverrides(expand(encodeOverrides({ w: { "50%.off": { include: true } } }))),
+   { w: { "50%.off": { include: true } } }, "a literal % in a name round-trips");
+// Mixed: legacy junk plus a newer encoded copy of the same row -- the encoded one wins.
+const mixed = expand(saved);
+const encKey = Object.keys(encodeOverrides({ x: { [DOTTED]: 1 } }).x)[0];
+mixed.w1[encKey] = { include: true, default: true, name: DOTTED };
+eq(decodeOverrides(mixed).w1[DOTTED], { include: true, default: true, name: DOTTED }, "a newer encoded entry beats legacy junk");
+// The real thing: Vorkul Stoneheart's exported flag, when the export is on this machine.
+const VORKUL = "C:/Users/Daniel/Downloads/fvtt-Actor-vorkul-stoneheart-NhRbbXGqWOKp8a1H.json";
+if (fs.existsSync(VORKUL)) {
+  const raw = JSON.parse(fs.readFileSync(VORKUL, "utf8")).flags?.[MOD_NS]?.overrides || {};
+  const dec = decodeOverrides(raw);
+  ok(ovHasLegacy(raw), "Vorkul's real flag holds legacy junk");
+  ok(Object.values(dec).some(m => Object.keys(m).some(n => n.startsWith("Power Attack: -[[1+floor(@attributes.bab.total/4)]]"))),
+     "Vorkul's Power Attack override is recovered under its full name");
+  ok(Object.values(dec).every(m => Object.values(m).every(v => Object.keys(v).every(k => ["include", "default", "name"].includes(k)))),
+     "every recovered entry is a clean {include, default, name} leaf");
+}
 
 // --- 8. the module ships every file it loads at runtime ------------------------------------------
 // The old bundler could silently omit a data file; now the failure mode is a module.json that points

@@ -1093,6 +1093,58 @@ const newConditionalsItem = () => ({
   flags: { [MOD_NS]: { conditionalsItem: true } },
 });
 
+// --- saved overrides: { [weaponId | COND_KEY]: { [origName]: {include, default, name} } } ---
+// Foundry expands every "." in an update key into a nested object, and row names carry dots
+// ("@attributes.bab.total", "5 ft."), so the flag stores each origName ENCODED (no dots) and the
+// rest of this file only ever sees the decoded map. Flags written before the encoding hold those
+// names as nested junk; loadOverrides() flattens it back (a dot-joined path IS the original name).
+const OV_FIELDS = new Set(["include", "default", "name"]);
+const ovEncode = s => String(s).replace(/%/g, "%25").replace(/\./g, "%2E");
+const ovDecode = s => String(s).replace(/%2E/gi, ".").replace(/%25/g, "%");
+const isOvLeaf = v => v && typeof v === "object" && !Array.isArray(v)
+  && Object.keys(v).length > 0 && Object.keys(v).every(k => OV_FIELDS.has(k));
+// Walk one weapon's map down to {include, default, name} leaves, re-joining the path Foundry split.
+function ovLeaves(node, path, out) {
+  for (const [k, v] of Object.entries(node || {})) {
+    const p = path === null ? k : `${path}.${k}`;
+    if (isOvLeaf(v)) out.push([p, v]);
+    else if (v && typeof v === "object") {
+      // A split name whose tail segment happens to be a field name ("…foo.name") leaves a mixed
+      // node: its field keys are this path's leaf, the rest keep descending.
+      const own = Object.fromEntries(Object.entries(v).filter(([kk, vv]) => OV_FIELDS.has(kk) && typeof vv !== "object"));
+      if (Object.keys(own).length) out.push([p, own]);
+      ovLeaves(Object.fromEntries(Object.entries(v).filter(([kk]) => !(kk in own))), p, out);
+    }
+  }
+  return out;
+}
+function decodeOverrides(raw) {
+  const out = {};
+  for (const [id, map] of Object.entries(raw || {})) {
+    const legacy = [], encoded = [];
+    for (const [p, v] of ovLeaves(map, null, [])) (p.includes(".") ? legacy : encoded).push([ovDecode(p), v]);
+    out[id] = {};
+    for (const [n, v] of [...legacy, ...encoded]) out[id][n] = { ...v };   // encoded = newer, wins
+  }
+  return out;
+}
+function encodeOverrides(map) {
+  const out = {};
+  for (const [id, rows] of Object.entries(map || {})) {
+    out[id] = {};
+    for (const [n, v] of Object.entries(rows || {})) out[id][ovEncode(n)] = v;
+  }
+  return out;
+}
+// True when the stored flag still holds pre-encoding nested junk (anything not a flat leaf map).
+const ovHasLegacy = raw => Object.values(raw || {}).some(m => Object.values(m || {}).some(v => !isOvLeaf(v)));
+const loadOverrides = actor => decodeOverrides(actor?.flags?.[MOD_NS]?.overrides);
+async function saveOverrides(actor, map) {
+  // Updates merge, so junk would linger: drop the whole flag once, then write the clean map.
+  if (ovHasLegacy(actor.flags?.[MOD_NS]?.overrides)) await actor.update({ [`flags.${MOD_NS}.-=overrides`]: null });
+  await actor.update({ [`flags.${MOD_NS}.overrides`]: encodeOverrides(map) });
+}
+
 // Editable row state for the Conditionals item (every tab at once), saved overrides on top.
 function conditionalsItemRows(specs, overrides, mode = "bespoke") {
   const ov = overrides[COND_KEY] || {};
@@ -1160,7 +1212,7 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
   // Read/write the RAW flags object rather than getFlag/setFlag: the write below is batched into the
   // same actor.update() as the rest, and the raw path is what the pre-module macro versions wrote —
   // MOD_NS is the module id, so flags saved back then are still read here unchanged.
-  const overrides = foundry.utils.deepClone(actor.flags?.[MOD_NS]?.overrides || {});
+  const overrides = loadOverrides(actor);   // decoded + legacy-migrated, already a fresh copy
   let mode = startMode;
 
   // Build the editable row state for the current selection.
@@ -1270,7 +1322,7 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
       const pushCond = async () => {
         const live = curWeaponId === COND_KEY ? curRows : null;
         if (live) remember(COND_KEY, live);
-        await actor.update({ [`flags.${MOD_NS}.overrides`]: overrides });
+        await saveOverrides(actor, overrides);
         const r = await pushConditionalsItem(actor, specs, overrides, mode, init, live);
         const n = (live || conditionalsItemRows(specs, overrides, mode)).filter(x => x.include).length;
         ui.notifications.info(`${r.create ? "Created" : "Updated"} the ${COND_ITEM_NAME} item (${n} conditional(s), ${mode}).`);
@@ -1309,7 +1361,7 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
         const upd = applyToWeapon(actor, curWeaponId, curActionIdx, curRows, init);
         if (!upd) { ui.notifications.warn("Selected weapon has no attack action to apply to."); return; }
         remember(curWeaponId, curRows);
-        await actor.update({ [`flags.${MOD_NS}.overrides`]: overrides });
+        await saveOverrides(actor, overrides);
         await actor.updateEmbeddedDocuments("Item", [upd]);
         const n = curRows.filter(r => r.include).length;
         ui.notifications.info(`Applied ${n} conditional(s) to ${actor.items.get(curWeaponId)?.name}.`);
@@ -1333,7 +1385,7 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
           summary.push(`${w.name}: ${rows.filter(r => r.include).length}`);
         }
         if (!updates.length) { ui.notifications.warn("No weapon/attack item has an attack action to apply to."); return; }
-        await actor.update({ [`flags.${MOD_NS}.overrides`]: overrides });
+        await saveOverrides(actor, overrides);
         await actor.updateEmbeddedDocuments("Item", updates);
         ui.notifications.info(`Applied to ${updates.length} item(s) — ${summary.join("; ")}.`);
       });
@@ -1370,7 +1422,7 @@ export async function apply(actorArg = null) {
     const init = initAttr(actor);
     const mode = actorMode(actor);
     const { specs, gaps } = buildSpecs(actor, data, init);
-    const r = await pushConditionalsItem(actor, specs, actor.flags?.[MOD_NS]?.overrides || {}, mode, init);
+    const r = await pushConditionalsItem(actor, specs, loadOverrides(actor), mode, init);
     if (r.create) ui.notifications.info(`${actor.name}: created a "${COND_ITEM_NAME}" item in the inventory.`);
     openDialog(actor, specs, gaps, init, data, mode);
   } catch (err) {
@@ -1382,4 +1434,5 @@ export async function apply(actorArg = null) {
 // The pure functions build/verify_specs.mjs drives directly.
 export { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs, otherAttackSpecs, detectQualities,
          retargetClassLevel, classTags, nameCandidates, itemEffectUpdate, itemEffectUpdates,
-         conditionalsItemRows, conditionalsItemUpdate, descEntries, parseMarkedName, buildIndex, COND_KEY };
+         conditionalsItemRows, conditionalsItemUpdate, descEntries, parseMarkedName, buildIndex, COND_KEY,
+         decodeOverrides, encodeOverrides, ovHasLegacy };
