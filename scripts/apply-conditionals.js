@@ -963,9 +963,35 @@ function otherAttackSpecs(actor, specs, weaponId, extraPrefixes) {
   return out.sort((a, b) => prefixOf(a.name).localeCompare(prefixOf(b.name)));
 }
 
-// Bespoke shows curated rows only; Full adds the gaps and passives (the "Name†: rules line" rows).
+// --- the view: what is offered and pushed ---
+// Bespoke/Full is per character (an actor flag). Full is everything: it adds the Not Recommended
+// rows -- every uncurated † row and every passive -- which go to the Conditionals item, never a
+// weapon. The other switches are per PLAYER, per character -- a user flag, prefs[actorId] -- each
+// remembered from its last click:
+//   recOnly  Only recommended spells: drop the reminder (bucket R) spells, keeping attack, damage
+//            and save spells.
+//   fullInfo Append each spell's Activation/Duration/Area/School tail (its `details`).
+//   folded   (dialog only, not part of the view) the section names collapsed on screen. Pure view
+//            state: a folded section is still applied.
+// Every function below that takes `mode` accepts either the bare "bespoke"/"full" string or a view.
 const actorMode = actor => (actor?.flags?.[MOD_NS]?.mode === "full" ? "full" : "bespoke");
-const inMode = (s, mode) => mode === "full" || s.curated !== false;
+const PREF_DEFAULTS = { recOnly: false, fullInfo: false };
+const getPrefs = actor => ({ ...PREF_DEFAULTS,
+  ...((globalThis.game?.user?.flags?.[MOD_NS]?.prefs || {})[actor?.id] || {}) });
+async function setPrefs(actor, patch) {
+  await game.user.update({ [`flags.${MOD_NS}.prefs.${actor.id}`]: { ...getPrefs(actor), ...patch } });
+}
+const viewOf = v => (v && typeof v === "object")
+  ? { ...PREF_DEFAULTS, ...v, mode: v.mode === "full" ? "full" : "bespoke" }
+  : { ...PREF_DEFAULTS, mode: v === "full" ? "full" : "bespoke" };
+const actorView = actor => ({ ...getPrefs(actor), mode: actorMode(actor) });
+const inMode = (s, mode) => {
+  const v = viewOf(mode);
+  if (s.curated === false) return v.mode === "full";
+  return !(v.recOnly && s.recSpell === false);
+};
+// A row's spell details ride along only when the view asks for full information.
+const detailsFor = (s, mode) => (viewOf(mode).fullInfo && s.details ? s.details : undefined);
 
 // Editable row state for ONE weapon+action: the actor-wide specs, that weapon's own quality rows,
 // the "On Other Attacks" rows, and any saved overrides on top. A row is unchecked by default when
@@ -978,7 +1004,8 @@ function buildRows(actor, specs, data, overrides, weaponId, actionIdx, mode = "b
   const actions = w?.system?.actions || [];
   const aType = actionWeaponType(actions[actionIdx] || actions[0]);
   const removed = removedSet(actor);
-  const base = specs.filter(s => !s.buffOnly && inMode(s, mode));
+  // Not Recommended rows (uncurated † and passive) never reach a weapon.
+  const base = specs.filter(s => !s.buffOnly && s.curated !== false && inMode(s, mode));
   const qSpecs = weaponQualitySpecs(actor, weaponId, data);
   const others = otherAttackSpecs(actor, specs, weaponId, qSpecs.map(s => prefixOf(s.name)));
   return base.concat(qSpecs, others).filter(s => !removed.has(removeKey(s.name))).map(s => {
@@ -987,7 +1014,7 @@ function buildRows(actor, specs, data, overrides, weaponId, actionIdx, mode = "b
     const defInclude = s._defaultInclude !== undefined ? s._defaultInclude : !mismatch;
     return {
       origName: s.name, srcName: s.srcName, rawMods: s.rawMods, section: s.section,
-      curated: s.curated !== false,
+      curated: s.curated !== false, details: detailsFor(s, mode),
       include: o.include !== undefined ? o.include : defInclude,
       def: o.default !== undefined ? o.default : !!s.default,
       name: o.name !== undefined ? o.name : s.name,
@@ -1005,7 +1032,7 @@ const ADOPT_SECTIONS = new Set(["Feats", "Weapon Qualities", "Class Features", "
 // attack-dialog list reads as grouped: Other -> Feats -> Qualities -> Items -> Class Features ->
 // PoW -> Spheres -> Spells -> Uncurated -> Other Attacks.
 const EXISTING_LABEL = "──────  OTHER (EXISTING)  ──────";
-const UNCURATED_LABEL = "──────  UNCURATED  ──────";
+const UNCURATED_LABEL = "──────  NOT RECOMMENDED  ──────";   // uncurated † + passive rows
 const SECT_LABEL = {
   "Feats": "──────  FEATS  ──────",
   "Weapon Qualities": "──────  WEAPON QUALITIES  ──────",
@@ -1024,7 +1051,8 @@ const SECT_LABEL = {
 //   layout "weapon": an OTHER (EXISTING) header over what survives, a divider per section, rows in
 //                    section order.
 //   layout "item":   rows in the order given (one tab of the Conditionals item), no header, and a
-//                    single UNCURATED divider before the first uncurated row.
+//                    single NOT RECOMMENDED divider before the first uncurated/passive row.
+// A row carrying `details` (a spell, with Show full information on) gets them appended to its name.
 function applyRowsToAction(action, rows, { seedBase, init, prevIds, layout = "weapon" }) {
   const wpnTypes = weaponDamageTypes(action);   // resolves ["as-weapon"] modifiers to this weapon's type
   const wpnDice = weaponBaseDice(action);       // resolves "as-weapon-dice" formulas to this weapon's dice
@@ -1069,7 +1097,8 @@ function applyRowsToAction(action, rows, { seedBase, init, prevIds, layout = "we
 
   let curSection = null, uncuratedShown = false;
   for (const r of ordered) {
-    if (!r.include || !r.name || seen.has(r.name)) continue;
+    const name = r.details && r.name ? `${r.name}; ${r.details}` : r.name;
+    if (!r.include || !name || seen.has(name)) continue;
     // A row you already have by hand (or an edited generator row that survived adoption) under the
     // same "Name" before the colon -- e.g. "(Boost) Bronze Knuckle: <your wording>" -- wins; don't
     // stack a near-duplicate next to it.
@@ -1083,11 +1112,11 @@ function applyRowsToAction(action, rows, { seedBase, init, prevIds, layout = "we
       uncuratedShown = true;
       action.conditionals.push(sep(`${seedBase}|__sep__|uncurated`, UNCURATED_LABEL));
     }
-    seen.add(r.name);
+    seen.add(name);
     const seed = `${seedBase}|${r.origName}`;                 // seed on the STABLE build-time name
     const cid = detId(seed, 8);
     action.conditionals.push({
-      _id: cid, name: r.name, default: !!r.def,
+      _id: cid, name, default: !!r.def,
       modifiers: (r.rawMods || []).map((m, i) => mkMod(m, r.srcName, seed, i, init, wpnTypes, wpnDice)),
     });
     newIds.push(cid);
@@ -1199,7 +1228,7 @@ function conditionalsItemRows(specs, overrides, mode = "bespoke", removed = new 
     const o = ov[s.name] || {};
     return {
       origName: s.name, srcName: s.srcName, rawMods: s.rawMods, section: s.section, tab: s.tab,
-      counter: !!s.counter, curated: s.curated !== false,
+      counter: !!s.counter, curated: s.curated !== false, details: detailsFor(s, mode),
       include: o.include !== undefined ? o.include : true,
       def: o.default !== undefined ? o.default : !!s.default,
       name: o.name !== undefined ? o.name : s.name,
@@ -1288,7 +1317,7 @@ function savedWeaponUpdates(actor, specs, data, overrides, mode, init, { onlyApp
 async function repushSaved(actor, ctx = {}) {
   const data = ctx.data || await loadData();
   const init = ctx.init || initAttr(actor);
-  const mode = ctx.mode || actorMode(actor);
+  const mode = ctx.mode || actorView(actor);
   const specs = ctx.specs || buildSpecs(actor, data, init).specs;
   const overrides = loadOverrides(actor);
   await pushConditionalsItem(actor, specs, overrides, mode, init);
@@ -1317,8 +1346,8 @@ async function restoreConditional(actor, key, ctx = {}) {
 
 // --- the review/edit dialog (stays open; edits persist to an actor flag) ---
 // The selector's first entry is the Conditionals item itself (every tab at once); the rest are the
-// actor's real weapons/attacks. The Bespoke/Full switch is remembered per actor and re-pushes the
-// Conditionals item straight away.
+// actor's real weapons/attacks. The Bespoke/Full switch is remembered per actor, the other switches
+// per player (see actorView); any switch re-pushes the Conditionals item straight away.
 function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
   const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const weapons = attackItems(actor);
@@ -1326,11 +1355,15 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
   // Read/write the RAW flags object rather than getFlag/setFlag: the write below is batched into the
   // same actor.update() as the rest, and the raw path is what the pre-module macro versions wrote —
   // MOD_NS is the module id, so flags saved back then are still read here unchanged.
-  const overrides = foundry.utils.deepClone(actor.flags?.[MOD_NS]?.overrides || {});
-  let mode = startMode;
+  const overrides = loadOverrides(actor);   // decoded + legacy-migrated, already a fresh copy
+  let mode = viewOf(startMode);            // {mode, recOnly, fullInfo}
+  const NOT_REC = "Not Recommended";
+  // Sections collapsed on screen (view only: folded rows stay in curRows and are still applied).
+  const folded = new Set(getPrefs(actor).folded || []);
 
   // Build the editable row state for the current selection.
-  const tabRank = r => { const i = COND_TABS.indexOf(r.tab); return i < 0 ? 99 : i; };
+  // Item view: tab order, with every Not Recommended row gathered at the very end.
+  const tabRank = r => { if (r.curated === false) return 100; const i = COND_TABS.indexOf(r.tab); return i < 0 ? 99 : i; };
   const rowsFor = (id, actionIdx) => id === COND_KEY
     ? conditionalsItemRows(specs, overrides, mode, removedSet(actor)).map((r, i) => ({ r, i }))
         .sort((a, b) => (tabRank(a.r) - tabRank(b.r)) || (a.i - b.i)).map(x => x.r)
@@ -1342,7 +1375,7 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
   };
 
   let curWeaponId = COND_KEY, curActionIdx = 0, curRows = [];
-  const groupOf = r => (curWeaponId === COND_KEY ? r.tab : r.section) || "Other";
+  const groupOf = r => (r.curated === false ? NOT_REC : (curWeaponId === COND_KEY ? r.tab : r.section)) || "Other";
 
   const removeTip = `Add to ${actor.name}'s remove list: it comes off the ${COND_ITEM_NAME} item and every `
     + `weapon, and stays off on re-runs. Restore it from the Removed list below or on the sheet's Settings tab.`;
@@ -1369,9 +1402,6 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
   // Magic-item passive effects. Not weapon-scoped -- they write to the equipment items themselves --
   // so they get their own button rather than riding the per-weapon apply.
   const itemUpdates = itemEffectUpdates(actor, data);
-  const li = arr => arr.length ? `<ul>${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : `<em>none</em>`;
-  const gapCount = gaps.spells.length + gaps.maneuvers.length + gaps.talents.length
-                 + gaps.qualities.length + gaps.classFeatures.length + gaps.feats.length;
   // Layout lives in styles/apply-conditionals.css, scoped under .pf1ca. The one exception is
   // #action-wrap's inline display:none -- jQuery .show()/.hide() below toggle it, and an inline
   // value is what they expect to clear.
@@ -1380,7 +1410,11 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
       <div class="pf1ca-toolbar">
         <label>Apply to: <select id="weapon-sel">${weaponOpts}</select></label>
         <span id="action-wrap" style="display:none"></span>
-        <label class="pf1ca-mode" title="Bespoke: curated conditionals only. Full: also every uncurated or passive feat, talent, maneuver and spell, as text-only rows marked †."><input type="checkbox" id="mode-full" ${mode === "full" ? "checked" : ""}> Full</label>
+        <label class="pf1ca-mode" title="Bespoke: curated conditionals only. Full: everything, including a Not Recommended section (uncurated † and passive rows, on the ${esc(COND_ITEM_NAME)} item only)."><input type="checkbox" id="mode-full" ${mode.mode === "full" ? "checked" : ""}> Full</label>
+      </div>
+      <div class="pf1ca-toolbar pf1ca-switches">
+        <label title="Leave out reminder spells (utility, defensive, healing…) and keep only spells with an attack, damage or save. Remembered for you, per character."><input type="checkbox" class="pf1ca-pref" data-pref="recOnly" ${mode.recOnly ? "checked" : ""}> Only recommended spells</label>
+        <label title="Add each spell's casting time, duration, area/targets and school to its row. Remembered for you, per character."><input type="checkbox" class="pf1ca-pref" data-pref="fullInfo" ${mode.fullInfo ? "checked" : ""}> Show full information</label>
       </div>
       <div class="pf1ca-toolbar">
         <button type="button" id="toggle-all"><i class="fas fa-check-double"></i> All on/off</button>
@@ -1389,19 +1423,9 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
         <button type="button" id="push-cond" title="Rewrite the ${esc(COND_ITEM_NAME)} item from your saved choices (and any edits on screen when it is selected)."><i class="fas fa-book"></i> Update ${esc(COND_ITEM_NAME)} item</button>
         ${itemUpdates.length ? `<button type="button" id="sync-items" title="Overlay the curated bonuses and notes for these items onto the item documents themselves. Deduped against what each item already has; re-runnable."><i class="fas fa-ring"></i> Sync item effects (${itemUpdates.length})</button>` : ""}
       </div>
-      <p class="pf1ca-hint">The ${esc(COND_ITEM_NAME)} item is kept up to date on every run. Uncheck to exclude a conditional; expand a row to edit its clauses or per-roll default. Edits persist per item and survive re-runs. ✕ removes a conditional from the whole character until you restore it. † = not curated (text only).</p>
+      <p class="pf1ca-hint">The ${esc(COND_ITEM_NAME)} item is kept up to date on every run. Uncheck to exclude a conditional; expand a row to edit its clauses or per-roll default. Edits persist per item and survive re-runs. ✕ removes a conditional from the whole character until you restore it. Full mode adds uncurated (†) and passive rows in a Not Recommended section (${esc(COND_ITEM_NAME)} item only). ▾ folds a section out of view; folded rows are still applied.</p>
       <div id="cond-rows"></div>
       <hr>
-      <details class="pf1ca-gaps"><summary>Curation gaps (${gapCount})</summary>
-        <div class="pf1ca-gaps-body">
-          <strong>Feats &amp; class features (${gaps.feats.length})</strong>${li(gaps.feats)}
-          <strong>Spells (${gaps.spells.length})</strong>${li(gaps.spells)}
-          <strong>Maneuvers (${gaps.maneuvers.length})</strong>${li(gaps.maneuvers)}
-          <strong>Talents (${gaps.talents.length})</strong>${li(gaps.talents)}
-          <strong>Weapon qualities (${gaps.qualities.length})</strong>${li(gaps.qualities)}
-          <strong>Class features, unresolved level (${gaps.classFeatures.length})</strong>${li(gaps.classFeatures)}
-        </div>
-      </details>
       <details class="pf1ca-removed" id="removed-box"></details>
     </div>`;
 
@@ -1420,20 +1444,30 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
           wrap.html(`Action: <select id="action-sel">${opts}</select>`).show();
         } else { wrap.empty().hide(); }
       };
-      const sectionHeader = name => `<div class="cond-section">
-        <strong>${esc(name)}</strong>
-        <button type="button" class="toggle-section" data-section="${esc(name)}">All on/off</button>
-      </div>`;
+      const nrTip = `Uncurated (†) and passive rows. Shown on the ${COND_ITEM_NAME} item only, never on a weapon. `
+        + `Clear them with All on/off, a row's checkbox, or ✕.`;
+      // Each section: a header (fold chevron, name, row count, All on/off) and its rows in a
+      // .cond-group the chevron hides. The header and its group are always adjacent siblings.
+      const sectionHtml = (name, rowsHtml, n) => {
+        const isFolded = folded.has(name);
+        return `<div class="cond-section${name === NOT_REC ? " pf1ca-notrec" : ""}" data-section="${esc(name)}"${name === NOT_REC ? ` title="${esc(nrTip)}"` : ""}>
+            <a class="pf1ca-fold" title="Fold or unfold this section (view only: folded rows are still applied)"><i class="fas fa-chevron-${isFolded ? "right" : "down"}"></i> <strong>${esc(name)} (${n})</strong></a>
+            <button type="button" class="toggle-section" data-section="${esc(name)}">All on/off</button>
+          </div>
+          <div class="cond-group${isFolded ? " folded" : ""}">${rowsHtml}</div>`;
+      };
       const renderRows = () => {
         curRows = rowsFor(curWeaponId, curActionIdx);
         if (!curRows.length) { html.find("#cond-rows").html("<p><em>Nothing to apply — actor has no matching feats, spells, maneuvers or talents.</em></p>"); return; }
-        let out = "", lastSection = null;
+        // Rows arrive grouped (sections are contiguous), so one pass collects each section in order.
+        const groups = [];
         curRows.forEach((r, i) => {
           const sec = groupOf(r);
-          if (sec !== lastSection) { out += sectionHeader(sec); lastSection = sec; }
-          out += rowHtml(r, i);
+          if (groups.at(-1)?.name !== sec) groups.push({ name: sec, html: "", n: 0 });
+          groups.at(-1).html += rowHtml(r, i);
+          groups.at(-1).n++;
         });
-        html.find("#cond-rows").html(out);
+        html.find("#cond-rows").html(groups.map(g => sectionHtml(g.name, g.html, g.n)).join(""));
       };
       // The actor's remove list, each entry restorable. Kept open across re-renders once opened.
       const renderRemoved = () => {
@@ -1481,18 +1515,31 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
         await saveOverrides(actor, overrides);
         const r = await pushConditionalsItem(actor, specs, overrides, mode, init, live);
         const n = (live || conditionalsItemRows(specs, overrides, mode, removedSet(actor))).filter(x => x.include).length;
-        ui.notifications.info(`${r.create ? "Created" : "Updated"} the ${COND_ITEM_NAME} item (${n} conditional(s), ${mode}).`);
+        ui.notifications.info(`${r.create ? "Created" : "Updated"} the ${COND_ITEM_NAME} item (${n} conditional(s), ${mode.mode}).`);
       };
 
       html.on("change", "#weapon-sel", ev => { curWeaponId = ev.target.value; curActionIdx = 0; renderActionSel(); renderRows(); });
       // Re-render on an action switch too: the melee/ranged default follows the action's type.
       html.on("change", "#action-sel", ev => { curActionIdx = +ev.target.value; renderRows(); });
       html.on("change", "#mode-full", async ev => {
-        mode = ev.target.checked ? "full" : "bespoke";
-        await actor.update({ [`flags.${MOD_NS}.mode`]: mode });
+        remember(curWeaponId, curRows);                  // keep on-screen edits across the re-render
+        mode = { ...mode, mode: ev.target.checked ? "full" : "bespoke" };
+        await actor.update({ [`flags.${MOD_NS}.mode`]: mode.mode });
         renderRows();
         await pushConditionalsItem(actor, specs, overrides, mode, init);
-        ui.notifications.info(`${actor.name}: ${mode === "full" ? "Full" : "Bespoke"} mode — ${COND_ITEM_NAME} item updated.`);
+        ui.notifications.info(`${actor.name}: ${mode.mode === "full" ? "Full" : "Bespoke"} mode — ${COND_ITEM_NAME} item updated.`);
+      });
+      // Per-player switches (Only recommended spells, Show full information).
+      const PREF_LABEL = { recOnly: "Only recommended spells", fullInfo: "Show full information" };
+      html.on("change", ".pf1ca-pref", async ev => {
+        const key = ev.target.dataset.pref, on = ev.target.checked;
+        remember(curWeaponId, curRows);
+        mode = { ...mode, [key]: on };
+        await setPrefs(actor, { [key]: on });
+        renderRows();
+        await saveOverrides(actor, overrides);
+        await pushConditionalsItem(actor, specs, overrides, mode, init);
+        ui.notifications.info(`${PREF_LABEL[key]} ${on ? "on" : "off"} — ${COND_ITEM_NAME} item updated. Apply again to update weapons.`);
       });
       html.on("change", ".cond-row .inc", ev => { curRows[rowIdx(ev)].include = ev.target.checked; });
       html.on("change", ".cond-row .def", ev => { curRows[rowIdx(ev)].def = ev.target.checked; });
@@ -1509,6 +1556,23 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
         ev.preventDefault();
         const sec = ev.target.closest(".toggle-section").dataset.section;
         setInclude(curRows.map((r, i) => [r, i]).filter(([r]) => groupOf(r) === sec).map(([, i]) => i));
+      });
+      // Fold/unfold a section. Pure view: no re-render, no push; the folded set is remembered per
+      // player, per character, and shared by the weapon view (sections) and the item view (tabs).
+      html.on("click", ".pf1ca-fold", ev => {
+        ev.preventDefault();
+        const name = ev.target.closest(".cond-section").dataset.section;
+        const nowFolded = !folded.has(name);
+        if (nowFolded) folded.add(name); else folded.delete(name);
+        for (const head of html.find(".cond-section").get().filter(el => el.dataset.section === name)) {
+          const group = head.nextElementSibling;
+          if (group?.classList.contains("cond-group")) group.classList.toggle("folded", nowFolded);
+          const icon = head.querySelector(".pf1ca-fold > i");
+          icon?.classList.toggle("fa-chevron-down", !nowFolded);
+          icon?.classList.toggle("fa-chevron-right", nowFolded);
+        }
+        setPrefs(actor, { folded: [...folded] })
+          .catch(err => console.warn(`[${MOD_NS}] could not save folded sections:`, err));
       });
       html.on("click", "#push-cond", async ev => { ev.preventDefault(); await pushCond(); });
       html.on("click", "#apply-weapon", async ev => {
@@ -1582,7 +1646,7 @@ export async function apply(actorArg = null) {
     if (!actor) return;
     const data = await loadData();
     const init = initAttr(actor);
-    const mode = actorMode(actor);
+    const mode = actorView(actor);           // Bespoke/Full + this player's switches
     const { specs, gaps } = buildSpecs(actor, data, init);
     const r = await pushConditionalsItem(actor, specs, loadOverrides(actor), mode, init);
     if (r.create) ui.notifications.info(`${actor.name}: created a "${COND_ITEM_NAME}" item in the inventory.`);

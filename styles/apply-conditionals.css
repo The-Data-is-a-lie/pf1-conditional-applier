@@ -80,8 +80,20 @@
   border-bottom: 1px solid rgba(128, 128, 128, .5);
 }
 
-.pf1ca .cond-section > strong {
+/* The fold toggle: chevron + "Name (N)". Folding is view only -- folded rows are still applied. */
+.pf1ca .cond-section > .pf1ca-fold {
   flex: 1;
+  cursor: pointer;
+}
+
+.pf1ca .cond-section > .pf1ca-fold > i {
+  width: 1em;
+  font-size: .8em;
+  opacity: .7;
+}
+
+.pf1ca .cond-group.folded {
+  display: none;
 }
 
 .pf1ca .toggle-section {
@@ -194,20 +206,6 @@
 .pf1ca .cond-row-mods {
   font-size: .78em;
   opacity: .7;
-}
-
-/* --- the collapsible "everything I couldn't match" list at the bottom --- */
-.pf1ca .pf1ca-gaps {
-  font-size: .85em;
-}
-
-.pf1ca .pf1ca-gaps-body {
-  max-height: 22vh;
-  overflow: auto;
-}
-
-.pf1ca .pf1ca-gaps-body ul {
-  margin: .2em 0 .5em 1em;
 }
 
 /* --- compact header buttons (scripts/compact-headers.js) ----------------------------------------

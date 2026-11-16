@@ -392,15 +392,14 @@ ok(!bs.specs.some(s => s.name.startsWith(data.class_feature_conditionals.rage_po
 ok(!bs.gaps.feats.includes("Hero Points"), "an empty bookkeeping item is not offered as a gap");
 ok(!bs.specs.some(s => /Barroom Talents/.test(s.name)), "a trainer's plain note produces no row");
 
-section("hand-built: Bespoke vs Full");
+section("hand-built: Bespoke vs Full -- Not Recommended rows never reach a weapon");
 const bespokeRows = buildRows(biff, bs.specs, data, {}, "w-1", 0, "bespoke");
 const fullRows = buildRows(biff, bs.specs, data, {}, "w-1", 0, "full");
 ok(bespokeRows.every(r => r.curated), "Bespoke weapon rows are all curated");
-ok(fullRows.some(r => r.origName.startsWith("(SoP) Zany Uncurated Talent†")), "Full adds the uncurated talent…");
-ok(fullRows.some(r => r.section === "Uncurated"), "…and uncurated feats, under their own section");
-ok(fullRows.length > bespokeRows.length, "Full is a superset of Bespoke");
+ok(fullRows.every(r => r.curated), "Full: weapon rows are still all curated");
+eq(fullRows.map(r => r.origName), bespokeRows.map(r => r.origName), "…so a weapon's rows are the same in both modes");
 const fullNames = applyToWeapon(biff, "w-1", 0, fullRows, "int")["system.actions"][0].conditionals.map(nameOf);
-ok(fullNames.includes("──────  UNCURATED  ──────"), "the weapon gets an UNCURATED divider in Full mode");
+ok(!fullNames.some(n => /NOT RECOMMENDED|UNCURATED/.test(n)), "no Not Recommended divider on a weapon");
 
 // --- 7. the Conditionals item -------------------------------------------------------------------
 section("conditionals item: created with only the tabs that have rows");
@@ -413,8 +412,16 @@ const tabNames = (r, tab) => ((r.create?.system.actions) || r.update["system.act
   .find(a => a.name === tab)?.conditionals.map(nameOf) || [];
 ok(!tabNames(created, "SoP").some(n => n.includes("Perfect Break")), "Bespoke leaves passives off the item");
 const createdFull = conditionalsItemUpdate(biff, bs.specs, {}, "full", "int");
-ok(tabNames(createdFull, "SoP").includes("──────  UNCURATED  ──────"), "Full adds an UNCURATED divider…");
+ok(tabNames(createdFull, "SoP").includes("──────  NOT RECOMMENDED  ──────"), "Full adds the Not Recommended rows: a NOT RECOMMENDED divider…");
 ok(tabNames(createdFull, "SoP").some(n => n.startsWith("(SoP) Perfect Break (passive)")), "…and the passive reminder");
+ok(tabNames(createdFull, "SoP").some(n => n.startsWith("(SoP) Zany Uncurated Talent†")), "…and the uncurated † talent");
+ok(tabNames(createdFull, "SoP").indexOf("──────  NOT RECOMMENDED  ──────")
+   > tabNames(createdFull, "SoP").findIndex(n => n.startsWith("(SoP) Shatter")), "…at the bottom of its tab");
+ok(!tabNames(created, "SoP").some(n => n.includes("NOT RECOMMENDED") || n.includes("Zany Uncurated")),
+   "Bespoke never shows Not Recommended rows or their divider");
+const createdFullRec = conditionalsItemUpdate(biff, bs.specs, {}, { mode: "full", recOnly: true, fullInfo: true }, "int");
+ok(tabNames(createdFullRec, "SoP").some(n => n.startsWith("(SoP) Zany Uncurated Talent†")),
+   "Full keeps Not Recommended rows whatever the other switches say");
 eq(createdFull.create.system.actions[0].damage.parts[0].formula, "1", "each tab rolls a flat 1, like the hand-built one");
 
 section("conditionals item: PoW as combat talents, an existing hand-built item");
@@ -583,6 +590,55 @@ if (fs.existsSync(VORKUL)) {
      "Vorkul's Power Attack override is recovered under its full name");
   ok(Object.values(dec).every(m => Object.values(m).every(v => Object.keys(v).every(k => ["include", "default", "name"].includes(k)))),
      "every recovered entry is a clean {include, default, name} leaf");
+}
+
+section("spells: (Spell N) [Name] rows, level order, recommended-only, full information");
+{
+  // Synthetic reminder/rider data, so the test doesn't depend on the shipped spell tables.
+  const sdata = { ...data, spell_reminders: { "Light": { save: null, riders: ["Effect: an object shines like a torch"],
+                                                details: "Activation: [[1]] standard action; Duration: [[10*@spells.primary.cl.total]] minutes" } },
+                  spell_riders: { ...data.spell_riders, "Acid Splash": { attack: "ranged", save: null, riders: ["Effect: an orb of acid"] },
+                    "Cone of Cold": { ...data.spell_riders["Cone of Cold"], details: "Activation: [[1]] standard action; School: evocation [cold]" } } };
+  const spell = (id, name, level) => mkItem({ id, type: "spell", name,
+    system: { level, spellbook: "primary", description: { value: `<p>${name} does a homebrew thing.</p>` } } });
+  const caster = {
+    name: "Wiz", flags: {}, system: { attributes: { spells: { spellbooks: { primary: { class: "wizard", ability: "int", inUse: true } } } },
+                                      abilities: { int: { total: 18 } } },
+    items: Items.from([
+      mkItem({ id: "bow", type: "weapon", name: "Bow", system: { actions: [mkAction("Attack", "rwak")] } }),
+      spell("s1", "Cone of Cold", 5), spell("s2", "Light", 0), spell("s3", "Zzz Homebrew Bolt", 2),
+      spell("s4", "Acid Splash", 0),
+    ]),
+  };
+  const sp = buildSpecs(caster, sdata, "int").specs.filter(x => x.tab === "Spells");
+  const cone = sp.find(x => x.srcName === "Cone of Cold");
+  ok(cone && cone.name.startsWith("(Spell 5) [Cone of Cold]: "), "a spell row reads (Spell N) [Name]: …");
+  ok(cone && !/^\(Spell 5\) \[Cone of Cold\]: half;/.test(cone.name), "no stray save word before the clauses");
+  eq(sp.filter(x => x.curated).map(x => prefixOf(x.name)),
+     ["(Spell 0) [Acid Splash]", "(Spell 0) [Light]", "(Spell 5) [Cone of Cold]"], "ordered by level, then name");
+  eq(removeKey(cone.name), removeKey("Cone of Cold: my own wording"), "the remove key is the bare spell name");
+  const light = sp.find(x => x.srcName === "Light");
+  eq(light?.recSpell, false, "a reminder spell is marked not-recommended-only");
+  const hb = sp.find(x => x.srcName === "Zzz Homebrew Bolt");
+  ok(hb && hb.curated === false && hb.name.startsWith("(Spell 2) [Zzz Homebrew Bolt]†"), "an uncurated spell is a † Not Recommended row");
+
+  const wNames = v => buildRows(caster, sp, sdata, {}, "bow", 0, v).map(r => prefixOf(r.origName));
+  ok(wNames("bespoke").includes("(Spell 0) [Light]"), "reminder spells go on weapons by default");
+  ok(!wNames({ mode: "bespoke", recOnly: true }).includes("(Spell 0) [Light]"), "…Only recommended spells drops them");
+  ok(wNames({ mode: "bespoke", recOnly: true }).includes("(Spell 5) [Cone of Cold]"), "…and keeps save/attack spells");
+  ok(!wNames("full").some(n => n.includes("Homebrew")), "a † spell never lands on a weapon, even in Full");
+
+  const itemSpells = v => (conditionalsItemUpdate(caster, sp, {}, v, "int").create.system.actions
+    .find(a => a.name === "Spells")?.conditionals || []).map(c => c.name);
+  const plain = itemSpells("bespoke").find(n => n.startsWith("(Spell 5) [Cone of Cold]"));
+  const full = itemSpells({ mode: "bespoke", fullInfo: true }).find(n => n.startsWith("(Spell 5) [Cone of Cold]"));
+  ok(plain && !plain.includes("School:"), "details stay off without Show full information");
+  ok(full && full.endsWith("; Activation: [[1]] standard action; School: evocation [cold]"), "…and are appended with it on");
+  const lightFull = itemSpells({ mode: "bespoke", fullInfo: true }).find(n => n.startsWith("(Spell 0) [Light]"));
+  ok(lightFull && lightFull.includes("Duration: [[10*") && !lightFull.includes("@spells.primary.cl.total"),
+     "details get the same caster-level substitution as the rider");
+  const rowsFull = conditionalsItemRows(sp, {}, { mode: "bespoke", fullInfo: true });
+  ok(rowsFull.every(r => !String(r.name).includes("School:")), "the editable name never carries the details (overrides stay stable)");
 }
 
 // --- 9. the module ships every file it loads at runtime ------------------------------------------
