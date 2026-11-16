@@ -101,6 +101,12 @@ Hooks.once("init", () => {
   // AppV1 sheets fire renderActorSheet; AppV2 (pf1 on Foundry v13) fires renderActorSheetV2.
   for (const hook of ["renderActorSheet", "renderActorSheetV2"]) Hooks.on(hook, onRenderActorSheet);
 
+  // pf1's action sheet jumps back to the top of its Conditionals tab whenever a conditional or
+  // modifier is added/removed (the item update re-renders it), which on a weapon with 150+ rows means
+  // scrolling back down after every click. Remember each sheet's scroll per tab, keyed by the sheet's
+  // stable id (it survives pf1 rebuilding the sheet object), and put it back after every render.
+  Hooks.on("renderItemActionSheet", keepActionSheetScroll);
+
   // Keybinding: no default key (editable: []) so it never collides — the user assigns one in
   // Configure Controls. Discovery of the feature comes from the visible sheet/toolbar buttons.
   game.keybindings.register(MOD_NS, "apply", {
@@ -110,6 +116,27 @@ Hooks.once("init", () => {
     onDown: () => { runApply(); return true; },
   });
 });
+
+const actionSheetScroll = new Map();          // sheet id -> { [tab name]: scrollTop }
+function keepActionSheetScroll(app, html) {
+  try {
+    const root = html?.jquery ? html[0] : html;
+    const tabs = root?.querySelectorAll?.(".primary-body > .tab[data-tab]") ?? [];
+    const saved = actionSheetScroll.get(app.id) || {};
+    for (const tab of tabs) {
+      const name = tab.dataset.tab;
+      tab.addEventListener("scroll", () => {
+        const m = actionSheetScroll.get(app.id) || {};
+        m[name] = tab.scrollTop;
+        actionSheetScroll.set(app.id, m);
+      }, { passive: true });
+      // After layout, so the restored offset isn't clamped against a not-yet-sized tab.
+      if (saved[name]) requestAnimationFrame(() => { tab.scrollTop = saved[name]; });
+    }
+  } catch (err) {
+    console.error(`[${MOD_NS}] action sheet scroll error:`, err);
+  }
+}
 
 Hooks.once("ready", () => {
   // Every table this reads (weapon actions, conditionals, spellbooks, @classes.<tag>.level) is pf1
