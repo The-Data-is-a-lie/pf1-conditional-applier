@@ -6,6 +6,24 @@ entries for the person using the module, not for the diff.
 
 ## Unreleased
 
+### Added
+
+- **A "Conditionals" inventory item, kept up to date on every run.** The first time it runs on a character, the module creates a weapon called *Conditionals* in the inventory. Every later run brings it up to date. Each tab of its attack is one group: **Conditionals** (feats, class features, magic items), **Path of War** (sorted Boost → Stance → Strike → Counter, then by maneuver level), **SoP** (Spheres of Power and Might talents), **Counters** (every Counter maneuver and anything marked "(Counter)", copied from its own tab) and **Spells**. A tab only appears once it has something in it. If the character already has a hand-made *Conditionals* item, the module takes it over: every row you wrote yourself is kept, and where you already have a row for something (say "(Boost) Bronze Knuckle: …"), the module doesn't add a second one.
+- **Bespoke / Full switch** in the dialog, remembered per character. Bespoke (the default) shows only curated conditionals, as before. Full also lists everything nobody has curated yet: feats, class features, talents, maneuvers and spells. Each appears as a text-only row marked **†** with its Benefit line, under an *UNCURATED* divider, on the Conditionals item and on weapons alike.
+- **Trainers and professions are read.** Feats listed as headings inside a *Trainer: …* item's description (Street Style, Pummeling Style, …) and names listed in a *Profession Rank N: (Job) A, B, C* item's name are now found.
+- Hand-written feat chains are understood: `Vital Strike<Improved<Greater` means Vital Strike, Improved Vital Strike and Greater Vital Strike, and `Cleave<Great<Finish<Improved` reads as Cleave, Great Cleave, Cleaving Finish and Improved Cleaving Finish. Spelling differences (`Blind Fight` / `Blind-Fight`, `&` / `and`) no longer stop a match.
+- Path of War maneuvers stored as combat talents (`(Lvl 2 Maneuver) Bronze Knuckle - Boost`, `(Stance) Iron Hand Stance`) are recognised as maneuvers, whatever sphere they're filed under.
+- New curated conditionals: the Barroom talents Interceding Crash, Surprise (with its attack bonus), Improvised Martial Arts, Focusing Break, Expanded Breaker and Bottle Rocket, plus the brawler's Awesome Blow and the snakebite striker's Snake Feint. Perfect Break, Brawler's Strike and Violent Ki are now recorded as passive abilities. They're no longer listed as curation gaps, and they show as reminder rows in Full mode.
+
+### Changed
+
+- Path of War and Spheres rows are named the way the table already writes them by hand: `(Boost) Name: …`, `(Strike) Name: …`, `(SoP) Name: …`. Include/edit choices you saved for those rows under the old names won't carry over.
+- The dialog's selector now starts on the *Conditionals* item. Your real weapons follow underneath it, and **Apply** applies to whichever one is selected.
+
+### Fixed
+
+- A trait that shares its name with a class feature, such as the *Brawler* trait and the barbarian's Brawler rage power, no longer picks up the class feature's conditional.
+
 ## Version 1.2.0 (2026-08-13)
 
 ### Added

@@ -5,8 +5,9 @@ character's weapons — the attack toggles for feats, weapon special abilities, 
 features, Path of War maneuvers, Spheres talents and spells that are otherwise a long manual slog,
 per weapon, per character.
 
-Run it, review what it found in a per-weapon dialog, apply. Re-runnable: it only ever replaces what
-it added. Everything it reads ships inside the module — it makes no network requests.
+Run it, and every conditional the character has lands in a **Conditionals** item in their inventory,
+one tab per group. Then review what it found, per weapon, and apply. Re-runnable: it only ever
+replaces what it added. Everything it reads ships inside the module — it makes no network requests.
 
 ## Install
 
@@ -39,16 +40,43 @@ weapon in `flags["pf1-conditional-applier"].condIds`), then re-scans — so it p
 maneuvers, talents and spells, drops ones you no longer have, and never touches conditionals you
 wrote by hand. Your include/edit choices persist per weapon and are honoured on later runs.
 
+## The Conditionals item
+
+Every run creates or updates a weapon called **Conditionals** in the character's inventory. Its
+attack has one tab per group, and each tab rolls a flat 1, so you can roll a tab just for its riders:
+
+| Tab | Holds |
+|---|---|
+| **Conditionals** | Feats, class features, magic-item activations |
+| **Path of War** | Maneuvers as `(Boost) …`, `(Stance) …`, `(Strike) …`, `(Counter) …`, in that order, then by level |
+| **SoP** | Spheres of Power and Might talents, as `(SoP) …` |
+| **Counters** | A copy of every Counter maneuver and anything marked `(Counter)` |
+| **Spells** | Spell toggles |
+
+A tab only appears once it has something in it. If the character already has an item named
+*Conditionals*, that item is reused. Rows you wrote on it by hand are kept, and where you already
+have one for something (`(Boost) Bronze Knuckle: <your wording>`), the module doesn't add its own.
+
+**Bespoke or Full.** The **Full** checkbox in the dialog is remembered per character. Bespoke shows
+only curated conditionals. Full adds everything nobody has curated yet, as text-only rows marked
+**†** carrying the ability's Benefit line, under an *UNCURATED* divider. Known passive abilities
+show as `(passive)` reminders.
+
 ## What it finds
 
 It scans the actor and gathers the relevant:
 
 - **Feats** — active-feat toggles (Power Attack, Deadly Aim, Combat Expertise) matched by name,
-  including feats folded into a generated character's chain names (`… > Charging Hurler > …`)
+  including chains written either way: a generated character's `… > Charging Hurler > …`, and the
+  hand-written shorthand `Vital Strike<Improved<Greater` (= Vital Strike, Improved Vital Strike,
+  Greater Vital Strike)
+- **Trainers and professions** — feats listed as headings in a `Trainer: …` item's description,
+  and names listed in a `Profession Rank 5: (Pit Fighter) A, B, C` item's name
 - **Weapon special abilities** — Flaming, Keen, … read off the selected weapon's own description
 - **Magic items** — activation text that targets an attack becomes a `(Item Name): …` toggle
 - **Class features** — rage powers, magus arcana, ki powers, rogue/ninja/slayer talents
-- **Path of War** maneuvers / damaging stances (actor items of type `pf1-pow.maneuver`)
+- **Path of War** maneuvers / damaging stances — `pf1-pow.maneuver` items, or combat talents named
+  like `(Lvl 2 Maneuver) Bronze Knuckle - Boost` / `(Stance) Iron Hand Stance`
 - **Spheres of Power / Might** talents (actor items flagged `flags.pf1spheres.sphere`)
 - **Spells** matched by name:
   - **A** self-buffs (Bless, Divine Favor, True Strike) → `+attack`/`+damage` toggle
@@ -62,7 +90,8 @@ activation, and cost — as labeled `Cost:`/`Activation:`/`Range:`/`Save:`/`Effe
 
 Instead of blindly applying to every weapon, it opens a **dialog**:
 
-1. **Pick a weapon** (and, when it has more than one action, which action).
+1. **Pick what to apply to**: the **★ Conditionals item** (all tabs, the default) or a weapon (and,
+   when it has more than one action, which action).
 2. See the **full list of conditionals** about to be added — each with an **include** checkbox
    (checked by default; uncheck to skip it) and an expandable row to **edit its clauses** or its
    per-roll default.
