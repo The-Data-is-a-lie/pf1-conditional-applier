@@ -16,8 +16,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs, retargetClassLevel,
          nameCandidates, itemEffectUpdates, conditionalsItemRows, conditionalsItemUpdate,
-         descEntries, parseMarkedName, buildIndex, COND_KEY,
-         decodeOverrides, encodeOverrides, ovHasLegacy } from "../scripts/apply-conditionals.js";
+         descEntries, parseMarkedName, buildIndex, COND_KEY, removeKey, savedWeaponUpdates,
+         appliedActionIdx, decodeOverrides, encodeOverrides, ovHasLegacy } from "../scripts/apply-conditionals.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..");
@@ -480,6 +480,66 @@ const upd3 = conditionalsItemUpdate(ike, is.specs, { [COND_KEY]: { [palm]: { inc
 ok(!tabNames(upd3, "Path of War").includes(palm), "an excluded row is removed from the item on re-push");
 ok(conditionalsItemRows(is.specs, {}, "bespoke").every(r => r.curated), "Bespoke item rows are curated only");
 
+// --- 8. the per-character remove list ------------------------------------------------------------
+section("remove list: one key per ability, wherever it appears");
+eq(removeKey("(SoP) Zany Uncurated Talent†: Does something"), removeKey("(SoP) Zany Uncurated Talent: mine"),
+   "the uncurated mark doesn't change the key");
+eq(removeKey("(SoP) Perfect Break (passive): x"), removeKey("(SoP) Perfect Break"), "nor does (passive)");
+eq(removeKey(POWER_ATTACK), removeKey("Power Attack"), "a full row name and its bare label share a key");
+
+section("remove list: drops the row from weapons, every tab and the Counters copy");
+{
+  const rogue = makeActor();
+  const rs = buildSpecs(rogue, data, "int").specs;
+  ok(buildRows(rogue, rs, data, {}, "wpn-gs", 0).some(r => r.origName === POWER_ATTACK), "Power Attack offered before removal");
+  rogue.flags[MOD_NS] = { removed: [{ key: removeKey(POWER_ATTACK), label: "Power Attack" }] };
+  for (const w of ["wpn-gs", "atk-gs", "wpn-bow"]) {
+    ok(!buildRows(rogue, rs, data, {}, w, 0, "full").some(r => removeKey(r.origName) === removeKey(POWER_ATTACK)),
+       `…and gone from ${w} after (Full mode too)`);
+  }
+  ok(!conditionalsItemRows(rs, {}, "full", new Set([removeKey(POWER_ATTACK)])).some(r => r.origName === POWER_ATTACK),
+     "…and from the Conditionals item rows");
+  rogue.flags[MOD_NS] = {};
+  ok(buildRows(rogue, rs, data, {}, "wpn-gs", 0).some(r => r.origName === POWER_ATTACK), "restoring brings it back");
+
+  const ike2 = makeIke();
+  const is2 = buildSpecs(ike2, dataStance, "wis").specs;
+  ike2.flags[MOD_NS] = { removed: [{ key: removeKey("(Counter) Counter Step"), label: "(Counter) Counter Step" }] };
+  const u = conditionalsItemUpdate(ike2, is2, {}, "bespoke", "wis");
+  ok(!tabNames(u, "Path of War").some(n => n.startsWith("(Counter) Counter Step")), "a removed counter leaves its own tab");
+  ok(!tabNames(u, "Counters").some(n => n.startsWith("(Counter) Counter Step")), "…and the Counters copy");
+}
+
+section("remove list: a re-push deletes our copy, never a hand-written one");
+{
+  // Apply once, remove Power Attack, re-apply from saved state: our tracked copy goes, and a
+  // hand-made row sharing the name would stay (here the pre-existing generator copy was adopted, so
+  // it is ours and goes too). The hand-authored "My Custom Toggle" is untouched throughout.
+  const rogue = makeActor();
+  const rs = buildSpecs(rogue, data, "int").specs;
+  const first = savedWeaponUpdates(rogue, rs, data, {}, "bespoke", "int").updates;
+  for (const u of first) applyBack(rogue, u.upd);
+  ok(condsOf(first.find(u => u.id === "wpn-gs").upd).includes(POWER_ATTACK), "Power Attack applied");
+  eq(appliedActionIdx(rogue.items.get("wpn-gs")), 0, "the applied action is remembered by its tracked ids");
+  rogue.flags[MOD_NS] = { removed: [{ key: removeKey(POWER_ATTACK), label: "Power Attack" }] };
+  const again = savedWeaponUpdates(rogue, rs, data, {}, "bespoke", "int", { onlyApplied: true }).updates;
+  const gs = condsOf(again.find(u => u.id === "wpn-gs").upd);
+  ok(!gs.includes(POWER_ATTACK), "the re-push takes our Power Attack off the weapon");
+  ok(gs.includes("My Custom Toggle: +1 luck"), "a hand-authored row survives the re-push");
+
+  const hand = makeActor();
+  hand.items.get("wpn-gs").system.actions[0].conditionals.push(
+    { _id: "pre-mine", name: "Power Attack: my house wording", default: false, modifiers: [] });
+  hand.flags[MOD_NS] = { removed: [{ key: removeKey(POWER_ATTACK), label: "Power Attack" }] };
+  const hs = buildSpecs(hand, data, "int").specs;
+  const hu = savedWeaponUpdates(hand, hs, data, {}, "bespoke", "int").updates.find(u => u.id === "wpn-gs");
+  ok(condsOf(hu.upd).includes("Power Attack: my house wording"), "a hand-written row with a removed name is never touched");
+
+  const fresh = makeActor();
+  eq(savedWeaponUpdates(fresh, buildSpecs(fresh, data, "int").specs, data, {}, "bespoke", "int",
+                        { onlyApplied: true }).updates.length, 0, "a remove re-push never wires a weapon that was never applied");
+}
+
 section("saved overrides: row names with dots survive Foundry's key expansion");
 // Foundry's actor.update() runs expandObject over the update: every "." in a key nests an object.
 const expand = obj => {
@@ -525,7 +585,7 @@ if (fs.existsSync(VORKUL)) {
      "every recovered entry is a clean {include, default, name} leaf");
 }
 
-// --- 8. the module ships every file it loads at runtime ------------------------------------------
+// --- 9. the module ships every file it loads at runtime ------------------------------------------
 // The old bundler could silently omit a data file; now the failure mode is a module.json that points
 // at something the repo doesn't have, or a data file loadData() fetches that was never committed.
 section("module: manifest and runtime files line up");

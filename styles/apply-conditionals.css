@@ -105,6 +105,77 @@
   cursor: pointer;
 }
 
+/* The ✕ that adds a row to the character's remove list: pushed to the row's right edge, quiet
+ * until hovered so a long list doesn't read as a column of warnings. */
+.pf1ca .cond-row > summary {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pf1ca .cond-row > summary > strong {
+  flex: 1;
+}
+
+.pf1ca .pf1ca-x {
+  flex: 0 0 auto;
+  padding: 0 4px;
+  opacity: .35;
+  cursor: pointer;
+}
+
+.pf1ca .pf1ca-x:hover {
+  opacity: 1;
+  color: #c0392b;
+}
+
+/* --- the remove list: in the dialog (#removed-box) and on the sheet's Settings tab --- */
+.pf1ca .pf1ca-removed,
+.pf1ca-removed-panel {
+  font-size: .85em;
+}
+
+.pf1ca .pf1ca-removed ul,
+.pf1ca-removed-panel ul {
+  margin: .2em 0 .5em 1em;
+  padding: 0;
+  max-height: 22vh;
+  overflow: auto;
+}
+
+.pf1ca .pf1ca-removed li,
+.pf1ca-removed-panel li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pf1ca .pf1ca-removed li > span,
+.pf1ca-removed-panel li > span {
+  flex: 1;
+}
+
+.pf1ca .pf1ca-restore,
+.pf1ca-removed-panel .pf1ca-restore {
+  cursor: pointer;
+  opacity: .7;
+}
+
+.pf1ca .pf1ca-restore:hover,
+.pf1ca-removed-panel .pf1ca-restore:hover {
+  opacity: 1;
+}
+
+/* Sits in the Utility Functions .flexcol under the Apply Conditionals button (order 9999). */
+.pf1ca-removed-panel {
+  order: 10000;
+  margin-top: 4px;
+}
+
+.pf1ca-removed-panel > summary {
+  cursor: pointer;
+}
+
 .pf1ca .cond-row-body {
   padding: 4px 2px 6px;
 }

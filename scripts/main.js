@@ -12,12 +12,13 @@
  * The sheet button has two possible homes — the window header and the Settings tab's "Utility
  * Functions" section — each switched on or off by a world setting (both on by default).
  */
-import { apply } from "./apply-conditionals.js";
+import { apply, remove, restore } from "./apply-conditionals.js";
 import "./compact-headers.js"; // side effects only: the compact-header-buttons setting + tooltips
 
 const MOD_NS = "pf1-conditional-applier";
 const HEADER_BTN = "pf1ca-apply-btn";
 const UTILITY_BTN = "pf1ca-utility-btn";
+const REMOVED_PANEL = "pf1ca-removed-panel";
 const TIP = "Wire curated conditionals onto this character's weapons.";
 
 const runApply = (actor) => game.modules.get(MOD_NS)?.api?.apply(actor);
@@ -42,6 +43,42 @@ function makeButton(cls, actor, label) {
   return btn;
 }
 
+// The character's remove list (✕ in the Apply Conditionals dialog), each entry restorable from the
+// sheet without opening the dialog. Only built when the list is non-empty. Restoring updates the actor,
+// which re-renders the sheet -- so the panel never needs patching in place.
+const opened = new Set();   // actor ids whose panel was left open, so a re-render keeps it open
+function removedPanel(actor) {
+  const list = Array.isArray(actor.flags?.[MOD_NS]?.removed) ? actor.flags[MOD_NS].removed : [];
+  if (!list.length) return null;
+  const panel = document.createElement("details");
+  panel.className = REMOVED_PANEL;
+  panel.open = opened.has(actor.id);
+  panel.addEventListener("toggle", () => (panel.open ? opened.add(actor.id) : opened.delete(actor.id)));
+  const summary = document.createElement("summary");
+  summary.textContent = `Removed conditionals (${list.length})`;
+  summary.title = "Conditionals removed from this character with ✕ in the Apply Conditionals dialog. "
+    + "They stay off the Conditionals item and every weapon until restored.";
+  panel.appendChild(summary);
+  const ul = document.createElement("ul");
+  for (const { key, label } of list) {
+    const li = document.createElement("li");
+    const name = document.createElement("span");
+    name.textContent = label || key;
+    const btn = document.createElement("a");
+    btn.className = "pf1ca-restore";
+    btn.title = "Restore: put it back on the Conditionals item and the weapons it was applied to.";
+    btn.innerHTML = `<i class="fa-solid fa-rotate-left" inert></i>`;
+    btn.addEventListener("click", async (ev) => {
+      ev.preventDefault(); ev.stopPropagation();
+      if (await restore(actor, key)) ui.notifications.info(`${actor.name}: restored "${label || key}".`);
+    });
+    li.append(name, btn);
+    ul.appendChild(li);
+  }
+  panel.appendChild(ul);
+  return panel;
+}
+
 // --- sheet buttons ------------------------------------------------------------------------------
 // Fires on every (re)render. Both buttons are removed up front and only the enabled ones re-added,
 // which is what makes turning a setting off actually clear the button on the next render.
@@ -58,6 +95,7 @@ function onRenderActorSheet(app) {
 
     root.querySelector(`.${HEADER_BTN}`)?.remove();
     root.querySelector(`.${UTILITY_BTN}`)?.remove();
+    root.querySelector(`.${REMOVED_PANEL}`)?.remove();
 
     if (showing("showHeaderButton")) {
       const header = root.querySelector(".window-header");
@@ -68,13 +106,15 @@ function onRenderActorSheet(app) {
       }
     }
 
-    if (showing("showUtilityButton")) {
-      // The Utility Functions column has no class of its own, but the point-buy button inside it
-      // does — so take that button's parent. Falls back to the column's position under .base-setup.
-      // Absent entirely on sheets without point buy (loot, vehicle…), in which case we just skip.
-      const col = root.querySelector('.tab[data-tab="settings"] button.pointbuy-calculator')?.parentElement
-               ?? root.querySelector('.tab[data-tab="settings"] .base-setup > div.flexcol:not(.spellbook-usage)');
-      if (col) col.appendChild(makeButton(UTILITY_BTN, actor, "Apply Conditionals"));
+    // The Utility Functions column has no class of its own, but the point-buy button inside it
+    // does — so take that button's parent. Falls back to the column's position under .base-setup.
+    // Absent entirely on sheets without point buy (loot, vehicle…), in which case we just skip.
+    const col = root.querySelector('.tab[data-tab="settings"] button.pointbuy-calculator')?.parentElement
+             ?? root.querySelector('.tab[data-tab="settings"] .base-setup > div.flexcol:not(.spellbook-usage)');
+    if (col && showing("showUtilityButton")) col.appendChild(makeButton(UTILITY_BTN, actor, "Apply Conditionals"));
+    if (col && showing("showRemovedPanel")) {
+      const panel = removedPanel(actor);
+      if (panel) col.appendChild(panel);
     }
   } catch (err) {
     console.error(`[${MOD_NS}] sheet button error:`, err);
@@ -82,7 +122,7 @@ function onRenderActorSheet(app) {
 }
 
 Hooks.once("init", () => {
-  game.modules.get(MOD_NS).api = { apply };
+  game.modules.get(MOD_NS).api = { apply, remove, restore };
 
   // Where the sheet button may appear. World-scoped: the GM decides for the whole table. Registered
   // here so they exist before the first sheet renders and reads them.
@@ -95,6 +135,13 @@ Hooks.once("init", () => {
     name: "Button in Utility Functions",
     hint: "Show an Apply Conditionals button at the bottom of the character sheet's "
       + "Settings tab, under Utility Functions.",
+    scope: "world", config: true, type: Boolean, default: true, onChange: rerenderActorSheets,
+  });
+  game.settings.register(MOD_NS, "showRemovedPanel", {
+    name: "Removed conditionals on the sheet",
+    hint: "List a character's removed conditionals (✕ in the Apply Conditionals dialog) under "
+      + "Utility Functions on the Settings tab, each with a restore button. Only shown when "
+      + "something has been removed.",
     scope: "world", config: true, type: Boolean, default: true, onChange: rerenderActorSheets,
   });
 

@@ -198,6 +198,18 @@ const prefixOf = n => {
   const i = s.indexOf(":");
   return (i >= 0 ? s.slice(0, i) : s).trim();
 };
+// The ability a row stands for: its "Name" before the colon, without the uncurated/passive marks.
+// One key matches the same ability on every weapon, every Conditionals-item tab and the Counters copy
+// -- the identity both the hand-row dedupe and the per-character remove list compare on.
+// A spell row's "(Spell 5) [Cone of Cold]" keys on the bare spell name, so it still matches a
+// hand-written "Cone of Cold: …" row and an older remove-list entry.
+const rowLabel = n => prefixOf(n).replace(/†|\s*\(passive\)\s*$/g, "").trim()
+  .replace(/^\(Spell\s+\d+\)\s*\[(.+)\]$/i, "$1");
+const removeKey = n => nkey(rowLabel(n));
+// The per-character remove list: flags.<ns>.removed = [{key, label}]. An array (not a keyed object)
+// so a write replaces it wholesale -- no "-=key" deletion syntax, and labels may hold any character.
+const removedList = actor => (Array.isArray(actor?.flags?.[MOD_NS]?.removed) ? actor.flags[MOD_NS].removed : []);
+const removedSet = actor => new Set(removedList(actor).map(r => r.key));
 const cap = s => { s = String(s || ""); return s ? s[0].toUpperCase() + s.slice(1) : ""; };
 // Curated class-feature formulas name the CANONICAL class (@classes.rogue.level,
 // @classes.barbarian.level) because the shared talent pools are authored once -- but the power may
@@ -926,16 +938,18 @@ const inMode = (s, mode) => mode === "full" || s.curated !== false;
 // Editable row state for ONE weapon+action: the actor-wide specs, that weapon's own quality rows,
 // the "On Other Attacks" rows, and any saved overrides on top. A row is unchecked by default when
 // its melee/ranged intent contradicts the action's; a saved override always wins over both.
-// Buff-only stances never reach a weapon (they ride the Conditionals item as reminders).
+// Buff-only stances never reach a weapon (they ride the Conditionals item as reminders). Anything on
+// the actor's remove list is left out entirely.
 function buildRows(actor, specs, data, overrides, weaponId, actionIdx, mode = "bespoke") {
   const ov = overrides[weaponId] || {};
   const w = actor.items.get(weaponId);
   const actions = w?.system?.actions || [];
   const aType = actionWeaponType(actions[actionIdx] || actions[0]);
+  const removed = removedSet(actor);
   const base = specs.filter(s => !s.buffOnly && inMode(s, mode));
   const qSpecs = weaponQualitySpecs(actor, weaponId, data);
   const others = otherAttackSpecs(actor, specs, weaponId, qSpecs.map(s => prefixOf(s.name)));
-  return base.concat(qSpecs, others).map(s => {
+  return base.concat(qSpecs, others).filter(s => !removed.has(removeKey(s.name))).map(s => {
     const o = ov[s.name] || {};
     const mismatch = !!(s.weaponType && aType && s.weaponType !== aType);
     const defInclude = s._defaultInclude !== undefined ? s._defaultInclude : !mismatch;
@@ -998,7 +1012,7 @@ function applyRowsToAction(action, rows, { seedBase, init, prevIds, layout = "we
 
   const seen = new Set(action.conditionals.map(c => c && c.name));                  // keep hand-made
   // Compared without the uncurated/passive marks, so "(SoP) Sweep†" defers to your "(SoP) Sweep: ...".
-  const rowKey = n => nkey(prefixOf(n).replace(/†|\s*\(passive\)\s*$/g, ""));
+  const rowKey = removeKey;
   const keptPrefixes = new Set(action.conditionals.map(c => rowKey(c && c.name)));
   const newIds = [];
   const sep = (seed, name) => {
@@ -1145,10 +1159,11 @@ async function saveOverrides(actor, map) {
   await actor.update({ [`flags.${MOD_NS}.overrides`]: encodeOverrides(map) });
 }
 
-// Editable row state for the Conditionals item (every tab at once), saved overrides on top.
-function conditionalsItemRows(specs, overrides, mode = "bespoke") {
+// Editable row state for the Conditionals item (every tab at once), saved overrides on top. Rows on
+// the actor's remove list (`removed`, a Set of removeKey()s) are left out of every tab.
+function conditionalsItemRows(specs, overrides, mode = "bespoke", removed = new Set()) {
   const ov = overrides[COND_KEY] || {};
-  return specs.filter(s => s.tab && inMode(s, mode)).map(s => {
+  return specs.filter(s => s.tab && inMode(s, mode) && !removed.has(removeKey(s.name))).map(s => {
     const o = ov[s.name] || {};
     return {
       origName: s.name, srcName: s.srcName, rawMods: s.rawMods, section: s.section, tab: s.tab,
@@ -1168,7 +1183,9 @@ function conditionalsItemUpdate(actor, specs, overrides, mode, init, rows = null
   src.system = src.system || {};
   const actions = (src.system.actions = Array.isArray(src.system.actions) ? src.system.actions : []);
   const prevBy = existing?.flags?.[MOD_NS]?.condIdsByAction || {};
-  const all = rows || conditionalsItemRows(specs, overrides, mode);
+  const removed = removedSet(actor);
+  const all = (rows || conditionalsItemRows(specs, overrides, mode, removed))
+    .filter(r => !removed.has(removeKey(r.origName)));
   const idsBy = {};
   for (const tab of COND_TABS) {
     // Curated first (a stable partition keeps the spec order inside each half).
@@ -1201,24 +1218,89 @@ async function pushConditionalsItem(actor, specs, overrides, mode, init, rows = 
   return r;
 }
 
+// The weapons/attack items a run may write to (never the Conditionals item itself).
+const attackItems = actor =>
+  actor.items.filter(i => (i.type === "weapon" || i.type === "attack") && !isConditionalsItem(i));
+
+// Which action of a weapon holds the conditionals this module last wrote (-1 if none): a re-push
+// must land where the last Apply did, or it would leave the old copies and add a second set.
+function appliedActionIdx(item) {
+  const ids = new Set(item?.flags?.[MOD_NS]?.condIds || []);
+  if (!ids.size) return -1;
+  const actions = item.system?.actions || [];
+  const i = actions.findIndex(a => (a?.conditionals || []).some(c => c && ids.has(c._id)));
+  return i < 0 ? 0 : i;
+}
+
+// Pure: weapon updates that re-apply each weapon's SAVED choices. `onlyApplied` limits it to the
+// weapons a previous Apply already wrote to -- a remove/restore re-push must never wire a weapon the
+// user chose to leave alone. `live` = {weaponId, actionIdx, rows} substitutes the dialog's on-screen
+// rows for the selected weapon.
+function savedWeaponUpdates(actor, specs, data, overrides, mode, init, { onlyApplied = false, live = null } = {}) {
+  const updates = [], summary = [];
+  for (const w of attackItems(actor)) {
+    const applied = appliedActionIdx(w);
+    if (onlyApplied && applied < 0) continue;
+    const idx = live?.weaponId === w.id ? live.actionIdx : Math.max(applied, 0);
+    const rows = live?.weaponId === w.id ? live.rows : buildRows(actor, specs, data, overrides, w.id, idx, mode);
+    const upd = applyToWeapon(actor, w.id, idx, rows, init);
+    if (!upd) continue;                      // no attack action on this item
+    updates.push({ upd, id: w.id, rows });
+    summary.push(`${w.name}: ${rows.filter(r => r.include).length}`);
+  }
+  return { updates, summary };
+}
+
+// Re-push everything from saved state: the Conditionals item, plus every weapon a previous Apply
+// wrote to. What a remove/restore runs, so the change reaches the whole character at once.
+async function repushSaved(actor, ctx = {}) {
+  const data = ctx.data || await loadData();
+  const init = ctx.init || initAttr(actor);
+  const mode = ctx.mode || actorMode(actor);
+  const specs = ctx.specs || buildSpecs(actor, data, init).specs;
+  const overrides = loadOverrides(actor);
+  await pushConditionalsItem(actor, specs, overrides, mode, init);
+  const { updates } = savedWeaponUpdates(actor, specs, data, overrides, mode, init, { onlyApplied: true });
+  if (updates.length) await actor.updateEmbeddedDocuments("Item", updates.map(u => u.upd));
+  return updates.length;
+}
+
+// Add one ability to (or take it off) the actor's remove list, then re-push. `nameOrKey` is a row
+// name ("Power Attack: -1 attack…") or an existing key; both resolve to the same removeKey().
+async function removeConditional(actor, nameOrKey, ctx = {}) {
+  const key = removeKey(nameOrKey);
+  if (!key || removedSet(actor).has(key)) return false;
+  const label = rowLabel(nameOrKey) || key;
+  await actor.update({ [`flags.${MOD_NS}.removed`]: [...removedList(actor), { key, label }] });
+  await repushSaved(actor, ctx);
+  return true;
+}
+async function restoreConditional(actor, key, ctx = {}) {
+  const list = removedList(actor);
+  if (!list.some(r => r.key === key)) return false;
+  await actor.update({ [`flags.${MOD_NS}.removed`]: list.filter(r => r.key !== key) });
+  await repushSaved(actor, ctx);
+  return true;
+}
+
 // --- the review/edit dialog (stays open; edits persist to an actor flag) ---
 // The selector's first entry is the Conditionals item itself (every tab at once); the rest are the
 // actor's real weapons/attacks. The Bespoke/Full switch is remembered per actor and re-pushes the
 // Conditionals item straight away.
 function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
   const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  const weapons = actor.items.filter(i => (i.type === "weapon" || i.type === "attack") && !isConditionalsItem(i));
+  const weapons = attackItems(actor);
   // Persisted overrides: { [weaponId | COND_KEY]: { [origName]: {include, default, name} } }.
   // Read/write the RAW flags object rather than getFlag/setFlag: the write below is batched into the
   // same actor.update() as the rest, and the raw path is what the pre-module macro versions wrote —
   // MOD_NS is the module id, so flags saved back then are still read here unchanged.
-  const overrides = loadOverrides(actor);   // decoded + legacy-migrated, already a fresh copy
+  const overrides = foundry.utils.deepClone(actor.flags?.[MOD_NS]?.overrides || {});
   let mode = startMode;
 
   // Build the editable row state for the current selection.
   const tabRank = r => { const i = COND_TABS.indexOf(r.tab); return i < 0 ? 99 : i; };
   const rowsFor = (id, actionIdx) => id === COND_KEY
-    ? conditionalsItemRows(specs, overrides, mode).map((r, i) => ({ r, i }))
+    ? conditionalsItemRows(specs, overrides, mode, removedSet(actor)).map((r, i) => ({ r, i }))
         .sort((a, b) => (tabRank(a.r) - tabRank(b.r)) || (a.i - b.i)).map(x => x.r)
     : buildRows(actor, specs, data, overrides, id, actionIdx, mode);
   // Merge rather than replace: rows hidden by the current mode keep their saved choices.
@@ -1230,6 +1312,8 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
   let curWeaponId = COND_KEY, curActionIdx = 0, curRows = [];
   const groupOf = r => (curWeaponId === COND_KEY ? r.tab : r.section) || "Other";
 
+  const removeTip = `Add to ${actor.name}'s remove list: it comes off the ${COND_ITEM_NAME} item and every `
+    + `weapon, and stays off on re-runs. Restore it from the Removed list below or on the sheet's Settings tab.`;
   const rowHtml = (r, i) => {
     const mods = (r.rawMods || []).map(m => `${m.formula} → ${m.target}`).join(", ") || "—";
     const editable = String(r.name).split("; ").join(";\n");   // one clause per line for editing
@@ -1238,6 +1322,7 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
       <summary>
         <label><input type="checkbox" class="inc" ${r.include ? "checked" : ""}></label>
         <strong>${esc(String(r.name).split(":")[0].slice(0, 70))}</strong>${also}
+        <a class="pf1ca-x" title="${esc(removeTip)}"><i class="fas fa-xmark"></i></a>
       </summary>
       <div class="cond-row-body">
         <label><input type="checkbox" class="def" ${r.def ? "checked" : ""}> on by default (per-roll)</label>
@@ -1272,7 +1357,7 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
         <button type="button" id="push-cond" title="Rewrite the ${esc(COND_ITEM_NAME)} item from your saved choices (and any edits on screen when it is selected)."><i class="fas fa-book"></i> Update ${esc(COND_ITEM_NAME)} item</button>
         ${itemUpdates.length ? `<button type="button" id="sync-items" title="Overlay the curated bonuses and notes for these items onto the item documents themselves. Deduped against what each item already has; re-runnable."><i class="fas fa-ring"></i> Sync item effects (${itemUpdates.length})</button>` : ""}
       </div>
-      <p class="pf1ca-hint">The ${esc(COND_ITEM_NAME)} item is kept up to date on every run. Uncheck to exclude a conditional; expand a row to edit its clauses or per-roll default. Edits persist per item and survive re-runs. † = not curated (text only).</p>
+      <p class="pf1ca-hint">The ${esc(COND_ITEM_NAME)} item is kept up to date on every run. Uncheck to exclude a conditional; expand a row to edit its clauses or per-roll default. Edits persist per item and survive re-runs. ✕ removes a conditional from the whole character until you restore it. † = not curated (text only).</p>
       <div id="cond-rows"></div>
       <hr>
       <details class="pf1ca-gaps"><summary>Curation gaps (${gapCount})</summary>
@@ -1285,6 +1370,7 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
           <strong>Class features, unresolved level (${gaps.classFeatures.length})</strong>${li(gaps.classFeatures)}
         </div>
       </details>
+      <details class="pf1ca-removed" id="removed-box"></details>
     </div>`;
 
   new Dialog({
@@ -1317,14 +1403,52 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
         });
         html.find("#cond-rows").html(out);
       };
+      // The actor's remove list, each entry restorable. Kept open across re-renders once opened.
+      const renderRemoved = () => {
+        const list = removedList(actor);
+        const box = html.find("#removed-box");
+        const open = box.prop("open");
+        box.html(`<summary>Removed (${list.length})</summary>`
+          + (list.length
+            ? `<ul>${list.map(r => `<li><span>${esc(r.label)}</span> <a class="pf1ca-restore" data-key="${esc(r.key)}" title="Restore: put it back on the ${esc(COND_ITEM_NAME)} item and the weapons it was applied to."><i class="fas fa-rotate-left"></i> restore</a></li>`).join("")}</ul>`
+            : `<p><em>Nothing removed. Use ✕ on a row to remove it from this character.</em></p>`));
+        box.prop("open", open);
+      };
       const rowIdx = ev => +ev.target.closest(".cond-row").dataset.i;
+      // A remove/restore re-pushes from saved state, so keep what is on screen first: otherwise an
+      // unsaved edit to another row would be lost when the rows re-render.
+      const ctx = () => ({ data, specs, init, mode });
+      const keepScreen = async () => {
+        remember(curWeaponId, curRows);
+        await saveOverrides(actor, overrides);
+      };
+      html.on("click", ".pf1ca-x", async ev => {
+        ev.preventDefault(); ev.stopPropagation();          // don't toggle the row open
+        const r = curRows[rowIdx(ev)];
+        if (!r) return;
+        await keepScreen();
+        if (await removeConditional(actor, r.origName, ctx())) {
+          ui.notifications.info(`${actor.name}: removed "${rowLabel(r.origName)}" from the ${COND_ITEM_NAME} item and every weapon.`);
+        }
+        renderRows(); renderRemoved();
+      });
+      html.on("click", ".pf1ca-restore", async ev => {
+        ev.preventDefault();
+        const key = ev.target.closest(".pf1ca-restore").dataset.key;
+        const label = removedList(actor).find(r => r.key === key)?.label || key;
+        await keepScreen();
+        if (await restoreConditional(actor, key, ctx())) {
+          ui.notifications.info(`${actor.name}: restored "${label}".`);
+        }
+        renderRows(); renderRemoved();
+      });
       // Push the Conditionals item: the on-screen rows when it is the selection, else saved choices.
       const pushCond = async () => {
         const live = curWeaponId === COND_KEY ? curRows : null;
         if (live) remember(COND_KEY, live);
         await saveOverrides(actor, overrides);
         const r = await pushConditionalsItem(actor, specs, overrides, mode, init, live);
-        const n = (live || conditionalsItemRows(specs, overrides, mode)).filter(x => x.include).length;
+        const n = (live || conditionalsItemRows(specs, overrides, mode, removedSet(actor))).filter(x => x.include).length;
         ui.notifications.info(`${r.create ? "Created" : "Updated"} the ${COND_ITEM_NAME} item (${n} conditional(s), ${mode}).`);
       };
 
@@ -1374,19 +1498,13 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
       // is not a weapon here; it has its own button.
       html.on("click", "#apply-all", async ev => {
         ev.preventDefault();
-        const updates = [], summary = [];
-        for (const w of weapons) {
-          const idx = w.id === curWeaponId ? curActionIdx : 0;
-          const rows = w.id === curWeaponId ? curRows : rowsFor(w.id, idx);
-          const upd = applyToWeapon(actor, w.id, idx, rows, init);
-          if (!upd) continue;                      // no attack action on this item
-          remember(w.id, rows);
-          updates.push(upd);
-          summary.push(`${w.name}: ${rows.filter(r => r.include).length}`);
-        }
+        const live = curWeaponId === COND_KEY ? null
+          : { weaponId: curWeaponId, actionIdx: curActionIdx, rows: curRows };
+        const { updates, summary } = savedWeaponUpdates(actor, specs, data, overrides, mode, init, { live });
         if (!updates.length) { ui.notifications.warn("No weapon/attack item has an attack action to apply to."); return; }
+        for (const u of updates) remember(u.id, u.rows);
         await saveOverrides(actor, overrides);
-        await actor.updateEmbeddedDocuments("Item", updates);
+        await actor.updateEmbeddedDocuments("Item", updates.map(u => u.upd));
         ui.notifications.info(`Applied to ${updates.length} item(s) — ${summary.join("; ")}.`);
       });
 
@@ -1405,8 +1523,20 @@ function openDialog(actor, specs, gaps, init, data, startMode = "bespoke") {
 
       renderActionSel();
       renderRows();
+      renderRemoved();
     },
   }, { width: 640, resizable: true }).render(true);
+}
+
+// --- the remove list, for callers outside the dialog (the sheet's Removed panel, macros) ---
+// Both re-push the Conditionals item and every weapon a previous Apply wrote to.
+export async function remove(actor, nameOrKey) {
+  try { return await removeConditional(actor, nameOrKey); }
+  catch (err) { console.error(`[${MOD_NS}] remove failed:`, err); ui.notifications.error(`Remove failed: ${err.message}`); return false; }
+}
+export async function restore(actor, key) {
+  try { return await restoreConditional(actor, key); }
+  catch (err) { console.error(`[${MOD_NS}] restore failed:`, err); ui.notifications.error(`Restore failed: ${err.message}`); return false; }
 }
 
 // --- run: the module's single entry point (see scripts/main.js) ---
@@ -1435,4 +1565,5 @@ export async function apply(actorArg = null) {
 export { buildSpecs, buildRows, applyToWeapon, weaponQualitySpecs, otherAttackSpecs, detectQualities,
          retargetClassLevel, classTags, nameCandidates, itemEffectUpdate, itemEffectUpdates,
          conditionalsItemRows, conditionalsItemUpdate, descEntries, parseMarkedName, buildIndex, COND_KEY,
+         removeKey, removedList, savedWeaponUpdates, appliedActionIdx, MOD_NS,
          decodeOverrides, encodeOverrides, ovHasLegacy };
